@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="langItem">
+        <item>身份证</item>
+        <item>户口本</item>
+        <item>其他证件</item>
+    </string-array>
+
+
+
+</resources>

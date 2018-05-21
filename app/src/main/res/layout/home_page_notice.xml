@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@mipmap/head_hd"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- 搜索框 -->
+
+            <EditText
+                android:textColor="#FFFFFF"
+                android:textColorHint="#ffffff"
+                android:paddingLeft="12dp"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="47dp"
+                android:background="@drawable/btn_login_bg_normal"
+                android:hint="搜索你感兴趣的"
+                android:layout_alignBottom="@+id/imageView2"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/editText" />
+
+            <!-- 放大镜 -->
+            <ImageView
+                android:id="@+id/notice_max"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:src="@mipmap/icon_max"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/editText"
+                android:layout_alignEnd="@+id/editText" />
+        </RelativeLayout>
+
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <!-- 安全检查 -->
+            <LinearLayout
+                android:id="@+id/notice_aujc"
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.CardView
+                    app:cardBackgroundColor="#26c5ff"
+                    app:cardCornerRadius="20dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp">
+
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@mipmap/menu3"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:text="安全检查"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+
+            <!-- 巡逻盘查 -->
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.CardView
+                    app:cardBackgroundColor="#ff8b00"
+                    app:cardCornerRadius="20dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp">
+
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@mipmap/menu2"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:text="巡逻盘查"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+
+            <!-- 一标三实 -->
+            <LinearLayout
+                android:id="@+id/notice_ybss"
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.CardView
+                    app:cardBackgroundColor="#2083f8"
+                    app:cardCornerRadius="20dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp">
+
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@mipmap/menu4"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:text="一标三实"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- 警情推送 -->
+            <LinearLayout
+                android:id="@+id/notice_jqts"
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.CardView
+                    app:cardBackgroundColor="#6ed309"
+                    app:cardCornerRadius="20dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp">
+
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@mipmap/menu1"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:text="警情推送"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+
+            <!-- 巡防轨迹 -->
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.CardView
+                    app:cardBackgroundColor="#f0562f"
+                    app:cardCornerRadius="20dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp">
+
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@mipmap/menu5"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:text="巡防轨迹"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+
+            <!-- 法律法规 -->
+            <LinearLayout
+                android:id="@+id/notice_flfg"
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.CardView
+                    app:cardBackgroundColor="#22bd8d"
+                    app:cardCornerRadius="20dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp">
+
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@mipmap/menu6"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:text="法律法规"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+</LinearLayout>

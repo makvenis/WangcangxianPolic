@@ -1,0 +1,104 @@
+package com.makvenis.dell.wangcangxianpolic.help;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/* 作者  王从文 */
+/* 全局采用注解模式 */
+/* 旺苍县公安局巡防系统 json数据解析 */
+
+/**
+ * @ 解释: 解析用户登陆信息 GetJsonRegiste
+ * @ 解释:
+ *
+ */
+
+public class JSON {
+
+    /* 用户登陆信息解析 */
+    public static Map<String, String> GetJsonRegiste(String mJson) {
+        System.out.println(mJson);
+        if(mJson.length() == 0) {
+            new Exception("传入参数不能为空"+mJson+" is null option");
+            return new HashMap<>();
+        }else {
+            if(mJson == "err") {
+                new Exception("账号密码错误"+mJson+" is 'error' ");
+                return new HashMap<>();
+            }else {
+                try {
+                    Map<String, String> map=new HashMap<>();
+
+                    JSONObject object=new JSONObject(mJson);
+                    map.put("email", object.optString("email"));
+                    map.put("headPortrait", object.optString("headPortrait"));
+                    map.put("id", object.optString("id"));
+                    map.put("nickname", object.optString("nickname"));
+                    map.put("numId", object.optString("numId"));
+                    map.put("password", object.optString("password"));
+                    map.put("phone", object.optString("phone"));
+                    map.put("qrCode", object.optString("qrCode"));
+                    map.put("salt", object.optString("salt"));
+                    map.put("truename", object.optString("truename"));
+                    map.put("username", object.optString("username"));
+                    map.put("weixin", object.optString("weixin"));
+
+                    if(map.size() != 0)
+                        return map;
+
+                } catch (JSONException e) {
+                    new Exception("未知异常");
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    /* 统一数据JSON */
+    /**
+     * @ 解释 使用于当只有一层的时候 jsonArray -  jsonObject
+     * @param mJson 传递过来的原始参数
+     * @param keyString 需要解析的键值对关系
+     */
+    public static List<Map<String,String>> GetJson(String mJson, String[] keyString){
+        if(mJson == null || keyString == null){
+
+            return new ArrayList<>();
+        }
+
+        try {
+            List<Map<String,String>> data = new ArrayList<>();
+
+            //便利所有的键
+            List<String> mKey = new ArrayList<>();
+            for (String str:keyString) {
+                mKey.add(str);
+            }
+
+            JSONArray arr = new JSONArray(mJson);
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject object=arr.getJSONObject(i);
+
+                Map<String, String> map=new HashMap<>();
+                for (int j = 0; j < mKey.size(); j++) {
+                    map.put(mKey.get(j), object.optString(mKey.get(j)));
+                }
+                data.add(map);
+            }
+            return data;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return new ArrayList<>();
+    }
+
+}

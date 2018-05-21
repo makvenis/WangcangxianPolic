@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myradio="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+    <FrameLayout
+        android:id="@+id/fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"></FrameLayout>
+
+    <ImageView
+        android:background="#fac"
+        android:layout_width="match_parent"
+        android:layout_height="3dp">
+    </ImageView>
+
+    <RadioGroup
+        android:background="#ffffff"
+        android:id="@+id/rg"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+
+        <com.makvenis.dell.wangcangxianpolic.view.SimpleRadioButton
+            android:checked="true"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/radiobutton_select_color"
+            android:id="@+id/Main_button_a"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#ffffff"
+            android:button="@null"
+            android:clickable="true"
+            myradio:drawableTop="@drawable/btnselector_c"
+            myradio:drawableSize="23dp"
+            android:gravity="center"
+            android:text="首页"
+            android:textSize="13sp"
+            />
+
+        <!--<com.makvenis.dell.wangcangxianpolic.view.SimpleRadioButton
+            android:layout_marginTop="10dp"
+            android:textColor="@color/radiobutton_select_color"
+            android:id="@+id/Main_button_b"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#ffffff"
+            android:button="@null"
+            android:clickable="true"
+            myradio:drawableTop="@drawable/btnselector_a"
+            myradio:drawableSize="23dp"
+            android:gravity="center"
+            android:text="通知公告"
+            android:textSize="13sp"
+            />-->
+
+        <com.makvenis.dell.wangcangxianpolic.view.SimpleRadioButton
+            android:layout_marginTop="10dp"
+            android:textColor="@color/radiobutton_select_color"
+            android:id="@+id/Main_button_c"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#ffffff"
+            android:button="@null"
+            android:clickable="true"
+            myradio:drawableTop="@drawable/btnselector_b"
+            myradio:drawableSize="23dp"
+            android:gravity="center"
+            android:text="个人中心"
+            android:textSize="13sp"
+            />
+
+    </RadioGroup>
+
+</LinearLayout>

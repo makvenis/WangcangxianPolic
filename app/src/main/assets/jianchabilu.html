@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="css/normalize3.0.2.min.css" />
+    <link rel="stylesheet" href="css/style.css?v=7" />
+    <link href="css/mobiscroll.css" rel="stylesheet" />
+    <link href="css/mobiscroll_date.css" rel="stylesheet" />
+    <title>检查笔录</title>
+    <style type="text/css">
+.body_01{ width:100%; margin:0 auto; margin-top:10px;}
+.body_01 input{ width:100%; height:30px; margin-top:10px;padding-left:20px; padding-right:20px;}
+.body_01 div{ width:100%; height:30px; margin-top:10px; line-height:30px;padding-left:20px;}
+.null_text{margin-top:20px; line-height:15px; height: auto; width:100%;}
+.null_title{margin-top:20px; line-height:30px; padding-left:20px;}
+.textarea{overflow-y:visible;border:0px;font-size:16px;font-family: Tahoma,Verdana,宋体,Fixedsys;line-height:150%;
+          overflow:visible;
+          border-width:0px;
+          width:100%;
+          height:140px;}
+</style>
+
+</head>
+
+
+<body>
+
+<div class="body_01">
+    <form>
+
+        <div class="null_title">检查时间(开始)</div>
+        <input type="text" name="USER_AGE" id="USER_AGE1" readonly class="input" placeholder="检查时间(开始)至" />
+
+        <div class="null_title">检查时间(结束)</div>
+        <input type="text" name="USER_AGE" id="USER_AGE2" readonly class="input" placeholder="结束时间" />
+
+        <!--
+        <div>检查对象:</div>
+        <input type="text" name="bianhao1" id="duixiang" /><br />
+
+        <div class="null_title">检查人员姓名、工作单位、职务（职称）</div>
+
+        <div>姓名:</div>
+        <input type="text" name="bianhao1" id="name" /><br />
+        <div>工作单位:</div>
+        <input type="text" name="bianhao1" id="danwei" /><br />
+        <div>职务:</div>
+        <input type="text" name="bianhao1" id="zhiwu" /><br />
+        -->
+        <div>过程及结果:</div>
+        <textarea class="textarea" id="textarea"></textarea>
+
+        <div onclick="JS.showName()">检查人（签名）:</div>
+        <img id="jiancharen" style="width:60xp; height:60px; margin-left:20px" src="" /><br />
+
+        <div onclick="JS.showNameJiLu()">记录人（签名）:</div>
+        <img id="jiluren" style="width:60xp; height:60px; margin-left:20px" src="" /><br />
+
+        <div onclick="JS.showNameBeiJianCha()">被检查单位负责人或者陪同检查人（签名）:</div>
+        <img id="beijiancharen" style="width:60xp; height:60px; margin-left:20px" src="" /><br />
+
+        <input type="button" id="tj" onclick="getShow()" style="width:100%; height:45px; background:#ff8a00; font-size:18px; color:#FFFFFF" value="提交" />
+
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/mobiscroll_date.js" charset="gb2312"></script>
+        <script src="js/mobiscroll.js"></script>
+        <script type="text/javascript">
+        $(function () {
+            var currYear = (new Date()).getFullYear();
+            var opt={};
+            opt.date = {preset : 'date'};
+            opt.datetime = {preset : 'datetime'};
+            opt.time = {preset : 'time'};
+            opt.default = {
+                theme: 'android-ics light', //皮肤样式
+                display: 'modal', //显示方式
+                mode: 'scroller', //日期选择模式
+                dateFormat: 'yyyy-mm-dd',
+                lang: 'zh',
+                showNow: true,
+                nowText: "今天",
+                startYear: currYear - 50, //开始年份
+                endYear: currYear + 10 //结束年份
+            };
+
+            $("#USER_AGE1").mobiscroll(jQuery.extend(opt['date'], opt['default']));
+			$("#USER_AGE2").mobiscroll(jQuery.extend(opt['date'], opt['default']));
+			$("#USER_AGE3").mobiscroll(jQuery.extend(opt['date'], opt['default']));
+        });
+        </script>
+        <!-- 提交 -->
+        <script>
+        	function getShow(){
+
+				var a = document.getElementById("USER_AGE1").value;
+				var b = document.getElementById("USER_AGE2").value;
+				//var c = document.getElementById("duixiang").value;
+				//var d = document.getElementById("name").value;
+				//var e = document.getElementById("danwei").value;
+				//var f = document.getElementById("zhiwu").value;
+				var g = document.getElementById("textarea").value;
+				var json=a+"@"+b+"@"+g;
+				//alert(json);
+				JS.postLoading(json)
+				}
+
+        </script>
+
+        <!-- 检查人 -->
+        <script>
+        	function setImg(murl){
+				var a = document.getElementById("jiancharen").src=murl;
+				}
+        
+        </script>
+
+        <!-- 记录人 -->
+        <script>
+        	function setImgJiLu(murl){
+				var a = document.getElementById("jiluren").src=murl;
+				}
+
+        </script>
+
+
+        <!-- 被检查人 -->
+        <script>
+        	function setImgBeiJianCha(murl){
+				var a = document.getElementById("beijiancharen").src=murl;
+				}
+
+        </script>
+
+
+    </form>
+</div>
+
+
+</body>
+
+
+</html>

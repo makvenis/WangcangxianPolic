@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_gravity="center"
+            android:textColor="#2178f1"
+            android:textSize="18sp"
+            android:text="标题也就是内容"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_hotel_title"/>
+
+        <ListView
+            android:id="@+id/item_hotel_wen_list"
+            android:layout_width="match_parent"
+            android:layout_height="160dp">
+
+        </ListView>
+
+    </LinearLayout>
+
+    <EditText
+        android:maxLines="1"
+        android:id="@+id/item_hotel_beizhu_text"
+        android:hint="请填写备注信息"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:background="#F00"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+</LinearLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/mAlertPush_police_item_img_img"
+            android:scaleType="fitXY"
+            android:src="@drawable/test_icon_background"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <TextView
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="160dp"
+            android:id="@+id/mAlertPush_police_item_img_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我是标题" />
+
+        <TextView
+            android:textColor="#FFFFFF"
+            android:id="@+id/mAlertPush_police_item_img_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12asdasdassd"
+            android:layout_alignBaseline="@+id/mAlertPush_police_item_img_title"
+            android:layout_alignBottom="@+id/mAlertPush_police_item_img_title"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+
+
+</FrameLayout>

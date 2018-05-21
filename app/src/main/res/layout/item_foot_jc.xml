@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#9ea0a7"
+        android:text="完成100%"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ProgressBar
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:max="100"
+        android:progress="100"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- 进度条 -->
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <TextView
+            android:textColor="#9ea0a7"
+            android:textSize="14sp"
+            android:text="备注:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:background="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1.70" />
+
+    </LinearLayout>
+
+    <!-- 监察人 -->
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 监察人签名 -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:gravity="center"
+                android:id="@+id/jc_jcryqz"
+                android:text="被检查单位负责人员签名:"
+                android:layout_width="200dp"
+                android:layout_height="40dp" />
+
+            <ImageView
+                android:id="@+id/jc_jcryqz_set"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+
+        <!-- 分割线 -->
+        <ImageView
+            android:background="#e1e1eb"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <!-- 监察人时间 -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:gravity="center"
+                android:id="@+id/jc_jcryqz_time"
+                android:text="时间:"
+                android:layout_width="200dp"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:id="@+id/jc_jcryqz_time_set"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="2017年9月28日" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <!-- 被监察人 -->
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 被监察人签名 -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:gravity="center"
+                android:id="@+id/jc_bjcryqz"
+                android:text="被检查单位负责人员签名:"
+                android:layout_width="200dp"
+                android:layout_height="40dp" />
+
+            <ImageView
+                android:id="@+id/jc_bjcryqz_set"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+
+        <!-- 分割线 -->
+        <ImageView
+            android:background="#e1e1eb"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <!-- 被监察人时间 -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:gravity="center"
+                android:id="@+id/jc_bjcryqz_time"
+                android:text="时间:"
+                android:layout_width="200dp"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:id="@+id/jc_bjcryqz_time_set"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="2017年9月28日" />
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:gravity="center"
+            android:text="检查时间:"
+            android:layout_width="200dp"
+            android:layout_height="40dp"/>
+        <TextView
+            android:paddingLeft="20dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="2017年9月28日"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
+
+    </LinearLayout>
+
+
+    <!-- 提交数据按钮 -->
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:paddingLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/jc_button_post"
+            android:text="提交检查数据"
+            android:background="#177ed5"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

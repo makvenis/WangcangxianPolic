@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.makvenis.dell.wangcangxianpolic.otherActivity.SetActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include layout="@layout/public_toolbar_simple"></include>
+
+    <!-- 是否开启定位 -->
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="#e3e2e2"
+        android:padding="12dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_weight="1"
+            android:text="定位"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.SwitchCompat
+            app:theme="@style/SwitchCompat.Control"
+            android:textColor="#fac"
+            android:textOff="关"
+            android:textOn="开"
+            app:showText="true"
+            app:switchPadding="5dp"
+            android:id="@+id/mSet_dingwei"
+            android:layout_weight="1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <!-- 是否开启本地任务历史 -->
+    <LinearLayout
+        android:gravity="center"
+        android:background="#e3e2e2"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_weight="1"
+            android:text="任务历史"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.SwitchCompat
+            app:theme="@style/SwitchCompat.Control"
+            android:textColor="#fac"
+            android:textOff="关"
+            android:textOn="开"
+            app:showText="true"
+            app:switchPadding="5dp"
+            android:id="@+id/mSet_renwu"
+            android:layout_weight="1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <!-- 清除所有缓存 -->
+    <LinearLayout
+        android:gravity="center"
+        android:background="#e3e2e2"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_weight="1"
+            android:text="清除文件缓存"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/mSet_clean_cache"
+            android:gravity="right"
+            android:text="1.7MB"
+            android:layout_weight="1"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <!-- 清除检查缓存 -->
+    <LinearLayout
+        android:gravity="center"
+        android:background="#e3e2e2"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_weight="1"
+            android:text="清除检查缓存"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/mSet_clean_addrs"
+            android:gravity="right"
+            android:text="清除"
+            android:layout_weight="1"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

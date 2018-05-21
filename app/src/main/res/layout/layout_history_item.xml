@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <LinearLayout
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:layout_width="50dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/mHistory_id"
+            android:textColor="#9c9c9c"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_weight="8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_weight="9"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_weight="8"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:maxLines="1"
+                        android:maxLength="20"
+                        android:id="@+id/mHistory_title"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:text="中共四川省南充市西充县党委支部"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/mHistory_name"
+                        android:textSize="12sp"
+                        android:text="检查人:王从文"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginTop="2dp"
+                        android:id="@+id/mHistory_gone"
+                        android:gravity="center"
+                        android:src="@drawable/icon_history_news"
+                        android:layout_width="16dp"
+                        android:layout_height="14dp" />
+                    <TextView
+                        android:id="@+id/mHistory_company"
+                        android:gravity="center"
+                        android:text="ssdai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                android:layout_width="80dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/mHistory_ok"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_history_ok"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp" />
+
+                <ImageView
+                    android:id="@+id/mHistory_looding"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_history_gengduo"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp">
+
+            <ImageView
+
+                android:background="#919191"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

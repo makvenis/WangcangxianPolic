@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    useLibrary 'org.apache.http.legacy'
+    compileSdkVersion 25
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "com.makvenis.dell.wangcangxianpolic"
+        minSdkVersion 23
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir('libs')
+            jni.srcDirs = [] //
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/', 'src/main/assets/js', 'src/main/assets/css', 'src/main/assets/image']
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile files('libs/okhttp-3.2.0.jar')
+    compile files('libs/okio-1.6.0.jar')
+    compile files('libs/xUtils-2.6.14.jar')
+    compile files('libs/Base64Util.jar')
+    compile files('libs/fastjson-1.1.41.jar')
+    compile files('libs/pojo.jar')
+    compile files('libs/BaiduLBS_Android.jar')
+    compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.android.support:cardview-v7:26.0.0-alpha1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    testCompile 'junit:junit:4.12'
+    compile files('libs/commons-text-1.1.jar')
+    compile files('libs/commons-lang3-3.7.jar')
+}

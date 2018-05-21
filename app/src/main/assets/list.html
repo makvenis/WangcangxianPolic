@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="stylesheet" href="css/normalize3.0.2.min.css" />
+<link rel="stylesheet" href="css/style.css?v=7" />
+<link href="css/mobiscroll.css" rel="stylesheet" />
+<link href="css/mobiscroll_date.css" rel="stylesheet" />
+<title>新闻详情界面</title>
+<style type="text/css">
+.body_01{ width:100%; margin:0 auto; overflow:hidden}
+.title{text-align:center; margin-top:10px; }
+.title a{ font-size:28px;}
+.name{ text-align:center; margin-top:12px;}
+#context{ padding:10px;}
+</style>
+
+</head>
+
+<body onload="JS.execute()">
+<div class="body_01">
+	<div class="title">
+    	<a id="mTitle"></a>
+    </div>
+    
+    <div class="name">
+    	<a id="mName"></a>
+        <a id="mTime"></a>
+    </div>
+    
+    <div id="context">
+		
+    </div>
+    
+
+</div>
+
+<script>
+	function execute(a,b,c,d){
+		setTitle(a);
+		setName(b);
+		setTimes(c);
+		setContext(d)
+		}
+
+</script>
+
+<script>
+	    function setTitle(context){
+		var a = document.getElementById("mTitle").text=context;
+		}
+</script>
+
+<script>
+	    function setName(context){
+		var a = document.getElementById("mName").text=context;
+		}
+</script>
+
+
+<script>
+	    function setTimes(context){
+		var a = document.getElementById("mTime").text=context;
+		}
+</script>
+
+<script>
+	function setContext(context){
+		var a = document.getElementById("context").innerHTML=context;
+		}
+</script>
+
+
+</body>
+</html>

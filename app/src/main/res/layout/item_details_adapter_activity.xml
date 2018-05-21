@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 左边 -->
+        <LinearLayout
+            android:paddingLeft="10dp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp">
+
+            <!-- 辖区 -->
+            <LinearLayout
+                android:gravity="center"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:text="辖区:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="武侯区"
+                    android:id="@+id/details_xiaqu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <!-- 警官姓名 -->
+            <LinearLayout
+                android:gravity="center"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:text="警官姓名:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="王从文"
+                    android:id="@+id/details_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <!-- 警员号 -->
+            <LinearLayout
+                android:gravity="center"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:text="警员号:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="08393369562"
+                    android:id="@+id/details_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <!-- 右边 -->
+        <LinearLayout
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/details_img"
+                android:layout_gravity="center"
+                android:src="@mipmap/icon_login_head"
+                android:layout_width="120dp"
+                android:layout_height="120dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <TextView
+        android:paddingTop="10dp"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:text="单位信息"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="#699cf5"
+            app:cardCornerRadius="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <!-- 单位名称 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:textColor="#FFFFFF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="单位名称:" />
+
+                    <TextView
+                        android:textColor="#FFFFFF"
+                        android:id="@+id/details_dwmc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="四川XXX科技有限公司" />
+
+                </LinearLayout>
+
+                <!-- 组织机构代码证 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:textColor="#FFFFFF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="组织机构代码证:" />
+
+                    <TextView
+                        android:textColor="#FFFFFF"
+                        android:id="@+id/details_zzjgdm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="51082119929836S" />
+
+                </LinearLayout>
+
+                <!-- 法人名称 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:textColor="#FFFFFF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="法人名称:" />
+
+                    <TextView
+                        android:textColor="#FFFFFF"
+                        android:id="@+id/details_faren"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="51082119929836S" />
+
+                </LinearLayout>
+
+                <!-- 联系电话 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:textColor="#FFFFFF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="联系电话:" />
+
+                    <TextView
+                        android:textColor="#FFFFFF"
+                        android:id="@+id/details_tel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="51082119929836S" />
+
+                </LinearLayout>
+
+                <!-- 公司地址 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:textColor="#FFFFFF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="公司地址:" />
+
+                    <TextView
+                        android:textColor="#FFFFFF"
+                        android:id="@+id/details_path"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="51082119929836S" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+    <!-- 公司简介 -->
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="公司简介"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:text="\u3000\u3000 我公司专门生产一些技术精密等设备，我公司
+            专门生产一些技术精密等设备，我公司专门生产一些技术精密
+            等设备，术精密等设备，我公司专门生产一些技术精密等设
+            公司专门生产一些技术精密等设公司专门生产一些技术精密等设备，我
+            公司专门生产一些技术精密等设备，我公司专门生产一些技术精密等设备"
+            android:id="@+id/details_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/company_start_jiancha"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/btn_login_bg_normal"
+        android:text="检查"
+        android:layout_width="300dp"
+        android:layout_height="50dp" />
+
+
+</LinearLayout>

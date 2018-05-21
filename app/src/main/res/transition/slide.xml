@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Acyivity跳转的滑动效果 slideEdge表示起始滑动的侧边位置，end表示右侧，start表示左侧，top表示顶部，bottom表示底侧-->
+<slide xmlns:android="http://schemas.android.com/apk/res/android"
+    android:slideEdge="top">
+    <!-- 如果你不希望顶部的状态栏以及底部的导航栏一起执行动画，可以在xml中指定 -->
+    <targets>
+        <target android:targetId="@android:id/navigationBarBackground"></target>
+        <target android:targetId="@android:id/statusBarBackground"></target>
+    </targets>
+
+
+</slide>

@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.makvenis.dell.wangcangxianpolic.correctActivity.CorrectCommandActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appBarLayout">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/CollapsingToolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:title="测试">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/head_hd" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+
+                <ImageView
+                    android:id="@+id/toolbar_bank"
+                    android:src="@drawable/icon_bank_35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:background="#e1e1e1"
+            android:id="@+id/mLinearLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- 当数据错误的时候出现 -->
+            <TextView
+                android:visibility="gone"
+                android:text="数据请求失败!"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- 旺公[] 字号[] -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_18"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:text="公安单位类别"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="旺公 （）"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:maxLines="1"
+                        android:id="@+id/mEdit_type_wg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="责通字 [  ]"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:id="@+id/mEdit_type_ztz"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 旺公（治）限字 第()号 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_19"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:text="公安单位类别"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="旺公 （）"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:maxLines="1"
+                        android:id="@+id/mEdit_type_xq_wg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="限字 [  ]"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:id="@+id/mEdit_type_xq_ztz"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="第()号"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:id="@+id/mEdit_type_xq_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 单位 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_1"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/myInputTextView"
+                        android:id="@+id/item_mTextView_danwei"
+                        android:text="违法行为人姓名或者单位名称：" />
+
+                    <EditText
+                        android:hint="违法行为人姓名或者单位名称"
+                        style="@style/myInputEditText"
+                        android:id="@+id/item_mEditView_danwei"/>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <!-- 性别 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_2"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/myInputTextView"
+                        android:id="@+id/item_mTextView_sex"
+                        android:text="性别：" />
+
+
+                    <RadioGroup
+                        android:id="@+id/item_mRadioGroup"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:textColor="#999999"
+                            android:text="男"
+                            android:id="@+id/item_mTextView_sex_man"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <RadioButton
+                            android:textColor="#999999"
+                            android:text="女"
+                            android:id="@+id/item_mTextView_sex_woman"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <!-- 年龄 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_3"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/myInputTextView"
+                        android:id="@+id/item_mTextView_nianling"
+                        android:text="年龄：" />
+
+                    <EditText
+                        android:hint="年龄"
+                        android:inputType="number"
+                        style="@style/myInputEditText"
+                        android:id="@+id/item_mEditView_nianling"/>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <!-- 出生日期 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_4"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:textColor="#3225c6"
+                        android:layout_weight="1"
+                        android:id="@+id/item_mTextView_shengri"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="出生日期:" />
+
+                    <TextView
+                        android:textColor="#F00"
+                        android:layout_weight="1"
+                        android:hint="2017-10-06"
+                        android:id="@+id/item_mEditView_shengri"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/item_mImageView_onClink"
+                        android:src="@drawable/icon_time_riqi"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 身份证种类 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_5"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:textColor="#3225c6"
+                        android:layout_weight="1"
+                        android:id="@+id/item_mTextView_sfzType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="证件选择" />
+
+                    <Spinner
+                        android:entries="@array/langItem"
+                        android:id="@+id/item_Spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </Spinner>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 证件号码 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_6"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/myInputTextView"
+                        android:id="@+id/item_mTextView_sfzNum"
+                        android:text="证件号码：" />
+
+                    <EditText
+                        android:hint="证件号码(数字)"
+                        android:inputType="number"
+                        style="@style/myInputEditText"
+                        android:id="@+id/item_mEditView_sfzNum"/>
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <!-- 法定代表人 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_7"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/myInputTextView"
+                        android:id="@+id/item_mTextView_faren"
+                        android:text="法定代表人：" />
+
+                    <EditText
+                        android:hint="法定代表人"
+                        style="@style/myInputEditText"
+                        android:id="@+id/item_mEditView_faren"/>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <!-- 单位地址 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_8"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/myInputTextView"
+                        android:id="@+id/item_mTextView_danweiaddress"
+                        android:text="单位地址：" />
+
+                    <EditText
+                        android:hint="单位地址"
+                        style="@style/myInputEditText"
+                        android:id="@+id/item_mEditView_danweiaddress"/>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <!-- 查明 存在违法行为 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_9"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/myInputTextView"
+                        android:id="@+id/item_mTextView_chaming"
+                        android:text="存在违法行为：" />
+
+                    <EditText
+                        android:gravity="top"
+                        style="@style/myInputEditTextNorml"
+                        android:hint="输入查明事实"
+                        android:maxLines="6"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="@drawable/border"
+                        android:id="@+id/item_mEditView_chaming"/>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <!-- 证据证实 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_10"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/myInputTextView"
+                        android:id="@+id/item_mTextView_zhengshi"
+                        android:text="证据证实：" />
+
+                    <EditText
+                        android:hint="证据证实"
+                        style="@style/myInputEditText"
+                        android:background="@drawable/border"
+                        android:id="@+id/item_mEditView_zhengshi"/>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <!-- 条款名称 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_11"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:textColor="#2b2a2a"
+                        android:id="@+id/item_mTextView_tiaoKuanName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="填写依据条款名称及其款（如无条款项信息责不填写）:" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            style="@style/myInputEditTextNorml"
+                            android:hint="条款名称"
+                            android:id="@+id/item_mEditView_tiaoKuanName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <EditText
+                            style="@style/myInputEditTextNorml"
+                            android:inputType="number"
+                            android:hint="条（数字）"
+                            android:id="@+id/item_mEditView_tiaoName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <EditText
+                            style="@style/myInputEditTextNorml"
+                            android:inputType="number"
+                            android:hint="款（数字）"
+                            android:id="@+id/item_mEditView_kuanName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <EditText
+                            style="@style/myInputEditTextNorml"
+                            android:inputType="number"
+                            android:hint="项（数字）"
+                            android:id="@+id/item_mEditView_xiang"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 给予的处罚 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_12"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/myInputTextView"
+                        android:id="@+id/item_mTextView_chufa"
+                        android:text="给予的处罚：" />
+
+                    <EditText
+                        style="@style/myInputEditTextNorml"
+                        android:hint="给予的处罚"
+                        android:maxLines="6"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="@drawable/border"
+                        android:id="@+id/item_mEditView_chufa"/>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <!-- 执行措施 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_13"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:text="执行措施"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <RadioGroup
+                        android:id="@+id/mRadioGroup_zxcs"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/item_mRadioGroup_zxcs_1"
+                            android:text="立即予以改正"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/item_mRadioGroup_zxcs_2"
+                            android:text="立即停"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </RadioGroup>
+
+                    <LinearLayout
+                        android:id="@+id/item_mLinearLayout"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:hint="整改完毕时间"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/item_mTextView_timer_zgcs"/>
+                        <ImageView
+                            android:id="@+id/item_mTextView_timer_zgcsOnClink"
+                            android:src="@drawable/icon_list_time_select"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp" />
+                        <TextView
+                            android:hint="规定时限内的整改要求(备注):"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                        <EditText
+                            android:id="@+id/mText_overTime_set"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <!-- 根据《企业事业单位内部治安保卫条例》 第()条 { 限期整改专用 } -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_20"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:textColor="#3225c6"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="选择《企业事业单位内部治安保卫条例》" />
+
+                    <EditText
+                        android:id="@+id/mEdit_type_xq_tiaoli"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:textColor="#3225c6"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="在整改完毕之前采取的必要措施" />
+
+                    <EditText
+                        android:id="@+id/mEdit_type_xq_cuoshi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 执行方式 { 当场处罚决定书 } -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_21"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RadioGroup
+                        android:id="@+id/mRadioGroup_chufa_zxfs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/mRadioGroup_chufa_zxcs_1"
+                            android:text="当场训诫"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/mRadioGroup_chufa_zxcs_2"
+                            android:text="当场收缴罚款"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/mRadioGroup_chufa_zxcs_3"
+                            android:text="被处罚人持本决定书在十五日内到银行缴纳罚"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </RadioGroup>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 处罚地点 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_14"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/item_mTextView_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="处罚地点:" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:hint="2017-10-06"
+                        android:id="@+id/item_mEditView_Dingwei_set"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/item_mImageView_DingweiOnClink"
+                        android:src="@drawable/marker"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 办案警察 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_15"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/item_mTextView_Name"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="办案警察签名:" />
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:id="@+id/item_mImageView_setName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp" />
+
+                    <ImageView
+                        android:id="@+id/item_mImageView_setNameonClink"
+                        android:src="@drawable/icon_list_qianming"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 被检查人签名 （汉字） -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_23"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="被检查人姓名(多个人请用','隔开):" />
+
+                    <EditText
+                        android:id="@+id/mEdit_type_Chinese_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 被检查人 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_22"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/item_mTextView_bjc_Name"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="被检查人签名:" />
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:id="@+id/item_mImageView_bjc_setName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp" />
+
+                    <ImageView
+                        android:id="@+id/item_mImageView_bjc_setNameonClink"
+                        android:src="@drawable/icon_list_qianming"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 单位工作人员  对你单位进行检查 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_16"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:textColor="#3225c6"
+                        android:layout_weight="1"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="检查日期:" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        style="@style/myInputEditTextNorml"
+                        android:hint="2017-10-06"
+                        android:id="@+id/item_mEditView_cfrq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/item_mImageView_onClink_Cfrq"
+                        android:src="@drawable/icon_time_riqi"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 单位工作人员  整改完毕时间 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/mCardView_17"
+                style="@style/myCardView">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:textColor="#3225c6"
+                        android:layout_weight="1"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="整改完毕时间:" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:hint="2017-10-06"
+                        android:id="@+id/item_mEditView_overTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/item_mImageView_onClink_overTime"
+                        android:src="@drawable/icon_list_time_select"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 提交数据 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_marginBottom="10dp"
+                    android:textSize="18sp"
+                    android:background="@color/colorPrimary"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/mPostData"
+                    android:text="提交数据"
+                    android:textColor="#FFFFFF"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        app:layout_behavior="com.makvenis.dell.wangcangxianpolic.behavior.ScrollAwareFABBehavior"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:src="@drawable/icon"
+        app:layout_anchor="@+id/nestedScrollView"
+        app:layout_anchorGravity="bottom|right" />
+
+</android.support.design.widget.CoordinatorLayout>
+
+

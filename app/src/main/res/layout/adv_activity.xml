@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.makvenis.dell.wangcangxianpolic.startActivity.AdvertisingActivity">
+
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/adv_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <com.makvenis.dell.wangcangxianpolic.view.SimpleTimeView
+        android:layout_alignParentRight="true"
+        android:id="@+id/adv_downTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>
+

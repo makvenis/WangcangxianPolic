@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.makvenis.dell.wangcangxianpolic.newsnotescheck.NotesNewActivity">
+
+    <android.support.v7.widget.Toolbar
+        app:popupTheme="@style/OverflowMenuStyle"
+        app:titleTextColor="#FFFFFF"
+        android:background="@color/colorPrimary"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_gravity="center"
+            android:text="旅店业安全情况检查登记表"
+            android:id="@+id/toolbar_name"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <ViewFlipper
+        android:id="@+id/mViewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ViewFlipper>
+
+</LinearLayout>

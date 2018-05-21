@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="#e3e3e4"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/min_task_adapter_icon"
+            android:src="@drawable/note_fav_not_support"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+
+        <TextView
+            android:textSize="16sp"
+            android:textColor="#1c1c1c"
+            android:layout_gravity="center"
+            android:text="我的任务"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/min_task_adapter_context"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/min_task_adapter_biaoshi"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:textSize="14sp"
+            android:textColor="#f00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

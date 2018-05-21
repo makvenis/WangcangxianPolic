@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:background="#e8e8e8"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 单位名称 -->
+        <LinearLayout
+            android:id="@+id/mHistory_pop_danwei"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/icon_history_xinxi"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:text="单位名称:"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/mHistory_pop_type2_danwei"
+                android:text="四川大香蕉种植栽培庄园"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- 法人 -->
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/icon_history_faren"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:text="法人:"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/mHistory_pop_type2_faren"
+                android:text="张大千"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- 地址 -->
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/icon_history_dizhi"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:text="单位地址:"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/mHistory_pop_type2_dizhi"
+                android:text="四川省南充市阆中洞子口"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- 删除记录 -->
+        <LinearLayout
+            android:id="@+id/mHistory_pop_delete"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/icon_history_delete"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:text="删除记录"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- 取消退出 -->
+        <LinearLayout
+            android:id="@+id/mHistory_pop_over"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/icon_history_quxiao"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:text="取消/退出"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

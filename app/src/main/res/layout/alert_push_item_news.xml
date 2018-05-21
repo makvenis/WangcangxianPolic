@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/icon_news"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:textSize="16sp"
+            android:textColor="#F00"
+            android:layout_gravity="center"
+            android:text="今日要闻"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:background="#FAC"
+        android:layout_width="1dp"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/mAlertPush_police_item_now_title"
+            android:maxLines="1"
+            android:text="走心推荐的美剧：“美女上错身”这世间更多的还是感动"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/mAlertPush_police_item_now_minTitle"
+            android:textColor="#d5d5d5"
+            android:textSize="12sp"
+            android:maxLines="3"
+            android:text="        这几天又重温了一部美剧：美女上错身，听起来并不是小清新题材，但是当你真的看懂这部美剧之后，你会发现人活着的意义不是为了big house，扬名立万，金钱美女……而是那一点一滴的感动！"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

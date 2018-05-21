@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Activity之间的跳转动画 淡出效果 -->
+<fade android:duration="300"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+</fade>
