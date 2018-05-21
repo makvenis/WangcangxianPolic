@@ -46,6 +46,8 @@ public class Configfile {
         };
     }
 
+    /* 用户新闻列表的请求地址 自动拼接页码标签 */
+    public static final String NEWS_PATH="http://ssdaixiner.oicp.net:26168/wcjw/mobile/news/newslist?classid=114&pageNow=";
     /* 用户信息数据库键 */
     public static final String USER_DATA_KEY="USER_SQL";
 

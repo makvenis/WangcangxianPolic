@@ -14,6 +14,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.makvenis.dell.wangcangxianpolic.R;
+import com.makvenis.dell.wangcangxianpolic.help.JSON;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleLoadingDialog;
@@ -23,7 +24,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +42,7 @@ public class AlertPushNewsActivity extends AppCompatActivity implements SwipeRef
     /* 布局适配器 */
     private SimpleAlertPushAdapter adapter;
     /* 翻页 */
-    int page=0;
+    int page=2;
     /* 全局Dialog */
     SimpleLoadingDialog dialog;
     /* 回调的数据 */
@@ -58,7 +58,7 @@ public class AlertPushNewsActivity extends AppCompatActivity implements SwipeRef
             if(obj != null){
                 switch (what){
                     case 0X000006:
-                        List<Map<String, String>> maps = TestData(obj);
+                        List<Map<String, String>> maps = getParment(obj);
                         for (int i = 0; i < maps.size(); i++) {
                             mData.add(maps.get(i));
                         }
@@ -127,19 +127,16 @@ public class AlertPushNewsActivity extends AppCompatActivity implements SwipeRef
 
     //初始化一开始加载的数据
     private void initData(){
-        /*mData = new ArrayList<>();
-        for (int i = 0; i < 20; i++){
-            mData.add("Item"+i);
-        }*/
-        List<Map<String, String>> maps = TestData(mObject);
+        List<Map<String, String>> maps = getParment(mObject);
         mData.addAll(maps);
+        /* 获取总的页码标签 */
     }
 
     //每次上拉加载的时候，就加载十条数据到RecyclerView中
     private void loadMoreData(){
         dialog=new SimpleLoadingDialog(this);
         dialog.setMessage("加载更多...").show();
-        String mPath="http://sapi.beibei.com/item/mz_temai_cat/v2/1-1"+page+"-nvzhuang.html?package=mizhe";
+        String mPath=Configfile.NEWS_PATH+page;
         NetworkTools.HttpUtilsGet(this,mPath,mHandler);
         page++;
     }
@@ -147,10 +144,10 @@ public class AlertPushNewsActivity extends AppCompatActivity implements SwipeRef
     //下拉刷新
     private void updateData(){
         //我在List最前面加入一条数据
-        Map<String,String> mMaps=new HashMap<>();
-        mMaps.put("title","我是“下拉刷新”生出来的");
-        mMaps.put("img","https://ps.ssl.qhimg.com/sdmt/87_135_100/t01c26515f619902f48.jpg");
-        mData.add(0, mMaps);
+        //Map<String,String> mMaps=new HashMap<>();
+        //mMaps.put("title","我是“下拉刷新”生出来的");
+        //mMaps.put("img","https://ps.ssl.qhimg.com/sdmt/87_135_100/t01c26515f619902f48.jpg");
+        //mData.add(0, mMaps);
     }
 
     @Override
@@ -169,28 +166,37 @@ public class AlertPushNewsActivity extends AppCompatActivity implements SwipeRef
                 .show();
     }
 
+    /**
+     "addtime":1521022383000,
+     "cid":114,
+     "cmsclass":Object{...},
+     "hits":13,
+     "id":319,
+     "ismsg":1,
+     "laiyuan":"本网",
+     "msgname":"jk",
+     "picdefault":"../../upload/20180313162658256.jpg",
+     "pxtime":1521022383000,
+     "remark":"水下婚纱照也是现代很多新人喜欢的一种婚纱照风格",
+     "state":0,
+     "title":"水下婚纱照如何拍摄更自然唯美",
+     "titlefu":"水下婚纱照如何拍摄更自然唯美",
+     "username":"ssdai"
+     */
 
-    public List<Map<String,String>> TestData(String s){
+    /**
+     * @解析当前的数据
+     *
+     */
+    public List<Map<String,String>> getParment(String s){
         try {
-            List<Map<String,String>> data=new ArrayList<>();
             JSONObject object=new JSONObject(s);
-            JSONArray jsonArray = object.getJSONArray("home_items");
-            for (int i = 0; i < jsonArray.length(); i++) {
-
-                Map<String,String> map=new HashMap<>();
-
-                JSONObject obj=jsonArray.getJSONObject(i);
-                String title = obj.optString("title");
-                String img = obj.optString("img");
-                map.put("title",title);
-                map.put("img",img);
-                data.add(map);
-            }
-
+            JSONArray jsonArray = object.getJSONArray("newsList");
+            List<Map<String, String>> data = JSON.GetJson(jsonArray.toString(), new String[]{"addtime", "cid", "id", "laiyuan", "msgname", "picdefault", "pxtime", "remark", "title", "titlefu", "username"});
             return data;
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
 }

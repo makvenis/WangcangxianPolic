@@ -73,6 +73,7 @@ public class NoticeFragment extends Fragment {
     /* 全局Dialog */
     SimpleLoadingDialog dialog;
 
+
     /* 全局Handler */
     Handler mHandler=new Handler(){
         @Override
@@ -211,7 +212,30 @@ public class NoticeFragment extends Fragment {
         ll_flfg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showdDialog();
+                new HttpUtils(10000).send(HttpRequest.HttpMethod.GET,
+                        Configfile.NEWS_PATH+"1",//表示默认请求第一页
+                        new RequestCallBack<String>() {
+                            @Override
+                            public void onSuccess(ResponseInfo<String> responseInfo) {
+                                String result = responseInfo.result;
+                                if(result != null){
+                                    Message msg=new Message();
+                                    msg.obj=result;
+                                    msg.what=0X000006;
+                                    mHandler.sendMessage(msg);
+                                }else {
+                                    Configfile.Log(getActivity(),"数据请求失败");
+                                    dialog.dismiss();
+                                }
+                            }
 
+                            @Override
+                            public void onFailure(HttpException e, String s) {
+                                Configfile.Log(getActivity(),"网络连接失败！");
+                                dialog.dismiss();
+                            }
+                        });
             }
         });
 
