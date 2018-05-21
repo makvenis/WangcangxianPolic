@@ -101,4 +101,38 @@ public class JSON {
         return new ArrayList<>();
     }
 
+
+    /**
+     * {@linkplain=Android} 适应与当只有一层Object的时候
+     * 使用此方法
+     * @param json
+     * @param key string[]{}
+     * @return 返回的类型  Map<String, Object>
+     */
+    public static Map<String, Object> getObjectJson(String json,String[] key) {
+        try {
+            if(json == null || key.length == 0)
+                return new HashMap<>();
+            //返回的集合
+            Map<String, Object> data=new HashMap<>();
+            JSONObject object=new JSONObject(json);
+            List<String> mKey=new ArrayList<>();
+            for (int i = 0; i < key.length; i++) {
+                mKey.add(key[i]);
+            }
+
+            for (int i = 0; i < mKey.size(); i++) {
+                data.put(mKey.get(i), object.get(mKey.get(i)));
+            }
+            if(data.size() != 0)
+                return data;
+
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return new HashMap<>();
+    }
+
+
 }
