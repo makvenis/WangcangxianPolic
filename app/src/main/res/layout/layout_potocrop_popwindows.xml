@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="#70c3f6"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 本地图片 -->
+        <LinearLayout
+            android:background="#ffffff"
+            android:id="@+id/mCrop_local_sd"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/icon_history_delete"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:gravity="center"
+                android:text="本地图片"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- 照相机 -->
+        <LinearLayout
+            android:background="#ffffff"
+            android:id="@+id/mCrop_local_camera"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/icon_history_delete"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:gravity="center"
+                android:text="照相机"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- 取消退出 -->
+        <LinearLayout
+            android:background="#ffffff"
+            android:id="@+id/mHistory_pop_over"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/icon_history_quxiao"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:gravity="center"
+                android:text="取消/退出"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

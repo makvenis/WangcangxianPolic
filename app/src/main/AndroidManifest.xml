@@ -79,6 +79,7 @@
         <activity android:name=".startActivity.TestActivity" />
         <activity android:name=".otherActivity.CorrectHistoryActivity" />
         <activity android:name=".otherActivity.SetActivity"></activity>
+        <activity android:name=".minFragment.PersonalCenterActivity"></activity>
     </application>
 
 </manifest>

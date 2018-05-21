@@ -1,5 +1,6 @@
 package com.makvenis.dell.wangcangxianpolic.minFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
 import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
+import com.makvenis.dell.wangcangxianpolic.view.SimpleImageViewCircleBitmap;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ public class PersonalCenterFragemnt extends Fragment {
 
     @ViewInject(R.id.mPersonal_listView)
     ListView listView;
+
+    SimpleImageViewCircleBitmap bitmap;
 
     @Nullable
     @Override
@@ -67,9 +71,33 @@ public class PersonalCenterFragemnt extends Fragment {
                     Picasso.with(getActivity()).load(path).into(v);
                 }
             }
+
+            /* Item里面的内一个子空间的点击事件 */
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                bitmap = (SimpleImageViewCircleBitmap) view.findViewById(R.id.min_personal_poto);
+                bitmap.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Configfile.Log(getActivity(),"SimpleImageViewCircleBitmap");
+                        Intent intent=new Intent(getActivity(),PersonalCenterActivity.class);
+                        // TODO: 2018/5/21 模拟原始图片地址
+                        String path="http://b1.hucdn.com/upload/item/1804/16/59603443964511_800x800.jpg";
+                        intent.putExtra("old_img_url",path);
+                        startActivity(intent);
+                    }
+                });
+
+
+                return view;
+
+            }
         };
 
         listView.setAdapter(adapter);
+
+
 
     }
 
@@ -100,4 +128,6 @@ public class PersonalCenterFragemnt extends Fragment {
         }
         return new HashMap<>();
     }
+
+
 }

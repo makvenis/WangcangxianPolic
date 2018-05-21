@@ -6,8 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="TAG" />
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
@@ -53,8 +52,8 @@
       <file leaf-file-name="PersonalCenterFragemnt.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/minFragment/PersonalCenterFragemnt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
+            <state relative-caret-position="230">
+              <caret line="57" column="41" selection-start-line="57" selection-start-column="41" selection-end-line="57" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -62,12 +61,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="min_fragment_personal_center.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/min_fragment_personal_center.xml">
+      <file leaf-file-name="layout_personal_item.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_personal_item.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-              <folding />
+            <state relative-caret-position="322">
+              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+              <folding>
+                <element signature="e#238#509#0" expanded="false" />
+                <element signature="e#515#792#0" expanded="false" />
+                <element signature="e#798#1460#0" expanded="false" />
+                <element signature="e#1466#2180#0" expanded="false" />
+              </folding>
             </state>
           </provider>
           <provider editor-type-id="android-designer2">
@@ -75,15 +79,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JSON.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/help/JSON.java">
+      <file leaf-file-name="min_fragment_personal_center.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/min_fragment_personal_center.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="39" column="41" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="41" />
-              <folding>
-                <element signature="method#getObjectJson#0;class#JSON#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="368">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
@@ -1931,11 +1936,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/sanEntery/Jcbilu.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_answer_list.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/public_item_notes_foot.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/TestActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_test.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_correct_command.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_dialog_type.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/sanEntery/JwYinhuanMsgFucha.java" />
@@ -1967,21 +1967,26 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_company.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/company/CompanyActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_notifly.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/assets/list.html" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newdbhelp/AppMothedHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/BaseActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/NotiflyActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/service/SimpleServiceMessage.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/help/JSON.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/tools/Configfile.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/NoticeFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/activity/AlertPushNewsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/adapter_alertpush_item_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/activity/SimpleAlertPushAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_personal_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/minFragment/PersonalCenterFragemnt.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/min_fragment_personal_center.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/minFragment/PersonalCenterFragemnt.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_potocrop_popwindows.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/tools/Configfile.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/tools/NetworkTools.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_personal_center.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/minFragment/PersonalCenterActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_personal_item.xml" />
       </list>
     </option>
   </component>
@@ -2112,16 +2117,8 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wangcangxianpolic" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -2155,7 +2152,7 @@
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/assets" />
     <property name="device.picker.selection" value="7DL7Z96DYSPRJBP7" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mizhe" />
     <property name="ExportApk.ApkPath" value="C:\Users\dell\Desktop" />
     <property name="ExportApk.Flavors" value="" />
     <property name="ExportApk.BuildType" value="release" />
@@ -2164,23 +2161,23 @@
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
+      <recent name="com.makvenis.dell.wangcangxianpolic.minFragment" />
       <recent name="com.makvenis.dell.wangcangxianpolic.otherActivity" />
       <recent name="com.makvenis.dell.wangcangxianpolic.startActivity" />
       <recent name="com.makvenis.dell.wangcangxianpolic.activity" />
       <recent name="com.makvenis.dell.wangcangxianpolic.correctActivity" />
-      <recent name="com.makvenis.dell.wangcangxianpolic.newsnotescheck" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.makvenis.dell.wangcangxianpolic.activity" />
       <recent name="com.makvenis.dell.wangcangxianpolic.minFragment" />
+      <recent name="com.makvenis.dell.wangcangxianpolic.activity" />
       <recent name="com.makvenis.dell.wangcangxianpolic.view" />
       <recent name="com.makvenis.dell.wangcangxianpolic.help" />
       <recent name="com.makvenis.dell.wangcangxianpolic.newsnotescheck" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Windows\AndroidProject\WangcangxianPolic\app\src\main\res\layout" />
       <recent name="D:\Windows\AndroidProject\WangcangxianPolic\app\libs" />
       <recent name="D:\Windows\AndroidProject\WangcangxianPolic\app\src\main\assets" />
-      <recent name="D:\Windows\AndroidProject\WangcangxianPolic\app\src\main\res\layout" />
       <recent name="D:\Windows\AndroidProject\WangcangxianPolic\app\src\main\res\anim" />
       <recent name="D:\Windows\AndroidProject\WangcangxianPolic\app\src\main\res\drawable" />
     </key>
@@ -2584,8 +2581,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
-    <editor active="true" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920793" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286385" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -2593,7 +2590,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7109283" sideWeight="0.50858366" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27144536" sideWeight="0.4914163" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16098708" sideWeight="0.4914163" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13242574" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -2665,65 +2662,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/content/ContextWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="163" column="37" selection-start-line="163" selection-start-column="37" selection-end-line="163" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/content/Context.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="687" column="77" selection-start-line="687" selection-start-column="77" selection-end-line="687" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/otherActivity/SetActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_set.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/WebViewActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="774">
-          <caret line="206" column="8" selection-start-line="206" selection-start-column="8" selection-end-line="206" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/assets/noSaverUp.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="87" column="55" selection-start-line="87" selection-start-column="55" selection-end-line="87" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/assets/fuchaServiceUp.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="100" column="53" selection-start-line="100" selection-start-column="53" selection-end-line="100" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/WebPostRemarkActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="126" column="52" selection-start-line="126" selection-start-column="52" selection-end-line="126" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/correctActivity/CorrectCommandActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="848">
@@ -2739,23 +2677,6 @@
       </provider>
       <provider editor-type-id="android-designer2">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_history_popwindows.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="71" column="21" selection-start-line="71" selection-start-column="21" selection-end-line="71" selection-end-column="21" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/otherActivity/CorrectHistoryActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="113" selection-end-column="5" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_company.xml">
@@ -2814,14 +2735,6 @@
             <element signature="e#274#275#0" expanded="false" />
             <element signature="e#304#305#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2898,17 +2811,9 @@
           <folding>
             <element signature="method#onclinkSearch#0;class#NoticeFragment#0" expanded="false" />
             <element signature="class#7088:8025" expanded="false" />
-            <element signature="e#8156#9502#0" expanded="true" />
-            <element signature="e#9501#9502#0" expanded="true" />
+            <element signature="e#8156#9502#0" expanded="false" />
+            <element signature="e#9501#9502#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/tools/Configfile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2944,21 +2849,13 @@
         <state relative-caret-position="-249">
           <caret line="149" column="30" selection-start-line="149" selection-start-column="30" selection-end-line="149" selection-end-column="30" />
           <folding>
-            <element signature="e#3595#3843#0" expanded="true" />
-            <element signature="e#3842#3843#0" expanded="true" />
-            <element signature="e#3963#4227#0" expanded="true" />
-            <element signature="e#4226#4227#0" expanded="true" />
-            <element signature="e#5282#5490#0" expanded="true" />
-            <element signature="e#5489#5490#0" expanded="true" />
+            <element signature="e#3595#3843#0" expanded="false" />
+            <element signature="e#3842#3843#0" expanded="false" />
+            <element signature="e#3963#4227#0" expanded="false" />
+            <element signature="e#4226#4227#0" expanded="false" />
+            <element signature="e#5282#5490#0" expanded="false" />
+            <element signature="e#5489#5490#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/tools/NetworkTools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="115" column="41" selection-start-line="112" selection-start-column="12" selection-end-line="115" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3032,8 +2929,8 @@
         <state relative-caret-position="-1642">
           <caret line="155" column="39" selection-start-line="155" selection-start-column="39" selection-end-line="155" selection-end-column="39" />
           <folding>
-            <element signature="e#4980#6001#0" expanded="true" />
-            <element signature="e#6000#6001#0" expanded="true" />
+            <element signature="e#4980#6001#0" expanded="false" />
+            <element signature="e#6000#6001#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3043,21 +2940,10 @@
         <state relative-caret-position="-575">
           <caret line="72" column="19" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
           <folding>
-            <element signature="e#2258#2476#0" expanded="true" />
-            <element signature="e#2475#2476#0" expanded="true" />
+            <element signature="e#2258#2476#0" expanded="false" />
+            <element signature="e#2475#2476#0" expanded="false" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_personal_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="42" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/help/JSON.java">
@@ -3081,14 +2967,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/minFragment/TaskCenterFragemnt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="44" column="56" selection-start-line="44" selection-start-column="56" selection-end-line="44" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/activity/AlertPushPoliceActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="326">
@@ -3097,21 +2975,189 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-fragment/26.0.0-alpha1/support-fragment-26.0.0-alpha1-sources.jar!/android/support/v4/app/Fragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="669" column="34" selection-start-line="669" selection-start-column="34" selection-end-line="669" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/help/PermissionsUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/view/SimpleImageViewCircleBitmap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="92" column="64" selection-start-line="92" selection-start-column="64" selection-end-line="92" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/view/SimpleDialogSureView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/minFragment/TaskCenterFragemnt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="186" column="77" selection-start-line="186" selection-start-column="77" selection-end-line="186" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/otherActivity/CorrectHistoryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="222" column="0" selection-start-line="222" selection-start-column="0" selection-end-line="288" selection-end-column="30" />
+          <folding>
+            <element signature="method#bottomwindow#0;class#CorrectHistoryActivity#0" expanded="false" />
+            <element signature="method#backgroundAlpha#0;class#CorrectHistoryActivity#0" expanded="false" />
+            <element signature="method#setButtonListeners#0;class#CorrectHistoryActivity#0" expanded="false" />
+            <element signature="method#setOnclinkButtom#0;class#CorrectHistoryActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_history_popwindows.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1288">
+          <caret line="56" column="39" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="39" />
+          <folding>
+            <element signature="e#2566#3574#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="81" column="53" selection-start-line="81" selection-start-column="53" selection-end-line="81" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_potocrop_popwindows.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <folding>
+            <element signature="e#2156#2982#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/tools/Configfile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="33" column="110" selection-start-line="33" selection-start-column="110" selection-end-line="33" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/tools/NetworkTools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="586" column="37" selection-start-line="586" selection-start-column="37" selection-end-line="586" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/minFragment/PersonalCenterActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="88" column="67" selection-start-line="88" selection-start-column="67" selection-end-line="88" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2163#2909#0" expanded="true" />
+            <element signature="e#2908#2909#0" expanded="true" />
+            <element signature="e#4017#4219#0" expanded="true" />
+            <element signature="e#4218#4219#0" expanded="true" />
+            <element signature="e#4322#4549#0" expanded="true" />
+            <element signature="e#4548#4549#0" expanded="true" />
+            <element signature="e#5700#5858#0" expanded="true" />
+            <element signature="e#5857#5858#0" expanded="true" />
+            <element signature="e#6662#6895#0" expanded="true" />
+            <element signature="e#6894#6895#0" expanded="true" />
+            <element signature="e#6955#7154#0" expanded="true" />
+            <element signature="e#7153#7154#0" expanded="true" />
+            <element signature="e#7213#7368#0" expanded="true" />
+            <element signature="e#7367#7368#0" expanded="true" />
+            <marker date="1526918736377" expanded="false" signature="5957:6185" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_personal_center.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="52" column="33" selection-start-line="52" selection-start-column="33" selection-end-line="52" selection-end-column="33" />
+          <folding>
+            <element signature="e#350#1709#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/min_fragment_personal_center.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/minFragment/PersonalCenterFragemnt.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
+        <state relative-caret-position="230">
+          <caret line="57" column="41" selection-start-line="57" selection-start-column="41" selection-end-line="57" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/min_fragment_personal_center.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_personal_item.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-          <folding />
+        <state relative-caret-position="322">
+          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding>
+            <element signature="e#238#509#0" expanded="false" />
+            <element signature="e#515#792#0" expanded="false" />
+            <element signature="e#798#1460#0" expanded="false" />
+            <element signature="e#1466#2180#0" expanded="false" />
+          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer2">

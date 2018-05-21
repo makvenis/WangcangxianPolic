@@ -30,6 +30,9 @@ public class Configfile {
     /* APP手机推送地址 请求的服务地址 */
     public static String MESSAGE_PATH="http://ssdaixiner.oicp.net:26168/wcjw/mobile/news/msglist?msgname=ssdai";
 
+    /* 文件上传地址 */
+    public static final String UPLOAD_FILE_PATH="http://ssdaixiner.oicp.net:26168/wcjw/static/doUploadFileMuti";
+
     /* 超时提醒 */
     public static void OverTimerLog(final Context context, final String log){
         /* 获取当前时间 */

@@ -540,7 +540,8 @@ public class NetworkTools {
      */
     public static void upload(String strPath, Context context, final Handler handler) {
         //服务器接受文件路径
-        String mPath = Configfile.APP_NAME + "query/UploadServlet";
+        //String mPath = Configfile.APP_NAME + "query/UploadServlet";
+        String mPath = Configfile.UPLOAD_FILE_PATH;
         //获取文件路径
         MediaType type = MediaType.parse("multipart/form-data");
         OkHttpClient http = new OkHttpClient();

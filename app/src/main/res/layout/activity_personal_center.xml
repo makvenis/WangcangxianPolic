@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".minFragment.PersonalCenterActivity"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#70c3f6"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/user_bank_left"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/icon"
+            android:layout_alignTop="@+id/textView2"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="头像更改"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/textView2" />
+        <!-- 上传按钮 -->
+        <TextView
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上传"
+            android:id="@+id/upload_user_poto"
+            android:layout_alignBaseline="@+id/textView2"
+            android:layout_alignBottom="@+id/textView2"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="11dp" />
+
+    </RelativeLayout>
+
+    <!-- 设置进度条不显示且占用位置 -->
+    <LinearLayout
+        android:id="@+id/mInvisible"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_gravity="center"
+            android:textColor="#F00"
+            android:id="@+id/mProgressBar_int"
+            android:text="上传中 30%"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ProgressBar
+            android:layout_gravity="center"
+            android:progress="30"
+            android:max="100"
+            android:id="@+id/mProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/old_user_poto"
+        android:layout_weight="1"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+
+    <Button
+        android:layout_marginBottom="10dp"
+        android:id="@+id/select_user_poto"
+        style="@style/UserButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#70c3f6"
+        android:text="更换头像" />
+
+
+
+</LinearLayout>
