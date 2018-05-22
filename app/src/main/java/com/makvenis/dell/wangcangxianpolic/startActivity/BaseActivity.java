@@ -197,8 +197,7 @@ public class BaseActivity extends AppCompatActivity {
         List<Map<String, String>> maps = setMessageJson(msg.getMessage());
         // 存储消息队列
 
-
-
+        /*
         // 判断是否需要显示NotifyCation
         boolean flags=true;
         if(maps.size() != 0){
@@ -215,9 +214,7 @@ public class BaseActivity extends AppCompatActivity {
                 setNotifyCation(maps);
                 flags=false;
             }
-
-
-        }
+        }*/
     }
 
     /* 获取当前地理位置数据 父类方法 */

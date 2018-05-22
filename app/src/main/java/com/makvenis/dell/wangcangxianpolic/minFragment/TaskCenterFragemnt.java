@@ -77,7 +77,7 @@ public class TaskCenterFragemnt extends Fragment {
         data3.add(1,mList_3);
 
 
-        /* 构建数据 我的任务 */
+        /* *//* 构建数据 我的任务 *//*
         List<Object> data2=new ArrayList<>();
         Map<String,String> map2=new HashMap<>();
         map2.put("mTitle","我的任务");
@@ -86,7 +86,7 @@ public class TaskCenterFragemnt extends Fragment {
         List<Integer> mList_1=new ArrayList<>();
         mList_1.add(R.drawable.icon_min_task_wancheng);
         data2.add(0,map2);
-        data2.add(1,mList_1);
+        data2.add(1,mList_1);*/
 
         /* 构建数据 我的退出 */
         List<Object> data4=new ArrayList<>();
@@ -95,13 +95,13 @@ public class TaskCenterFragemnt extends Fragment {
         map4.put("mType","NEW_DIALOG");
         map4.put("mTop","");
         List<Integer> mList_4=new ArrayList<>();
-        mList_4.add(R.drawable.note_fav_not_support);
+        mList_4.add(R.drawable.icon_tuichu);
         data4.add(0,map4);
         data4.add(1,mList_4);
 
         mDtabase.add(data);
         mDtabase.add(data3);
-        mDtabase.add(data2);
+        //mDtabase.add(data2);
         mDtabase.add(data4);
 
         RecyclerView.LayoutManager manager=new LinearLayoutManager(getContext(),

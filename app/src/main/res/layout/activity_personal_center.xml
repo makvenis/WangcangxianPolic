@@ -15,12 +15,21 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:layout_marginLeft="10dp"
             android:id="@+id/user_bank_left"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/icon"
-            android:layout_alignTop="@+id/textView2"
+            android:src="@drawable/icon_left_bank_120"
+            android:layout_alignTop="@+id/user_bank_left_text"
             android:layout_alignParentStart="true" />
+        <TextView
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:text="返回"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/user_bank_left_text"
+            android:layout_toEndOf="@+id/user_bank_left" />
 
         <TextView
             android:textSize="18sp"
@@ -30,19 +39,19 @@
             android:text="头像更改"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/textView2" />
+            android:id="@+id/user_bank_left_text" />
         <!-- 上传按钮 -->
         <TextView
+            android:layout_marginRight="10dp"
             android:textColor="#ffffff"
             android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="上传"
             android:id="@+id/upload_user_poto"
-            android:layout_alignBaseline="@+id/textView2"
-            android:layout_alignBottom="@+id/textView2"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="11dp" />
+            android:layout_marginEnd="14dp"
+            android:layout_alignTop="@+id/user_bank_left_text"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 
@@ -64,7 +73,7 @@
             android:layout_height="wrap_content" />
 
         <ProgressBar
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:progress="30"
             android:max="100"
             android:id="@+id/mProgressBar"
@@ -76,8 +85,8 @@
     </LinearLayout>
 
     <ImageView
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="10dp"
+
+        android:padding="10dp"
         android:id="@+id/old_user_poto"
         android:layout_weight="1"
         android:src="@mipmap/ic_launcher"
@@ -92,7 +101,6 @@
         android:layout_height="45dp"
         android:background="#70c3f6"
         android:text="更换头像" />
-
 
 
 </LinearLayout>

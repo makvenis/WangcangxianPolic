@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Call;
@@ -547,7 +548,7 @@ public class NetworkTools {
         OkHttpClient http = new OkHttpClient();
         File mFile = new File(strPath);
 		 /*文件后缀及其名称获取*/
-        String[] splite = strPath.split("/");
+        final String[] splite = strPath.split("/");
         int len = splite.length;
         String da = splite[len - 1];
 
@@ -602,6 +603,14 @@ public class NetworkTools {
 
                 @Override
                 public void onResponse(Call call, final Response response) throws IOException {
+                    String string = response.body().string();
+                    Log.e("TAG", new Date()+" >>> (上传)服务器返回的json "+string);
+                    if(string != null){
+                        Message msg=new Message();
+                        msg.obj=string;
+                        msg.what=0X1003;
+                        handler.sendMessage(msg);
+                    }
                 }
             });
         }

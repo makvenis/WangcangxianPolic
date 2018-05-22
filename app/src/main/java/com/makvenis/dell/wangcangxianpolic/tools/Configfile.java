@@ -33,6 +33,13 @@ public class Configfile {
     /* 文件上传地址 */
     public static final String UPLOAD_FILE_PATH="http://ssdaixiner.oicp.net:26168/wcjw/static/doUploadFileMuti";
 
+    /* 用户更新数据库中用户头像请求地址 */
+    /* 地址：http://ssdaixiner.oicp.net:26168/wcjw/mobile/toUpdatePersonPhoto?url=../../upload/20188987678687467.jpg&id=1 */
+    public static final String UPDATE_USER_POTO="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toUpdatePersonPhoto?";
+
+    /* 当图片不存在的时候加载贲张图片 */
+    public static final String IMAGE_NO="http://ssdaixiner.oicp.net:26168/wcjw/resources/images/nopic2.png";
+
     /* 超时提醒 */
     public static void OverTimerLog(final Context context, final String log){
         /* 获取当前时间 */

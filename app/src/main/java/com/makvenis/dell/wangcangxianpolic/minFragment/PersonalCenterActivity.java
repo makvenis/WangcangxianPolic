@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -29,12 +30,21 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
+import com.makvenis.dell.wangcangxianpolic.help.JSON;
+import com.makvenis.dell.wangcangxianpolic.help.MessageEvent;
+import com.makvenis.dell.wangcangxianpolic.help.PermissionsUtils;
+import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
+import com.makvenis.dell.wangcangxianpolic.startActivity.HomeActivity;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
 import com.squareup.picasso.Picasso;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+import java.util.Map;
 
 /*
 *@解析用户头像的上传
@@ -44,6 +54,9 @@ import java.io.IOException;
 
 @ContentView(R.layout.activity_personal_center)
 public class PersonalCenterActivity extends AppCompatActivity {
+
+    /* 调用系统权限 */
+    PermissionsUtils permissionsUtils=new PermissionsUtils();
 
     /* 中间的用户头像(老的) 当更新之后就是新的 */
     @ViewInject(R.id.old_user_poto)
@@ -75,6 +88,13 @@ public class PersonalCenterActivity extends AppCompatActivity {
     @ViewInject(R.id.mProgressBar)
     ProgressBar mProgressBar;
 
+    /* 返回上一级的按钮 */
+    @ViewInject(R.id.user_bank_left)
+    ImageView mBankImage;
+    @ViewInject(R.id.user_bank_left_text)
+    TextView mBankTextView;
+
+
 
     public Handler mHandler=new Handler(){
         @Override
@@ -89,11 +109,55 @@ public class PersonalCenterActivity extends AppCompatActivity {
                         mProgressBar.setVisibility(View.INVISIBLE);
                     }
                     Configfile.Log(PersonalCenterActivity.this,"头像更新成功");
+
+
+
                 }else {
                     mProgressBar_int.setText("上传中 "+obj+"%");
                 }
 
                 mProgressBar.setProgress(obj);
+            }else if(msg.what == 0x1003){
+                String obj = ((String) msg.obj);
+                if(obj != null){
+                    Map<String, Object> json = JSON.getObjectJson(obj, new String[]{"title","url"});
+                    /**
+                     *
+                     * @详细信息请查看 {@link PersonalCenterFragemnt}
+                     *
+                     * @ 因为在页面 PersonalCenterFragemnt中还需要对数据库中的用户头像地址进行更换 为避免多次
+                     *   对字符串的操作（replace() 以及 split()） 故所以直接将用户返回的用户头像地址
+                     *   ../../upload/2019051628764.jpg 不做处理 以便后续的操作
+                     * String newPotoPath = (String) json.get("url");
+                     * String replace = newPotoPath.replace("../../", Configfile.SERVICE_WEB_IMG);
+                     *
+                     */
+                    String newPotoPath = (String) json.get("url");
+                    //String replace = newPotoPath.replace("../../", Configfile.SERVICE_WEB_IMG);
+
+
+                    /**
+                     * @ 注意 当图片地址发生变化之后数据库中的地址也要发生变化
+                     * @ 那么需要修改本地数据库的字符串 数据
+                     * @ 具体的操作使用 替换工具
+                     * @ 首先查找出用户的图片地址 >>> 用现在字符串替换之前的字符串
+                     */
+
+                    AppMothedHelper helper=new AppMothedHelper(PersonalCenterActivity.this);
+                    Map<Object, Object> map = helper.queryByKey(Configfile.USER_DATA_KEY);
+                    String data = (String) map.get("data");
+                    //调用解析
+                    Map<String, String> mRegisteMap = JSON.GetJsonRegiste(data);
+                    //获取原来的地址
+                    String mDatabaseOldUrl = mRegisteMap.get("headPortrait");
+                    String mNewString = data.replace(mDatabaseOldUrl, newPotoPath);
+                    //存储
+                    helper.update(Configfile.USER_DATA_KEY,mNewString);
+
+                    /* 广播 */
+                    EventBus.getDefault().post(new MessageEvent(newPotoPath));
+
+                }
             }
         }
     };
@@ -106,6 +170,9 @@ public class PersonalCenterActivity extends AppCompatActivity {
 
         /* 首先接收父类传递过来的老图片地址 old_img_url */
         getParment();
+
+        /* permissionsUtils 动态获取权限 */
+        permissionsUtils.SetPermissionForNormal(this);
     }
 
 
@@ -115,6 +182,20 @@ public class PersonalCenterActivity extends AppCompatActivity {
         oldImagePath = intent.getStringExtra("old_img_url");
         /* 为了增加用户体验，那么在没有更新头像之前首先让用户能够看见之前的头像 */
         Picasso.with(this).load(oldImagePath).into(oldImageView);
+    }
+
+    /* 返回按钮 ImageView*/
+    @OnClick({R.id.user_bank_left})
+    public void bankImage(View v){
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
+    }
+
+    /* 返回按钮 TextView*/
+    @OnClick({R.id.user_bank_left_text})
+    public void bankTextView(View v){
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
     }
 
     /* 用户选择上传（当前还处于查找手机上面的图片）的点击事件按钮 */
@@ -210,7 +291,6 @@ public class PersonalCenterActivity extends AppCompatActivity {
         localImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2018/5/21  启动本地图片选择
                 getActionPoto();
                 popupWindow.dismiss();
             }
@@ -221,6 +301,7 @@ public class PersonalCenterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO: 2018/5/21  启动照相机拍照
+                getLocalCamera();
                 popupWindow.dismiss();
             }
         });
@@ -320,8 +401,74 @@ public class PersonalCenterActivity extends AppCompatActivity {
                 Bitmap bitmap= BitmapFactory.decodeFile(newImagePath);
                 oldImageView.setImageBitmap(bitmap);
                 break;
+
+            case 3:
+                if(requestCode == 3) {
+                    newImagePath = Environment.getExternalStorageDirectory().toString()+"/WCCamera"+"/newCamera"+".jpg";
+                    Uri uri = Uri.fromFile(new File(newImagePath));
+                    Log.e("crop","newImagePath == "+ newImagePath);
+                    try {
+                        getCropPoto(uri);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                break;
         }
     }
 
     /* 启动本地图片的选择 结束 */
+
+    /* 启动照相机拍照 开始 */
+    public void getLocalCamera(){
+        //创建意图
+        Intent intent=new Intent();
+        //设置获取资源的意图
+        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+        //在使用Camera video 需要指定路径
+        /**
+         * 1.指定图像的存储位置，一般图像都是存储在外部存储设备，即SD卡上。
+
+         　　你可以考虑的标准的位置有以下两个：
+
+         　　Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+
+         　　这个方法返回图像和视频的标准共享位置，别的应用也可以访问，如果你的应用被卸载了，这个路径下的文件是会保留的。
+
+         　　为了区分，你可以在这个路径下为你的应用创建一个子文件夹。
+
+         　2.Context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
+         　　这个方法返回的路径是和你的应用相关的一个存储图像和视频的方法。
+
+         　　如果应用被卸载，这个路径下的东西全都会被删除。
+
+         　　这个路径没有什么安全性限制，别的应用也可以自由访问里面的文件。
+         */
+        Uri mOutPutFileUri;
+        String path = Environment.getExternalStorageDirectory().toString()+"/WCCamera";
+        File path1 = new File(path);
+        if(!path1.exists()){
+            path1.mkdirs();
+        }
+        /**
+         *
+         *@ 解释  全程地址为： path + "/newCamera"+".jpg"
+         */
+
+        //File file = new File(path1,System.currentTimeMillis()+".jpg");
+        File file = new File(path1,"newCamera"+".jpg");
+        mOutPutFileUri = Uri.fromFile(file);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, mOutPutFileUri);
+        Log.e("crop",new Date()+" >>> 预备传递的Intent(MediaStore.EXTRA_OUTPUT, uri) "+mOutPutFileUri+"");
+        //设置如果意图加载失败不崩溃
+        ComponentName componentName = intent.resolveActivity(getPackageManager());
+        if(componentName !=null){
+            startActivityForResult(intent,3);
+        }
+    }
+
+    /* 启动照相机拍照 结束 */
+
 }

@@ -7,14 +7,12 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <!-- 本地图片 -->
         <LinearLayout
-            android:background="#ffffff"
             android:id="@+id/mCrop_local_sd"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
@@ -23,22 +21,27 @@
 
             <ImageView
                 android:layout_gravity="center"
-                android:src="@drawable/icon_history_delete"
+                android:src="@drawable/icon_local_poto"
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <TextView
+                android:textColor="#FFFFFF"
                 android:gravity="center"
                 android:text="本地图片"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
+        <ImageView
+            android:background="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
         <!-- 照相机 -->
         <LinearLayout
-            android:background="#ffffff"
             android:id="@+id/mCrop_local_camera"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
@@ -47,22 +50,27 @@
 
             <ImageView
                 android:layout_gravity="center"
-                android:src="@drawable/icon_history_delete"
+                android:src="@drawable/icon_camera"
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <TextView
+                android:textColor="#FFFFFF"
                 android:gravity="center"
                 android:text="照相机"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
+        <ImageView
+            android:background="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
         <!-- 取消退出 -->
         <LinearLayout
-            android:background="#ffffff"
             android:id="@+id/mHistory_pop_over"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
@@ -75,14 +83,20 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <TextView
+                android:textColor="#FFFFFF"
                 android:gravity="center"
                 android:text="取消/退出"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
+
+        <ImageView
+            android:background="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
 
 
     </LinearLayout>
