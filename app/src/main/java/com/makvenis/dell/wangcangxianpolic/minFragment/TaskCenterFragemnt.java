@@ -1,6 +1,8 @@
 package com.makvenis.dell.wangcangxianpolic.minFragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
 import com.makvenis.dell.wangcangxianpolic.otherActivity.CorrectHistoryActivity;
 import com.makvenis.dell.wangcangxianpolic.otherActivity.SetActivity;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
+import com.makvenis.dell.wangcangxianpolic.tools.DownloadAppUpdateManager;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleDialogSureView;
 
 import java.util.ArrayList;
@@ -77,18 +80,6 @@ public class TaskCenterFragemnt extends Fragment {
         data3.add(0,map3);
         data3.add(1,mList_3);
 
-
-        /* *//* 构建数据 我的任务 *//*
-        List<Object> data2=new ArrayList<>();
-        Map<String,String> map2=new HashMap<>();
-        map2.put("mTitle","我的任务");
-        map2.put("mType","NEW_ACTIVITY");
-        map2.put("mTop","");
-        List<Integer> mList_1=new ArrayList<>();
-        mList_1.add(R.drawable.icon_min_task_wancheng);
-        data2.add(0,map2);
-        data2.add(1,mList_1);*/
-
         /* 构建数据 我的退出 */
         List<Object> data4=new ArrayList<>();
         Map<String,String> map4=new HashMap<>();
@@ -100,17 +91,28 @@ public class TaskCenterFragemnt extends Fragment {
         data4.add(0,map4);
         data4.add(1,mList_4);
 
+        /* 版本检查 */
+        List<Object> data5=new ArrayList<>();
+        Map<String,String> map_version=new HashMap<>();
+        map_version.put("mTitle","版本检查");
+        map_version.put("mType","NEW_VERSION");
+        // TODO: 2018/5/23  获取服务器的最新版本 如果有最新版本责需要显示为 map_version.put("mTop","(当前有新版本待更新)");
+        // TODO: 2018/5/23  否则则显示为 map_version.put("mTop","(当前为最新版本)");
+        map_version.put("mTop","(当前有新版本待更新)");
+        List<Integer> list_version=new ArrayList<>();
+        list_version.add(R.drawable.icon_update_app_120);
+        data5.add(0,map_version);
+        data5.add(1,list_version);
+
         mDtabase.add(data);
         mDtabase.add(data3);
-        //mDtabase.add(data2);
         mDtabase.add(data4);
+        mDtabase.add(data5);
 
         RecyclerView.LayoutManager manager=new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL,false);
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(new MySimpleTaskCenterAdapter(mDtabase));
-
-
 
 
     }
@@ -139,7 +141,7 @@ public class TaskCenterFragemnt extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(MyTaskViewHolder holder, int position) {
+        public void onBindViewHolder(final MyTaskViewHolder holder, final int position) {
             List<Object> obj = mdata_adapter.get(position);
             Log.e("TAG","position == 3 >>>"+mdata_adapter.get(2).toString());
             final Map<String, String> map = (Map<String, String>) obj.get(0);
@@ -210,6 +212,39 @@ public class TaskCenterFragemnt extends Fragment {
                     }else if(mType.equals("NEW_SET")){
 
                         startActivity(new Intent(getActivity(),SetActivity.class));
+
+                    }else if(mType.equals("NEW_VERSION")){
+                        // TODO: 2018/5/23 模拟 此处地址只运用于测试 不可用于发行版
+                        /* 此处地址只运用于测试 不可用于发行版 */
+                        String mTestAppUpdatePath="http://192.168.0.106/im/version.1.6.1.apk";
+                        Configfile.Log(getActivity(),"正在检查版本...");
+                        final DownloadAppUpdateManager manager=new DownloadAppUpdateManager(getActivity(),mTestAppUpdatePath,"旺苍公安巡防");
+                        int code = manager.getAppVersionCode();
+
+                        Log.e("TAG",position+"");
+                        // TODO: 2018/5/23  获取服务器的最新版本
+                        final AlertDialog show = new AlertDialog.Builder(getContext())
+                                .setTitle("版本更新")
+                                .setIcon(R.drawable.icon_update_app_120)
+                                .setMessage("最新版本V1.2.3."+code+" \n 1.修复适配器图片加载方法 \n 2.优化特效配置"
+                                +" \n 3.修改推送服务"
+                                )
+                                .setPositiveButton("更新", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        /* 开始后台下载 */
+                                        // TODO: 2018/5/23 当具有新的版本 去执行 manager.post();
+                                        manager.post();
+                                    }
+                                })
+                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .show();
+
 
                     }
                 }

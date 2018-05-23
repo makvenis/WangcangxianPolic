@@ -111,7 +111,7 @@ public class DownloadAppUpdateManager {
         mRequest.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
         /* 设置标题以及内容 */
         mRequest.setTitle(mTitleMessage);
-        mRequest.setDescription("Apk Downloading");
+        mRequest.setDescription("正在下载...");
         /* 代之NotifyCation的下载界面是否显示 */
         mRequest.setVisibleInDownloadsUi(true);
 
