@@ -48,6 +48,9 @@ public class JSON {
                     map.put("truename", object.optString("truename"));
                     map.put("username", object.optString("username"));
                     map.put("weixin", object.optString("weixin"));
+                    map.put("danweiid", object.optString("danweiid")); //单位ID
+                    map.put("jobid", object.optString("jobid"));       //警员编号
+                    map.put("zhiwu", object.optString("zhiwu"));       //职务
 
                     if(map.size() != 0)
                         return map;

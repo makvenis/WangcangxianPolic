@@ -1,5 +1,7 @@
 package com.makvenis.dell.wangcangxianpolic.activity;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,12 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
+import com.makvenis.dell.wangcangxianpolic.startActivity.HomeActivity;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleLoadingDialog;
@@ -70,10 +76,26 @@ public class AlertPushNewsActivity extends AppCompatActivity implements SwipeRef
 
         }
     };
+
+
+    /* 处理toolbar 开始 version=2  */
+    /* include 里面的点击事件 */
+    @ViewInject(R.id.toolbar_callbank)
+    ImageView mImageView_bank;
+    @ViewInject(R.id.toolbar_callbank_text)
+    TextView mBankTextView;
+    @ViewInject(R.id.mToolbar_text)
+    TextView mTextView;
+    /* 处理toolbar 结束 */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewUtils.inject(this);
+
+        /* 赋值ToolbarTitle */
+        mTextView.setText("法律法规");
+
 
         Bundle bundle = getIntent().getExtras();
         mObject = bundle.getString("mAdapter");
@@ -122,6 +144,18 @@ public class AlertPushNewsActivity extends AppCompatActivity implements SwipeRef
             }
         });
 
+    }
+
+    /* 返回 */
+    @OnClick({R.id.toolbar_callbank})
+    public void oncklinkViewImage(View v){
+        startActivity(new Intent(this, HomeActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+    }
+
+    /* 返回 */
+    @OnClick({R.id.toolbar_callbank_text})
+    public void oncklinkViewTextView(View v){
+        startActivity(new Intent(this, HomeActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
 

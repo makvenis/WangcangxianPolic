@@ -38,6 +38,15 @@
         <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\pre-dexed\release\pojo_8848700da6b76c1a3f603e4767f41d060c871e08.jar" />
     </item>
     <item
+        is-multidex="false"
+        jar="D:\Windows\AndroidProject\WangcangxianPolic\app\libs\commons-lang3-3.7.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="557edd918fd41f9260963583ebf5a61a43a6b423">
+        <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\pre-dexed\release\commons-lang3-3.7_4682124a47ca2999f5881499d2a7ba18a8b23ff0.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
@@ -144,6 +153,15 @@
         revision="26.0.2"
         sha1="4def203b5d6ca13bc8f6460ab789e37f67340397">
         <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\pre-dexed\release\BaiduLBS_Android_4183e30ec3932618c88af241b524dd7ca509d776.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Windows\AndroidProject\WangcangxianPolic\app\libs\commons-text-1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="c336bf600f44b88af356c8a85eef4af822b06a4d">
+        <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\pre-dexed\release\commons-text-1.1_08bed369270f689dc8276cd167e8fd7268149a4a.jar" />
     </item>
     <item
         is-multidex="true"

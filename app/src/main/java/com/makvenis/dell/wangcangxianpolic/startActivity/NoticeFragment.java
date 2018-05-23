@@ -251,7 +251,7 @@ public class NoticeFragment extends Fragment {
         ll_ybss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),NotiflyActivity.class));
+                startActivity(new Intent(getActivity(),TestActivity.class));
             }
         });
 

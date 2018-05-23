@@ -58,7 +58,7 @@ public class TaskCenterFragemnt extends Fragment {
         Map<String,String> map1=new HashMap<>();
         map1.put("mTitle","我的检查历史");
         map1.put("mType","NEW_ACTIVITY");
-        map1.put("mTop","new");
+        map1.put("mTop","+1");
         List<Integer> mList=new ArrayList<>();
         mList.add(R.drawable.icon_min_task_hostory);
         data.add(0,map1);
@@ -70,7 +70,8 @@ public class TaskCenterFragemnt extends Fragment {
         Map<String,String> map3=new HashMap<>();
         map3.put("mTitle","我的设置");
         map3.put("mType","NEW_SET");
-        map3.put("mTop","set");
+        //map3.put("mTop","set");
+        map3.put("mTop","");
         List<Integer> mList_3=new ArrayList<>();
         mList_3.add(R.drawable.icon_min_task_set);
         data3.add(0,map3);

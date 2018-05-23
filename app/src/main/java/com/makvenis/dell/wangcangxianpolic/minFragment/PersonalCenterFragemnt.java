@@ -149,10 +149,10 @@ public class PersonalCenterFragemnt extends Fragment {
         adapter=new SimpleAdapter(getActivity(),
                 data,
                 R.layout.layout_personal_item,
-                        new String[]{"username","truename","phone","headPortrait"},
+                        new String[]{"truename","zhiwu","jobid","headPortrait"},
                         new int[]{R.id.min_personal_name, //用户名
                                   R.id.min_personal_type, //职务
-                                  R.id.min_personal_remark,//个人简介
+                                  R.id.min_personal_remark,//警员编号
                                   R.id.min_personal_poto  //头像
                         }){
             @Override
@@ -207,8 +207,6 @@ public class PersonalCenterFragemnt extends Fragment {
         };
 
         listView.setAdapter(adapter);
-
-
 
     }
 
