@@ -3,6 +3,7 @@ package com.makvenis.dell.wangcangxianpolic.activity;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.makvenis.dell.wangcangxianpolic.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 公安推送的消息列表 适配器
@@ -24,7 +26,7 @@ public class SimpleAlertPushPoliceAdapter extends RecyclerView.Adapter<RecyclerV
 
     private int TYPE_1 = 0;
     private int TYPE_2 = 1;
-    private int TYPE_3 = 3;
+    private int TYPE_3 = 2;
 
     Context mContext;
     List<Object> mData;
@@ -40,10 +42,8 @@ public class SimpleAlertPushPoliceAdapter extends RecyclerView.Adapter<RecyclerV
             return TYPE_1;
         }else if (position == 1){
             return TYPE_2;
-        }else if (position == 2){
-            return TYPE_3;
         }else {
-            return 4;
+            return TYPE_3;
         }
 
     }
@@ -70,30 +70,44 @@ public class SimpleAlertPushPoliceAdapter extends RecyclerView.Adapter<RecyclerV
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         if(holder instanceof ImageViewHolder){
-            List<String> list = (List<String>) mData.get(0);
-            ImageView m_img = ((ImageViewHolder) holder).mImageView;
 
-            Picasso.with(mContext).load(list.get(0)).into(m_img);
-            ((ImageViewHolder) holder).mTextView.setText(list.get(1));
-            ((ImageViewHolder) holder).mTextView_num.setText(list.get(2)+"");
+            Map<String, String> map = (Map<String, String>) mData.get(0);
+
+            if(map.size() > 0){
+
+                ImageView m_img = ((ImageViewHolder) holder).mImageView;
+
+                Picasso.with(mContext).load(map.get("picdefault")).into(m_img);
+                ((ImageViewHolder) holder).mTextView.setText(map.get("title"));
+                ((ImageViewHolder) holder).mTextView_num.setText(map.get("hits"));
+            }
+
 
         }else if(holder instanceof NowTimeNewsViewHolder){
-            List<String> now = (List<String>) mData.get(1);
-            ((NowTimeNewsViewHolder) holder).mTextView_max.setText(now.get(0));
-            ((NowTimeNewsViewHolder) holder).mTextView_min.setText(now.get(1));
+            Map<String, String> map = (Map<String, String>) mData.get(1);
+            if(map.size() > 0){
+
+                ((NowTimeNewsViewHolder) holder).mTextView_max.setText(map.get("remark"));
+                ((NowTimeNewsViewHolder) holder).mTextView_min.setText("来源:"+map.get("laiyuan"));
+            }
 
 
         }else if(holder instanceof HistoryViewHolder){
             RecyclerView Recycle_view = ((HistoryViewHolder) holder).mRecyclerView;
             //获取数据
-            List<List<String>> objects = (List<List<String>>) mData.get(2);
+            List<Map<String,String>> objects = (List<Map<String,String>>) mData.get(2);
+
+            Log.e("SimpleAlertPushPoliceAdapter",objects.size()+"=======");
+
             //设置布局管理器
             RecyclerView.LayoutManager manager=new LinearLayoutManager(mContext,
                     LinearLayoutManager.VERTICAL,
                     false);
             Recycle_view.setLayoutManager(manager);
             ItemHistoryAdapter adapter=new ItemHistoryAdapter(objects);
-            Recycle_view.setAdapter(adapter);
+            if(objects.size() > 0){
+                Recycle_view.setAdapter(adapter);
+            }
 
 
         }
@@ -140,12 +154,12 @@ public class SimpleAlertPushPoliceAdapter extends RecyclerView.Adapter<RecyclerV
         }
     }
 
-    /* 内部类适配器 */
+    /* 内部类适配器(历史推送) */
     public class ItemHistoryAdapter extends RecyclerView.Adapter<ItemHistoryAdapter.ItemHistoryViewHolder>{
 
-        List<List<String>> mMindata;
+        List<Map<String,String>>  mMindata;
 
-        public ItemHistoryAdapter(List<List<String>> mMindata) {
+        public ItemHistoryAdapter(List<Map<String,String>>  mMindata) {
             this.mMindata = mMindata;
         }
 
@@ -158,10 +172,10 @@ public class SimpleAlertPushPoliceAdapter extends RecyclerView.Adapter<RecyclerV
         @Override
         public void onBindViewHolder(ItemHistoryViewHolder holder, int position) {
             if(holder instanceof ItemHistoryViewHolder){
-                List<String> list = mMindata.get(position);
-                holder.max_TextView.setText(list.get(0));
-                holder.min_TextView.setText(list.get(1));
-                Picasso.with(mContext).load(list.get(2)).into(holder.mImageView);
+                Map<String,String> list = mMindata.get(position);
+                holder.max_TextView.setText(list.get("title"));
+                holder.min_TextView.setText(list.get("remark"));
+                Picasso.with(mContext).load(list.get("picdefault")).into(holder.mImageView);
             }
         }
 

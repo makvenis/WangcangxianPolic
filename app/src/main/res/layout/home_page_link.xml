@@ -20,6 +20,14 @@
             app:title="我的信息">
 
             <ImageView
+                android:nestedScrollingEnabled="true"
+                android:id="@+id/mHomeLink_bank"
+                android:padding="10dp"
+                android:src="@drawable/icon_bank"
+                android:layout_width="23dp"
+                android:layout_height="23dp" />
+
+            <ImageView
                 android:background="@drawable/test_icon_background"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"

@@ -38,7 +38,7 @@ public class SimpleViewPage extends FragmentPagerAdapter {
             case 0:
                 return "个人信息";
             case 1:
-                return "我的任务";
+                return "我的设置";
 
         }
 

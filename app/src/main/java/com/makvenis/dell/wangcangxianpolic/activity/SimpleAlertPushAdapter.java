@@ -58,7 +58,9 @@ public class SimpleAlertPushAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             public void onClick(View v) {
                 if(mRecyclerView != null && onclinkItemView != null){
                     int position = mRecyclerView.getChildAdapterPosition(v);
-                    onclinkItemView.showItem(mRecyclerView,v,position);
+                    Map<String, String> map = mData.get(position);
+                    String id = map.get("id");
+                    onclinkItemView.showItem(mRecyclerView,v,id);
                 }
             }
         });
@@ -196,6 +198,6 @@ public class SimpleAlertPushAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     public interface OnclinkItemView{
-        void showItem(RecyclerView recyclerView,View view,int position);
+        void showItem(RecyclerView recyclerView,View view,String id);
     }
 }

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.CountDownTimer;
 import android.widget.Toast;
 
+import com.makvenis.dell.wangcangxianpolic.startActivity.NotiflyActivity;
+
 /**
  * 配置文件
  */
@@ -28,14 +30,21 @@ public class Configfile {
     }
 
     /* APP手机推送地址 请求的服务地址 */
-    public static String MESSAGE_PATH="http://ssdaixiner.oicp.net:26168/wcjw/mobile/news/msglist?msgname=ssdai";
+    //http://ssdaixiner.oicp.net:26168/wcjw/mobile/news/msglist?msgname=ssdai
+    public static String MESSAGE_PATH="http://ssdaixiner.oicp.net:26168/wcjw/mobile/news/msglist?msgname=";
 
     /* 文件上传地址 */
     public static final String UPLOAD_FILE_PATH="http://ssdaixiner.oicp.net:26168/wcjw/static/doUploadFileMuti";
 
     /* 用户更新数据库中用户头像请求地址 */
-    /* 地址：http://ssdaixiner.oicp.net:26168/wcjw/mobile/toUpdatePersonPhoto?url=../../upload/20188987678687467.jpg&id=1 */
     public static final String UPDATE_USER_POTO="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toUpdatePersonPhoto?";
+
+    /* 新闻页面的详情页面 */
+    /**
+     * @解释 新闻页面的详情页面 供WebView使用
+     * {@link NotiflyActivity}
+     */
+    public static final String NEWS_ALL_CONTENT_PATH="http://ssdaixiner.oicp.net:26168/wcjw/mobile/news/newsDetail2?id=";
 
     /* 当图片不存在的时候加载贲张图片 */
     public static final String IMAGE_NO="http://ssdaixiner.oicp.net:26168/wcjw/resources/images/nopic2.png";

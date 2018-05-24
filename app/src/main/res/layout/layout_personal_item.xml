@@ -13,15 +13,17 @@
         android:layout_height="120dp" />
 
     <TextView
+        android:textColor="@color/colorPrimary"
+        android:textSize="22sp"
         android:id="@+id/min_personal_name"
         android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:textSize="18sp"
+        android:gravity="center|center_vertical"
         android:text="王从文"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:layout_gravity="center_vertical"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="horizontal"
@@ -29,14 +31,17 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
             android:text="职位:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
             android:id="@+id/min_personal_type"
             android:gravity="center"
-            android:textSize="14sp"
             android:text="公安巡警支队"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -44,6 +49,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_gravity="center_vertical"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -51,15 +57,18 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
             android:text="证件编号"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
             android:id="@+id/min_personal_remark"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:textSize="14sp"
             android:text="公安巡警支队的一名普通职员"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

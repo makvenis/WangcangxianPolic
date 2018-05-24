@@ -251,10 +251,9 @@ public class NoticeFragment extends Fragment {
         ll_ybss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),TestActivity.class));
+
             }
         });
-
     }
 
     @Override
@@ -268,6 +267,4 @@ public class NoticeFragment extends Fragment {
         dialog=new SimpleLoadingDialog(getActivity());
         dialog.setMessage("正在请求数据...").show();
     }
-
-
 }
