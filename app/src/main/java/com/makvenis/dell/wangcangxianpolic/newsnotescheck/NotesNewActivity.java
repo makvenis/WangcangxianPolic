@@ -155,6 +155,8 @@ public class NotesNewActivity extends BaseActivity implements GestureDetector.On
     private String id;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,6 +201,8 @@ public class NotesNewActivity extends BaseActivity implements GestureDetector.On
 
         /* 获取单位ID */
         id = bundle.getString("id");
+
+        Log.e("TAG",new Date()+" >>>  获取单位ID" + id);
 
         //1.构建手势检测器
         mGestureDetector =  new GestureDetector(this,this);
@@ -442,7 +446,7 @@ public class NotesNewActivity extends BaseActivity implements GestureDetector.On
             mEntry.setJcResult(1); // 注释
             mEntry.setJcSignature("data:image/png;base64,"+new String(mByteString_jc)); //获取检查人的图片字符串
             mEntry.setJcTime(new Date());
-            mEntry.setJcUnitid(1);
+            mEntry.setJcUnitid(Integer.valueOf(id));
             mEntry.setTiaolinum(setTiaolinum);
             mEntry.setYinhuan(m_jc_zgnr_text);
             mEntry.setZgendtime(new Date());

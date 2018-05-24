@@ -142,6 +142,8 @@ public class WebHtmlActivity extends AppCompatActivity {
                             Configfile.Log(mThis,"请求失败");
                             looading.dismiss();
                         }
+                    }else if(mLocal_title.equals("收缴物品清单")){
+
                     }else {
                         Configfile.Log(mThis,"参数错误！未获取到 {" + mLocal_title+" }");
                     }
@@ -282,6 +284,7 @@ public class WebHtmlActivity extends AppCompatActivity {
 
         }else if(mLocal_title.equals("收缴物品清单")){
             // TODO: 2018/5/14 暂未写html
+
         }else if(mLocal_title.equals("检查笔录")){
             Jcbilu e1=new Jcbilu();
 

@@ -110,7 +110,7 @@ public class WebPostRemarkActivity extends BaseActivity {
                         case R.id.toolbar_r_2: // 具有收缴的物品清单
                             Intent intent = new Intent(WebPostRemarkActivity.this, WebHtmlActivity.class);
                             Bundle bundle=new Bundle();
-                            bundle.putString("l_url","yesServiceUp.html");
+                            bundle.putString("l_url","shoujiao.html");
                             bundle.putString("l_title","收缴物品清单");
                             bundle.putString("mLocal_bianhao",mBianhao);
                             bundle.putString("id",id);
