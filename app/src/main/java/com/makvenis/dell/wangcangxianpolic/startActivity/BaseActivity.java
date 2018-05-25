@@ -1,9 +1,5 @@
 package com.makvenis.dell.wangcangxianpolic.startActivity;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -18,22 +14,11 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
-import com.makvenis.dell.wangcangxianpolic.help.MessageEventService;
 import com.makvenis.dell.wangcangxianpolic.help.SimpleBaiDuMap;
 import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
-import com.makvenis.dell.wangcangxianpolic.service.SimpleServiceMessage;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class BaseActivity extends AppCompatActivity {
@@ -57,29 +42,15 @@ public class BaseActivity extends AppCompatActivity {
         Transition fade = TransitionInflater.from(this).inflateTransition(R.transition.fade);
         /* 告诉Windows在什么情况下使用上面的动画 */
         //第一次进入Activity
-        getWindow().setEnterTransition(slide);
+        getWindow().setEnterTransition(explode);
         //再次进入Activity时候
-        getWindow().setReenterTransition(slide);
+        getWindow().setReenterTransition(explode);
         //当退出时候
-        getWindow().setExitTransition(slide);
+        getWindow().setExitTransition(explode);
         /**
          * @ 解释： 使用案例startActivity(new Intent(this,SeekActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
          *
          */
-
-
-        /* 注册SimpleService 服务的消息 */
-        Intent intent=new Intent(this, SimpleServiceMessage.class);
-        Bundle bundle=new Bundle();
-        //bundle.putString("mMessage",Configfile.MESSAGE_PATH); // 测试地址
-        bundle.putString("mMessage",Configfile.MESSAGE_PATH+getSqliteName());
-        intent.putExtras(bundle);
-        startService(intent);
-
-
-        /* 绑定广播事件 */
-        EventBus.getDefault().register(this);
-
         /* 网络判断 */
         anInt = boolenNet();
 
@@ -183,36 +154,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
 
-    /* 注册处理广播事件 */
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void executeMessage(MessageEventService msg) throws JSONException{
-        Log.e("TAG",new Date() + " BaseActivity 全局获取的消息对象 >>> " + msg.getMessage());
-        Log.e("TAG",msg.isBoolean()+"");
-        if(msg.isBoolean() == true){
-            getLocalMessage(msg.getMessage());
-            // 解析Message消息队列
-            String message = msg.getMessage();
-            JSONObject object=new JSONObject(message);
-            JSONArray array = object.getJSONArray("newsList");
-            if(array.length() > 0){
-                List<Map<String, String>> maps = JSON.GetJson(array.toString(), new String[]{"title","remark","cid","id"});
-                if(maps.size() > 0){
-                    Map<String, String> stringMap = maps.get(0);
-                    // 存储消息队列
-                    if(stringMap != null){
-                        setNotifyCation(stringMap);
-                    }
-                }
-            }
-
-        }
-    }
 
     /* 传递获取当前地理位置数据 父类方法 */
     public void getLocalPath(String str){}
@@ -239,58 +181,6 @@ public class BaseActivity extends AppCompatActivity {
             getUserName("ssdai");
         }
         return s;
-    }
-
-
-
-
-    /* 当前全局NotifyCation */
-    private void setNotifyCation(Map<String, String> map){
-
-        /* 通知ID 有两处需要到这个ID的使用 所以提成全局 */
-        int notiflyId=0;
-        /* 转化string  因为只有传String类型 */
-
-        Intent intent=new Intent(this, NotiflyActivity.class);
-        intent.putExtra("id",map.get("id")); //页面参数ID
-        intent.putExtra("url",Configfile.NEWS_ALL_CONTENT_PATH);//页面域名
-        intent.putExtra("notiflyId",String.valueOf(notiflyId)); //需要关闭的NotiflyCation的id
-
-        /**
-         *  int FLAG_CANCEL_CURRENT：如果该PendingIntent已经存在，则在生成新的之前取消当前的。
-         *  int FLAG_NO_CREATE：如果该PendingIntent不存在，直接返回null而不是创建一个PendingIntent。
-         *  int FLAG_ONE_SHOT:该PendingIntent只能用一次，在send()方法执行后，自动取消。
-         *  int FLAG_UPDATE_CURRENT：如果该PendingIntent已经存在，则用新传入的Intent更新当前的数据。
-         *  我们需要把最后一个参数改为PendingIntent.FLAG_UPDATE_CURRENT,这样在启动的Activity里就可以用接收Intent传送数据              *  的方法正常接收。
-         */
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        NotificationManager manager = (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
-        Notification.Builder builder = new Notification.Builder(this);
-        builder.setTicker("通知");
-        builder.setSmallIcon(R.drawable.icon);
-        builder.setContentTitle(map.get("title"));
-        builder.setContentText( map.get("remark"));
-        builder.setContentIntent(pendingIntent);
-        builder.setOnlyAlertOnce(true);
-        Notification notification = builder.build();
-        //notification.flags = Notification.FLAG_AUTO_CANCEL;
-        manager.notify(notiflyId, notification);
-    }
-
-    /* 处理Message 消息队列 只有一层对象 */
-    private Map<String, Object> setMessageJson(String message){
-        try {
-
-            JSONObject object=new JSONObject(message);
-            JSONArray array = object.getJSONArray("newsList");
-            Map<String, Object> maps = JSON.getObjectJson(array.toString(), new String[]{"title", "addtime", "laiyuan", "content","remark"});
-            return maps;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return new HashMap<>();
     }
 
     /* 网络判断 */

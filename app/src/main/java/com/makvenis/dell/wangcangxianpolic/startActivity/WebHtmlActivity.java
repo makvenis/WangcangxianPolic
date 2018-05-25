@@ -184,16 +184,14 @@ public class WebHtmlActivity extends AppCompatActivity {
         mLocal_bianhao = bundle.getString("mLocal_bianhao");
         id = bundle.getString("id");
         Log.e("TAG",new Date()+" >>> 被检查单位ID "+id);
+        Log.e("TAG",new Date()+" >>> 表单名称 "+mLocal_title);
+        Log.e("TAG",new Date()+" >>> 预加载html文件名称 "+mLocalHtml_url);
     }
 
     /* 构建中间类 */
     public class JSinterface{
         @JavascriptInterface
         public void showDialog(){
-
-        }
-        @JavascriptInterface
-        public void showTimer(){
 
         }
 
@@ -242,7 +240,6 @@ public class WebHtmlActivity extends AppCompatActivity {
                 e.setContent(list.get(3));                  //整改的内容
                 e.setYqStarttime(stringByDate(list.get(4)+" "+"12:12:12")); //开始时间
                 e.setYqEndtime(stringByDate(list.get(5)+" "+"12:12:12"));   //结束时间
-                // TODO: 2018/5/13  list.get(6) 等于被检查的单位名称
                 e.setTzsTime(stringByDate(list.get(6)+" "+"12:12:12"));     //填表时间
 
                  /* 转换JSON */
@@ -267,7 +264,6 @@ public class WebHtmlActivity extends AppCompatActivity {
                 e1.setBianhao1(list.get(0));                 //编号1
                 e1.setBianhao2(Integer.valueOf(list.get(1)));//编号3
                 e1.setContent(list.get(3));                   //整改的内容
-                // TODO: 2018/5/13  list.get(6) 等于被检查的单位名称
                 e1.setTzsTime(stringByDate(list.get(4)+" "+"12:12:12"));
 
                  /* 转换JSON */
@@ -284,6 +280,10 @@ public class WebHtmlActivity extends AppCompatActivity {
 
         }else if(mLocal_title.equals("收缴物品清单")){
             // TODO: 2018/5/14 暂未写html
+            Configfile.Log(this,var);
+            Log.e("TAG","收缴物品清单" + var);
+
+
 
         }else if(mLocal_title.equals("检查笔录")){
             Jcbilu e1=new Jcbilu();

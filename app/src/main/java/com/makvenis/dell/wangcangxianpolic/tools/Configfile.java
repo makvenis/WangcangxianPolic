@@ -16,6 +16,9 @@ public class Configfile {
     public static final String SERVICE_WEB="http://ssdaixiner.oicp.net:26168/wcjw/mobile/";
     public static final String SERVICE_WEB_IMG="http://ssdaixiner.oicp.net:26168/wcjw/";
 
+    /* App更新 */
+    public static final String APP_UPDATE="http://ssdaixiner.oicp.net:26168/wcjw/mobile/getNewVersion";
+
     /*服务器地址*/
     public static final String REGISTE_URL="http://ssdaixiner.oicp.net:26168/wcjw/mobile/getloginInfo";
     /*是否启用广告界面*/

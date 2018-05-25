@@ -520,6 +520,16 @@ public class CorrectCommandActivity extends BaseActivity {
         mTitleParment = bundle.getString("mTitle");//mGoneData
         mGoneParment = bundle.getStringArrayList("mGoneData");//mGoneData
         mCollapsingToolbarLayout.setTitle(mTitleParment);
+        /**
+         * 扩张时候的title颜色：
+         * mCollapsingToolbarLayout.setExpandedTitleColor();
+         * 收缩后在Toolbar上显示时的title的颜色：
+         * mCollapsingToolbarLayout.setCollapsedTitleTextColor();
+         */
+        mCollapsingToolbarLayout.setExpandedTitleColor(Color.BLUE);
+        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+
+
         id = bundle.getString("id");
 
         /* 获取当前允许显示的字段 */

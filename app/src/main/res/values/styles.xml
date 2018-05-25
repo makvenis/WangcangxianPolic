@@ -93,5 +93,18 @@
         <item name="android:background">@drawable/btn_bg_pressed</item>
     </style>
 
+    <!-- 用户登陆界面的登陆输入框样式布局 -->
+    <style name="margin">
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
+
+    <!-- 用户登陆界面的登陆密码找回样式布局 -->
+    <style name="textPassWordStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
 
 </resources>

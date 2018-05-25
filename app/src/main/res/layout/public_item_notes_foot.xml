@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
-            android:background="#FFFFFF"
+            android:background="@drawable/bg_edittext_select"
             android:gravity="top" />
     </LinearLayout>
 
@@ -66,9 +66,9 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:background="@drawable/bg_edittext_select"
             android:id="@+id/jc_cqcs"
             android:layout_marginTop="10dp"
-            android:background="#FFFFFF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

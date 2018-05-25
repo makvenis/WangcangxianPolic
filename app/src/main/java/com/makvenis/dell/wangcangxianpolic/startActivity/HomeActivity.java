@@ -1,15 +1,39 @@
 package com.makvenis.dell.wangcangxianpolic.startActivity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ContentView;
+import com.lidroid.xutils.view.annotation.ViewInject;
 import com.makvenis.dell.wangcangxianpolic.R;
+import com.makvenis.dell.wangcangxianpolic.help.JSON;
+import com.makvenis.dell.wangcangxianpolic.help.MessageEventService;
+import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
+import com.makvenis.dell.wangcangxianpolic.service.SimpleServiceMessage;
+import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /* 作者  王从文 */
 /* 全局采用注解模式 */
@@ -23,21 +47,21 @@ import com.makvenis.dell.wangcangxianpolic.R;
  * @
  */
 
-
+@ContentView(R.layout.home_activity)
 public class HomeActivity extends BaseActivity {
-    private FrameLayout fl;
-    private RadioGroup mRg;
+    @ViewInject(R.id.fl)
+    FrameLayout fl;
+
+    @ViewInject(R.id.rg)
+    RadioGroup mRg;
+
     private FragmentManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.home_activity);
-
-        /* 控件查找 */
-        fl = ((FrameLayout) findViewById(R.id.fl));
-        mRg = ((RadioGroup) findViewById(R.id.rg));
+        ViewUtils.inject(this);
 
         /* 默认加载第一个碎片 */
         manager=getSupportFragmentManager();
@@ -48,9 +72,88 @@ public class HomeActivity extends BaseActivity {
 
         //处理点击事件
         SetOnlinkRadioButton();
+        //注册IntentService 服务
+        CreatIntentService();
 
-        /* NotiflyCation 的事件传递 */
+        /* 注册广播服务器 */
+        EventBus.getDefault().register(this);
 
+    }
+
+    /* 注册处理广播事件 */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void executeMessage(MessageEventService msg) throws JSONException {
+        Log.e("TAG",new Date() + " BaseActivity 全局获取的消息对象 >>> " + msg.getMessage());
+        Log.e("TAG",msg.isBoolean()+"");
+        if(msg.isBoolean() == true){
+            getLocalMessage(msg.getMessage());
+            // 解析Message消息队列
+            String message = msg.getMessage();
+            JSONObject object=new JSONObject(message);
+            JSONArray array = object.getJSONArray("newsList");
+            if(array.length() > 0){
+                List<Map<String, String>> maps = JSON.GetJson(array.toString(), new String[]{"title","remark","cid","id"});
+                if(maps.size() > 0){
+                    Map<String, String> stringMap = maps.get(0);
+                    // 存储消息队列
+                    if(stringMap != null){
+                        setNotifyCation(stringMap);
+                    }
+                }
+            }
+
+        }
+    }
+
+    /* 当前推送NotifyCation */
+    private void setNotifyCation(Map<String, String> map){
+
+        /* 通知ID 有两处需要到这个ID的使用 所以提成全局 */
+        int notiflyId=0;
+        /* 转化string  因为只有传String类型 */
+
+        Intent intent=new Intent(this, NotiflyActivity.class);
+        intent.putExtra("id",map.get("id")); //页面参数ID
+        intent.putExtra("url",Configfile.NEWS_ALL_CONTENT_PATH);//页面域名
+        intent.putExtra("notiflyId",String.valueOf(notiflyId)); //需要关闭的NotiflyCation的id
+
+        /**
+         *  int FLAG_CANCEL_CURRENT：如果该PendingIntent已经存在，则在生成新的之前取消当前的。
+         *  int FLAG_NO_CREATE：如果该PendingIntent不存在，直接返回null而不是创建一个PendingIntent。
+         *  int FLAG_ONE_SHOT:该PendingIntent只能用一次，在send()方法执行后，自动取消。
+         *  int FLAG_UPDATE_CURRENT：如果该PendingIntent已经存在，则用新传入的Intent更新当前的数据。
+         *  我们需要把最后一个参数改为PendingIntent.FLAG_UPDATE_CURRENT,这样在启动的Activity里就可以用接收Intent传送数据              *  的方法正常接收。
+         */
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationManager manager = (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setTicker("通知");
+        builder.setSmallIcon(R.drawable.icon);
+        builder.setContentTitle(map.get("title"));
+        builder.setContentText( map.get("remark"));
+        builder.setContentIntent(pendingIntent);
+        builder.setOnlyAlertOnce(true);
+        Notification notification = builder.build();
+        //notification.flags = Notification.FLAG_AUTO_CANCEL;
+        manager.notify(notiflyId, notification);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    /* 调用服务 */
+    private void CreatIntentService() {
+        /* 注册SimpleService 服务的消息 */
+        Intent intent=new Intent(this, SimpleServiceMessage.class);
+        Bundle bundle=new Bundle();
+        bundle.putString("mMessage", Configfile.MESSAGE_PATH+getName());
+        intent.putExtras(bundle);
+        startService(intent);
     }
 
     /* 处理Button事件机制 */
@@ -79,6 +182,24 @@ public class HomeActivity extends BaseActivity {
         });
 
 
+    }
+
+    /* 获取用户信息列表 */
+    private String getName(){
+        /* 数据库操作 获取当前用户名称 */
+        AppMothedHelper helper=new AppMothedHelper(this);
+        Map<Object, Object> map = helper.queryByKey(Configfile.USER_DATA_KEY);
+        String data = (String) map.get("data");
+        Map<String, String> map1 = JSON.GetJsonRegiste(data);
+        String s = map1.get("username");
+        Log.e("TAG",new Date() + " >>> 当前用户名称 "+s);
+
+        if(s != null){
+            getUserName(s);
+        }else {
+            getUserName("ssdai");
+        }
+        return s;
     }
 
     /* 重写物理返回键 */
