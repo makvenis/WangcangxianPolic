@@ -6,5 +6,9 @@
         android:drawable = "@drawable/icon_new_btn_a2_group" />
     <!-- 定义按钮默认的图片 -->
     <item android:drawable = "@drawable/icon_new_btn_a1_group" />
+    <item android:drawable="@color/colorUserSeleck"
+        android:state_checked="false" />
 
+    <item android:drawable="@color/colorUserEndSeleck"
+        android:state_checked="true" />
 </selector>

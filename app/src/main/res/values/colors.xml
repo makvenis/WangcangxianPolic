@@ -5,5 +5,14 @@
     <color name="colorAccent">#FF4081</color>
     <color name="select_default">#FFADADAD</color>
     <color name="select_selectCheck">#2fa3f6</color>
-
+    <!-- 总体的背景颜色 -->
+    <color name="colorUserSeleck">#efefef</color>
+    <!-- 选中的背景颜色 -->
+    <color name="colorUserEndSeleck">#e2b3ff</color>
+    <!-- 字体颜色 -->
+    <color name="colorText">#ffffff</color>
+    <!-- 字体颜色 -->
+    <color name="colorUserZCText">#febe55</color>
+    <!-- 选中的背景颜色 -->
+    <color name="colorActivity">#ffffff</color>
 </resources>

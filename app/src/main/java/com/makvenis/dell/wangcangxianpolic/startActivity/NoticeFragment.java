@@ -251,7 +251,7 @@ public class NoticeFragment extends Fragment {
         ll_ybss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), WebHtmlActivity.class);
+                /*Intent intent = new Intent(getActivity(), WebHtmlActivity.class);
                 Bundle bundle=new Bundle();
                 bundle.putString("l_url","shoujiao.html");
                 bundle.putString("l_title","收缴物品清单");
@@ -259,7 +259,7 @@ public class NoticeFragment extends Fragment {
                 bundle.putString("id","91");
                 intent.putExtras(bundle);
                 startActivity(intent,
-                        ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                        ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());*/
             }
         });
     }

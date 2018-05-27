@@ -356,7 +356,35 @@ public class TaskCenterFragemnt extends Fragment {
                                 startActivity(new Intent(getActivity(), UpdatePassActivity.class));
 
                     }else if(mType.equals("NEW_STYLE")){ //个性风格
+                        Configfile.Log(getActivity()," 关闭 ");
+                       /* final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_style_view, null);
 
+                        TextView title = (TextView) view.findViewById(R.id.mDialog_Title);
+                        TextView message = (TextView) view.findViewById(R.id.mDialog_Message);
+                        TextView start = (TextView) view.findViewById(R.id.mDialog_start);
+                        TextView off = (TextView) view.findViewById(R.id.mDialog_off);
+
+                        title.setText("跳转风格");
+                        message.setText("是否打开切换样式?");
+                        start.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Configfile.Log(getActivity()," start ");
+                            }
+                        });
+
+
+                        off.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Configfile.Log(getActivity()," off ");
+                            }
+                        });
+
+                        builder.setView(view);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();*/
 
 
                     }else {

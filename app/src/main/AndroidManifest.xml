@@ -81,6 +81,17 @@
         <activity android:name=".otherActivity.SetActivity" />
         <activity android:name=".minFragment.PersonalCenterActivity" />
         <activity android:name=".startActivity.UpdatePassActivity"></activity>
+
+
+        <!-- notifyCation 的广播注册事件 -->
+        <receiver android:name=".broadcastReceiver.MyNotifyCationBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="NOTIFY_NEWS" />
+            </intent-filter>
+        </receiver>
+
+
     </application>
 
 </manifest>

@@ -12,20 +12,26 @@ import com.makvenis.dell.wangcangxianpolic.startActivity.NotiflyActivity;
  */
 public class Configfile {
 
+    /* 服务器IP地址分析 */
+    public static final String IP="http://ssdaixiner.oicp.net:26168/";
+
+    /* 服务器、报名地址*/
+    public static final String WEB=Configfile.IP+"wcjw/";
+
     /* 服务器前端地址 */
-    public static final String SERVICE_WEB="http://ssdaixiner.oicp.net:26168/wcjw/mobile/";
-    public static final String SERVICE_WEB_IMG="http://ssdaixiner.oicp.net:26168/wcjw/";
+    public static final String SERVICE_WEB=Configfile.WEB+"mobile/";
+    public static final String SERVICE_WEB_IMG=Configfile.WEB;
 
     /* App更新 */
-    public static final String APP_UPDATE="http://ssdaixiner.oicp.net:26168/wcjw/mobile/getNewVersion";
+    public static final String APP_UPDATE=Configfile.WEB+"mobile/getNewVersion";
 
     /*服务器地址*/
-    public static final String REGISTE_URL="http://ssdaixiner.oicp.net:26168/wcjw/mobile/getloginInfo";
+    public static final String REGISTE_URL=Configfile.WEB+"mobile/getloginInfo";
     /*是否启用广告界面*/
     public static final boolean IS_ADV = false;
 
     /* 广告默认下载地址 也作为测试地址 */
-    public static final String IMAGERVIEW_PATH = "http://pic1.win4000.com/mobile/d/59bccd99693d0.png";
+    public static final String IMAGERVIEW_PATH = Configfile.WEB+"resources/images/nopic2.png";
 
     /* 页面Log */
     public static void Log(Context context, String mLog){
@@ -34,23 +40,23 @@ public class Configfile {
 
     /* APP手机推送地址 请求的服务地址 */
     //http://ssdaixiner.oicp.net:26168/wcjw/mobile/news/msglist?msgname=ssdai
-    public static String MESSAGE_PATH="http://ssdaixiner.oicp.net:26168/wcjw/mobile/news/msglist?msgname=";
+    public static String MESSAGE_PATH=Configfile.WEB+"mobile/news/msglist?msgname=";
 
     /* 文件上传地址 */
-    public static final String UPLOAD_FILE_PATH="http://ssdaixiner.oicp.net:26168/wcjw/static/doUploadFileMuti";
+    public static final String UPLOAD_FILE_PATH=Configfile.WEB+"http://ssdaixiner.oicp.net:26168/wcjw/static/doUploadFileMuti";
 
     /* 用户更新数据库中用户头像请求地址 */
-    public static final String UPDATE_USER_POTO="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toUpdatePersonPhoto?";
+    public static final String UPDATE_USER_POTO=Configfile.WEB+"mobile/toUpdatePersonPhoto?";
 
     /* 新闻页面的详情页面 */
     /**
      * @解释 新闻页面的详情页面 供WebView使用
      * {@link NotiflyActivity}
      */
-    public static final String NEWS_ALL_CONTENT_PATH="http://ssdaixiner.oicp.net:26168/wcjw/mobile/news/newsDetail2?id=";
+    public static final String NEWS_ALL_CONTENT_PATH=Configfile.WEB+"mobile/news/newsDetail2?id=";
 
     /* 当图片不存在的时候加载贲张图片 */
-    public static final String IMAGE_NO="http://ssdaixiner.oicp.net:26168/wcjw/resources/images/nopic2.png";
+    public static final String IMAGE_NO=Configfile.WEB+"resources/images/nopic2.png";
 
     /* 超时提醒 */
     public static void OverTimerLog(final Context context, final String log){
@@ -69,23 +75,27 @@ public class Configfile {
     }
 
     /* 用户新闻列表的请求地址 自动拼接页码标签 */
-    public static final String NEWS_PATH="http://ssdaixiner.oicp.net:26168/wcjw/mobile/news/newslist?classid=114&pageNow=";
+    public static final String NEWS_PATH=Configfile.WEB+"mobile/news/newslist?classid=114&pageNow=";
     /* 用户信息数据库键 */
     public static final String USER_DATA_KEY="USER_SQL";
 
     /* 表单请求地址 */
-    public static final String FORM_POST="http://ssdaixiner.oicp.net:26168/wcjw/mobile/getDataforQuest";
+    public static final String FORM_POST=Configfile.WEB+"mobile/getDataforQuest";
 
     /* 单位列表信息页面 请求的接口地址 */
-    public static final String COMPANY_URL="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toshowdanweis";
+    public static final String COMPANY_URL=Configfile.WEB+"mobile/toshowdanweis";
     /* 单位列表信息页面 请求的接口地址 */
-    public static final String COMPANY_URL_SEARCH="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toshowdanweiByName?name=";
+    public static final String COMPANY_URL_SEARCH=Configfile.WEB+"mobile/toshowdanweiByName?name=";
 
     /* 以下是四张请求表格的数据的JSON地址 */
-    public static final String FORM_GET_TABLE_1="http://ssdaixiner.oicp.net:26168/wcjw/mobile/getDataforQuest?type=1";  //旅店安全检查json
-    public static final String FORM_GET_TABLE_2="http://ssdaixiner.oicp.net:26168/wcjw/mobile/getDataforQuest?type=2";  //银行业金融机构治安保卫工作检查登记表
-    public static final String FORM_GET_TABLE_3="http://ssdaixiner.oicp.net:26168/wcjw/mobile/getDataforQuest?type=3";  //寄递物流业安全检查登记表
-    public static final String FORM_GET_TABLE_4="http://ssdaixiner.oicp.net:26168/wcjw/mobile/getDataforQuest?type=4";  //校园治安保卫工作检查登记表
+    public static final String FORM_GET_TABLE_1=Configfile.WEB+"mobile/getDataforQuest?type=1";
+    //旅店安全检查json
+    public static final String FORM_GET_TABLE_2=Configfile.WEB+"mobile/getDataforQuest?type=2";
+    //银行业金融机构治安保卫工作检查登记表
+    public static final String FORM_GET_TABLE_3=Configfile.WEB+"mobile/getDataforQuest?type=3";
+    //寄递物流业安全检查登记表
+    public static final String FORM_GET_TABLE_4=Configfile.WEB+"mobile/getDataforQuest?type=4";
+    //校园治安保卫工作检查登记表
 
     /* 以下是数据库存储四张JSON的key键 也是取出数据的条件 */
     public static final String FORM_SQL_DATABASE_1="FORM_SQL_DATABASE_1"; //旅店安全检查 存储json
@@ -94,10 +104,10 @@ public class Configfile {
     public static final String FORM_SQL_DATABASE_4="FORM_SQL_DATABASE_4"; //校园治安保卫工作检查登记表 存储json
 
     /* 以下是每一张json对应的html结果网页地址 只是在WebViewActivity中使用 */
-    public static final String RESULT_HTML_TYPE_1="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toshowDengji?type=1";
-    public static final String RESULT_HTML_TYPE_2="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toshowDengji2?type=2";
-    public static final String RESULT_HTML_TYPE_3="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toshowDengji2?type=3";
-    public static final String RESULT_HTML_TYPE_4="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toshowDengji2?type=4";
+    public static final String RESULT_HTML_TYPE_1=Configfile.WEB+"mobile/toshowDengji?type=1";
+    public static final String RESULT_HTML_TYPE_2=Configfile.WEB+"mobile/toshowDengji2?type=2";
+    public static final String RESULT_HTML_TYPE_3=Configfile.WEB+"mobile/toshowDengji2?type=3";
+    public static final String RESULT_HTML_TYPE_4=Configfile.WEB+"mobile/toshowDengji2?type=4";
 
     /***
      * @ 解释: 当使用检查项目的提交时候分别提交的地址
@@ -105,29 +115,34 @@ public class Configfile {
      * @ 提交方式 post
      * @ 实用 type=(1,2,3,4)
      */
-    public static final String FORM_POST_SERVICE_TABLE_JSON_PATH="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toSaveDengjiData";
+    public static final String FORM_POST_SERVICE_TABLE_JSON_PATH=Configfile.WEB+"mobile/toSaveDengjiData";
 
     /* 当Post请求的时候 回调的数据 msg的值 */
     public static final int CALLBANK_POST_MSG=0X000005;
 
     /* 责令改正POST数据提交地址 */
-    public static final String OVER_POST_CORECT="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toSaveGaiZheng";
+    public static final String OVER_POST_CORECT=Configfile.WEB+"mobile/toSaveGaiZheng";
     /* 处罚决定书POST数据提交地址 */
-    public static final String OVER_POST_CORECT_CHUFA="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toSaveChuFa";
+    public static final String OVER_POST_CORECT_CHUFA=Configfile.WEB+"mobile/toSaveChuFa";
     /* 治安隐患POST数据提交地址 */
-    public static final String OVER_POST_CORECT_YINHUAN="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toSaveYanQiZhengGai";
+    public static final String OVER_POST_CORECT_YINHUAN=Configfile.WEB+"mobile/toSaveYanQiZhengGai";
 
     /* 存储同意延期整改治安隐患通知书 */
-    public static final String OVER_POST_CORECT_TONGYI="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toSaveYesYanQiZhengGai";
+    public static final String OVER_POST_CORECT_TONGYI=Configfile.WEB+"mobile/toSaveYesYanQiZhengGai";
     /* 存储不同意延期整改治安隐患通知书  */
-    public static final String OVER_POST_CORECT_NOTONGYI="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toSaveNoYanQiZhengGai";
+    public static final String OVER_POST_CORECT_NOTONGYI=Configfile.WEB+"mobile/toSaveNoYanQiZhengGai";
     /* 存储检查笔录 */
-    public static final String OVER_POST_CORECT_BILU="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toSaveBiLu";
+    public static final String OVER_POST_CORECT_BILU=Configfile.WEB+"mobile/toSaveBiLu";
     /* 存储复查登记表 */
-    public static final String OVER_POST_CORECT_FUCHA="http://ssdaixiner.oicp.net:26168/wcjw/mobile/toSavefucha";
+    public static final String OVER_POST_CORECT_FUCHA=Configfile.WEB+"mobile/toSavefucha";
+    /* 收缴物品清单 */
+    public static final String SHOUJIAO_POST_PATH=Configfile.WEB+"mobile/toSaveShouJiaoWuPin";
 
+    /* 密码修改 */
+    public static  final String UPDATE_PASS=Configfile.WEB+"mobile/doUpdatePassword";
 
-
+    /* 回调当前地址 */
+    public static final String UPDATE_MAP_PATH=Configfile.WEB+"mobile/doSaveCoordinates";
 
 
 

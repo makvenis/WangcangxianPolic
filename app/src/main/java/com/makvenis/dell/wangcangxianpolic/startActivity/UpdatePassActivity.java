@@ -3,6 +3,9 @@ package com.makvenis.dell.wangcangxianpolic.startActivity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +18,13 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
+import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
+import com.makvenis.dell.wangcangxianpolic.view.SimpleLoadingDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Date;
 
 /**
  * @解释 用户密码找回
@@ -36,6 +46,9 @@ public class UpdatePassActivity extends BaseActivity {
     @ViewInject(R.id.user_submit)
     Button mSubmit;
 
+    /* 全局Dialog */
+    SimpleLoadingDialog looading;
+
     /* 处理toolbar 开始 version=2  */
     /* include 里面的点击事件 */
     @ViewInject(R.id.toolbar_callbank)
@@ -48,6 +61,32 @@ public class UpdatePassActivity extends BaseActivity {
 
     /* 全局用户名称 */
     public String mName;
+
+    public Handler mHandler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            String obj = (String) msg.obj;
+            Log.e("TAG",new Date()+" >>> 当前服务器返回的值 "+ obj);
+            JSONObject object= null;
+            try {
+                object = new JSONObject(obj);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if(msg.what == 0X000007){
+                if(object.optString("state").equals("OK")){
+                    Configfile.Log(UpdatePassActivity.this,(String) msg.obj);
+                    startActivity(new Intent(UpdatePassActivity.this,HomeActivity.class),ActivityOptions.makeSceneTransitionAnimation(UpdatePassActivity.this).toBundle());
+                    looading.dismiss();
+                }else {
+                    Configfile.Log(UpdatePassActivity.this,"请求失败");
+                    looading.dismiss();
+                }
+
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,32 +120,24 @@ public class UpdatePassActivity extends BaseActivity {
     /* 提交密码修改 */
     @OnClick({R.id.user_submit})
     public void Submit(View v){
-        // 获取用户需要修改的密码
-        String mInputPass = getUserInput();
+        looading=new SimpleLoadingDialog(UpdatePassActivity.this);
+        looading.setMessage("正在提交...").show();
+        String passFirst = userPass.getText().toString();
+        String passTwo = userPassTwo.getText().toString();
+        /* ssdaixiner.oicp.net:26168/wcjw/mobile/doUpdatePassword?username=ssdai&passwordOld=&passwordNew= */
+        if(passFirst != null && passTwo != null && passFirst != passTwo){
+            //
+            String path= Configfile.UPDATE_PASS+"?username="+mName+"&passwordOld="+passFirst+"&passwordNew="+passTwo;
+            Log.e("TAG",new Date()+" >>>> 密码修改预备提交的地址 "+path);
+            NetworkTools.getHttpTools(path,mHandler,0X000007);
+        }else {
+            Configfile.Log(UpdatePassActivity.this,"不能使用近期的密码或输入为空");
+        }
 
-        Configfile.Log(this,mInputPass + " >>> " + mName);
+
 
         // TODO: 2018/5/25  提交密码修改
 
     }
 
-    /* 获取当前用户的输出 */
-    public String getUserInput() {
-
-        String passFirst = userPass.getText().toString();
-        String passTwo = userPassTwo.getText().toString();
-
-        if(passFirst == null && passTwo == null ){ //&&
-            Configfile.Log(this,"密码输入不能为空");
-            return "";
-        }else if(passFirst == passTwo && passFirst != "" && passTwo != ""){
-            return passTwo;
-        }else if(passFirst != passTwo){
-            Configfile.Log(this,"两次密码输入不一至");
-            return "";
-        }else {
-            return "";
-        }
-
-    }
 }

@@ -11,9 +11,6 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
-import com.makvenis.dell.wangcangxianpolic.help.MessageEventService;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -42,7 +39,7 @@ public class SimpleServiceMessage extends IntentService{
 
     private boolean isMessage=true;
 
-    private void execute(Intent intent){
+    private void execute(final Intent intent){
 
         try {
             Thread.sleep(10000);
@@ -66,7 +63,13 @@ public class SimpleServiceMessage extends IntentService{
                                 isMessage=false;
                                 Log.e("TAG",str);
                                 Thread.sleep(2000);
-                                EventBus.getDefault().post(new MessageEventService(str,true));
+                                //EventBus.getDefault().post(new MessageEventService(str,true));
+                                Intent send=new Intent();
+                                send.putExtra("notify",str);
+                                send.setAction("NOTIFY_NEWS");
+                                send.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+                                getApplicationContext().sendBroadcast(send);
+                                Log.e("TAG","广播发送成功！");
                             }
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();

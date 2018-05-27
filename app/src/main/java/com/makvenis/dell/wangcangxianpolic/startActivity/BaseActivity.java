@@ -1,8 +1,11 @@
 package com.makvenis.dell.wangcangxianpolic.startActivity;
 
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.transition.Transition;
@@ -17,6 +20,7 @@ import com.makvenis.dell.wangcangxianpolic.help.JSON;
 import com.makvenis.dell.wangcangxianpolic.help.SimpleBaiDuMap;
 import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
+import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
 
 import java.util.Date;
 import java.util.Map;
@@ -27,6 +31,16 @@ public class BaseActivity extends AppCompatActivity {
 
     public LocationClient mLocationClient = null;
     private SimpleBaiDuMap myListener = new SimpleBaiDuMap();
+
+    public Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.what == 2){
+                Log.e("TAG", new Date() + " >>>>当前回调地址结果 " + ((String) msg.obj)+"");
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,8 +141,34 @@ public class BaseActivity extends AppCompatActivity {
 
         /* 接口回调 */
         myListener.GetOnClinkMapListener(new SimpleBaiDuMap.GetOnClinkMapListener() {
+
+            SharedPreferences pref = getSharedPreferences("set",MODE_PRIVATE);
+            final SharedPreferences.Editor editor = pref.edit();
+
             @Override
-            public void showMap(double x, double y) { //回调的经纬度
+            public void showMap(final double x, final double y) { //回调的经纬度
+                boolean mPathBoolean = pref.getBoolean("dingwei", false);
+                if(mPathBoolean == true){
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                        /* 实例地址 http://ssdaixiner.oicp.net:26168/wcjw/mobile/doSaveCoordinates?longitude=106.302964&latitude=32.229278 */
+                            try {
+                                Thread.sleep(3000);
+                                String mX = String.valueOf(x);
+                                String mY = String.valueOf(y);
+                                String path = Configfile.UPDATE_MAP_PATH+"?longitude="+mX+"&latitude="+ mY+
+                                        "username="+getSqliteName();
+                                NetworkTools.getHttpTools(path,mHandler,2);
+
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+                }else {
+                    Configfile.Log(BaseActivity.this,"请在设置中开启定位");
+                }
 
             }
 
@@ -178,7 +218,7 @@ public class BaseActivity extends AppCompatActivity {
         if(s != null){
             getUserName(s);
         }else {
-            getUserName("ssdai");
+            getUserName("");
         }
         return s;
     }

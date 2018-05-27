@@ -21,7 +21,7 @@
     </ImageView>
 
     <RadioGroup
-        android:background="#ffffff"
+        android:background="#e7e7e7"
         android:id="@+id/rg"
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -40,7 +40,6 @@
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="#ffffff"
             android:button="@null"
             android:clickable="true"
             myradio:drawableTop="@drawable/btnselector_c"
@@ -78,7 +77,6 @@
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="#ffffff"
             android:button="@null"
             android:clickable="true"
             myradio:drawableTop="@drawable/btnselector_b"

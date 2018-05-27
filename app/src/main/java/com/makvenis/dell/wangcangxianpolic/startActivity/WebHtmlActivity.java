@@ -27,9 +27,12 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.help.CacheUtils;
+import com.makvenis.dell.wangcangxianpolic.help.JSON;
 import com.makvenis.dell.wangcangxianpolic.otherActivity.HistoryUtils;
 import com.makvenis.dell.wangcangxianpolic.sanEntery.Jcbilu;
 import com.makvenis.dell.wangcangxianpolic.sanEntery.JwNoyqYinhuanMsg;
+import com.makvenis.dell.wangcangxianpolic.sanEntery.JwSjwp;
+import com.makvenis.dell.wangcangxianpolic.sanEntery.JwSjwpDetails;
 import com.makvenis.dell.wangcangxianpolic.sanEntery.JwYesyqYinhuanMsg;
 import com.makvenis.dell.wangcangxianpolic.sanEntery.JwYinhuanMsgFucha;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
@@ -74,6 +77,8 @@ public class WebHtmlActivity extends AppCompatActivity {
 
     /* 单位ID */
     private String id;
+
+    public String TAG="WebHtmlActivity";
 
     /* 全局Handler */
     public Handler mHandler=new Handler(){
@@ -143,7 +148,16 @@ public class WebHtmlActivity extends AppCompatActivity {
                             looading.dismiss();
                         }
                     }else if(mLocal_title.equals("收缴物品清单")){
-
+                        if(object.optString("state").equals("OK")){
+                            Configfile.Log(mThis,"请求成功");
+                            /* 调用日志文件 */
+                            HistoryUtils.executeAddrs(WebHtmlActivity.this,
+                                    id,mLocal_title,"完成");
+                            looading.dismiss();
+                        }else {
+                            Configfile.Log(mThis,"请求失败");
+                            looading.dismiss();
+                        }
                     }else {
                         Configfile.Log(mThis,"参数错误！未获取到 {" + mLocal_title+" }");
                     }
@@ -281,8 +295,75 @@ public class WebHtmlActivity extends AppCompatActivity {
         }else if(mLocal_title.equals("收缴物品清单")){
             // TODO: 2018/5/14 暂未写html
             Configfile.Log(this,var);
-            Log.e("TAG","收缴物品清单" + var);
+            Log.e("TAG","收缴物品清单 >>> " + var);
+            /**
+             * "num1":"kkk",
+             "num2":"422442",
+             "table":"[{"bianhao":"1","name":"2","num":"3","tz":"4","remark":"5"},{"bianhao":"6","name":"7","num":"8","tz":"9","remark":"10"},{"bianhao":"11","name":"12","num":"13","tz":"14","remark":"15"},{"bianhao":"16","name":"17","num":"18","tz":"19","remark":"20"}]",
+             "check1":true,
+             "check2":true,
+             "check3":true,
+             "check4":true,
+             "time1":"2018-05-26",
+             "time2":"2018-05-26",
+             "time3":"2018-05-26"
+             *
+             */
 
+            Map<String, Object> json = JSON.getObjectJson(var, new String[]{"num1", "num2", "table", "check1", "check2", "check3", "check4", "time1", "time2", "time3"});
+            Log.e("TAG",json.size()+"");
+            JwSjwp e=new JwSjwp();
+            Log.e(TAG,"mLocal_bianhao"+mLocal_bianhao);
+            e.setChufaid(Integer.valueOf(mLocal_bianhao));
+            e.setCyrSignature(NameImg.get("jcr"));       //检查人
+            e.setBgrSignature(NameImg.get("jlr"));       //记录人
+            e.setPoliceSignature(NameImg.get("bjcr"));   //被检查人
+            e.setBianhao1(((String) json.get("num1")));
+            e.setBianhao2(((String) json.get("num2")));
+
+            e.setSjTime(new Date());
+
+            String[] arr=new String[]{"check1","check2","check3","check4"};
+
+            String indexBooleab="";
+            for (int i = 0; i < arr.length; i++) {
+                if(((Boolean) json.get(arr[i])) == true){
+                    indexBooleab+="1";
+                }else {
+                    indexBooleab+="0";
+                }
+            }
+
+            e.setTiaokuan(indexBooleab);
+
+            Log.e(TAG,NameImg.get("jcr"));
+
+            String table = (String) json.get("table");
+            if(table != null){
+                List<Map<String, String>> maps = JSON.GetJson(table, new String[]{"bianhao", "name", "num", "tz", "remark"});
+                List<JwSjwpDetails> e1=new ArrayList<>();
+                for (int i=0;i < maps.size(); i++) {
+                    Map<String, String> map = maps.get(i);
+                    JwSjwpDetails eTable = new JwSjwpDetails();
+                    eTable.setSjwpnum(Integer.valueOf(map.get("num"))); //数量
+                    eTable.setBianhao(map.get("bianhao"));              //编号
+                    eTable.setSjwpDispose(null);                        //
+                    eTable.setSjwpid(Integer.valueOf(map.get("bianhao"))); //物品Id
+                    eTable.setSjwpname(map.get("name"));                //物品名称
+                    eTable.setSjwpFeature(map.get("tz"));               //特征
+                    e1.add(eTable);
+                }
+
+                e.setJwSjwpDetails(e1);
+            }
+
+             /* 转换JSON */
+            String mResult=com.alibaba.fastjson.JSON.toJSONString(e);
+            Log.e(TAG," 预备提交的地址 >>>> "+Configfile.SHOUJIAO_POST_PATH);
+            Log.e(TAG," 预备提交的实体JSON >>>> "+mResult);
+
+            //提交
+            //NetworkTools.postHttpToolsUaerRegistite(Configfile.SHOUJIAO_POST_PATH,mHandler,mResult);
 
 
         }else if(mLocal_title.equals("检查笔录")){
