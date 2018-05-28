@@ -72,7 +72,11 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.MyViewHo
         String serviceWebImg = Configfile.SERVICE_WEB_IMG;
         String replace = url.replace("../../", "");
         String img=serviceWebImg+replace;
-        Picasso.with(mContext).load(img).into(holder.item_ImageView);
+        Picasso.with(mContext)
+                .load(img)
+                .placeholder(R.drawable.icon_normal_no_photo)
+                .error(R.drawable.icon_normal_no_photo)
+                .into(holder.item_ImageView);
     }
 
     @Override

@@ -119,6 +119,7 @@ public class PersonalCenterActivity extends AppCompatActivity {
                 mProgressBar.setProgress(obj);
             }else if(msg.what == 0x1003){
                 String obj = ((String) msg.obj);
+                Log.e("TAG"," 用户上传信息成功之后 返回的数据（包括新的头像地址） "+obj);
                 if(obj != null){
                     Map<String, Object> json = JSON.getObjectJson(obj, new String[]{"title","url"});
                     /**
@@ -133,8 +134,9 @@ public class PersonalCenterActivity extends AppCompatActivity {
                      *
                      */
                     String newPotoPath = (String) json.get("url");
-                    //String replace = newPotoPath.replace("../../", Configfile.SERVICE_WEB_IMG);
-
+                    Log.e("TAG","头像新图标地址"+newPotoPath+"");
+                    if(newPotoPath == null)
+                        return;
 
                     /**
                      * @ 注意 当图片地址发生变化之后数据库中的地址也要发生变化

@@ -174,7 +174,11 @@ public class PersonalCenterFragemnt extends Fragment {
                         mPicasso = Configfile.SERVICE_WEB_IMG+imgNamePath;
                         Log.e(TAG,new Date() + " >>> 用户第一次进入此页面的 做完拼接之后的头像地址 Picasso使用 "+ mPicasso);
                         //执行加载
-                        Picasso.with(getActivity()).load(mPicasso).into(v);
+                        Picasso.with(getActivity())
+                                .load(mPicasso)
+                                .placeholder(R.drawable.icon_normal_user_poto)
+                                .error(R.drawable.icon_normal_404)
+                                .into(v);
                     }else {
                         //当图片不存在的时候加载 全局暂未有图片的 默认图片
                         Picasso.with(getActivity()).load(Configfile.IMAGE_NO).into(v);

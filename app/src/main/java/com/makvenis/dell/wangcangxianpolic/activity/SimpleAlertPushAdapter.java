@@ -17,11 +17,6 @@ import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -120,43 +115,16 @@ public class SimpleAlertPushAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             final String img = map.get("picdefault");
             mImageView_poto = ((MyAlertPushViewHolder) holder).mImageView_poto;
             if(img != null){
+                String replace = img.replace("../../", Configfile.SERVICE_WEB_IMG);
 
-                final String replace = img.replace("../../", Configfile.SERVICE_WEB_IMG);
-                Log.e("TAG",new Date()+" >>>  预备传递的图片地址 "+replace);
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            URL url = new URL(replace);
-                            HttpURLConnection conn= (HttpURLConnection) url.openConnection();
-                            conn.setRequestMethod("GET");
-                            int code = conn.getResponseCode();
-                            Log.e("TAG",new Date()+" >>> 请求码 "+code+"");
-                            if(code == 200){
-                                Message msg=new Message();
-                                msg.what=200;
-                                msg.obj=replace;
-                                mHandler.sendMessage(msg);
-                            }else {
-                                Message msg=new Message();
-                                msg.what=200;
-                                msg.obj="http://ssdaixiner.oicp.net:26168/wcjw/resources/images/nopic2.png";
-                                mHandler.sendMessage(msg);
-                            }
-                        } catch (MalformedURLException e) {
-                            e.printStackTrace();
-                        } catch (ProtocolException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-
+                Picasso.with(mContext)
+                        .load(replace)
+                        .placeholder(R.drawable.icon_normal_no_photo)
+                        .error(R.drawable.icon_normal_no_photo)
+                        .into(mImageView_poto);
             }else {
-                String imgNoPath="http://ssdaixiner.oicp.net:26168/wcjw/resources/images/nopic2.png";
-                Picasso.with(mContext).load(imgNoPath).error(R.drawable.icon).into(((MyAlertPushViewHolder) holder).mImageView_poto);
+                //String imgNoPath="http://ssdaixiner.oicp.net:26168/wcjw/resources/images/nopic2.png";
+                mImageView_poto.setImageResource(R.drawable.icon_normal_no_photo);
             }
 
         }
