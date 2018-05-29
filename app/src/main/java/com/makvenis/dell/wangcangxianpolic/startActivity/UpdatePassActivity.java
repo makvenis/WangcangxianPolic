@@ -108,13 +108,17 @@ public class UpdatePassActivity extends BaseActivity {
     /* 返回 */
     @OnClick({R.id.toolbar_callbank})
     public void oncklinkViewImage(View v){
-        startActivity(new Intent(this, HomeActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        Intent intent=new Intent(this,HomeActivity.class);
+        intent.putExtra("bank_id",2);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
     /* 返回 */
     @OnClick({R.id.toolbar_callbank_text})
     public void oncklinkViewTextView(View v){
-        startActivity(new Intent(this, HomeActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        Intent intent=new Intent(this,HomeActivity.class);
+        intent.putExtra("bank_id",2);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
     /* 提交密码修改 */

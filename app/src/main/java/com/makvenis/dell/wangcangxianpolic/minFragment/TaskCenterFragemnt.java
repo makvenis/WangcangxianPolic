@@ -76,7 +76,6 @@ public class TaskCenterFragemnt extends Fragment {
                             Log.e("version",verid+"");
                             /* 此处地址只运用于测试 不可用于发行版 */
                             //String mTestAppUpdatePath = "http://192.168.0.106/im/version.1.6.1.apk";
-                            Configfile.Log(getActivity(), "正在检查版本...");
                             final DownloadAppUpdateManager manager = new DownloadAppUpdateManager(getActivity(), address, "旺苍公安巡防");
 
                             int code = manager.getAppVersionCode();
@@ -329,7 +328,7 @@ public class TaskCenterFragemnt extends Fragment {
                         startActivity(new Intent(getActivity(),SetActivity.class));
 
                     }else if(mType.equals("NEW_VERSION")){
-
+                        Configfile.Log(getActivity(), "正在检查版本...");
                         new HttpUtils(10000).send(HttpRequest.HttpMethod.GET,
                                 Configfile.APP_UPDATE,
                                 new RequestCallBack<String>() {
@@ -347,7 +346,7 @@ public class TaskCenterFragemnt extends Fragment {
 
                                     @Override
                                     public void onFailure(HttpException e, String s) {
-
+                                        Configfile.Log(getActivity(),"网络连接失败！");
                                     }
                                 });
 

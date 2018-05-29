@@ -88,7 +88,17 @@ public class SetActivity extends BaseActivity {
     /* 返回 */
     @OnClick({R.id.toolbar_callbank})
     public void oncklinkView(View v){
-        startActivity(new Intent(mContext, HomeActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        Intent intent=new Intent(this,HomeActivity.class);
+        intent.putExtra("bank_id",2);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+    }
+
+    /* 返回 */
+    @OnClick({R.id.toolbar_callbank_text})
+    public void oncklinkViewTextView(View v){
+        Intent intent=new Intent(this,HomeActivity.class);
+        intent.putExtra("bank_id",2);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
     /* 重写方法 获取用户名称 */
@@ -153,10 +163,6 @@ public class SetActivity extends BaseActivity {
 
 
     }
-
-
-
-
 
     /* 获取用户的设置 */
     public void setUser(){

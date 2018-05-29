@@ -6,11 +6,13 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -54,6 +56,12 @@ public class HomeActivity extends BaseActivity {
 
     @ViewInject(R.id.rg)
     RadioGroup mRg;
+
+    @ViewInject(R.id.Main_button_a)
+    RadioButton mRadioButton_a;
+
+    @ViewInject(R.id.Main_button_c)
+    RadioButton mRadioButton_c;
 
     private FragmentManager manager;
 
@@ -219,4 +227,52 @@ public class HomeActivity extends BaseActivity {
         }
         return true;
     }
+
+
+    @Override
+    protected void onResume() {
+        int id = getIntent().getIntExtra("bank_id", 0);
+        if (id == 2) {//其他Activity跳转第二个碎片里面的ViewPage中第二个页面
+            Fragment fragmen = new LinkFragment();
+            FragmentManager fmanger = getSupportFragmentManager();
+            FragmentTransaction transaction = fmanger.beginTransaction();
+            transaction.replace(R.id.fl, fragmen);
+            transaction.commit();
+            //帮助跳转到指定子fragment
+            Intent i=new Intent();
+            i.setClass(HomeActivity.this,LinkFragment.class);
+            i.putExtra("bank_id",2);
+
+            mRadioButton_c.setChecked(true);
+
+        }else if(id == 1){
+            Fragment fragmen = new NoticeFragment();
+            FragmentManager fmanger = getSupportFragmentManager();
+            FragmentTransaction transaction = fmanger.beginTransaction();
+            transaction.replace(R.id.fl, fragmen);
+            transaction.commit();
+            //帮助跳转到指定子fragment
+            Intent i=new Intent();
+            i.setClass(HomeActivity.this,NoticeFragment.class);
+            i.putExtra("id",1);
+
+            mRadioButton_a.setChecked(true);
+        }else if(id == 3){ //其他Activity跳转第二个碎片里面的ViewPage中第一个页面
+            Fragment fragmen = new LinkFragment();
+            FragmentManager fmanger = getSupportFragmentManager();
+            FragmentTransaction transaction = fmanger.beginTransaction();
+            transaction.replace(R.id.fl, fragmen);
+            transaction.commit();
+            //帮助跳转到指定子fragment
+            Intent i=new Intent();
+            i.setClass(HomeActivity.this,LinkFragment.class);
+            i.putExtra("bank_id",1);
+
+            mRadioButton_c.setChecked(true);
+        }
+        super.onResume();
+
+    }
+
+
 }

@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
@@ -45,14 +45,11 @@ public class PersonalCenterFragemnt extends Fragment {
 
     public final String TAG="PersonalCenterFragemnt";
 
-    @ViewInject(R.id.mPersonal_listView)
-    ListView listView;
+    @ViewInject(R.id.mPersonal_RecyclerView)
+    RecyclerView mRecycle;
 
     /* 用户头像 */
     SimpleImageViewCircleBitmap bitmap;
-
-    /* 全局适配器 用于刷新适配器 */
-    SimpleAdapter adapter;
 
     /**
      * @ 全局图片地址
@@ -71,8 +68,6 @@ public class PersonalCenterFragemnt extends Fragment {
         EventBus.getDefault().register(this);
     }
 
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
@@ -84,7 +79,7 @@ public class PersonalCenterFragemnt extends Fragment {
     public void getEventMessaeData(MessageEvent msg){
         /**
          *
-         * @详细信息请查看 {@link PersonalCenterActivity}
+         * @详细信息请查看 {@link #PersonalCenterActivity}
          *
          * @ 承接 PersonalCenterActivity 中通过广播对象 EventBus的对象传递的MessageEvent
          *   的对象，因为需要多次使用用户头像的地址 故在此接收的用户头像地址为 ../../upload/2019051628764.jpg
@@ -142,11 +137,18 @@ public class PersonalCenterFragemnt extends Fragment {
 
         //获取用户信息
         final Map<String, String> maps = getPersonalData();
+        Log.e(TAG," 适配之前数据库查询结果 "+maps.size()+" >>> "+maps.toString());
         //再次装载 一边SimpleAdapter格式使用
-        final List<Map<String, String>> data=new ArrayList<>();
-        data.add(maps);
+        List<Object> adapterData = creatAdapterData(maps);
+        Log.e(TAG," 适配之前数据集合的大小 "+adapterData.size()+"");
+        RecyclerView.LayoutManager manager=new LinearLayoutManager(getActivity(),
+                LinearLayoutManager.VERTICAL,false);
+        mRecycle.setLayoutManager(manager);
+        mRecycle.setAdapter(new MyPersonalAdapter(adapterData));
 
-        adapter=new SimpleAdapter(getActivity(),
+
+
+        /*adapter=new SimpleAdapter(getActivity(),
                 data,
                 R.layout.layout_personal_item,
                         new String[]{"truename","zhiwu","jobid","headPortrait"},
@@ -166,7 +168,7 @@ public class PersonalCenterFragemnt extends Fragment {
                     String headPortrait = maps.get("headPortrait");
                     Log.e(TAG,new Date() + " >>> 用户第一次进入此页面的 获取的头像地址 "+ headPortrait);
                     if(headPortrait != null){
-                        /* 用户头像地址实例 http://ssdaixiner.oicp.net:26168/wcjw/upload/20180522211240011.jpg */
+                        *//* 用户头像地址实例 http://ssdaixiner.oicp.net:26168/wcjw/upload/20180522211240011.jpg *//*
                         //拆分 ../../
                         String imgNamePath = headPortrait.replace("../../", "");
 
@@ -187,7 +189,7 @@ public class PersonalCenterFragemnt extends Fragment {
                 }
             }
 
-            /* Item里面的内一个子空间的点击事件 */
+            *//* Item里面的内一个子空间的点击事件 *//*
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -210,7 +212,7 @@ public class PersonalCenterFragemnt extends Fragment {
             }
         };
 
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);*/
 
     }
 
@@ -228,7 +230,7 @@ public class PersonalCenterFragemnt extends Fragment {
         Map<Object, Object> map = helper.queryByKey(Configfile.USER_DATA_KEY);
         String data = (String) map.get("data");
 
-        Log.e("TAG","===== >>>>> 为解析前 "+data); // []
+        Log.e("TAG","===== >>>>> 为解析前 "+data);
 
         if(data != null){
             Log.e("TAG","PersonalCenterFragemnt 在使用用户的数据 >>>> map集合大小"+map.size());
@@ -242,5 +244,202 @@ public class PersonalCenterFragemnt extends Fragment {
         return new HashMap<>();
     }
 
+    /**
+     * {@link #getPersonalData 返回的数据不适合适配器的使用 故此在进行加工使其满足适配器的使用}
+     */
+    public List<Object> creatAdapterData(Map<String, String> map){
 
+        List<Object> obj=new ArrayList<>();
+
+        if(map.size() > 0){
+            Map<String,String> imgPath=new HashMap<>();
+            imgPath.put("headPortrait",map.get("headPortrait"));
+            obj.add(0,imgPath);
+            
+            List<Map<String,String>> mMps=new ArrayList<>();
+            String[] key=new String[]{"id","zhiwu","danweiid","truename","username","jobid","phone"};
+            String[] cnValue=new String[]{"编号","职务","单位ID","姓名","用户名","警员编号","联系方式"};
+            for (int i = 0; i < key.length; i++) {
+                Map<String,String> imgText=new HashMap<>();
+                imgText.put("value",map.get(key[i]));
+                imgText.put("type",cnValue[i]);
+                mMps.add(imgText);
+            }
+            obj.add(1,mMps);
+            return obj;
+        }else return new ArrayList<>();
+    }
+
+
+    /* 本类适配器 */
+    public class MyPersonalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+
+        public int TYPE_0 = 0;
+        public int TYPE_1 = 1;
+
+        List<Object> mData;
+
+        public MyPersonalAdapter(List<Object> mData) {
+            this.mData = mData;
+        }
+
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            if(viewType == TYPE_0){
+                View view = LayoutInflater.from(getActivity())
+                        .inflate(R.layout.layout_fragment_personal_image,
+                                parent,
+                                false);
+
+                return new MyViewHolderImage(view);
+            }else if(viewType == TYPE_1){
+                View view = LayoutInflater.from(getActivity())
+                        .inflate(R.layout.layout_fragment_personal_adapter,
+                                parent,
+                                false);
+                return new MyViewHolderRecycle(view);
+            }
+
+            return null;
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            if(holder instanceof MyViewHolderImage){
+                Map<String, String> map = (Map<String, String>) mData.get(0);
+
+                Log.e(TAG," 适配MyViewHolderImage "+map.size()+" >>> "+map.toString());
+
+                bitmap = ((MyViewHolderImage) holder).mImage;
+                /* 获取的地址 */
+                mPicasso = map.get("headPortrait").replace("../../", Configfile.SERVICE_WEB_IMG);
+                Picasso.with(getActivity()).load(mPicasso).placeholder(R.drawable.icon_normal_no_photo)
+                        .error(R.drawable.icon_normal_404).into(bitmap);
+
+                bitmap.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //启动本地资源
+                        Configfile.Log(getActivity(),"SimpleImageViewCircleBitmap");
+                        Intent intent=new Intent(getActivity(),PersonalCenterActivity.class);
+                        // TODO: 2018/5/21 模拟原始图片地址
+                        Log.e(TAG,"解析的图片全路径地址 >>> "+mPicasso);
+                        //String path="http://b1.hucdn.com/upload/item/1804/16/59603443964511_800x800.jpg";
+                        intent.putExtra("old_img_url",mPicasso);
+                        startActivity(intent);
+                    }
+                });
+
+            }else if(holder instanceof MyViewHolderRecycle){
+                RecyclerView mRecycleView = ((MyViewHolderRecycle) holder).mRecycleView;
+                RecyclerView.LayoutManager manager=new LinearLayoutManager(getActivity(),
+                        LinearLayoutManager.VERTICAL,
+                        false);
+                mRecycleView.setLayoutManager(manager);
+                List<Map<String, String>> maps = (List<Map<String, String>>) mData.get(1);
+                Log.e(TAG," 适配MyViewHolderRecycle "+maps.size()+" >>> "+maps.toString());
+
+                MyAdapterRecycleViewItem mMinAdapter = new MyAdapterRecycleViewItem(maps);
+                mRecycleView.setAdapter(mMinAdapter);
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            if(mData.size() != 0){
+                return mData.size();
+            }else {
+                return 0;
+            }
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if(position == 0){
+                return TYPE_0;
+            }else if (position == 1){
+                return TYPE_1;
+            }else {
+                return 2;
+            }
+        }
+
+        /* 静态内部类 */
+        public class MyViewHolderImage extends RecyclerView.ViewHolder{
+
+            @ViewInject(R.id.mPersonalAdapterImage)
+            SimpleImageViewCircleBitmap mImage;
+
+            public MyViewHolderImage(View itemView) {
+                super(itemView);
+                ViewUtils.inject(this,itemView);
+            }
+        }
+
+        public class MyViewHolderRecycle extends RecyclerView.ViewHolder{
+
+            @ViewInject(R.id.mPersonalAdapterRecycleView)
+            RecyclerView mRecycleView;
+            public MyViewHolderRecycle(View itemView) {
+                super(itemView);
+                ViewUtils.inject(this,itemView);
+            }
+        }
+
+
+        public class MyAdapterRecycleViewItem extends RecyclerView.Adapter<MyViewHolderRecycleViewItem>{
+
+            List<Map<String,String>> mapList;
+
+            public MyAdapterRecycleViewItem(List<Map<String, String>> mapList) {
+                this.mapList = mapList;
+            }
+
+            @Override
+            public MyViewHolderRecycleViewItem onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_fragment_personal_adapter_item,
+                        parent,
+                        false);
+                return new MyViewHolderRecycleViewItem(view);
+            }
+
+            @Override
+            public void onBindViewHolder(MyViewHolderRecycleViewItem holder, int position) {
+                if(holder instanceof MyViewHolderRecycleViewItem){
+                    Map<String, String> map = mapList.get(position);
+                    holder.mPersonalAdapterType.setText(map.get("type"));
+                    holder.mPersonalAdapterValue.setText(map.get("value"));
+                }
+            }
+
+            @Override
+            public int getItemCount() {
+                return mapList.size();
+            }
+        }
+
+        public class MyViewHolderRecycleViewItem extends RecyclerView.ViewHolder{
+
+            @ViewInject(R.id.mPersonalAdapterType)
+            TextView mPersonalAdapterType;
+
+            @ViewInject(R.id.mPersonalAdapterValue)
+            TextView mPersonalAdapterValue;
+
+            public MyViewHolderRecycleViewItem(View itemView) {
+                super(itemView);
+                ViewUtils.inject(this,itemView);
+            }
+        }
+
+
+
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

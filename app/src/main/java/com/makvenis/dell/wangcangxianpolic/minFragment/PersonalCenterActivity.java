@@ -34,6 +34,7 @@ import com.makvenis.dell.wangcangxianpolic.help.JSON;
 import com.makvenis.dell.wangcangxianpolic.help.MessageEvent;
 import com.makvenis.dell.wangcangxianpolic.help.PermissionsUtils;
 import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
+import com.makvenis.dell.wangcangxianpolic.service.SimpleUpdateUserImagePhoto;
 import com.makvenis.dell.wangcangxianpolic.startActivity.HomeActivity;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
@@ -110,8 +111,6 @@ public class PersonalCenterActivity extends AppCompatActivity {
                     }
                     Configfile.Log(PersonalCenterActivity.this,"头像更新成功");
 
-
-
                 }else {
                     mProgressBar_int.setText("上传中 "+obj+"%");
                 }
@@ -153,8 +152,21 @@ public class PersonalCenterActivity extends AppCompatActivity {
                     //获取原来的地址
                     String mDatabaseOldUrl = mRegisteMap.get("headPortrait");
                     String mNewString = data.replace(mDatabaseOldUrl, newPotoPath);
-                    //存储
+                    //存储本地
                     helper.update(Configfile.USER_DATA_KEY,mNewString);
+
+                    //更新远程服务器端
+                    String userId = mRegisteMap.get("id");
+                    /* 注册SimpleService 服务的消息 */
+                    Intent intent=new Intent(PersonalCenterActivity.this, SimpleUpdateUserImagePhoto.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putString("id", userId); //用户id 主键
+                    bundle.putString("name", newPotoPath); //用户新的 ../../XXXX.jpg的名称
+                    bundle.putString("url", Configfile.UPDATE_USER_POTO);  //上传服务器的地址
+                    intent.putExtras(bundle);
+                    startService(intent);
+
+
 
                     /* 广播 */
                     EventBus.getDefault().post(new MessageEvent(newPotoPath));
@@ -189,14 +201,18 @@ public class PersonalCenterActivity extends AppCompatActivity {
     /* 返回按钮 ImageView*/
     @OnClick({R.id.user_bank_left})
     public void bankImage(View v){
-        startActivity(new Intent(this, HomeActivity.class));
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("bank_id",3);
+        startActivity(intent);
         finish();
     }
 
     /* 返回按钮 TextView*/
     @OnClick({R.id.user_bank_left_text})
     public void bankTextView(View v){
-        startActivity(new Intent(this, HomeActivity.class));
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("bank_id",3);
+        startActivity(intent);
         finish();
     }
 
@@ -217,11 +233,54 @@ public class PersonalCenterActivity extends AppCompatActivity {
             mInvisible.setVisibility(View.VISIBLE);
         }
         if(newImagePath != null){
+
+            final String mPath = Configfile.UPLOAD_FILE_PATH;
             //开始上传
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    NetworkTools.upload(newImagePath,PersonalCenterActivity.this,mHandler);
+                    NetworkTools.upload(newImagePath,PersonalCenterActivity.this,mHandler,mPath);
+
+                    /**
+                     *
+                     * X-utils
+                     *
+                     */
+                    /*RequestParams params=new RequestParams();
+                    params.addBodyParameter("keyName","asdasd");
+                    params.addBodyParameter("mapData","asdasdad");
+
+                    new HttpUtils().send(HttpRequest.HttpMethod.POST,
+                            "",
+                            params,
+                            new RequestCallBack<String>() {
+
+                                //上传成功
+                                @Override
+                                public void onSuccess(ResponseInfo<String> responseInfo) {
+
+                                }
+
+                                //上传失败...
+                                @Override
+                                public void onFailure(HttpException e, String s) {
+
+                                }
+
+                                //上传中...
+                                @Override
+                                public void onLoading(long total, long current, boolean isUploading) {
+                                    super.onLoading(total, current, isUploading);
+                                }
+
+                                //取消上传
+                                @Override
+                                public void onCancelled() {
+                                    super.onCancelled();
+
+                                }
+                            });*/
+
                 }
             }).start();
         }else {

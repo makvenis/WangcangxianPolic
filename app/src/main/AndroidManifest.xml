@@ -72,26 +72,29 @@
             android:name=".service.SimpleServiceMessage"
             android:enabled="true"
             android:exported="true" />
+        <service
+            android:name=".service.SimpleUpdateUserImagePhoto"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity android:name=".activity.AlertPushPoliceActivity" />
         <activity android:name=".startActivity.WebHtmlActivity" />
         <activity android:name=".startActivity.WebPostRemarkActivity" />
-        <activity android:name=".startActivity.TestActivity" />
         <activity android:name=".otherActivity.CorrectHistoryActivity" />
         <activity android:name=".otherActivity.SetActivity" />
         <activity android:name=".minFragment.PersonalCenterActivity" />
-        <activity android:name=".startActivity.UpdatePassActivity"></activity>
-
+        <activity android:name=".startActivity.UpdatePassActivity" />
 
         <!-- notifyCation 的广播注册事件 -->
-        <receiver android:name=".broadcastReceiver.MyNotifyCationBroadcastReceiver"
+        <receiver
+            android:name=".broadcastReceiver.MyNotifyCationBroadcastReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="NOTIFY_NEWS" />
             </intent-filter>
         </receiver>
 
-
+        <activity android:name=".activity.TestActivity"></activity>
     </application>
 
 </manifest>

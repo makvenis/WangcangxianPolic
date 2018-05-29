@@ -41,9 +41,9 @@ dependencies {
     compile files('libs/fastjson-1.1.41.jar')
     compile files('libs/pojo.jar')
     compile files('libs/BaiduLBS_Android.jar')
-    compile 'com.android.support:design:26.0.0-alpha1'
     compile files('libs/commons-text-1.1.jar')
     compile files('libs/commons-lang3-3.7.jar')
+    compile 'com.android.support:design:26.0.0-alpha1'
     compile 'com.android.support:design:26.0.0-alpha1'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

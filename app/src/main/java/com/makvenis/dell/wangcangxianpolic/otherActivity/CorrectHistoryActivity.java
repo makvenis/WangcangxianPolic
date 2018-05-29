@@ -110,7 +110,17 @@ public class CorrectHistoryActivity extends BaseActivity {
     /* 返回 */
     @OnClick({R.id.toolbar_callbank})
     public void oncklinkView(View v){
-        startActivity(new Intent(mContext, HomeActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        Intent intent=new Intent(this,HomeActivity.class);
+        intent.putExtra("bank_id",2);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+    }
+
+    /* 返回 */
+    @OnClick({R.id.mToolbar_text})
+    public void onclinkText(View v){
+        Intent intent=new Intent(this,HomeActivity.class);
+        intent.putExtra("bank_id",2);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
     /* 创建数据 */

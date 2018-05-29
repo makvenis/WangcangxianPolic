@@ -43,7 +43,7 @@ public class Configfile {
     public static String MESSAGE_PATH=Configfile.WEB+"mobile/news/msglist?msgname=";
 
     /* 文件上传地址 */
-    public static final String UPLOAD_FILE_PATH=Configfile.WEB+"http://ssdaixiner.oicp.net:26168/wcjw/static/doUploadFileMuti";
+    public static final String UPLOAD_FILE_PATH=Configfile.WEB+"static/doUploadFileMuti";
 
     /* 用户更新数据库中用户头像请求地址 */
     public static final String UPDATE_USER_POTO=Configfile.WEB+"mobile/toUpdatePersonPhoto?";

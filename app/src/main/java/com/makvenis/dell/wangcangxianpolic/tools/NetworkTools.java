@@ -538,11 +538,12 @@ public class NetworkTools {
      * @param strPath 上传文件的路径
      * @param context
      * @param handler
+     * @param servicePath 服务器地址
      */
-    public static void upload(String strPath, Context context, final Handler handler) {
+    public static void upload(String strPath, Context context, final Handler handler, String servicePath) {
         //服务器接受文件路径
         //String mPath = Configfile.APP_NAME + "query/UploadServlet";
-        String mPath = Configfile.UPLOAD_FILE_PATH;
+
         //获取文件路径
         MediaType type = MediaType.parse("multipart/form-data");
         OkHttpClient http = new OkHttpClient();
@@ -592,7 +593,7 @@ public class NetworkTools {
 
 			/*请求体*/
             Request requestPostFile = new Request.Builder()
-                    .url(mPath)
+                    .url(servicePath)
                     //.post(requestBody) //不带监听上传进度的方式采用
                     .post(ProgressRequestBodyListener.addProgressRequestListener(requestBody, p))
                     .build();

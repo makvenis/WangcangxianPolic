@@ -25,12 +25,11 @@ public class JSON {
     public static Map<String, String> GetJsonRegiste(String mJson) {
         System.out.println(mJson);
         if(mJson.length() == 0) {
-            new Exception("传入参数不能为空"+mJson+" is null option");
-            return new HashMap<>();
+            throw new IllegalArgumentException("传入参数不能为空 大小为"+mJson.length()+" is null option");
         }else {
             if(mJson == "err") {
-                new Exception("账号密码错误"+mJson+" is 'error' ");
-                return new HashMap<>();
+                throw new IllegalArgumentException("账号密码错误"+mJson+" is 'error' ");
+
             }else {
                 try {
                     Map<String, String> map=new HashMap<>();
@@ -56,12 +55,11 @@ public class JSON {
                         return map;
 
                 } catch (JSONException e) {
-                    new Exception("未知异常");
-                    e.printStackTrace();
+                    throw new IllegalArgumentException("在解析 GetJsonRegiste 发生未知异常" + mJson);
                 }
             }
         }
-        return null;
+        return new HashMap<>();
     }
 
     /* 统一数据JSON */
@@ -72,7 +70,6 @@ public class JSON {
      */
     public static List<Map<String,String>> GetJson(String mJson, String[] keyString){
         if(mJson == null || keyString == null){
-
             return new ArrayList<>();
         }
 
