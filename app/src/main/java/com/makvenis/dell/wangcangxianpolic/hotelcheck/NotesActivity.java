@@ -49,8 +49,6 @@ public class NotesActivity extends BaseActivity {
             }
         });
 
-        // TODO: 2018/4/7   menu项点击事件
-
         //添加menu项点击事件
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

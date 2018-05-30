@@ -255,7 +255,7 @@ public class PersonalCenterFragemnt extends Fragment {
             Map<String,String> imgPath=new HashMap<>();
             imgPath.put("headPortrait",map.get("headPortrait"));
             obj.add(0,imgPath);
-            
+
             List<Map<String,String>> mMps=new ArrayList<>();
             String[] key=new String[]{"id","zhiwu","danweiid","truename","username","jobid","phone"};
             String[] cnValue=new String[]{"编号","职务","单位ID","姓名","用户名","警员编号","联系方式"};

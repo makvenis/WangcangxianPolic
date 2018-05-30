@@ -183,7 +183,7 @@ public class NoticeFragment extends Fragment {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        new HttpUtils(10000).send(HttpRequest.HttpMethod.GET,
+                        new HttpUtils(5000).send(HttpRequest.HttpMethod.GET,
                                 Configfile.COMPANY_URL,
                                 new RequestCallBack<String>() {
                                     @Override
@@ -200,6 +200,7 @@ public class NoticeFragment extends Fragment {
                                     @Override
                                     public void onFailure(HttpException e, String s) {
                                         Configfile.Log(getActivity(),"网络链接失败！");
+                                        dialog.dismiss();
                                     }
                                 });
                     }
@@ -212,7 +213,7 @@ public class NoticeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showdDialog();
-                new HttpUtils(10000).send(HttpRequest.HttpMethod.GET,
+                new HttpUtils(5000).send(HttpRequest.HttpMethod.GET,
                         Configfile.NEWS_PATH+"1",//表示默认请求第一页
                         new RequestCallBack<String>() {
                             @Override
@@ -259,9 +260,6 @@ public class NoticeFragment extends Fragment {
                 intent.putExtras(bundle);
                 startActivity(intent,
                         ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());*/
-                Intent intent = new Intent(getActivity(), com.makvenis.dell.wangcangxianpolic.activity.TestActivity.class);
-                startActivity(intent,
-                        ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
 
 
             }

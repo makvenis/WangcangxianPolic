@@ -1,5 +1,9 @@
 package com.makvenis.dell.wangcangxianpolic.startActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -21,13 +25,16 @@ import com.makvenis.dell.wangcangxianpolic.help.SimpleBaiDuMap;
 import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
+import com.makvenis.dell.wangcangxianpolic.utils.NetUtil;
 
 import java.util.Date;
 import java.util.Map;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity{
 
     private int anInt;
+
+    NetBroadcastReceiver mReceiver;
 
     public LocationClient mLocationClient = null;
     private SimpleBaiDuMap myListener = new SimpleBaiDuMap();
@@ -65,11 +72,18 @@ public class BaseActivity extends AppCompatActivity {
          * @ 解释： 使用案例startActivity(new Intent(this,SeekActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
          *
          */
+        /* 广播注册 */
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        mReceiver = new NetBroadcastReceiver();
+        this.registerReceiver(mReceiver, filter);
+
+
         /* 网络判断 */
         anInt = boolenNet();
 
         if(anInt == 0){
-            Configfile.Log(this,"当前无网络连接,请检查网络！");
+            //startActivity(new Intent(this,NoActivity.class));
         }else if(anInt == 3){
             Configfile.Log(this,"当前4G网络连接,请注意流量使用！");
         }
@@ -189,12 +203,14 @@ public class BaseActivity extends AppCompatActivity {
 
         /* 定义全局变量 */
         getSqliteName();
-
-
     }
 
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
+    }
 
     /* 传递获取当前地理位置数据 父类方法 */
     public void getLocalPath(String str){}
@@ -224,15 +240,21 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /* 网络判断 */
+    @Deprecated
     private int boolenNet(){
 
-            int netType = 0;//没有网络
-            ConnectivityManager connMgr = (ConnectivityManager)
-                    this.getSystemService(this.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        int netType = 0;//没有网络
+        ConnectivityManager connMgr = (ConnectivityManager)
+                this.getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-            int nType = networkInfo.getType();
-            if (nType == ConnectivityManager.TYPE_WIFI) {
+        /* 如果没有网络 这里经过调试发现返回的是null */
+        if (networkInfo == null) {
+            return netType;
+        }
+
+        int nType = networkInfo.getType();
+        if (nType == ConnectivityManager.TYPE_WIFI) {
                 netType = 1;// wifi
             } else if (nType == ConnectivityManager.TYPE_MOBILE) {
                 int nSubType = networkInfo.getSubtype();
@@ -249,11 +271,28 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * 判断网络连接的广播 {@link NetBroadcastReceiver}
+     */
+
+    public class NetBroadcastReceiver extends BroadcastReceiver {
 
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // TODO Auto-generated method stub
+            // 如果相等的话就说明网络状态发生了变化
+            if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+                int netId = NetUtil.boolenNet(context);
+                Log.e("NetBroadcastReceiver"," 网络当前广播值: >>> " + netId+"");
+                if(netId == 0){
+                    startActivity(new Intent(BaseActivity.this,NoActivity.class));
+                }
+
+            }
+        }
 
 
-
-
+    }
 
 }
