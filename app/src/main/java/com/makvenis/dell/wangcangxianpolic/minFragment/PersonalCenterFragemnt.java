@@ -1,6 +1,5 @@
 package com.makvenis.dell.wangcangxianpolic.minFragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,27 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
-import com.makvenis.dell.wangcangxianpolic.help.MessageEvent;
 import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleImageViewCircleBitmap;
-import com.squareup.picasso.Picasso;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,13 +47,6 @@ public class PersonalCenterFragemnt extends Fragment {
      * @ 注意 此地址（用户的本地头像地址）是区别与当用户更新之后的图片地址 更新的地址是不加如数据库的操作
      *
      */
-    String mPicasso;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
-    }
 
     @Nullable
     @Override
@@ -75,15 +55,15 @@ public class PersonalCenterFragemnt extends Fragment {
         return view;
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+   /* @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMessaeData(MessageEvent msg){
-        /**
+        *//**
          *
          * @详细信息请查看 {@link #PersonalCenterActivity}
          *
          * @ 承接 PersonalCenterActivity 中通过广播对象 EventBus的对象传递的MessageEvent
          *   的对象，因为需要多次使用用户头像的地址 故在此接收的用户头像地址为 ../../upload/2019051628764.jpg
-         */
+         *//*
 
         Log.e(TAG,new Date() + " >>> PersonalCenterFragemnt " +msg.getMessage());
         // 拼接Picasso 使用的地址
@@ -91,10 +71,10 @@ public class PersonalCenterFragemnt extends Fragment {
         Log.e(TAG,new Date() + " >>> 用户更新之后的头像地址 PersonalCenterActivity "+mPicassoPath);
         Picasso.with(getActivity()).load(mPicassoPath).into(bitmap);
         //更新图片地址
-        /**
+        *//**
          * http://ssdaixiner.oicp.net:26168/wcjw/mobile/toUpdatePersonPhoto?url=../../upload/20188987678687467.jpg&id=1
          *
-         */
+         *//*
         AppMothedHelper helper=new AppMothedHelper(getActivity());
         boolean dismisData = helper.isDismisData(getActivity(), Configfile.USER_DATA_KEY);
         if(dismisData){
@@ -106,10 +86,10 @@ public class PersonalCenterFragemnt extends Fragment {
                 //设置地址
                 String mMsgPath="../../" + msg.getMessage();
                 //拼接地址
-                /**
+                *//**
                  * {@value  /toUpdatePersonPhoto?url=../../upload/20188987678687467.jpg&id=1}
                  * {@link PersonalCenterFragemnt} 新地址构成分别有 web地址 + ../../ +id
-                 */
+                 *//*
                 final String mUpdateUrl = Configfile.UPDATE_USER_POTO+"url="+msg.getMessage()+"&"+"id="+mId;
                 Log.e(TAG,new Date() + " >>> 预备执行的更新数据库中用户名的头像地址 "+mUpdateUrl);
                 new HttpUtils(10000).send(HttpRequest.HttpMethod.GET,
@@ -130,7 +110,7 @@ public class PersonalCenterFragemnt extends Fragment {
             }
         }
     }
-
+*/
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -139,12 +119,13 @@ public class PersonalCenterFragemnt extends Fragment {
         final Map<String, String> maps = getPersonalData();
         Log.e(TAG," 适配之前数据库查询结果 "+maps.size()+" >>> "+maps.toString());
         //再次装载 一边SimpleAdapter格式使用
-        List<Object> adapterData = creatAdapterData(maps);
-        Log.e(TAG," 适配之前数据集合的大小 "+adapterData.size()+"");
+        //List<Object> adapterData = creatAdapterData(maps);
+        List<Map<String, String>> data = creatAdapterData(maps);
+        Log.e(TAG," 适配之前数据集合的大小 "+data.size()+"");
         RecyclerView.LayoutManager manager=new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL,false);
         mRecycle.setLayoutManager(manager);
-        mRecycle.setAdapter(new MyPersonalAdapter(adapterData));
+        mRecycle.setAdapter(new MyAdapterRecycleViewItem(data));
 
 
 
@@ -247,14 +228,14 @@ public class PersonalCenterFragemnt extends Fragment {
     /**
      * {@link #getPersonalData 返回的数据不适合适配器的使用 故此在进行加工使其满足适配器的使用}
      */
-    public List<Object> creatAdapterData(Map<String, String> map){
+    public List<Map<String,String>> creatAdapterData(Map<String, String> map){
 
-        List<Object> obj=new ArrayList<>();
+        //List<Object> obj=new ArrayList<>();
 
         if(map.size() > 0){
-            Map<String,String> imgPath=new HashMap<>();
+            /*Map<String,String> imgPath=new HashMap<>();
             imgPath.put("headPortrait",map.get("headPortrait"));
-            obj.add(0,imgPath);
+            obj.add(0,imgPath);*/
 
             List<Map<String,String>> mMps=new ArrayList<>();
             String[] key=new String[]{"id","zhiwu","danweiid","truename","username","jobid","phone"};
@@ -265,14 +246,14 @@ public class PersonalCenterFragemnt extends Fragment {
                 imgText.put("type",cnValue[i]);
                 mMps.add(imgText);
             }
-            obj.add(1,mMps);
-            return obj;
+            //obj.add(mMps);
+            return mMps;
         }else return new ArrayList<>();
     }
 
 
     /* 本类适配器 */
-    public class MyPersonalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    /*public class MyPersonalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         public int TYPE_0 = 0;
         public int TYPE_1 = 1;
@@ -311,7 +292,7 @@ public class PersonalCenterFragemnt extends Fragment {
                 Log.e(TAG," 适配MyViewHolderImage "+map.size()+" >>> "+map.toString());
 
                 bitmap = ((MyViewHolderImage) holder).mImage;
-                /* 获取的地址 */
+                *//* 获取的地址 *//*
                 mPicasso = map.get("headPortrait").replace("../../", Configfile.SERVICE_WEB_IMG);
                 Picasso.with(getActivity()).load(mPicasso).placeholder(R.drawable.icon_normal_no_photo)
                         .error(R.drawable.icon_normal_404).into(bitmap);
@@ -364,7 +345,7 @@ public class PersonalCenterFragemnt extends Fragment {
             }
         }
 
-        /* 静态内部类 */
+        *//* 静态内部类 *//*
         public class MyViewHolderImage extends RecyclerView.ViewHolder{
 
             @ViewInject(R.id.mPersonalAdapterImage)
@@ -435,11 +416,52 @@ public class PersonalCenterFragemnt extends Fragment {
 
 
     }
+*/
+
+    public class MyAdapterRecycleViewItem extends RecyclerView.Adapter<MyAdapterRecycleViewItem.MyViewHolderRecycleViewItem>{
+
+        List<Map<String,String>> mapList;
+
+        public MyAdapterRecycleViewItem(List<Map<String, String>> mapList) {
+            this.mapList = mapList;
+        }
+
+        @Override
+        public MyAdapterRecycleViewItem.MyViewHolderRecycleViewItem onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_fragment_personal_adapter_item,
+                    parent,
+                    false);
+            return new MyAdapterRecycleViewItem.MyViewHolderRecycleViewItem(view);
+        }
+
+        @Override
+        public void onBindViewHolder(MyAdapterRecycleViewItem.MyViewHolderRecycleViewItem holder, int position) {
+            if(holder instanceof MyAdapterRecycleViewItem.MyViewHolderRecycleViewItem){
+                Map<String, String> map = mapList.get(position);
+                holder.mPersonalAdapterType.setText(map.get("type"));
+                holder.mPersonalAdapterValue.setText(map.get("value"));
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return mapList.size();
+        }
 
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
+        public class MyViewHolderRecycleViewItem extends RecyclerView.ViewHolder{
+
+            @ViewInject(R.id.mPersonalAdapterType)
+            TextView mPersonalAdapterType;
+
+            @ViewInject(R.id.mPersonalAdapterValue)
+            TextView mPersonalAdapterValue;
+
+            public MyViewHolderRecycleViewItem(View itemView) {
+                super(itemView);
+                ViewUtils.inject(this,itemView);
+            }
+        }
     }
+
 }

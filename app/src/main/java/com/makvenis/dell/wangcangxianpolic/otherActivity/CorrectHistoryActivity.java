@@ -176,7 +176,7 @@ public class CorrectHistoryActivity extends BaseActivity {
                 holder.name.setText(mName);
                 holder.company.setText(((String) map.get("className")));//检查的内容 当前时间检查了什么内容？
                 // TODO: 2018/5/18  被检查的单位名称？ 根据单位ID去获取
-                holder.title.setText("被检查单位（只有ID="+map.get("danwei")+"）");//被检查的单位名称
+                holder.title.setText("被检查单位（ID="+map.get("danwei")+"）");//被检查的单位名称
 
                 holder.ok.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -194,7 +194,6 @@ public class CorrectHistoryActivity extends BaseActivity {
                         String addTime = (String) map.get("time");
                         /* 调用底部PopWindows */
                         bottomwindow(v,danWeiId,addTime);
-
                     }
                 });
 
@@ -290,6 +289,9 @@ public class CorrectHistoryActivity extends BaseActivity {
             dizhi.setText("暂未数据");
         }else {
             // TODO: 2018/5/18 赋值单位信息
+            danwei.setText("暂未数据");
+            faren.setText("暂未数据");
+            dizhi.setText("暂未数据");
 
         }
         setOnclinkButtom(delete,1,addTime);
