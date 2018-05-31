@@ -3,6 +3,8 @@ package com.makvenis.dell.wangcangxianpolic.details;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,14 +17,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jude.rollviewpager.OnItemClickListener;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
+import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.makvenis.dell.wangcangxianpolic.R;
+import com.makvenis.dell.wangcangxianpolic.help.JSON;
+import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +44,7 @@ import java.util.Map;
 public class ToViewFragment extends Fragment {
 
     /* 单位ID */
-    private String id;
+    private String xmlIdString;
 
     /* TAG */
     public final String TAG = "ToViewFragment";
@@ -47,6 +57,40 @@ public class ToViewFragment extends Fragment {
 
     /* Context */
     public final Context mContext = getActivity();
+
+    /* 数据集合 */
+    List<List<Map<String,String>>> mMaxData = new ArrayList<>();
+
+    /* 全局Adapter */
+    private ToViewAdapter mAdapter;
+
+    public Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            int what = msg.what;
+            switch (what){
+                case 0X000001:
+                    String obj = (String) msg.obj;
+                    Log.e(TAG," mHandler >>> " + obj);
+                    List<List<Map<String, String>>> lists = setTypeAdapterData(obj);
+                    mMaxData.addAll(lists);
+                    Log.e(TAG," addAll() 之后的集合状态 "+mMaxData.size() + " >>> " + mMaxData.toString());
+                    /* 绑定适配器 */
+                    RecyclerView.LayoutManager manager=new LinearLayoutManager(mContext,
+                            LinearLayoutManager.VERTICAL,false);
+                    mRecycle.setLayoutManager(manager);
+                    mAdapter = new ToViewAdapter(getActivity(),mMaxData);
+                    if( mMaxData != null ){
+                        mRecycle.setAdapter(mAdapter);
+                        mSwipe.setRefreshing(false);
+                    }
+                    break;
+
+            }
+        }
+    };
+
 
     @Nullable
     @Override
@@ -61,15 +105,100 @@ public class ToViewFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         /* 获取固定xmlId 存储的单位id值 */
         SharedPreferences xmlId = getActivity().getSharedPreferences("xmlId", Context.MODE_PRIVATE);
-        String xmlIdString = xmlId.getString("id", "0");
+        xmlIdString = xmlId.getString("id", "0");
         Log.e(TAG,"haredPreferences()" + xmlIdString);
 
-        /* 绑定适配器 */
-        RecyclerView.LayoutManager manager=new LinearLayoutManager(mContext,
-                LinearLayoutManager.VERTICAL,false);
-        mRecycle.setLayoutManager(manager);
-        mRecycle.setAdapter(new ToViewAdapter(getActivity()));
+        /* 设置刷新 */
+        mSwipe.setRefreshing(true);
 
+        /* 构建数据 */
+        creatMoreDatils();
+
+        /* 重新请求数据 */
+        mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSwipe.setRefreshing(true);
+                creatMoreDatils();
+            }
+        });
+
+
+    }
+
+    /* 数据规范化 */
+    public List<List<Map<String, String>>> setTypeAdapterData(String  result ){
+
+        if(result != null){
+            /* 数据集合 */
+            List<List<Map<String,String>>> mHandlerData = new ArrayList<>();
+
+            Map<String, Object> json = JSON
+                    .getObjectJson(result,
+                    new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum"});
+
+            String[] key = new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum"};
+
+            String[] name = new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum"};
+            if(json.size() != 0){
+                /* 构建第一组 */
+                List<Map<String,String>> minDataImg = new ArrayList<>();
+                for (int i = 0; i < 3; i++) {
+                    Map<String,String> imgMpa = new HashMap<>();
+                    imgMpa.put("url","http://");
+                    minDataImg.add(imgMpa);
+                }
+
+                /* 构建第二组 */
+                List<Map<String,String>> minData = new ArrayList<>();
+
+                for (int i = 0; i < json.size(); i++) {
+                    Map<String,String> mByMapsData = new HashMap<>();
+
+                    String getObj = (String) json.get(key[i]); //phone
+                    if(getObj.equals("")){
+                        mByMapsData.put("value", "暂未数据");
+                        mByMapsData.put("key",name[i]);
+                    }else {
+                        mByMapsData.put("value", getObj);
+                        mByMapsData.put("key",name[i]);
+                    }
+                    minData.add(mByMapsData);
+                }
+                mHandlerData.add(0,minDataImg);
+                mHandlerData.add(1,minData);
+                Log.e(TAG,mHandlerData.size()+" >>> " + mHandlerData.toString());
+                return mHandlerData;
+            }
+        }
+        return new ArrayList<>();
+    }
+
+    /* 数据下载 */
+    private void creatMoreDatils() {
+
+        String path = Configfile.COMPANY_URL_SEARCH_ID + xmlIdString;
+        Log.e("TAG",path);
+        new HttpUtils(5000).send(HttpRequest.HttpMethod.GET,
+                path,
+                new RequestCallBack<String>() {
+                    @Override
+                    public void onSuccess(ResponseInfo<String> responseInfo) {
+                        String result = responseInfo.result;
+                        if(result != null){
+                            Message msg=new Message();
+                            msg.what=0X000001;
+                            msg.obj=result;
+                            mHandler.sendMessage(msg);
+                        }else {
+                            Configfile.Log(mContext,"暂未有数据！");
+                        }
+                    }
+                    @Override
+                    public void onFailure(HttpException e, String s) {
+                        Configfile.Log(mContext,"网络连接失败！");
+                    }
+                });
     }
 
     @Override
@@ -86,9 +215,12 @@ public class ToViewFragment extends Fragment {
         public final int VIEW_TYPE_2 = 2;
 
         public Context mContext;
+        public List<List<Map<String,String>>> mMaxDataAdapter;
 
-        public ToViewAdapter(Context mContext) {
+
+        public ToViewAdapter(Context mContext, List<List<Map<String, String>>> mMaxDataAdapter) {
             this.mContext = mContext;
+            this.mMaxDataAdapter = mMaxDataAdapter;
         }
 
         @Override
@@ -129,18 +261,17 @@ public class ToViewFragment extends Fragment {
 
                 RecyclerView mDatilsRecycle = ((MyRecycleViewHolder) holder).mDatailsRecycle;
 
-                List<Map<String,String>> data = new ArrayList<>();
-                for (int i = 0; i < 20; i++) {
-                    Map<String,String> map=new HashMap<>();
-                    map.put("key","asd");
-                    data.add(map);
+                List<Map<String, String>> maps = mMaxDataAdapter.get(1);
+
+                if( maps.size() != 0){
+
+                    LinearLayoutManager manager=new LinearLayoutManager(getActivity(),
+                            LinearLayoutManager.VERTICAL,false);
+
+                    mDatilsRecycle.setLayoutManager(manager);
+                    mDatilsRecycle.setAdapter(new MyTestPaddingAdapter(maps,getActivity()));
                 }
 
-                LinearLayoutManager manager=new LinearLayoutManager(getActivity(),
-                        LinearLayoutManager.VERTICAL,false);
-
-                mDatilsRecycle.setLayoutManager(manager);
-                mDatilsRecycle.setAdapter(new MyTestPaddingAdapter(data,getActivity()));
 
             }else if(holder instanceof MyPhotoleViewHolder){
                 RelativeLayout layout = ((MyPhotoleViewHolder) holder).layout;
@@ -196,9 +327,6 @@ public class ToViewFragment extends Fragment {
         }
 
 
-
-
-
     }
 
     public class MyPagerAdapter extends StaticPagerAdapter {
@@ -226,8 +354,6 @@ public class ToViewFragment extends Fragment {
         }
     }
 
-
-
     public class MyTestPaddingAdapter extends RecyclerView.Adapter<MyTestPaddingAdapter.MyViewHolder>{
 
 
@@ -242,13 +368,18 @@ public class ToViewFragment extends Fragment {
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            View view = LayoutInflater.from(mContext).inflate(R.layout.test_item, parent, false);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.layout_datails_adapter_item_type_viewholder, parent, false);
 
             return new MyViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
+
+
+            Map<String, String> map = data.get(position);
+            holder.mKey.setText((map.get("key")));
+            holder.mValue.setText((map.get("value")));
             if(position == 3 || position == 7){
                 LinearLayout liner = holder.liner;
                 liner.setPadding(0,30,10,0);
@@ -263,6 +394,13 @@ public class ToViewFragment extends Fragment {
         class MyViewHolder extends RecyclerView.ViewHolder{
             @ViewInject(R.id.liner)
             LinearLayout liner;
+
+            @ViewInject(R.id.mViewHolderKey)
+            TextView mKey;
+
+            @ViewInject(R.id.mViewHolderValue)
+            TextView mValue;
+
             public MyViewHolder(View itemView) {
                 super(itemView);
                 ViewUtils.inject(this,itemView);

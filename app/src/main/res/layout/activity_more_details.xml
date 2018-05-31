@@ -23,7 +23,7 @@
             app:contentScrim="#d3bb04"
             app:expandedTitleMarginEnd="10dp"
             app:expandedTitleMarginStart="10dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:layout_scrollFlags="scroll|snap">
 
             <ImageView
                 android:id="@+id/main.backdrop"

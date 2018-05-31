@@ -106,7 +106,7 @@
     <TextView
         android:layout_gravity="center"
         android:id="@+id/content_delete"
-        android:layout_width="50dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:padding="15dp"
         android:background="#d8ab08"
@@ -121,7 +121,7 @@
     <TextView
         android:layout_gravity="center"
         android:id="@+id/content_add"
-        android:layout_width="50dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:padding="15dp"
         android:background="#e74686"

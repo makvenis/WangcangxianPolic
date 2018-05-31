@@ -17,7 +17,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="400dp">
+                android:layout_height="wrap_content">
 
 
 
@@ -311,31 +311,55 @@
                     android:layout_height="1dp" />
 
 
+                <!-- 修改按钮 -->
+                <LinearLayout
+                    android:background="#fac"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <Button
+                        android:text="修改"
+                        android:id="@+id/mMore_submit"
+                        android:textSize="18sp"
+                        android:background="#fac"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+                </LinearLayout>
+                <!-- 下划线 -->
+                <ImageView
+                    android:layout_marginBottom="10dp"
+                    android:background="#e7e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+
                 <!-- foot底部标线 -->
                 <LinearLayout
-                    android:background="#f00"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp">
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
                     <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:background="#fac"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp" />
+                        android:background="#fac" />
+
                     <TextView
-                        android:textColor="#fac"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:text="到底了"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textColor="#fac" />
+
                     <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:background="#fac"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp" />
+                        android:background="#fac" />
                 </LinearLayout>
 
 
