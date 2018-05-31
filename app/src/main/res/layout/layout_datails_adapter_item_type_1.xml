@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:background="#d4d4d4"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/liner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--
+
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:textSize="18sp"
+            android:textColor="#8d8d8d"
+            android:gravity="right|center"
+            android:text="单位名称"
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:id="@+id/mMore_Name"
+            android:textColorHint="#afafaf"
+            android:textColor="#afafaf"
+            android:textSize="18sp"
+            android:hint="请选择单位名称"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+    <ImageView
+        android:background="#e7e6e6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    -->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mDatailsRecycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
+
+
+

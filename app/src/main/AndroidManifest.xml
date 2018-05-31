@@ -96,6 +96,7 @@
 
         <activity android:name=".activity.TestActivity" />
         <activity android:name=".startActivity.NoActivity" />
+        <activity android:name=".details.MoreDetailsActivity"></activity>
     </application>
 
 </manifest>

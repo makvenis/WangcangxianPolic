@@ -63,9 +63,7 @@ public class Configfile {
         /* 获取当前时间 */
         CountDownTimer countDownTimer=new CountDownTimer(30*1000,1000) {
             @Override
-            public void onTick(long millisUntilFinished) {
-
-            }
+            public void onTick(long millisUntilFinished) {}
 
             @Override
             public void onFinish() {
@@ -86,6 +84,8 @@ public class Configfile {
     public static final String COMPANY_URL=Configfile.WEB+"mobile/toshowdanweis";
     /* 单位列表信息页面 请求的接口地址 */
     public static final String COMPANY_URL_SEARCH=Configfile.WEB+"mobile/toshowdanweiByName?name=";
+    /* 单位id接口 通过id来查询单位 */
+    public static final String COMPANY_URL_SEARCH_ID=Configfile.WEB+"mobile/toUpdateDanwei?id=";
 
     /* 以下是四张请求表格的数据的JSON地址 */
     public static final String FORM_GET_TABLE_1=Configfile.WEB+"mobile/getDataforQuest?type=1";

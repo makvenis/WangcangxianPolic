@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -9,7 +10,7 @@
     <LinearLayout
         android:padding="10dp"
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
@@ -97,10 +98,35 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:background="#dcdcdc"
-        android:layout_width="match_parent"
-        android:layout_height="1dp" />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/background_dark"/>
+
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/content_delete"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:background="#d8ab08"
+        android:text="单位详情"
+        android:textSize="20sp"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/background_dark"/>
+
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/content_add"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:background="#e74686"
+        android:text="备份按钮"
+        android:textSize="20sp"/>
 
 
 </LinearLayout>

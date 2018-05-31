@@ -260,8 +260,7 @@ public class NoticeFragment extends Fragment {
                 intent.putExtras(bundle);
                 startActivity(intent,
                         ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());*/
-
-
+                startActivity(new Intent(getActivity(),TestActivity.class));
             }
         });
     }

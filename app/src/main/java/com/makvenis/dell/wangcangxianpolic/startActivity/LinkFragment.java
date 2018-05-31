@@ -195,7 +195,7 @@ public class LinkFragment extends Fragment{
 
         SimpleDateFormat fm = new SimpleDateFormat("MM-dd");
         String time = fm.format(new Date());
-        mTimer.setText("最近更新:"+time);
+
 
         /**
          *
@@ -204,8 +204,14 @@ public class LinkFragment extends Fragment{
          */
         Map<String, String> map = getPersonalData();
         mPicasso = map.get("headPortrait").replace("../../", Configfile.SERVICE_WEB_IMG);
-        Picasso.with(getActivity()).load(mPicasso).placeholder(R.drawable.icon_normal_no_photo)
-                .error(R.drawable.icon_normal_404).into(mPersonal_Photo);
+        if(mPicasso == ""){
+
+        }else {
+            /*Log.e(TAG,map.get("headPortrait"));
+            Picasso.with(getActivity()).load(mPicasso).placeholder(R.drawable.icon_normal_no_photo)
+                    .error(R.drawable.icon_normal_404).into(mPersonal_Photo);*/
+        }
+
 
         mPersonal_Photo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,6 +227,12 @@ public class LinkFragment extends Fragment{
             }
         });
 
+        if(map.get("truename") != null){
+            mTimer.setText(map.get("truename")+" 最近更新:"+time);
+        }else mTimer.setText("最近更新:"+time);
+
+
+
 
         /**
          * 扩张时候的title颜色：
@@ -229,9 +241,9 @@ public class LinkFragment extends Fragment{
          * mCollapsingToolbarLayout.setCollapsedTitleTextColor();
          */
         mCollapsingToolbarLayout.setEnabled(true);
-        mCollapsingToolbarLayout.setTitle(map.get("truename"));
-        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
-        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+        mCollapsingToolbarLayout.setTitle(map.get("truename")+"MAK");
+        mCollapsingToolbarLayout.setExpandedTitleColor(Color.RED);
+        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.RED);
 
         List<Fragment> dataFragment = new ArrayList<>();
         dataFragment.add(new PersonalCenterFragemnt());

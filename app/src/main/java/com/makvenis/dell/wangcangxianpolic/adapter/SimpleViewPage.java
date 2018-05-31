@@ -6,9 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-/**
- * Created by dell on 2018/4/22.
- */
 
 public class SimpleViewPage extends FragmentPagerAdapter {
 

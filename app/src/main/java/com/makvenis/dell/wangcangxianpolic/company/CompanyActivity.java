@@ -37,6 +37,7 @@ import com.makvenis.dell.wangcangxianpolic.startActivity.HomeActivity;
 import com.makvenis.dell.wangcangxianpolic.startActivity.WebHtmlActivity;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleLoadingDialog;
+import com.makvenis.dell.wangcangxianpolic.view.SimpleRecycleScollView;
 
 import java.util.Date;
 import java.util.List;
@@ -93,7 +94,8 @@ public class CompanyActivity extends BaseActivity{
 
 
     @ViewInject(R.id.company_recycle)
-    private RecyclerView mRecycleView;
+    private SimpleRecycleScollView mRecycleView;
+    //private RecyclerView mRecycleView;
 
     @ViewInject(R.id.company_swipe)
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -148,6 +150,10 @@ public class CompanyActivity extends BaseActivity{
 
         RecyclerView.LayoutManager manager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,
                 false);
+
+
+
+
         mRecycleView.setLayoutManager(manager);
 
         mRecycleView.setAdapter(mAdapter);
