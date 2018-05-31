@@ -273,28 +273,35 @@ public class TaskCenterFragemnt extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if(mType.equals("NEW_DIALOG")){
-                        final SimpleDialogSureView minDialog=new SimpleDialogSureView(getContext());
-                        minDialog.setMessage("确定退出?");
-                        minDialog.show();
-                        minDialog.setOnclinkDialogSureListener(new SimpleDialogSureView.setOnclinkDialogSureListener() {
-                            @Override
-                            public Void OnClinkSureListener() { //点击确认
-                                //删除用户数据
-                                AppMothedHelper helper=new AppMothedHelper(getContext());
-                                helper.delete(Configfile.USER_DATA_KEY);
-                                getContext().startActivity(new Intent(getActivity(), RegisteActivity.class));
-                                getActivity().finish();
-                                return null;
-                            }
-                        });
 
-                        minDialog.setOnclinkDialogCancelListener(new SimpleDialogSureView.setOnclinkDialogCancelListener() {
-                            @Override
-                            public Void OnClinkCancelListener() {
-                                minDialog.dismiss();
-                                return null;
-                            }
-                        });
+                        try {
+                            final SimpleDialogSureView minDialog=new SimpleDialogSureView(getContext());
+                            minDialog.setMessage("确定退出?");
+                            minDialog.show();
+                            minDialog.setOnclinkDialogSureListener(new SimpleDialogSureView.setOnclinkDialogSureListener() {
+                                @Override
+                                public Void OnClinkSureListener() { //点击确认
+                                    //删除用户数据
+                                    AppMothedHelper helper=new AppMothedHelper(getContext());
+                                    helper.delete(Configfile.USER_DATA_KEY);
+                                    getContext().startActivity(new Intent(getActivity(), RegisteActivity.class));
+                                    return null;
+                                }
+                            });
+
+                            minDialog.setOnclinkDialogCancelListener(new SimpleDialogSureView.setOnclinkDialogCancelListener() {
+                                @Override
+                                public Void OnClinkCancelListener() {
+                                    minDialog.dismiss();
+                                    return null;
+                                }
+                            });
+
+                        } catch (Exception e){
+                            throw new IllegalArgumentException("窗口溢出");
+                        }
+
+
                     }else if(mType.equals("NEW_ACTIVITY")){
                         /* 查询XML */
                         SharedPreferences pref = getActivity().getSharedPreferences("set", Context.MODE_PRIVATE);
@@ -431,4 +438,5 @@ public class TaskCenterFragemnt extends Fragment {
 
 
     }
+
 }

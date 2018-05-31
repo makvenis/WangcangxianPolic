@@ -1,6 +1,7 @@
 package com.makvenis.dell.wangcangxianpolic.details;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,8 +22,10 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
+import com.makvenis.dell.wangcangxianpolic.morePhotoUpload.UploadImageActivity;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 
 import java.util.Map;
@@ -193,5 +196,11 @@ public class UpdateViewFragment extends Fragment {
             mMore_Lev.setText(((String) map.get("level")));
         }else mMore_Lev.setText("暂无数据");
 
+    }
+
+    @OnClick({R.id.mMore_Addrs_photo})
+    public void selectImage(View v){
+        Intent intent=new Intent(getActivity(), UploadImageActivity.class);
+        startActivity(intent);
     }
 }

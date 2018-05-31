@@ -53,8 +53,9 @@
                         android:layout_height="28dp" />
 
                     <TextView
+                        android:textSize="18sp"
                         android:layout_width="wrap_content"
-                        android:text="我的信息"
+                        android:text="单位概况"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView3"
                         android:layout_centerVertical="true"
@@ -83,7 +84,7 @@
             <ImageView
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="65dp"
-                android:src="@drawable/icon_font_01"
+                android:src="@drawable/icon_head_danwei_name"
                 android:layout_width="100dp"
                 android:layout_height="70dp" />
 

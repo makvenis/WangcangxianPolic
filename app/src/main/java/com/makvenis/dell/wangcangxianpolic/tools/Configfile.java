@@ -81,7 +81,7 @@ public class Configfile {
     public static final String FORM_POST=Configfile.WEB+"mobile/getDataforQuest";
 
     /* 单位列表信息页面 请求的接口地址 */
-    public static final String COMPANY_URL=Configfile.WEB+"mobile/toshowdanweis";
+    public static final String COMPANY_URL=Configfile.WEB+"mobile/toshowdanweiByPcs?username=";
     /* 单位列表信息页面 请求的接口地址 */
     public static final String COMPANY_URL_SEARCH=Configfile.WEB+"mobile/toshowdanweiByName?name=";
     /* 单位id接口 通过id来查询单位 */

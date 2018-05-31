@@ -946,16 +946,7 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-    <android.support.design.widget.FloatingActionButton
-        app:layout_behavior="com.makvenis.dell.wangcangxianpolic.behavior.ScrollAwareFABBehavior"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:src="@drawable/icon"
-        app:layout_anchor="@+id/nestedScrollView"
-        app:layout_anchorGravity="bottom|right" />
+
 
 </android.support.design.widget.CoordinatorLayout>
 

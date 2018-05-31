@@ -151,9 +151,6 @@ public class CompanyActivity extends BaseActivity{
         RecyclerView.LayoutManager manager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,
                 false);
 
-
-
-
         mRecycleView.setLayoutManager(manager);
 
         mRecycleView.setAdapter(mAdapter);

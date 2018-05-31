@@ -53,4 +53,5 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     testCompile 'junit:junit:4.12'
     compile 'com.jude:rollviewpager:1.4.6'
+    compile 'com.zhihu.android:matisse:0.4.3'
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Toolbar
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/icon_x"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:id="@+id/toolbar_callbank" />
+
+            <TextView
+                android:id="@+id/toolbar_callbank_text"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:text="返回"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/toolbar_callbank" />
+
+            <TextView
+                android:id="@+id/mToolbar_text"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:text="图片上传"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+            <TextView
+                android:id="@+id/mToolbar_upload"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:text="上传"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="12dp" />
+
+        </RelativeLayout>
+
+
+    </Toolbar>
+
+</LinearLayout>

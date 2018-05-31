@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
@@ -120,7 +121,7 @@ public class PersonalCenterFragemnt extends Fragment {
         Log.e(TAG," 适配之前数据库查询结果 "+maps.size()+" >>> "+maps.toString());
         //再次装载 一边SimpleAdapter格式使用
         //List<Object> adapterData = creatAdapterData(maps);
-        List<Map<String, String>> data = creatAdapterData(maps);
+        List<Map<String, Object>> data = creatAdapterData(maps);
         Log.e(TAG," 适配之前数据集合的大小 "+data.size()+"");
         RecyclerView.LayoutManager manager=new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL,false);
@@ -228,7 +229,7 @@ public class PersonalCenterFragemnt extends Fragment {
     /**
      * {@link #getPersonalData 返回的数据不适合适配器的使用 故此在进行加工使其满足适配器的使用}
      */
-    public List<Map<String,String>> creatAdapterData(Map<String, String> map){
+    public List<Map<String,Object>> creatAdapterData(Map<String, String> map){
 
         //List<Object> obj=new ArrayList<>();
 
@@ -237,13 +238,21 @@ public class PersonalCenterFragemnt extends Fragment {
             imgPath.put("headPortrait",map.get("headPortrait"));
             obj.add(0,imgPath);*/
 
-            List<Map<String,String>> mMps=new ArrayList<>();
+            List<Map<String,Object>> mMps=new ArrayList<>();
+            int[] img = new int[]{R.drawable.icon_personal_list_bh,
+                                R.drawable.icon_personal_list_zw,
+                    R.drawable.icon_personal_list_dw,
+                    R.drawable.icon_personal_list_xm,
+                    R.drawable.icon_personal_list_tx,
+                    R.drawable.icon_personal_list_bh,
+                    R.drawable.icon_personal_list_lxfs};
             String[] key=new String[]{"id","zhiwu","danweiid","truename","username","jobid","phone"};
-            String[] cnValue=new String[]{"编号","职务","单位ID","姓名","用户名","警员编号","联系方式"};
+            String[] cnValue=new String[]{"编号","职务","单位","姓名","用户名","警员编号","联系方式"};
             for (int i = 0; i < key.length; i++) {
-                Map<String,String> imgText=new HashMap<>();
+                Map<String,Object> imgText=new HashMap<>();
                 imgText.put("value",map.get(key[i]));
                 imgText.put("type",cnValue[i]);
+                imgText.put("img",img[i]);
                 mMps.add(imgText);
             }
             //obj.add(mMps);
@@ -420,9 +429,9 @@ public class PersonalCenterFragemnt extends Fragment {
 
     public class MyAdapterRecycleViewItem extends RecyclerView.Adapter<MyAdapterRecycleViewItem.MyViewHolderRecycleViewItem>{
 
-        List<Map<String,String>> mapList;
+        List<Map<String,Object>> mapList;
 
-        public MyAdapterRecycleViewItem(List<Map<String, String>> mapList) {
+        public MyAdapterRecycleViewItem(List<Map<String, Object>> mapList) {
             this.mapList = mapList;
         }
 
@@ -437,9 +446,11 @@ public class PersonalCenterFragemnt extends Fragment {
         @Override
         public void onBindViewHolder(MyAdapterRecycleViewItem.MyViewHolderRecycleViewItem holder, int position) {
             if(holder instanceof MyAdapterRecycleViewItem.MyViewHolderRecycleViewItem){
-                Map<String, String> map = mapList.get(position);
-                holder.mPersonalAdapterType.setText(map.get("type"));
-                holder.mPersonalAdapterValue.setText(map.get("value"));
+                Map<String, Object> map = mapList.get(position);
+                holder.mPersonalAdapterType.setText(((String) map.get("type")));
+                holder.mPersonalAdapterValue.setText(((String) map.get("value")));
+                Integer img = (Integer) map.get("img");
+                holder.mPersonalAdapterIcon.setImageResource(img);
             }
         }
 
@@ -450,6 +461,9 @@ public class PersonalCenterFragemnt extends Fragment {
 
 
         public class MyViewHolderRecycleViewItem extends RecyclerView.ViewHolder{
+
+            @ViewInject(R.id.mPersonalAdapterIcon)
+            ImageView mPersonalAdapterIcon;
 
             @ViewInject(R.id.mPersonalAdapterType)
             TextView mPersonalAdapterType;

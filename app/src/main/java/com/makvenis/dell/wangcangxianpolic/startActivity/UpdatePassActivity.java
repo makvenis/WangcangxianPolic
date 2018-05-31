@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,7 +43,7 @@ public class UpdatePassActivity extends BaseActivity {
     EditText userPassTwo;
 
     @ViewInject(R.id.user_submit)
-    Button mSubmit;
+    TextView mSubmit;
 
     /* 全局Dialog */
     SimpleLoadingDialog looading;
@@ -137,11 +136,6 @@ public class UpdatePassActivity extends BaseActivity {
         }else {
             Configfile.Log(UpdatePassActivity.this,"不能使用近期的密码或输入为空");
         }
-
-
-
-        // TODO: 2018/5/25  提交密码修改
-
     }
 
 }

@@ -26,6 +26,8 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.activity.*;
 import com.makvenis.dell.wangcangxianpolic.company.CompanyActivity;
+import com.makvenis.dell.wangcangxianpolic.help.JSON;
+import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleLoadingDialog;
 
@@ -34,6 +36,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
+import java.util.Map;
 
 /* 作者  王从文 */
 /* 全局采用注解模式 */
@@ -171,9 +174,24 @@ public class NoticeFragment extends Fragment {
         return view;
     }
 
+    /* 获取用户信息列表 */
+    public String getSqliteName(){
+        /* 数据库操作 获取当前用户名称 */
+        AppMothedHelper helper=new AppMothedHelper(getActivity());
+        Map<Object, Object> map = helper.queryByKey(Configfile.USER_DATA_KEY);
+        String data = (String) map.get("data");
+        Map<String, String> map1 = JSON.GetJsonRegiste(data);
+        String s = map1.get("username");
+        Log.e("TAG",new Date() + " >>> 当前用户名称 "+s);
+
+        return s;
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
 
         // 安全检查
         ll.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +202,7 @@ public class NoticeFragment extends Fragment {
                     @Override
                     public void run() {
                         new HttpUtils(5000).send(HttpRequest.HttpMethod.GET,
-                                Configfile.COMPANY_URL,
+                                Configfile.COMPANY_URL+getSqliteName(),
                                 new RequestCallBack<String>() {
                                     @Override
                                     public void onSuccess(ResponseInfo<String> responseInfo) {

@@ -97,6 +97,7 @@
         <activity android:name=".activity.TestActivity" />
         <activity android:name=".startActivity.NoActivity" />
         <activity android:name=".details.MoreDetailsActivity"></activity>
+        <activity android:name=".morePhotoUpload.UploadImageActivity"></activity>
     </application>
 
 </manifest>

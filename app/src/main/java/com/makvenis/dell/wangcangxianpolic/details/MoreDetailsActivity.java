@@ -8,13 +8,20 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
+import com.makvenis.dell.wangcangxianpolic.startActivity.HomeActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /* 单位的更多详情信息 */
@@ -75,6 +82,13 @@ public class MoreDetailsActivity extends AppCompatActivity {
     /* 上下文 */
     public final Context mContext=MoreDetailsActivity.this;
 
+    @ViewInject(R.id.mHomeLink_bank)
+    ImageView mImageView;
+
+    /* 时间更新 */
+    @ViewInject(R.id.mTime)
+    TextView mTimer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +117,11 @@ public class MoreDetailsActivity extends AppCompatActivity {
                 //Toast.makeText(mContext, "复选的"+tab.getText(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        /* 显示当前更新的时间 */
+        SimpleDateFormat fm = new SimpleDateFormat("MM-dd");
+        String time = fm.format(new Date());
+        mTimer.setText(" 最近更新:"+time);
     }
 
     private void insertXmlId(String num) {
@@ -130,4 +149,22 @@ public class MoreDetailsActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onResume() {
+        int id = getIntent().getIntExtra("bank_id", 0);
+        if (id == 2) {//其他Activity跳转第二个碎片里面的ViewPage中第二个页面
+            mViewPage.setCurrentItem(1);
+            mTabLayout.getTabAt(1).select();
+        }else if(id == 3) {
+            mViewPage.setCurrentItem(2);
+            mTabLayout.getTabAt(2).select();
+        }
+        super.onResume();
+    }
+
+    @OnClick({R.id.mHomeLink_bank})
+    public void BankCompanyActivity(View v){
+        startActivity(new Intent(this, HomeActivity.class));
+    }
 }
