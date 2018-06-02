@@ -12,8 +12,8 @@ import com.makvenis.dell.wangcangxianpolic.startActivity.NotiflyActivity;
  */
 public class Configfile {
 
-    /* 服务器IP地址分析 */
-    public static final String IP="http://wcjworg.oicp.io:21000/";
+    /* 服务器IP地址分析 http://wcjworg.oicp.io:21000/    */
+    public static final String IP="http://ssdaixiner.oicp.net:26168/";
 
     /* 服务器、报名地址*/
     public static final String WEB=Configfile.IP+"wcjw/";
@@ -45,8 +45,12 @@ public class Configfile {
     /* 文件上传地址 */
     public static final String UPLOAD_FILE_PATH=Configfile.WEB+"static/doUploadFileMuti";
 
+    /* 文件上传地址 */
+    public static final String UPLOAD_FILE_PATH_ALL=Configfile.WEB+"static/doUploadFile";
+
     /* 用户更新数据库中用户头像请求地址 */
     public static final String UPDATE_USER_POTO=Configfile.WEB+"mobile/toUpdatePersonPhoto?";
+
 
     /* 新闻页面的详情页面 */
     /**
@@ -141,12 +145,21 @@ public class Configfile {
     /* 密码修改 */
     public static  final String UPDATE_PASS=Configfile.WEB+"mobile/doUpdatePassword";
 
-    /* 回调当前地址 */
+    /* 回调地图当前地址 */
     public static final String UPDATE_MAP_PATH=Configfile.WEB+"mobile/doSaveCoordinates";
 
+    /* 证据事实的图片上传地址 */
+    public static final String UPLOAD_TRUE_IMAGE=Configfile.WEB+"mobile/toSaveScenePhotos?dataJson";
+
+    /* 删除当前的单位 通过ID */
+    public static final String DELETE_COMPANY_DATA=Configfile.WEB+"mobile/doDelDanwei?id=";
+
+    /* 添加单位 */
+    public static final String INSERT_COMPANY=Configfile.WEB+"mobile/doAddDanwei?dataJson=";
 
 
-
+    /* 修改当前单位 */
+    public static final String UPDATE_COMPANY=Configfile.WEB+"mobile/doUpdateDanwei?dataJson=";
 
 
 

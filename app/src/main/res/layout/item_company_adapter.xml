@@ -127,7 +127,7 @@
         android:layout_height="match_parent"
         android:padding="15dp"
         android:background="#e74686"
-        android:text="备份按钮"
+        android:text="删除单位"
         android:textSize="20sp"/>
 
 

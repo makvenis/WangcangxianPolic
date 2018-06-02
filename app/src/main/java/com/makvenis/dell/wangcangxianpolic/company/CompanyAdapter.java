@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.details.MoreDetailsActivity;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
+import com.makvenis.dell.wangcangxianpolic.view.SimpleDialogSureView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -83,7 +84,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         /* 赋值操作 */
         //拿到数组
         final Map<String, String> map = mList.get(position);
@@ -110,16 +111,39 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.MyViewHo
             }
         });
 
-        /* 处理备份按钮 */
+        /* 处理单位单位 */
         holder.addTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mContext, MoreDetailsActivity.class);
-                intent.putExtra("id",map.get("id"));//单位ID
-                mContext.startActivity(intent);
+
+                final String id = map.get("id");
+                final SimpleDialogSureView dialog=new SimpleDialogSureView(mContext);
+                dialog.setMessage("确认删除当前单位? 不恰当删除将造成数据丢失");
+                dialog.show();
+
+                dialog.setOnclinkDialogSureListener(new SimpleDialogSureView.setOnclinkDialogSureListener() {
+                    @Override
+                    public Void OnClinkSureListener() {
+                        mCallBankItemCheck.show(id,position);
+                        dialog.dismiss();
+                        return null;
+                    }
+
+
+                });
+
+                dialog.setOnclinkDialogCancelListener(new SimpleDialogSureView.setOnclinkDialogCancelListener() {
+                    @Override
+                    public Void OnClinkCancelListener() {
+                        // TODO: 2018/6/2  取消当前操作
+                        dialog.dismiss();
+                        return null;
+                    }
+                });
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -163,6 +187,19 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.MyViewHo
             deleteTextView = (TextView)itemView.findViewById(R.id.content_delete);
             addTextView = (TextView)itemView.findViewById(R.id.content_add);
         }
+    }
+
+    CallBankItemCheck mCallBankItemCheck;
+
+    public void SetCallBankItemCheck(CallBankItemCheck mCallBankItemCheck) {
+        this.mCallBankItemCheck = mCallBankItemCheck;
+    }
+
+    public interface CallBankItemCheck{
+        /**
+         * @param id 删除的单位ID
+         */
+        void show(String id,int postion);
     }
 
 }

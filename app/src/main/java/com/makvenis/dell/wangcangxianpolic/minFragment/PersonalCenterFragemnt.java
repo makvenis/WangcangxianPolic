@@ -246,7 +246,7 @@ public class PersonalCenterFragemnt extends Fragment {
                     R.drawable.icon_personal_list_tx,
                     R.drawable.icon_personal_list_bh,
                     R.drawable.icon_personal_list_lxfs};
-            String[] key=new String[]{"id","zhiwu","danweiid","truename","username","jobid","phone"};
+            String[] key=new String[]{"id","zhiwu","police","truename","username","jobid","phone"};
             String[] cnValue=new String[]{"编号","职务","单位","姓名","用户名","警员编号","联系方式"};
             for (int i = 0; i < key.length; i++) {
                 Map<String,Object> imgText=new HashMap<>();
@@ -448,7 +448,16 @@ public class PersonalCenterFragemnt extends Fragment {
             if(holder instanceof MyAdapterRecycleViewItem.MyViewHolderRecycleViewItem){
                 Map<String, Object> map = mapList.get(position);
                 holder.mPersonalAdapterType.setText(((String) map.get("type")));
-                holder.mPersonalAdapterValue.setText(((String) map.get("value")));
+
+                String type = (String) map.get("type");
+                Log.e(TAG,"type >>> "+ type);
+
+                if(type.equals("单位")){
+                    String value = (String) map.get("value");
+                    Map<String, Object> json = JSON.getObjectJson(value, new String[]{"name", "id"});
+                    holder.mPersonalAdapterValue.setText(((String) json.get("name")));
+                }else holder.mPersonalAdapterValue.setText(((String) map.get("value")));
+
                 Integer img = (Integer) map.get("img");
                 holder.mPersonalAdapterIcon.setImageResource(img);
             }

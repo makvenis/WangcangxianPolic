@@ -96,8 +96,13 @@
 
         <activity android:name=".activity.TestActivity" />
         <activity android:name=".startActivity.NoActivity" />
-        <activity android:name=".details.MoreDetailsActivity"></activity>
-        <activity android:name=".morePhotoUpload.UploadImageActivity"></activity>
+        <activity android:name=".details.MoreDetailsActivity" />
+        <activity android:name=".morePhotoUpload.UploadImageActivity" />
+        <activity android:name=".startActivity.UploadCheckActivity" />
+        <activity
+            android:name=".addCompany.AddCompanyActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

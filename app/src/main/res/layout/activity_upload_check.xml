@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.makvenis.dell.wangcangxianpolic.startActivity.UploadCheckActivity">
+
+    <include layout="@layout/public_toolbar_simple_upload"></include>
+
+    <android.support.v4.widget.NestedScrollView
+        android:background="#e8e8e8"
+        android:id="@+id/mNested"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:background="#FFFFFF"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/icon_upload_check_01"
+                        android:layout_gravity="start"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp" />
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:text="随笔"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/mShowText"
+                        android:textColorHint="#2ba2ec"
+                        android:hint="记点什么..."
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@drawable/border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:src="@drawable/icon_upload_check_02"
+                        android:id="@+id/mShowImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="#FFFFFF"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/icon_upload_check_01"
+                        android:layout_gravity="start"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp" />
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:text="随笔"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/mShowText2"
+                        android:textColorHint="#2ba2ec"
+                        android:hint="记点什么..."
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@drawable/border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:src="@drawable/icon_upload_check_02"
+                        android:id="@+id/mShowImage2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="#FFFFFF"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/icon_upload_check_01"
+                        android:layout_gravity="start"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp" />
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:text="随笔"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/mShowText3"
+                        android:textColorHint="#2ba2ec"
+                        android:hint="记点什么..."
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@drawable/border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:src="@drawable/icon_upload_check_02"
+                        android:id="@+id/mShowImage3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

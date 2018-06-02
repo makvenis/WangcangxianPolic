@@ -50,6 +50,7 @@ public class JSON {
                     map.put("danweiid", object.optString("danweiid")); //单位ID
                     map.put("jobid", object.optString("jobid"));       //警员编号
                     map.put("zhiwu", object.optString("zhiwu"));       //职务
+                    map.put("police", object.optString("police"));     //警察单位
 
                     if(map.size() != 0)
                         return map;

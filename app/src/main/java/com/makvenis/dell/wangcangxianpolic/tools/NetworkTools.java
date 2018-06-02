@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
@@ -617,6 +618,7 @@ public class NetworkTools {
         }
     }
 
+
     /* HttpUtils的数据下载请求 */
     public static void HttpUtilsGet(final Context context, String path, final Handler handler){
         new HttpUtils(10000).send(HttpRequest.HttpMethod.GET,
@@ -641,5 +643,106 @@ public class NetworkTools {
                     }
                 });
     }
+
+
+    /**
+     *
+     * {@link NetworkTools #httpUpload}
+     * @param method 请求方式
+     * @param data 需要上传的数据
+     * @param servicePath 上传服务器的路径
+     * @param dataHead 设置请求头
+     * @param mHandler 回调的数据Handler
+     */
+    public static void httpUpload(final HttpRequest.HttpMethod method, final String dataHead, final Handler mHandler, final String servicePath, final String data){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(method == HttpRequest.HttpMethod.GET){
+                    /* 通过地址拼接请求的地址 */
+                    String mPath = servicePath+"?"+dataHead+"="+data;
+                    new HttpUtils(5000).send(HttpRequest.HttpMethod.GET,
+                            mPath,
+                            new RequestCallBack<String>() {
+                                @Override
+                                public void onSuccess(ResponseInfo<String> responseInfo) {
+                                    String result = responseInfo.result;
+
+                                    if(result != null){
+                                        Message msg=new Message();
+                                        msg.what = 0X101;
+                                        msg.obj = result;
+                                        mHandler.sendMessage(msg);
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(HttpException e, String s) {
+                                    Message msg=new Message();
+                                    msg.what = 0X102;
+                                    msg.obj = e.toString();
+                                    mHandler.sendMessage(msg);
+                                }
+
+                                @Override
+                                public void onLoading(long total, long current, boolean isUploading) {
+                                    super.onLoading(total, current, isUploading);
+                                    int cd = (int) ((int) (current * 100) / total);
+                                    Message msg=new Message();
+                                    msg.what = 0X103;
+                                    msg.obj = current;
+                                    mHandler.sendMessage(msg);
+                                }
+                            });
+
+
+
+                }else {
+
+                    RequestParams params=new RequestParams();
+                    params.addBodyParameter(dataHead,data);
+
+                    new HttpUtils(5000).send(HttpRequest.HttpMethod.POST,
+                            servicePath,
+                            params,
+                            new RequestCallBack<String>() {
+                                @Override
+                                public void onSuccess(ResponseInfo<String> responseInfo) {
+                                    String result = responseInfo.result;
+
+                                    if(result != null){
+                                        Message msg=new Message();
+                                        msg.what = 0X101;
+                                        msg.obj = result;
+                                        mHandler.sendMessage(msg);
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(HttpException e, String s) {
+                                    Message msg=new Message();
+                                    msg.what = 0X102;
+                                    msg.obj = e.toString();
+                                    mHandler.sendMessage(msg);
+                                }
+
+                                @Override
+                                public void onLoading(long total, long current, boolean isUploading) {
+                                    super.onLoading(total, current, isUploading);
+                                    /*int cd = (int) ((int) (current * 100) / total);
+                                    Message msg=new Message();
+                                    msg.what = 0X103;
+                                    msg.obj = cd;
+                                    mHandler.sendMessage(msg);*/
+                                }
+                            });
+
+                }
+            }
+        }).start();
+
+
+    }
+
 
 }

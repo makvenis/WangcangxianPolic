@@ -7,20 +7,12 @@
     android:layout_height="match_parent"
     tools:context="com.makvenis.dell.wangcangxianpolic.company.CompanyActivity">
 
-    <include layout="@layout/public_toolbar_simple"></include>
+    <include layout="@layout/public_toolbar_simple_add"></include>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/company_swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
-        <!--<android.support.v7.widget.RecyclerView
-            android:id="@+id/company_recycle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>-->
 
         <com.makvenis.dell.wangcangxianpolic.view.SimpleRecycleScollView
             android:id="@+id/company_recycle"

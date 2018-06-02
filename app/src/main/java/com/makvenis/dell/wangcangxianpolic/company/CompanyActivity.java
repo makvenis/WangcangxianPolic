@@ -29,6 +29,7 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
+import com.makvenis.dell.wangcangxianpolic.addCompany.AddCompanyActivity;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
 import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
 import com.makvenis.dell.wangcangxianpolic.newsnotescheck.NotesNewActivity;
@@ -39,6 +40,10 @@ import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleLoadingDialog;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleRecycleScollView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +84,25 @@ public class CompanyActivity extends BaseActivity{
 
                     CompanyActivity.this.startActivity(intentType1);
                     break;
+                case 0X000005:
+                    String result = ((String) msg.obj);
+                    if(result != null){
+                        List<Map<String, String>> list = JSON.GetJson(result, new String[]{"address", "attr", "name", "photoUrl","id"});
+                        if(maps != null){
+                            maps.removeAll(maps);
+                            for (int i = 0; i < list.size(); i++) {
+                                maps.add(list.get(i));
+                            }
+                        }
+
+                        for (int i = 0; i < list.size(); i++) {
+                            maps.add(list.get(i));
+                        }
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                    break;
             }
         }
     };
@@ -90,21 +114,30 @@ public class CompanyActivity extends BaseActivity{
     TextView mTextView;
 
 
+    /* 添加单位 */
+    @ViewInject(R.id.mToolbar_add)
+    TextView mAdd;
+    // TODO: 2018/6/2  添加单位
 
+
+    CompanyAdapter mAdapter;
 
 
     @ViewInject(R.id.company_recycle)
     private SimpleRecycleScollView mRecycleView;
-    //private RecyclerView mRecycleView;
 
     @ViewInject(R.id.company_swipe)
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
+    /* 适配集合 */
+    List<Map<String, String>> maps = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewUtils.inject(this);
+
+        swipeData();
 
         SetAdapters();
 
@@ -113,15 +146,13 @@ public class CompanyActivity extends BaseActivity{
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                SetAdapters();
+                swipeData();
                 Configfile.Log(CompanyActivity.this,"刷新成功！");
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
 
-
         mTextView.setText("单位列表信息");
-
     }
 
     /* 返回 */
@@ -142,11 +173,39 @@ public class CompanyActivity extends BaseActivity{
         return data;
     }
 
+    /* 刷新使用 下载使用 */
+    public void swipeData(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new HttpUtils(5000).send(HttpRequest.HttpMethod.GET,
+                        Configfile.COMPANY_URL+getSqliteName(),
+                        new RequestCallBack<String>() {
+                            @Override
+                            public void onSuccess(ResponseInfo<String> responseInfo) {
+                                String result = responseInfo.result;
+                                if(result != null){
+                                    Message msg=new Message();
+                                    msg.what=0X000005;
+                                    msg.obj=result;
+                                    mHandler.sendMessage(msg);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(HttpException e, String s) {
+                                Configfile.Log(CompanyActivity.this,"网络链接失败！");
+                            }
+                        });
+            }
+        }).start();
+    }
+
+
     /* 适配 */
     public void SetAdapters(){
 
-        List<Map<String, String>> maps = GetCompanyDatabase();
-        CompanyAdapter mAdapter = new CompanyAdapter(maps,this);
+        mAdapter = new CompanyAdapter(maps,this);
 
         RecyclerView.LayoutManager manager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,
                 false);
@@ -154,6 +213,45 @@ public class CompanyActivity extends BaseActivity{
         mRecycleView.setLayoutManager(manager);
 
         mRecycleView.setAdapter(mAdapter);
+
+        mAdapter.SetCallBankItemCheck(new CompanyAdapter.CallBankItemCheck() {
+            @Override
+            public void show(String id,final int postion) {
+
+                Configfile.Log(CompanyActivity.this,"回调被删除的单位ID"+id);
+
+                final String path = Configfile.DELETE_COMPANY_DATA+id;
+                new HttpUtils(5000).send(HttpRequest.HttpMethod.GET,
+                                path,
+                                new RequestCallBack<String>() {
+                                    @Override
+                                    public void onSuccess(ResponseInfo<String> responseInfo) {
+                                        String result = responseInfo.result;
+                                        if(result != null){
+                                            try {
+                                                JSONObject mJson=new JSONObject(result);
+                                                if(mJson.get("state").equals("OK")){
+                                                    Configfile.Log(mContext,"删除成功");
+                                                    //mSwipeRefreshLayout.setRefreshing(true);
+                                                    maps.remove(postion);
+                                                    mAdapter.notifyDataSetChanged();
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }else {
+                                            Configfile.Log(mContext,"删除失败！");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(HttpException e, String s) {
+                                        Configfile.Log(mContext,"网络连接失败！");
+                                    }
+                                });
+
+            }
+        });
 
         /* 适配器的回调事件 */
         mAdapter.SetOnclinkRecycleItem(new CompanyAdapter.OnclinkRecycleItem() {
@@ -178,6 +276,26 @@ public class CompanyActivity extends BaseActivity{
             }
         });
     }
+
+
+    @OnClick({R.id.mToolbar_add})
+    public void addCompany(View v){
+        Intent intent=new Intent(CompanyActivity.this, AddCompanyActivity.class);
+        startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /* ------------------------------Dialog的处理事件--------------------------------- */

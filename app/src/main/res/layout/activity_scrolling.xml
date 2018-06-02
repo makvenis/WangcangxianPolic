@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.makvenis.dell.wangcangxianpolic.addCompany.AddCompanyActivity">
+
+    <include layout="@layout/public_toolbar_simple_add"></include>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <!-- Group 1 -->
+                <!-- 单位名称 -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="#8d8d8d"
+                        android:gravity="right|center"
+                        android:text="单位名称"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent" />
+
+                    <EditText
+                        android:id="@+id/mMore_Name"
+                        android:textColorHint="#afafaf"
+                        android:textColor="#afafaf"
+                        android:textSize="18sp"
+                        android:hint="请选择单位名称"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <!-- 下划线 -->
+                <ImageView
+                    android:background="#e7e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <!-- 单位地址 -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="#8d8d8d"
+                        android:gravity="right|center"
+                        android:text="单位地址"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent" />
+
+                    <EditText
+                        android:inputType="text"
+                        android:id="@+id/mMore_Addrs"
+                        android:textColorHint="#afafaf"
+                        android:textColor="#afafaf"
+                        android:textSize="18sp"
+                        android:hint="请添加单位地址"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <!-- 下划线 -->
+                <ImageView
+                    android:background="#e7e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <!-- 法人名称 -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="#8d8d8d"
+                        android:gravity="right|center"
+                        android:text="法人"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent" />
+
+                    <EditText
+                        android:inputType="text"
+                        android:id="@+id/mMore_LevName"
+                        android:textColorHint="#afafaf"
+                        android:textColor="#afafaf"
+                        android:textSize="18sp"
+                        android:hint="法人姓名"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <!-- 下划线 -->
+                <ImageView
+                    android:background="#e7e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <!-- Group 2 -->
+
+                <!-- 管辖单位 -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="#8d8d8d"
+                        android:gravity="right|center"
+                        android:text="管辖单位"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:gravity="center|start"
+                        android:id="@+id/mMore_GovName"
+                        android:textColorHint="#afafaf"
+                        android:textColor="#afafaf"
+                        android:textSize="18sp"
+                        android:hint="请选择管辖单位"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <!-- 下划线 -->
+                <ImageView
+                    android:background="#e7e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <!-- 行业类型 -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="#8d8d8d"
+                        android:gravity="right|center"
+                        android:text="行业类型"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:textColorHint="#afafaf"
+                        android:gravity="center|start"
+                        android:id="@+id/mMore_AddrsType"
+                        android:textColor="#afafaf"
+                        android:textSize="18sp"
+                        android:hint="请添加组织类型"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <!-- 下划线 -->
+                <ImageView
+                    android:background="#e7e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <!-- 单位联系电话 -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="#8d8d8d"
+                        android:gravity="right|center"
+                        android:text="联系电话"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent" />
+
+                    <EditText
+                        android:inputType="number"
+                        android:id="@+id/mMore_Phone"
+                        android:textColorHint="#afafaf"
+                        android:textColor="#afafaf"
+                        android:textSize="18sp"
+                        android:hint="请输入联系电话"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <!-- 下划线 -->
+                <ImageView
+                    android:background="#e7e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <!-- 法人性别 -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="#8d8d8d"
+                        android:gravity="right|center"
+                        android:text="性别"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:gravity="center|start"
+                        android:inputType="text"
+                        android:id="@+id/mMore_Sex"
+                        android:textColorHint="#afafaf"
+                        android:textColor="#afafaf"
+                        android:textSize="18sp"
+                        android:hint="请选择性别"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <!-- 下划线 -->
+                <ImageView
+                    android:background="#e7e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <!-- 法人证件类型 -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="#8d8d8d"
+                        android:gravity="right|center"
+                        android:text="证件类型"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:gravity="center|start"
+                        android:inputType="number"
+                        android:id="@+id/mMore_LevType"
+                        android:textColorHint="#afafaf"
+                        android:textColor="#afafaf"
+                        android:textSize="18sp"
+                        android:hint="请选择证件类型"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <!-- 下划线 -->
+                <ImageView
+                    android:background="#e7e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <!-- 法人证件号码  -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="#8d8d8d"
+                        android:gravity="right|center"
+                        android:text="证件号码"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent" />
+
+                    <EditText
+                        android:gravity="center|start"
+                        android:inputType="number"
+                        android:id="@+id/mMore_Num"
+                        android:textColorHint="#afafaf"
+                        android:textColor="#afafaf"
+                        android:textSize="18sp"
+                        android:hint="请输入证件号码"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <!-- 下划线 -->
+                <ImageView
+                    android:background="#e7e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+
+
+                <!-- 法人年龄 -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="#8d8d8d"
+                        android:gravity="right|center"
+                        android:text="年龄"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent" />
+
+                    <EditText
+                        android:gravity="center|start"
+                        android:inputType="number"
+                        android:id="@+id/mMore_Age"
+                        android:textColorHint="#afafaf"
+                        android:textColor="#afafaf"
+                        android:textSize="18sp"
+                        android:hint="请输入年龄"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <!-- 下划线 -->
+                <ImageView
+                    android:background="#e7e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <!-- Group 3 -->
+
+                <!-- 单位照片 -->
+                <RelativeLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:textColor="@color/colorPrimary"
+                        android:id="@+id/mMore_Uri"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/textView10"
+                        android:layout_alignBottom="@+id/textView10"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="119dp" />
+
+                    <ImageView
+                        android:src="@drawable/icon_more_photo_add"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/mMore_Addrs_photo"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/mMore_Uri" />
+                    <TextView
+                        android:text="选择图片"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/mMore_Addrs_photo"
+                        android:id="@+id/textView10" />
+
+                </RelativeLayout>
+                <!-- 下划线 -->
+                <ImageView
+                    android:background="#e7e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <!-- 管理等级 -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="#8d8d8d"
+                        android:gravity="right|center"
+                        android:text="管理等级"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent" />
+
+                    <EditText
+                        android:inputType="number"
+                        android:id="@+id/mMore_Lev"
+                        android:textColorHint="#afafaf"
+                        android:textColor="#afafaf"
+                        android:textSize="18sp"
+                        android:hint="请输入联系电话"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <!-- 下划线 -->
+                <ImageView
+                    android:layout_marginBottom="10dp"
+                    android:background="#e7e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/mMore_Submit"
+                        android:background="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:text="添加"
+                        android:textColor="#ffffff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <!-- foot底部标线 -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="#fac"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp" />
+                    <TextView
+                        android:textColor="#fac"
+                        android:padding="10dp"
+                        android:text="到底了"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="#fac"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp" />
+                </LinearLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

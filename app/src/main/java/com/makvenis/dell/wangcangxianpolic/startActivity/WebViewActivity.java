@@ -1,5 +1,6 @@
 package com.makvenis.dell.wangcangxianpolic.startActivity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,11 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.correctActivity.CorrectCommandActivity;
 
@@ -54,6 +57,10 @@ public class WebViewActivity extends BaseActivity {
     /* 单位id */
     private String id;
 
+
+    /* 图片上传 */
+    @ViewInject(R.id.mUploadImage)
+    Button mSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -240,6 +247,17 @@ public class WebViewActivity extends BaseActivity {
      */
 
 
+    @OnClick({R.id.mUploadImage})
+    public void jumActivity(View v){
+        Intent intent=new Intent(this,UploadCheckActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putString("mTitle",mTitle_intent);
+        bundle.putString("mUrl",mUrl_intent);
+        bundle.putString("mCid",mCid);
+        bundle.putString("id",id);
+        intent.putExtras(bundle);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+    }
 
 
 }

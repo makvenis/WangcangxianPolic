@@ -37,4 +37,13 @@
 
     </WebView>
 
+    <Button
+        android:id="@+id/mUploadImage"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"
+        android:text="上传图片"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
 </LinearLayout>

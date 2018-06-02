@@ -37,7 +37,7 @@ public class SimpleDetailsViewPage extends FragmentPagerAdapter {
             case 1:
                 return "修改信息";
             case 2:
-                return "增加单位";
+                return "检查历史";
 
         }
 
