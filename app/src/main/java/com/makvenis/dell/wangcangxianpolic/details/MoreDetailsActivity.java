@@ -17,6 +17,7 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
+import com.makvenis.dell.wangcangxianpolic.help.PermissionsUtils;
 import com.makvenis.dell.wangcangxianpolic.startActivity.HomeActivity;
 
 import java.text.SimpleDateFormat;
@@ -30,45 +31,6 @@ import java.util.List;
 
 @ContentView(R.layout.activity_more_details)
 public class MoreDetailsActivity extends AppCompatActivity {
-
-
-
-    /* 单位照片 *//*
-    @ViewInject(R.id.mMore_photo)
-    ImageView mMore_photo;
-
-    *//* 单位名称 *//*
-    @ViewInject(R.id.mMore_Name)
-    EditText mMore_Name;
-
-    *//* 单位地址 *//*
-    @ViewInject(R.id.mMore_Addrs)
-    EditText mMore_Addrs;
-
-    *//* 法人姓名 *//*
-    @ViewInject(R.id.mMore_LevName)
-    EditText mMore_LevName;
-
-    *//* 管辖单位 *//*
-    @ViewInject(R.id.mMore_GovName)
-    EditText mMore_GovName;
-
-    *//* 单位类型 *//*
-    @ViewInject(R.id.mMore_AddrsType)
-    EditText mMore_AddrsType;
-
-    *//* 单位电话 *//*
-    @ViewInject(R.id.mMore_Phone)
-    EditText mMore_Phone;
-
-    *//* 法人性别 *//*
-    @ViewInject(R.id.mMore_Sex)
-    EditText mMore_Sex;
-
-    *//* 添加单位照片 *//*
-    @ViewInject(R.id.mMore_Addrs_photo)
-    ImageView mMore_Addrs_photo;*/
-
 
     @ViewInject(R.id.mTabLayout)
     TabLayout mTabLayout;
@@ -93,6 +55,9 @@ public class MoreDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewUtils.inject(this);
+
+        PermissionsUtils permissionsUtils=new PermissionsUtils();
+        permissionsUtils.SetPermissionForNormal(this);
 
         creadFragmentData();
         /* 获取单位ID */
@@ -154,9 +119,12 @@ public class MoreDetailsActivity extends AppCompatActivity {
     protected void onResume() {
         int id = getIntent().getIntExtra("bank_id", 0);
         if (id == 2) {//其他Activity跳转第二个碎片里面的ViewPage中第二个页面
+            onCreate(null);
+            creadFragmentData();
             mViewPage.setCurrentItem(1);
             mTabLayout.getTabAt(1).select();
         }else if(id == 3) {
+            onCreate(null);
             mViewPage.setCurrentItem(2);
             mTabLayout.getTabAt(2).select();
         }

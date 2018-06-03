@@ -155,11 +155,11 @@ public class Configfile {
     public static final String DELETE_COMPANY_DATA=Configfile.WEB+"mobile/doDelDanwei?id=";
 
     /* 添加单位 */
-    public static final String INSERT_COMPANY=Configfile.WEB+"mobile/doAddDanwei?dataJson=";
+    public static final String INSERT_COMPANY=Configfile.WEB+"mobile/doAddDanwei";
 
 
     /* 修改当前单位 */
-    public static final String UPDATE_COMPANY=Configfile.WEB+"mobile/doUpdateDanwei?dataJson=";
+    public static final String UPDATE_COMPANY=Configfile.WEB+"mobile/doUpdateDanwei";
 
 
 

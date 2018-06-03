@@ -673,6 +673,7 @@ public class NetworkTools {
                                         msg.what = 0X101;
                                         msg.obj = result;
                                         mHandler.sendMessage(msg);
+                                        Log.e("HTTP",result);
                                     }
                                 }
 
@@ -715,6 +716,7 @@ public class NetworkTools {
                                         msg.what = 0X101;
                                         msg.obj = result;
                                         mHandler.sendMessage(msg);
+                                        Log.e("HTTP",result);
                                     }
                                 }
 

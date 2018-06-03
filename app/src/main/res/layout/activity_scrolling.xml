@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     tools:context="com.makvenis.dell.wangcangxianpolic.addCompany.AddCompanyActivity">
 
-    <include layout="@layout/public_toolbar_simple_add"></include>
+    <include layout="@layout/public_toolbar_simple"></include>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

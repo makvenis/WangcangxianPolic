@@ -33,6 +33,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -135,18 +136,29 @@ public class ToViewFragment extends Fragment {
 
             Map<String, Object> json = JSON
                     .getObjectJson(result,
-                    new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum"});
+                    new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum","photoUrl"});
 
-            String[] key = new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum"};
+            String[] key = new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum","photoUrl"};
 
-            String[] name = new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum"};
+            String[] name = new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum","photoUrl"};
             if(json.size() != 0){
                 /* 构建第一组 */
                 List<Map<String,String>> minDataImg = new ArrayList<>();
-                for (int i = 0; i < 3; i++) {
-                    Map<String,String> imgMpa = new HashMap<>();
-                    imgMpa.put("url","http://");
-                    minDataImg.add(imgMpa);
+                String s = (String) json.get("photoUrl");
+                if(s != null){
+                    String[] split = s.split(",");
+                    for (int i = 0; i < split.length; i++) {
+                        Map<String,String> imgMpa = new HashMap<>();
+                        String replace = split[i].replace("../../", Configfile.SERVICE_WEB_IMG);
+                        imgMpa.put("url",replace);
+                        minDataImg.add(imgMpa);
+                    }
+                }else {
+                    for (int i = 0; i < 3; i++) {
+                        Map<String, String> imgMpa = new HashMap<>();
+                        imgMpa.put("url", Configfile.IMAGE_NO);
+                        minDataImg.add(imgMpa);
+                    }
                 }
 
                 /* 构建第二组 */
@@ -240,10 +252,10 @@ public class ToViewFragment extends Fragment {
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             if(holder instanceof MyRollViewHolder){
-
+                List<Map<String, String>> maps = mMaxDataAdapter.get(0);
                 RollPagerView page = ((MyRollViewHolder) holder).mRollPagerView;
                 //设置适配器
-                page.setAdapter(new MyPagerAdapter());
+                page.setAdapter(new MyPagerAdapter(maps));
                 /* 启动自动翻页 */
                 page.pause();
                 page.resume();
@@ -333,6 +345,11 @@ public class ToViewFragment extends Fragment {
 
         private int[] image = {R.drawable.icon_test, R.drawable.icon_test, R.drawable.icon_test, R.drawable.icon_test};
 
+        List<Map<String, String>> imgData;
+
+        public MyPagerAdapter(List<Map<String, String>> imgData) {
+            this.imgData = imgData;
+        }
 
         // SetScaleType(ImageView.ScaleType.CENTER_CROP);
         // 按比例扩大图片的size居中显示，使得图片长(宽)等于或大于View的长(宽)
@@ -340,9 +357,32 @@ public class ToViewFragment extends Fragment {
         @Override
         public View getView(ViewGroup container, int position) {
             ImageView imageView = new ImageView(container.getContext());
-            imageView.setImageResource(image[position]);
+
+            //imageView.setImageResource(image[position]);
             String path="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=488179422,3251067872&fm=200&gp=0.jpg";
-            //Picasso.with(mContext).load(path).into(imageView); //失败
+
+            Map<String, String> map = imgData.get(position);
+            String url = map.get("url");
+
+            /* http://ssdaixiner.oicp.net:26168/wcjw/resources/images/nopic2.png */
+            if(url != null){
+                String[] split = url.split("//");
+                String xy = split[0];
+                if(xy.equals("http:") || xy.equals("https:")){
+                    Picasso.with(mContext)
+                            .load(url)
+                            .placeholder(R.drawable.icon_normal_no_photo)
+                            .error(R.drawable.icon_normal_404)
+                            .into(imageView); //
+                }else {
+                    Picasso.with(mContext)
+                            .load(Configfile.SERVICE_WEB_IMG)
+                            .placeholder(R.drawable.icon_normal_no_photo)
+                            .error(R.drawable.icon_normal_404)
+                            .into(imageView); //
+                }
+            }
+
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             return imageView;
@@ -350,7 +390,7 @@ public class ToViewFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return image.length;
+            return imgData.size();
         }
     }
 

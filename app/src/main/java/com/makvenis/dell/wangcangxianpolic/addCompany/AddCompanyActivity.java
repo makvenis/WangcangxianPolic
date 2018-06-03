@@ -1,5 +1,6 @@
 package com.makvenis.dell.wangcangxianpolic.addCompany;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.cat.CatLoadingView;
 import com.makvenis.dell.wangcangxianpolic.company.CompanyActivity;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
+import com.makvenis.dell.wangcangxianpolic.help.PermissionsUtils;
 import com.makvenis.dell.wangcangxianpolic.sanEntery.BjcUnit;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
@@ -114,10 +116,17 @@ public class AddCompanyActivity extends AppCompatActivity {
     @ViewInject(R.id.mMore_Uri)
     TextView mMore_Uri;
 
+    /* 处理toolbar 开始 version=2  */
+    /* include 里面的点击事件 */
+    @ViewInject(R.id.toolbar_callbank)
+    ImageView mImageView_bank;
+    @ViewInject(R.id.toolbar_callbank_text)
+    TextView mBankTextView;
+    @ViewInject(R.id.mToolbar_text)
+    TextView mTextView;
+    /* 处理toolbar 结束 */
 
-
-
-
+    
     /* 上下文 */
     public final Context mContext = AddCompanyActivity.this;
     private CatLoadingView mCat;
@@ -128,6 +137,9 @@ public class AddCompanyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ViewUtils.inject(this);
 
+        mTextView.setText("添加单位基本信息");
+        PermissionsUtils permissionsUtils=new PermissionsUtils();
+        permissionsUtils.SetPermissionForNormal(this);
 
     }
 
@@ -220,6 +232,19 @@ public class AddCompanyActivity extends AppCompatActivity {
                 .imageEngine(new PicassoEngine())
                 .forResult(1);
     }
+
+    /* 返回 */
+    @OnClick({R.id.toolbar_callbank})
+    public void oncklinkViewImage(View v){
+        startActivity(new Intent(this, CompanyActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+    }
+
+    /* 返回 */
+    @OnClick({R.id.toolbar_callbank_text})
+    public void oncklinkViewTextView(View v){
+        startActivity(new Intent(this, CompanyActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -374,8 +399,9 @@ public class AddCompanyActivity extends AppCompatActivity {
         Log.e("TAG"," 预备提交的地址 >>>> "+ Configfile.INSERT_COMPANY);
         Log.e("TAG"," 预备提交的实体JSON >>>> "+mResult);
 
-        NetworkTools.postHttpToolsUaerRegistite(Configfile.INSERT_COMPANY,mHandler,mResult);
-
+        //NetworkTools.postHttpToolsUaerRegistite(Configfile.INSERT_COMPANY,mHandler,mResult);
+        NetworkTools.httpUpload(HttpRequest.HttpMethod.POST,
+                "dataJson",mHandler,Configfile.INSERT_COMPANY,mResult);
 
 
         mCat = new CatLoadingView();
@@ -390,29 +416,29 @@ public class AddCompanyActivity extends AppCompatActivity {
             super.handleMessage(msg);
             int what = msg.what;
             switch (what){
-                case Configfile.CALLBANK_POST_MSG :
-                    String obj = (String) msg.obj;
-                    Log.e("TAG",obj);
-                    if(obj != null){
+                case 0X101:
+                    String jsonCall = (String) msg.obj;
+                    if(jsonCall != null){
                         try {
-                            JSONObject json=new JSONObject(obj);
-                            String state = json.optString("state");
+                            JSONObject obj=new JSONObject(jsonCall);
+                            String state = obj.optString("state");
                             if(state.equals("OK")){
-                                mCat.dismiss();
-                                Configfile.Log(mContext,"添加成功"+obj);
+                                Configfile.Log(AddCompanyActivity.this, "添加成功");
+                                /* 返回单位列表页 */
                                 Intent intent=new Intent(AddCompanyActivity.this, CompanyActivity.class);
-                                startActivity(intent);
-                                Log.e(TAG,obj);
+                                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(AddCompanyActivity.this).toBundle());
                             }else {
-                                mCat.dismiss();
-                                Configfile.Log(mContext,"添加失败");
+                                Configfile.Log(AddCompanyActivity.this, "解析错误"+obj);
                             }
+                            mCat.dismiss();
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                         }
                     }else {
-                        Log.e(TAG,obj);
+                        Configfile.Log(AddCompanyActivity.this, "添加失败");
+                        mCat.dismiss();
                     }
+
                     break;
                 case 0x000008:
                     String json = (String) msg.obj;

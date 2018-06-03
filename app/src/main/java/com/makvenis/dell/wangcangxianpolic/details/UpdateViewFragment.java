@@ -1,5 +1,6 @@
 package com.makvenis.dell.wangcangxianpolic.details;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,6 +41,9 @@ import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.PicassoEngine;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.Date;
@@ -131,8 +135,32 @@ public class UpdateViewFragment extends Fragment {
 
             switch (what){
                 case 0X101:
-                    Configfile.Log(getActivity(), "0X001 >>> "+((String) msg.obj));
-                    Log.e(TAG,"0X001 >>> "+((String) msg.obj));
+                    String json = (String) msg.obj;
+                    if(json != null){
+                        try {
+                            JSONObject obj=new JSONObject(json);
+                            String state = obj.optString("state");
+                            if(state.equals("OK")){
+                                Configfile.Log(getActivity(), "修改成功");
+                                /* 返回单位列表页 */
+                                Intent intent=new Intent(getActivity(), MoreDetailsActivity.class);
+                                /* 返回此页面基本参数需要一个查询的id */
+
+                                intent.putExtra("id",xmlIdString);
+                                intent.putExtra("bank_id",2);
+                                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                            }else {
+                                Configfile.Log(getActivity(), "解析错误"+obj);
+                            }
+                            mCat.dismiss();
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }else {
+                        Configfile.Log(getActivity(), "修改失败");
+                        mCat.dismiss();
+                    }
+
                     break;
             }
 
@@ -140,15 +168,10 @@ public class UpdateViewFragment extends Fragment {
             if(msg.what == 1){
                 String obj = (String) msg.obj;
                 Log.e(TAG,"赋值前的数据 mHandler obj >>> "+obj);
-
-                //{"address":"旺苍县檬子乡街道175号","attr":"","id":691,"legalaName":"","level":"","name":"吴蓉烟花爆竹专卖店","pcs":"英萃派出所","phone":"","sex":1,"state":1,"tradeId":5,"type":"民爆物品","zjnum":"","zjtype":1}
-
                 Map<String, Object> json = JSON.getObjectJson(obj, new String[]{"address","attr", "id", "legalaName","level", "name", "pcs", "phone", "sex","state", "tradeId", "type", "zjnum" ,"zjtype"});
-                Log.e(TAG,"赋值前的数据 mHandler >>> "+json.toString());
                 if(json.size() != 0){
                     setEditViewData(json);
                     mInteger = ((Integer) json.get("id"));
-
                 }
             }
             if(msg.what == 0x000009){
@@ -178,10 +201,7 @@ public class UpdateViewFragment extends Fragment {
                 }else {
                     Configfile.Log(getActivity(),"[ERROR]"+ json);
                 }
-
             }
-
-
         }
     };
 
@@ -202,6 +222,14 @@ public class UpdateViewFragment extends Fragment {
         xmlIdString = xmlId.getString("id", "0");
         Log.e(TAG,"haredPreferences()" + xmlIdString);
 
+        /* 执行下载 首次赋值单位的信息 */
+        downData();
+
+
+
+    }
+    /* 首次或者跟新的时候使用器下载 */
+    public void downData(){
         /* 服务地址 */
         String path = Configfile.COMPANY_URL_SEARCH_ID + xmlIdString;
         Log.e("TAG",path);
@@ -226,9 +254,18 @@ public class UpdateViewFragment extends Fragment {
 
                     }
                 });
-
     }
-
+    /**
+     * 判断fragment的隐藏，没有隐藏则请求数据
+     * @param hidden
+     */
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+           downData();
+        }
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -410,8 +447,8 @@ public class UpdateViewFragment extends Fragment {
         Log.e("TAG"," 预备提交的实体JSON >>>> "+mResult);
 
         //NetworkTools.postHttpToolsUaerRegistite(Configfile.UPDATE_COMPANY,mHandler,mResult);
-
-        NetworkTools.httpUpload(HttpRequest.HttpMethod.POST,"dataJson",mHandler,Configfile.UPDATE_COMPANY,
+        String path="http://ssdaixiner.oicp.net:26168/wcjw/mobile/doUpdateDanwei";
+        NetworkTools.httpUpload(HttpRequest.HttpMethod.POST,"dataJson",mHandler,path,
                 mResult);
 
         mCat = new CatLoadingView();

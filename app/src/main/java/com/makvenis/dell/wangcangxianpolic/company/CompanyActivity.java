@@ -107,11 +107,18 @@ public class CompanyActivity extends BaseActivity{
         }
     };
 
+    /* 处理toolbar 开始 version=2  */
     /* include 里面的点击事件 */
     @ViewInject(R.id.toolbar_callbank)
     ImageView mImageView_bank;
+    @ViewInject(R.id.toolbar_callbank_text)
+    TextView mBankTextView;
     @ViewInject(R.id.mToolbar_text)
     TextView mTextView;
+    /* 处理toolbar 结束 */
+
+
+
 
 
     /* 添加单位 */
