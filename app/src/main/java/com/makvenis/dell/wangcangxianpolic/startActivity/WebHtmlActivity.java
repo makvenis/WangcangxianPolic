@@ -97,6 +97,9 @@ public class WebHtmlActivity extends AppCompatActivity {
 
             switch (what){
                 case Configfile.CALLBANK_POST_MSG:
+                    if(obj != null){
+                        return;
+                    }else
                     if(mLocal_title.equals("不同意延期整改治安隐患") || mLocal_title.equals("同意延期整改治安隐患")){
                         if((object.optString("state")).equals("OK")){ //说明请求成功
                             Configfile.Log(mThis,"请求成功");
@@ -162,9 +165,7 @@ public class WebHtmlActivity extends AppCompatActivity {
                         Configfile.Log(mThis,"参数错误！未获取到 {" + mLocal_title+" }");
                     }
 
-
                    break;
-
             }
         }
     };
@@ -296,28 +297,21 @@ public class WebHtmlActivity extends AppCompatActivity {
             // TODO: 2018/5/14 暂未写html
             Configfile.Log(this,var);
             Log.e("TAG","收缴物品清单 >>> " + var);
-            /**
-             * "num1":"kkk",
-             "num2":"422442",
-             "table":"[{"bianhao":"1","name":"2","num":"3","tz":"4","remark":"5"},{"bianhao":"6","name":"7","num":"8","tz":"9","remark":"10"},{"bianhao":"11","name":"12","num":"13","tz":"14","remark":"15"},{"bianhao":"16","name":"17","num":"18","tz":"19","remark":"20"}]",
-             "check1":true,
-             "check2":true,
-             "check3":true,
-             "check4":true,
-             "time1":"2018-05-26",
-             "time2":"2018-05-26",
-             "time3":"2018-05-26"
-             *
-             */
 
             Map<String, Object> json = JSON.getObjectJson(var, new String[]{"num1", "num2", "table", "check1", "check2", "check3", "check4", "time1", "time2", "time3"});
             Log.e("TAG",json.size()+"");
+
             JwSjwp e=new JwSjwp();
             Log.e(TAG,"mLocal_bianhao"+mLocal_bianhao);
             e.setChufaid(Integer.valueOf(mLocal_bianhao));
-            e.setCyrSignature(NameImg.get("jcr"));       //检查人
+/*            e.setCyrSignature(NameImg.get("jcr"));       //检查人
             e.setBgrSignature(NameImg.get("jlr"));       //记录人
-            e.setPoliceSignature(NameImg.get("bjcr"));   //被检查人
+            e.setPoliceSignature(NameImg.get("bjcr"));   //被检查人*/
+
+            e.setCyrSignature("");       //检查人
+            e.setBgrSignature("");       //记录人
+            e.setPoliceSignature("");   //被检查人
+
             e.setBianhao1(((String) json.get("num1")));
             e.setBianhao2(((String) json.get("num2")));
 
@@ -364,7 +358,7 @@ public class WebHtmlActivity extends AppCompatActivity {
 
             //提交
             //NetworkTools.postHttpToolsUaerRegistite(Configfile.SHOUJIAO_POST_PATH,mHandler,mResult);
-
+            //NetworkTools.httpUpload(HttpRequest.HttpMethod.POST,"dataJson",mHandler,Configfile.SHOUJIAO_POST_PATH,mResult);
 
         }else if(mLocal_title.equals("检查笔录")){
             Jcbilu e1=new Jcbilu();
@@ -477,6 +471,7 @@ public class WebHtmlActivity extends AppCompatActivity {
      * @param fileName 当使用Gesture来实现手势绘图的时候 当绘制完毕需要给图片命名
      */
     private Map<String,String> NameImg=new HashMap<>();
+
     public void getGesture(final WebView WebView,final String fileName) {
 
         View myView = LayoutInflater.from(this).inflate(R.layout.my_gesure_xml, null, false);

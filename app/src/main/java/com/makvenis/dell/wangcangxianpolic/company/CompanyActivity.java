@@ -53,7 +53,6 @@ import java.util.Map;
 /* 全局采用注解模式 */
 /* 旺苍县公安局巡防系统 被检查单位信息列表页面 */
 
-
 @ContentView(R.layout.activity_company)
 public class CompanyActivity extends BaseActivity{
 
@@ -117,18 +116,12 @@ public class CompanyActivity extends BaseActivity{
     TextView mTextView;
     /* 处理toolbar 结束 */
 
-
-
-
-
     /* 添加单位 */
     @ViewInject(R.id.mToolbar_add)
     TextView mAdd;
     // TODO: 2018/6/2  添加单位
 
-
     CompanyAdapter mAdapter;
-
 
     @ViewInject(R.id.company_recycle)
     private SimpleRecycleScollView mRecycleView;

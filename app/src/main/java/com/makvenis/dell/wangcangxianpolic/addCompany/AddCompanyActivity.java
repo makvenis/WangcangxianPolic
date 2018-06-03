@@ -126,7 +126,7 @@ public class AddCompanyActivity extends AppCompatActivity {
     TextView mTextView;
     /* 处理toolbar 结束 */
 
-    
+
     /* 上下文 */
     public final Context mContext = AddCompanyActivity.this;
     private CatLoadingView mCat;

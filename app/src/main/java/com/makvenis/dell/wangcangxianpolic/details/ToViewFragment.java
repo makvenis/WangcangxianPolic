@@ -87,7 +87,6 @@ public class ToViewFragment extends Fragment {
                         mSwipe.setRefreshing(false);
                     }
                     break;
-
             }
         }
     };
@@ -140,7 +139,7 @@ public class ToViewFragment extends Fragment {
 
             String[] key = new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum","photoUrl"};
 
-            String[] name = new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum","photoUrl"};
+            String[] name = new String[]{"单位地址", "单位属性", "法人姓名", "管理等级", "单位名称", "管辖单位", "电话","证件类型", "证件编号","图片地址"};
             if(json.size() != 0){
                 /* 构建第一组 */
                 List<Map<String,String>> minDataImg = new ArrayList<>();
@@ -188,7 +187,6 @@ public class ToViewFragment extends Fragment {
 
     /* 数据下载 */
     private void creatMoreDatils() {
-
         String path = Configfile.COMPANY_URL_SEARCH_ID + xmlIdString;
         Log.e("TAG",path);
         new HttpUtils(5000).send(HttpRequest.HttpMethod.GET,
@@ -253,20 +251,23 @@ public class ToViewFragment extends Fragment {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             if(holder instanceof MyRollViewHolder){
                 List<Map<String, String>> maps = mMaxDataAdapter.get(0);
-                RollPagerView page = ((MyRollViewHolder) holder).mRollPagerView;
-                //设置适配器
-                page.setAdapter(new MyPagerAdapter(maps));
+                if(maps != null){
+                    RollPagerView page = ((MyRollViewHolder) holder).mRollPagerView;
+                    //设置适配器
+                    page.setAdapter(new MyPagerAdapter(maps));
                 /* 启动自动翻页 */
-                page.pause();
-                page.resume();
-                page.isPlaying();
+                    page.pause();
+                    page.resume();
+                    page.isPlaying();
 
-                page.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        Toast.makeText(mContext,"Item "+position+" clicked",Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    page.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            Toast.makeText(mContext,"Item "+position+" clicked",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
 
 
             }else if(holder instanceof MyRecycleViewHolder){

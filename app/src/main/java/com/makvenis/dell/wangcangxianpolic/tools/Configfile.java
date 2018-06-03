@@ -12,7 +12,8 @@ import com.makvenis.dell.wangcangxianpolic.startActivity.NotiflyActivity;
  */
 public class Configfile {
 
-    /* 服务器IP地址分析 http://wcjworg.oicp.io:21000/    */
+    /* 服务器IP地址分析 /    */
+    //public static final String IP="http://wcjworg.oicp.io:21000/";
     public static final String IP="http://ssdaixiner.oicp.net:26168/";
 
     /* 服务器、报名地址*/
@@ -149,7 +150,7 @@ public class Configfile {
     public static final String UPDATE_MAP_PATH=Configfile.WEB+"mobile/doSaveCoordinates";
 
     /* 证据事实的图片上传地址 */
-    public static final String UPLOAD_TRUE_IMAGE=Configfile.WEB+"mobile/toSaveScenePhotos?dataJson";
+    public static final String UPLOAD_TRUE_IMAGE=Configfile.WEB+"mobile/toSaveScenePhotos";
 
     /* 删除当前的单位 通过ID */
     public static final String DELETE_COMPANY_DATA=Configfile.WEB+"mobile/doDelDanwei?id=";

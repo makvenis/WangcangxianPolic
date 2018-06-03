@@ -35,9 +35,9 @@
 
                 <ImageView
                     android:id="@+id/toolbar_bank"
-                    android:src="@drawable/icon_bank_35"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:src="@drawable/icon_bank"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
 
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>

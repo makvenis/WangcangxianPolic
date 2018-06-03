@@ -12,6 +12,8 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
@@ -19,7 +21,15 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
+import com.makvenis.dell.wangcangxianpolic.company.CompanyActivity;
 import com.makvenis.dell.wangcangxianpolic.correctActivity.CorrectCommandActivity;
+import com.makvenis.dell.wangcangxianpolic.help.MessageEvent;
+import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
+import com.squareup.picasso.Picasso;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,10 +72,26 @@ public class WebViewActivity extends BaseActivity {
     @ViewInject(R.id.mUploadImage)
     Button mSubmit;
 
+    /* 组查找 Start */
+    @ViewInject(R.id.mWebLiner)
+    LinearLayout mLinearLayout;
+
+    @ViewInject(R.id.mWebImage_1)
+    ImageView mWebImage_1;
+    @ViewInject(R.id.mWebImage_2)
+    ImageView mWebImage_2;
+    @ViewInject(R.id.mWebImage_3)
+    ImageView mWebImage_3;
+
+    /* 组查找 End */
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewUtils.inject(this);
+
+        EventBus.getDefault().register(this);
 
         /* 获取父类传递过来的参数 */
         getParmentData();
@@ -79,9 +105,49 @@ public class WebViewActivity extends BaseActivity {
         /* 设置WebView的基本属性 */
         setWebView();
 
-
-
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void showImage(MessageEvent msg){
+        Log.e("TAG",msg.getMessage());
+        if(msg.getMessage() != null){
+            //mLinearLayout.setVisibility(View.VISIBLE);
+            String url = msg.getMessage();
+            String[] split = url.split(",");
+            for (int i = 0; i < split.length; i++) {
+                String s = split[i];
+                Log.e("TAG"," 拆分地址 "+s);
+                if(s != null && i == 0){
+                    String replace = s.replace("../../", Configfile.SERVICE_WEB_IMG);
+                    Picasso.with(this).load(replace)
+                            .placeholder(R.drawable.icon_normal_no_photo)
+                            .error(R.drawable.icon_normal_no_photo)
+                            .into(mWebImage_1);
+                }else if(s != null && i == 1){
+                    String replace = s.replace("../../", Configfile.SERVICE_WEB_IMG);
+                    Picasso.with(this).load(replace)
+                            .placeholder(R.drawable.icon_normal_no_photo)
+                            .error(R.drawable.icon_normal_no_photo)
+                            .into(mWebImage_2);
+                }else if(s != null && i == 2){
+                    String replace = s.replace("../../", Configfile.SERVICE_WEB_IMG);
+                    Picasso.with(this).load(replace)
+                            .placeholder(R.drawable.icon_normal_no_photo)
+                            .error(R.drawable.icon_normal_no_photo)
+                            .into(mWebImage_2);
+                }
+
+
+            }
+        }
+    }
+
 
     /* 获取参数（上一级页面传递过来的必要参数） */
     public void getParmentData() {
@@ -131,7 +197,7 @@ public class WebViewActivity extends BaseActivity {
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(WebViewActivity.this,HomeActivity.class));
+                startActivity(new Intent(WebViewActivity.this,CompanyActivity.class));
                 finish();
             }
         });

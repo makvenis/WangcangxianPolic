@@ -1,6 +1,9 @@
 package com.makvenis.dell.wangcangxianpolic.startActivity;
 
+import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -32,15 +35,25 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.cat.CatLoadingView;
+import com.makvenis.dell.wangcangxianpolic.help.JSON;
+import com.makvenis.dell.wangcangxianpolic.help.MessageEvent;
+import com.makvenis.dell.wangcangxianpolic.sanEntery.JwScenePhoto;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
+import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.PicassoEngine;
 
+import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 @ContentView(R.layout.activity_upload_check)
@@ -75,6 +88,18 @@ public class UploadCheckActivity extends AppCompatActivity {
 
     /* 组合控件查找 end */
 
+    /* 处理toolbar 开始 version=2  */
+    /* include 里面的点击事件 */
+    @ViewInject(R.id.toolbar_callbank)
+    ImageView mImageView_bank;
+    @ViewInject(R.id.toolbar_callbank_text)
+    TextView mBankTextView;
+    @ViewInject(R.id.mToolbar_text)
+    TextView mTextView;
+    /* 处理toolbar 结束 */
+
+
+
     private CatLoadingView mCat;
 
 
@@ -83,37 +108,103 @@ public class UploadCheckActivity extends AppCompatActivity {
     TextView mTextSubmit;
 
 
+
     public Handler mHandler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
             int what = msg.what;
-            String obj = (String) msg.obj;
 
             switch (what){
+                case 1:
+                    String json = (String) msg.obj;
+                    List<Map<String, String>> maps = JSON.GetJson(json, new String[]{"url", "message"});
+                    if(maps.size() >= 0){
+                        // 更新数据库
+                        Log.e(TAG," 更新数据库 "+maps.size()+" >>> " + maps.toString());
+                        updateDatabase(maps);
+                    }else {
+                        Configfile.Log(UploadCheckActivity.this,"[ERROR]"+ json);
+                        mCat.dismiss();
+                    }
 
-                case 0x1002:
-                    /*if(obj != null){
-                        List<Map<String, String>> maps = JSON.GetJson(obj,new String[]{"","",""});
-                        if(maps.size() != 0){
+                    break;
 
+                case 0X101:
+                    String obj = ((String) msg.obj);
+                    if(obj != null){
+                        Log.e("TAG"," 更新之后返回的数据 "+obj);
+                        try {
+                            JSONObject opt=new JSONObject(obj);
+                            String state = opt.optString("state");
+                            if(state.equals("OK")){
+                                Configfile.Log(UploadCheckActivity.this,"上传成功");
+                                Intent intent=new Intent(UploadCheckActivity.this,WebViewActivity.class);
+                                /**
+                                 *mTitle_intent = bundle.getString("mTitle");
+                                 mUrl_intent = bundle.getString("mUrl");
+                                 mCid = bundle.getString("mCid");
+                                 id = bundle.getString("id");
+                                 */
+                                intent.putExtra("mTitle",mTitle_intent);
+                                intent.putExtra("mUrl",mUrl_intent );
+                                intent.putExtra("mCid", mCid);
+                                intent.putExtra("id",id);
+
+                                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(UploadCheckActivity.this).toBundle());
+                                mCat.dismiss();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-
-                    }*/
-
-                    Log.e(TAG," 用户上传的证据照片 "+obj);
-                    mCat.dismiss();
-                    break;
-
-                case 0X000002:
+                    }else {
+                        Log.e("TAG"," 更新之后返回的数据 "+obj);
+                        Configfile.Log(UploadCheckActivity.this,"上传失败");
+                        mCat.dismiss();
+                    }
 
                     break;
-
             }
 
         }
     };
+
+    /* 上传完毕 更新数据库 */
+    public void updateDatabase(List<Map<String, String>> maps){
+        JwScenePhoto e=new JwScenePhoto();
+        e.setAddtime(new Date());
+        e.setBianhao(Integer.valueOf(mCid));
+        e.setUsername(null);
+
+        String mPath="";
+
+        for (int i = 0; i < maps.size(); i++) {
+            Map<String, String> map = maps.get(i);
+            String url = map.get("url");
+            mPath+=url+",";
+            if(i == 0){
+                e.setPhotourl1(url);
+            }else if( i == 1) {
+                e.setPhotourl2(url);
+            }else if( i == 2 ){
+                e.setPhotourl3(url);
+            }
+        }
+        /* 转换JSON */
+        String mResult=com.alibaba.fastjson.JSON.toJSONString(e);
+        Log.e("TAG"," 旺苍县公安局责令改正通知书ID >>>> "+id);
+        Log.e("TAG"," 预备提交的地址 >>>> "+Configfile.UPLOAD_TRUE_IMAGE);
+        Log.e("TAG"," 预备提交的实体JSON >>>> "+mResult);
+
+        //NetworkTools.postHttpToolsUaerRegistite(Configfile.UPLOAD_TRUE_IMAGE,mHandler,mResult);
+
+        NetworkTools.httpUpload(HttpRequest.HttpMethod.POST,"dataJson",mHandler,Configfile.UPLOAD_TRUE_IMAGE,
+                mResult);
+
+        EventBus.getDefault().post(new MessageEvent(mPath));
+
+    }
 
 
     @OnClick({R.id.mToolbar_upload})
@@ -121,6 +212,42 @@ public class UploadCheckActivity extends AppCompatActivity {
         mCat = new CatLoadingView();
         mCat.show(getSupportFragmentManager(),"");
         uploadImage();
+    }
+
+    /* 返回 */
+    @OnClick({R.id.toolbar_callbank})
+    public void oncklinkViewImage(View v){
+        Intent intent=new Intent(UploadCheckActivity.this,WebViewActivity.class);
+        /**
+         *mTitle_intent = bundle.getString("mTitle");
+         mUrl_intent = bundle.getString("mUrl");
+         mCid = bundle.getString("mCid");
+         id = bundle.getString("id");
+         */
+        intent.putExtra("mTitle",mTitle_intent);
+        intent.putExtra("mUrl",mUrl_intent );
+        intent.putExtra("mCid", mCid);
+        intent.putExtra("id",id);
+
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(UploadCheckActivity.this).toBundle());
+    }
+
+    /* 返回 */
+    @OnClick({R.id.toolbar_callbank_text})
+    public void oncklinkViewTextView(View v){
+        Intent intent=new Intent(UploadCheckActivity.this,WebViewActivity.class);
+        /**
+         *mTitle_intent = bundle.getString("mTitle");
+         mUrl_intent = bundle.getString("mUrl");
+         mCid = bundle.getString("mCid");
+         id = bundle.getString("id");
+         */
+        intent.putExtra("mTitle",mTitle_intent);
+        intent.putExtra("mUrl",mUrl_intent );
+        intent.putExtra("mCid", mCid);
+        intent.putExtra("id",id);
+
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(UploadCheckActivity.this).toBundle());
     }
 
 
@@ -277,16 +404,42 @@ public class UploadCheckActivity extends AppCompatActivity {
         }
     }
 
-    public void uploadImage(){
+    /**
+     * {@link #getRealPathFromUri(Context, Uri)}
+     * 通过此方法 将context:// 代表的是一个路径 存在Android系统数据库中
+     * 需要查询拿到这张图片的地址代表的文件
+     */
+    public String getRealPathFromUri(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
 
-        final RequestParams params=new RequestParams();
-        for (int i = 0; i < mSelected.size(); i++) {
-            params.addBodyParameter("msg",new File(mSelected.get(i).toString()));
+
+    public void uploadImage() {
+
+        if (mSelected.size() == 0) {
+            Configfile.Log(this, "未选取任何文件");
+            return;
         }
 
         new Thread(new Runnable() {
             @Override
             public void run() {
+                final RequestParams params = new RequestParams();
+                for (int i = 0; i < mSelected.size(); i++) {
+                    params.addBodyParameter("msg" + i, new File(getRealPathFromUri(UploadCheckActivity.this, mSelected.get(i))));
+                    Log.e(TAG,"文件个数"+i);
+                }
                 new HttpUtils(5000).send(HttpRequest.HttpMethod.POST,
                         Configfile.UPLOAD_FILE_PATH_ALL,
                         params,
@@ -294,60 +447,24 @@ public class UploadCheckActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(ResponseInfo<String> responseInfo) {
                                 String result = responseInfo.result;
-                                if(result != null){
-                                    Log.e(TAG,result);
+                                if (result != null) {
+                                    Message msg=new Message();
+                                    msg.what = 1;
+                                    msg.obj = result;
+                                    mHandler.sendMessage(msg);
                                 }
                             }
 
                             @Override
-                            public void onFailure(HttpException e, String s) {
-
-                            }
+                            public void onFailure(HttpException e, String s) {}
 
                             @Override
                             public void onLoading(long total, long current, boolean isUploading) {
                                 super.onLoading(total, current, isUploading);
-                                int l = (int)((total / current)/1000);
-
-                                Log.e(TAG,"上传比例 >>> "+ l + "%");
+                                Log.e(TAG, "上传比例 >>> " + current + "%");
                             }
                         });
             }
         }).start();
-
-
-
-
-        /*JwScenePhoto e=new JwScenePhoto();
-        e.setAddtime(new Date());
-        e.setBianhao(Integer.valueOf(mCid));
-        e.setUsername(null);
-
-        //解析
-        if(mSelected != null){
-            for (int i = 0; i < mSelected.size(); i++) {
-                Uri uri = mSelected.get(i);
-                byte[] imageStr = Base64Util.getImageStr(uri.toString());
-                String s = new String(imageStr);
-                if(i == 0){
-                    e.setPhotourl1("data:image/png;base64,"+s);
-                }if(i == 1){
-                    e.setPhotourl2("data:image/png;base64,"+s);
-                }else if(i == 2){
-                    e.setPhotourl3("data:image/png;base64,"+s);
-                }
-            }
-
-
-        }*/
-
-        /* 转换JSON *//*
-        String mResult=com.alibaba.fastjson.JSON.toJSONString(e);
-        Log.e("TAG"," 旺苍县公安局责令改正通知书ID >>>> "+id);
-        Log.e("TAG"," 预备提交的地址 >>>> "+Configfile.UPLOAD_TRUE_IMAGE);
-        Log.e("TAG"," 预备提交的实体JSON >>>> "+mResult);
-
-        NetworkTools.postHttpToolsUaerRegistite(Configfile.UPLOAD_TRUE_IMAGE,mHandler,mResult);*/
-
     }
 }
