@@ -17,6 +17,9 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.makvenis.dell.wangcangxianpolic.R;
+import com.makvenis.dell.wangcangxianpolic.newCompanyPost.ToBiLuActivity;
+import com.makvenis.dell.wangcangxianpolic.newCompanyPost.ToNoActivity;
+import com.makvenis.dell.wangcangxianpolic.newCompanyPost.ToYesActivity;
 
 import java.util.Date;
 
@@ -80,9 +83,9 @@ public class WebPostRemarkActivity extends BaseActivity {
                             startActivity(new Intent(WebPostRemarkActivity.this,HomeActivity.class));
                             break;
                         case R.id.toolbar_r_2: // 同意限期
-                            Intent intent = new Intent(WebPostRemarkActivity.this, WebHtmlActivity.class);
+                            Intent intent = new Intent(WebPostRemarkActivity.this, ToYesActivity.class);
                             Bundle bundle=new Bundle();
-                            bundle.putString("l_url","yesServiceUp.html");
+                            //bundle.putString("l_url","yesServiceUp.html");
                             bundle.putString("l_title","同意延期整改治安隐患");
                             bundle.putString("mLocal_bianhao",mBianhao);
                             bundle.putString("id",id);
@@ -91,9 +94,9 @@ public class WebPostRemarkActivity extends BaseActivity {
                                     ActivityOptions.makeSceneTransitionAnimation(WebPostRemarkActivity.this).toBundle());
                             break;
                         case R.id.toolbar_r_3: // 不同意限期
-                            Intent intent1 = new Intent(WebPostRemarkActivity.this, WebHtmlActivity.class);
+                            Intent intent1 = new Intent(WebPostRemarkActivity.this, ToNoActivity.class);
                             Bundle bundle1=new Bundle();
-                            bundle1.putString("l_url","noSaverUp.html");
+                            //bundle1.putString("l_url","noSaverUp.html");
                             bundle1.putString("l_title","不同意延期整改治安隐患");
                             bundle1.putString("mLocal_bianhao",mBianhao);
                             bundle1.putString("id",id);
@@ -132,13 +135,13 @@ public class WebPostRemarkActivity extends BaseActivity {
 
                     }
 
-                }else if(mtitle.equals("不同意延期整改治安隐患") || mtitle.equals("同意延期整改治安隐患") || mtitle.equals("旺苍县公安局责令改正通知书")){
+                }else if(mtitle.equals("旺苍县公安局责令改正通知书")){
                     switch (item.getItemId()) {
                         case R.id.toolbar_r_1: //返回首页
                             startActivity(new Intent(WebPostRemarkActivity.this,HomeActivity.class));
                             break;
                         case R.id.toolbar_r_2: // 检查笔录
-                            Intent intent = new Intent(WebPostRemarkActivity.this, WebHtmlActivity.class);
+                            Intent intent = new Intent(WebPostRemarkActivity.this, ToBiLuActivity.class);
                             Bundle bundle=new Bundle();
                             bundle.putString("l_url","jianchabilu.html");
                             bundle.putString("l_title","检查笔录");
@@ -155,6 +158,17 @@ public class WebPostRemarkActivity extends BaseActivity {
                     switch (item.getItemId()) {
                         case R.id.toolbar_r_1: //返回首页
                             startActivity(new Intent(WebPostRemarkActivity.this,HomeActivity.class));
+                            break;
+                        case R.id.toolbar_r_2: // 检查笔录
+                            Intent intent = new Intent(WebPostRemarkActivity.this, ToBiLuActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putString("l_url","jianchabilu.html");
+                            bundle.putString("l_title","检查笔录");
+                            bundle.putString("mLocal_bianhao",mBianhao);
+                            bundle.putString("id",id);
+                            intent.putExtras(bundle);
+                            startActivity(intent,
+                                    ActivityOptions.makeSceneTransitionAnimation(WebPostRemarkActivity.this).toBundle());
                             break;
                     }
                 }

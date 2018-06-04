@@ -13,8 +13,8 @@ import com.makvenis.dell.wangcangxianpolic.startActivity.NotiflyActivity;
 public class Configfile {
 
     /* 服务器IP地址分析 /    */
-    //public static final String IP="http://wcjworg.oicp.io:21000/";
-    public static final String IP="http://ssdaixiner.oicp.net:26168/";
+    public static final String IP="http://wcjworg.oicp.io:21000/";
+    //public static final String IP="http://ssdaixiner.oicp.net:26168/";
 
     /* 服务器、报名地址*/
     public static final String WEB=Configfile.IP+"wcjw/";

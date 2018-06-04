@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,9 +80,6 @@ public class CompanyUtils {
 
 
     public Map<String,String> creatEditData() {
-        /* 创建标题 */
-        String[] mName=new String[]{"编号","旺公","违法行为"};
-        String[] mKey=new String[]{"number","readHead","document"};
         List<CompanyItemEntry> mData=new ArrayList<>();
 
         //返回的数据集合
@@ -135,6 +133,50 @@ public class CompanyUtils {
 
     }
 
+
+    public Map<String,Date> creatTimeData() {
+        /* 创建标题 */
+        List<CompanyTimeEntry> mData=new ArrayList<>();
+
+        //返回的数据集合
+        final Map<String,Date> mTime=new HashMap<>();
+
+        /**
+         * {@emue 列出枚举类型}
+         * 那么对应的也是三种布局 分别是输入框 时间选择框 签名框
+         * 准备三个集合 分别装载
+         */
+        for (int i = 0; i < mName.length; i++) {
+            CompanyTimeEntry e = new CompanyTimeEntry();
+            e.setType(TYPE_EDIT);
+            e.setName(mName[i]);
+            e.setKey(mKey[i]);
+            e.setValue(null);
+            mData.add(e);
+        }
+
+        // TODO: 2018/6/3 测试
+        RecyclerView.LayoutManager manager=new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false);
+        mRecycle.setLayoutManager(manager);
+        CompanyTimeAdapter adapter=new CompanyTimeAdapter(mContext,mData);
+        mRecycle.setAdapter(adapter);
+
+        adapter.setmClink(new CompanyTimeAdapter.OnClinkItem() {
+            @Override
+            public void bankTime(int position, String key, String time) {
+
+            }
+
+            @Override
+            public void bankTime(int position, String key, Date time) {
+                mTime.put(key,time);
+            }
+        });
+
+
+        return mTime;
+
+    }
 
 
 

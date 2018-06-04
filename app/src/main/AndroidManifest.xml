@@ -103,7 +103,10 @@
             android:name=".addCompany.AddCompanyActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme" />
-        <activity android:name=".newCompanyPost.CompanyEditActivity"></activity>
+        <activity android:name=".newCompanyPost.CompanyEditActivity" />
+        <activity android:name=".newCompanyPost.ToYesActivity"></activity>
+        <activity android:name=".newCompanyPost.ToNoActivity"></activity>
+        <activity android:name=".newCompanyPost.ToBiLuActivity"></activity>
     </application>
 
 </manifest>

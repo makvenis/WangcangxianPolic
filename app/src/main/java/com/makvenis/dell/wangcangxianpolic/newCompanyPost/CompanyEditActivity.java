@@ -17,6 +17,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -56,6 +57,7 @@ public class CompanyEditActivity extends AppCompatActivity {
 
     Map<String, String> map1;
     Map<String, String> map2;
+    Map<String, Date> map3;
 
 
     /* 点击事件 */
@@ -97,6 +99,9 @@ public class CompanyEditActivity extends AppCompatActivity {
             }else if(viewType == 1) {
                 View view = LayoutInflater.from(mContext).inflate(R.layout.test_item1, parent, false);
                 return new MyTwoViewHolder(view) ;
+            }else if(viewType == 2){
+                View view = LayoutInflater.from(mContext).inflate(R.layout.test_item2, parent, false);
+                return new MyThreeViewHolder(view) ;
             }
 
             return null;
@@ -117,12 +122,18 @@ public class CompanyEditActivity extends AppCompatActivity {
                 String[] mKey=new String[]{"number","readHead","document"};
                 CompanyUtils utils=new CompanyUtils(mContext,view,mName,mKey);
                 map2 = utils.creatDataGouse();
+            }else if(holder instanceof MyThreeViewHolder){
+                RecyclerView view = ((MyThreeViewHolder) holder).view;
+                String[] mName=new String[]{"检查时间","被检查时间","填写时间"};
+                String[] mKey=new String[]{"number","readHead","document"};
+                CompanyUtils utils=new CompanyUtils(mContext,view,mName,mKey);
+                map3 = utils.creatTimeData();
             }
         }
 
         @Override
         public int getItemCount() {
-            return 2;
+            return 3;
         }
 
         @Override
@@ -132,8 +143,10 @@ public class CompanyEditActivity extends AppCompatActivity {
                 return 0;
             }else if(position == 1){
                 return 1;
-            }else {
+            }else if(position == 2){
                 return 2;
+            }else {
+                return 3;
             }
 
         }
@@ -155,6 +168,17 @@ public class CompanyEditActivity extends AppCompatActivity {
             @ViewInject(R.id.mTestRecycle)
             RecyclerView view;
             public MyTwoViewHolder(View itemView) {
+                super(itemView);
+                ViewUtils.inject(this,itemView);
+            }
+        }
+
+        /* 第三组内部类 */
+        class MyThreeViewHolder extends RecyclerView.ViewHolder{
+
+            @ViewInject(R.id.mTestRecycle)
+            RecyclerView view;
+            public MyThreeViewHolder(View itemView) {
                 super(itemView);
                 ViewUtils.inject(this,itemView);
             }

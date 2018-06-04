@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:background="#d4d4d4"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/liner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/mCompany_Submit"
+        android:layout_margin="10dp"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:text="提交"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+</LinearLayout>
+
+
+

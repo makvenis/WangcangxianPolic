@@ -6,6 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="TAG" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -49,50 +50,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="CompanyEditActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyEditActivity.java">
+      <file leaf-file-name="CompanyActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/company/CompanyActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="556">
-              <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+            <state relative-caret-position="-359">
+              <caret line="235" column="66" selection-start-line="235" selection-start-column="66" selection-end-line="235" selection-end-column="66" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#2389#3933#0" expanded="true" />
+                <element signature="e#3932#3933#0" expanded="true" />
+                <element signature="method#getRadioGroupCheck#0;class#CompanyActivity#0" expanded="false" />
+                <element signature="docComment;method#creadCondationDefault#0;class#CompanyActivity#0" expanded="false" />
+                <element signature="method#creadCondationDefault#0;class#CompanyActivity#0" expanded="false" />
+                <element signature="method#getNetJsonString#0;class#CompanyActivity#0" expanded="false" />
+                <element signature="method#setLocahostSqliteDatabase#0;class#CompanyActivity#0" expanded="false" />
+                <element signature="method#loadingDialog#0;class#CompanyActivity#0" expanded="false" />
               </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompanyTimeAdapter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyTimeAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46">
-              <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NoticeFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/NoticeFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1449">
-              <caret line="273" column="43" selection-start-line="273" selection-start-column="43" selection-end-line="273" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="102" column="57" selection-start-line="102" selection-start-column="57" selection-end-line="102" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-manifest">
-            <state />
           </provider>
         </entry>
       </file>
@@ -1980,15 +1953,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/minFragment/TaskCenterFragemnt.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/home_page_link.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_more_details.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_upload_check.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/sanEntery/JwScenePhoto.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/cat/CatLoadingView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/catloading_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/details/SimpleDetailsViewPage.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_company_adapter.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/help/JSON.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/minFragment/PersonalCenterFragemnt.java" />
@@ -2006,7 +1970,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/details/MoreDetailsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/addCompany/AddCompanyActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_datails_adapter_item_type_2.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/company/CompanyActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/help/PermissionsUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/details/ToViewFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/UploadCheckActivity.java" />
@@ -2017,20 +1980,30 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/ComapnyAdapterTypeEntry.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyAdapterTypeEntry.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyItemEntry.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/tools/Configfile.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyGouseEntry.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/public_company_iten_image.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyGouseAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/test_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_company_edit.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/public_company_iten_edit.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyEditAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyUtils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/NoticeFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/tools/Configfile.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/test_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyTimeEntry.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyEditActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/test_item3.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/NoticeFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyUtils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_to_yes.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyGouseAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/ToBiLuActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/ToNoActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/ToYesActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/public_company_iten_image.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/public_company_iten_time.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyTimeAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/toolbarnoall.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/WebPostRemarkActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/public_company_iten_edit.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/company/CompanyActivity.java" />
       </list>
     </option>
   </component>
@@ -2084,28 +2057,24 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches">
-        <subPane />
-      </pane>
-      <pane id="ProjectPane">
-        <subPane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WangcangxianPolic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WangcangxianPolic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WangcangxianPolic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
+      </pane>
+      <pane id="Scratches">
+        <subPane />
+      </pane>
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
+      <pane id="ProjectPane">
+        <subPane />
       </pane>
       <pane id="AndroidView">
         <subPane>
@@ -2113,6 +2082,10 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="WangcangxianPolic" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gradle Scripts" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2207,90 +2180,11 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WangcangxianPolic" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wangcangxianpolic" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="startActivity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WangcangxianPolic" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wangcangxianpolic" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newCompanyPost" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WangcangxianPolic" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wangcangxianpolic" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="correctActivity" />
+              <option name="myItemId" value="company" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane />
       </pane>
     </panes>
   </component>
@@ -2738,7 +2632,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="0" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920793" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2747,7 +2641,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6698002" sideWeight="0.53218883" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20329025" sideWeight="0.46781117" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5828437" sideWeight="0.46781117" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13242574" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902467" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -2756,7 +2650,6 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24034335" sideWeight="0.4880597" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902467" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991362" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.49402985" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -2769,6 +2662,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902467" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2819,141 +2713,20 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/company/CompanyAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-962">
-          <caret line="126" column="59" selection-start-line="126" selection-start-column="59" selection-end-line="126" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/cat/CatLoadingView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/cat/GraduallyTextView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="108" column="4" selection-start-line="108" selection-start-column="4" selection-end-line="108" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/view/SimpleRecycleScollView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/generated/source/r/debug/com/jude/rollviewpager/R.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="26" column="32" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_datails_adapter_item_type_0.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jude/rollviewpager/1.4.6/fd32c416214bfc0fcbe2c069194d2adadcd6cb97/rollviewpager-1.4.6-sources.jar!/com/jude/rollviewpager/RollPagerView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1426">
-          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_scrolling.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="50" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/public_toolbar_simple.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/details/UpdateViewFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="210" column="55" selection-start-line="210" selection-start-column="55" selection-end-line="210" selection-end-column="55" />
-          <folding>
-            <element signature="method#downData#0;class#UpdateViewFragment#0" expanded="false" />
-            <element signature="method#onViewCreated#0;class#UpdateViewFragment#0" expanded="false" />
-            <element signature="method#selectImage#0;class#UpdateViewFragment#0" expanded="false" />
-            <element signature="e#11478#11500#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_more_toview.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_more_update.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="447" column="0" selection-start-line="447" selection-start-column="0" selection-end-line="472" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_datails_adapter_item_type_2.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
           <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/company/CompanyActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding>
-            <element signature="method#getRadioGroupCheck#0;class#CompanyActivity#0" expanded="false" />
-            <element signature="docComment;method#creadCondationDefault#0;class#CompanyActivity#0" expanded="false" />
-            <element signature="method#creadCondationDefault#0;class#CompanyActivity#0" expanded="false" />
-            <element signature="method#getNetJsonString#0;class#CompanyActivity#0" expanded="false" />
-            <element signature="method#setLocahostSqliteDatabase#0;class#CompanyActivity#0" expanded="false" />
-            <element signature="method#loadingDialog#0;class#CompanyActivity#0" expanded="false" />
-          </folding>
-        </state>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/details/ToViewFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="268" column="17" selection-start-line="268" selection-start-column="17" selection-end-line="268" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3009,14 +2782,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/activity/AlertPushNewsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="157" column="5" selection-start-line="157" selection-start-column="5" selection-end-line="157" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/icon_normal_no_photo.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -3033,36 +2798,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/WebViewActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_web_view.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_correct_command.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_correct_command.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="897">
           <caret line="39" column="47" selection-start-line="39" selection-start-column="47" selection-end-line="39" selection-end-column="47" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/help/JSON.java">
@@ -3073,62 +2828,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/WebHtmlActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4384">
-          <caret line="99" column="36" selection-start-line="99" selection-start-column="36" selection-end-line="99" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/WebPostRemarkActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="186" column="8" selection-start-line="186" selection-start-column="8" selection-end-line="191" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyAdapterTypeEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyItemEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-          <folding>
-            <element signature="e#822#823#0" expanded="true" />
-            <element signature="e#849#850#0" expanded="true" />
-            <element signature="e#889#890#0" expanded="true" />
-            <element signature="e#921#922#0" expanded="true" />
-            <element signature="e#952#953#0" expanded="true" />
-            <element signature="e#979#980#0" expanded="true" />
-            <element signature="e#1019#1020#0" expanded="true" />
-            <element signature="e#1051#1052#0" expanded="true" />
-            <element signature="e#1081#1082#0" expanded="true" />
-            <element signature="e#1107#1108#0" expanded="true" />
-            <element signature="e#1145#1146#0" expanded="true" />
-            <element signature="e#1175#1176#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="e#1235#1236#0" expanded="true" />
-            <element signature="e#1277#1278#0" expanded="true" />
-            <element signature="e#1311#1312#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyAdapterTypeEntry.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/activity/TestActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
           <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3140,48 +2844,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/tools/Configfile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-          <folding>
-            <element signature="method#OverTimerLog#0;class#Configfile#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyGouseEntry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-350">
           <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-          <folding>
-            <element signature="e#581#582#0" expanded="true" />
-            <element signature="e#608#609#0" expanded="true" />
-            <element signature="e#648#649#0" expanded="true" />
-            <element signature="e#680#681#0" expanded="true" />
-            <element signature="e#711#712#0" expanded="true" />
-            <element signature="e#738#739#0" expanded="true" />
-            <element signature="e#778#779#0" expanded="true" />
-            <element signature="e#810#811#0" expanded="true" />
-            <element signature="e#840#841#0" expanded="true" />
-            <element signature="e#866#867#0" expanded="true" />
-            <element signature="e#904#905#0" expanded="true" />
-            <element signature="e#934#935#0" expanded="true" />
-            <element signature="e#969#970#0" expanded="true" />
-            <element signature="e#999#1000#0" expanded="true" />
-            <element signature="e#1046#1047#0" expanded="true" />
-            <element signature="e#1084#1085#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/correctActivity/CorrectCommandActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1288">
-          <caret line="805" column="0" selection-start-line="805" selection-start-column="0" selection-end-line="854" selection-end-column="0" />
-          <folding>
-            <element signature="method#getGesture#0;class#CorrectCommandActivity#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3189,51 +2855,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="274">
           <caret line="41" column="66" selection-start-line="39" selection-start-column="8" selection-end-line="41" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/public_company_iten_image.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-437">
-          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyGouseAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="61" column="54" selection-start-line="61" selection-start-column="54" selection-end-line="61" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1711#2277#0" expanded="true" />
-            <element signature="e#2276#2277#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/test_item.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/test_item1.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -3246,52 +2867,112 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_company_edit.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/test_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyItemEntry.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
+        <state relative-caret-position="161">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="13" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_company_edit.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="27" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/activity/AlertPushNewsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="153" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="163" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/public_company_iten_edit.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/test_item3.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="18" selection-end-column="39" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyUtils.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/NoticeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="405">
+          <caret line="282" column="68" selection-start-line="282" selection-start-column="68" selection-end-line="282" selection-end-column="68" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyEditAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/test_item2.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="69" column="76" selection-start-line="69" selection-start-column="76" selection-end-line="69" selection-end-column="76" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/sanEntery/JwYesyqYinhuanMsg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/StartActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_start.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_to_yes.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="102" column="57" selection-start-line="102" selection-start-column="57" selection-end-line="102" selection-end-column="57" />
+        <state relative-caret-position="592">
+          <caret line="108" column="53" selection-start-line="108" selection-start-column="53" selection-end-line="108" selection-end-column="53" />
           <folding />
         </state>
       </provider>
@@ -3299,31 +2980,211 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/NoticeFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyGouseAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1449">
-          <caret line="273" column="43" selection-start-line="273" selection-start-column="43" selection-end-line="273" selection-end-column="43" />
+        <state relative-caret-position="349">
+          <caret line="58" column="90" selection-start-line="58" selection-start-column="90" selection-end-line="58" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/tools/Configfile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#OverTimerLog#0;class#Configfile#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyEditActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/ToYesActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+        <state relative-caret-position="3036">
+          <caret line="165" column="85" selection-start-line="165" selection-start-column="85" selection-end-line="165" selection-end-column="85" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="class#TestAdapter#0;class#ToYesActivity#0" expanded="false" />
+            <element signature="e#7376#7377#0" expanded="false" />
+            <element signature="e#7424#7425#0" expanded="false" />
+            <element signature="e#9504#9505#0" expanded="false" />
+            <element signature="e#9536#9537#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/ToBiLuActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="48" column="22" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/ToNoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="247" column="44" selection-start-line="247" selection-start-column="44" selection-end-line="247" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="docComment;method#jumpActivity#0;class#ToNoActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/test_item1.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/public_company_iten_image.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-69">
+          <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-624">
+          <caret line="68" column="31" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
+          <folding>
+            <element signature="e#2048#2247#0" expanded="false" />
+            <element signature="e#2246#2247#0" expanded="false" />
+            <element signature="method#creatEditData#0;class#CompanyUtils#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/public_company_iten_time.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="667">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyTimeEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="56" column="31" selection-start-line="56" selection-start-column="31" selection-end-line="56" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyTimeAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+        <state relative-caret-position="598">
+          <caret line="117" column="17" selection-start-line="117" selection-start-column="17" selection-end-line="117" selection-end-column="17" />
+          <folding>
+            <element signature="e#3567#3969#0" expanded="false" />
+            <element signature="e#3968#3969#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/WebViewActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/WebHtmlActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-368">
+          <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/toolbarnoall.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="27" column="39" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyEditActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="763">
+          <caret line="71" column="55" selection-start-line="71" selection-start-column="55" selection-end-line="71" selection-end-column="55" />
+          <folding>
+            <element signature="class#TestAdapter#0;class#CompanyEditActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/public_company_iten_edit.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/newCompanyPost/CompanyEditAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="54" column="75" selection-start-line="54" selection-start-column="75" selection-end-line="54" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/startActivity/WebPostRemarkActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1085">
+          <caret line="166" column="72" selection-start-line="166" selection-start-column="72" selection-end-line="166" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/correctActivity/CorrectCommandActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="347" column="50" selection-start-line="347" selection-start-column="50" selection-end-line="347" selection-end-column="50" />
+          <folding>
+            <element signature="method#getGesture#0;class#CorrectCommandActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/makvenis/dell/wangcangxianpolic/company/CompanyActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-359">
+          <caret line="235" column="66" selection-start-line="235" selection-start-column="66" selection-end-line="235" selection-end-column="66" />
+          <folding>
+            <element signature="e#2389#3933#0" expanded="true" />
+            <element signature="e#3932#3933#0" expanded="true" />
+            <element signature="method#getRadioGroupCheck#0;class#CompanyActivity#0" expanded="false" />
+            <element signature="docComment;method#creadCondationDefault#0;class#CompanyActivity#0" expanded="false" />
+            <element signature="method#creadCondationDefault#0;class#CompanyActivity#0" expanded="false" />
+            <element signature="method#getNetJsonString#0;class#CompanyActivity#0" expanded="false" />
+            <element signature="method#setLocahostSqliteDatabase#0;class#CompanyActivity#0" expanded="false" />
+            <element signature="method#loadingDialog#0;class#CompanyActivity#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

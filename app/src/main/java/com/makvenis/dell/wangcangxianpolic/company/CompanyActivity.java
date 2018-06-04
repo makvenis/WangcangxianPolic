@@ -232,7 +232,7 @@ public class CompanyActivity extends BaseActivity{
                                                 JSONObject mJson=new JSONObject(result);
                                                 if(mJson.get("state").equals("OK")){
                                                     Configfile.Log(mContext,"删除成功");
-                                                    //mSwipeRefreshLayout.setRefreshing(true);
+                                                    mSwipeRefreshLayout.setRefreshing(true);
                                                     maps.remove(postion);
                                                     mAdapter.notifyDataSetChanged();
                                                 }

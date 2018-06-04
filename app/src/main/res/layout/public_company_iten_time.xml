@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:background="#d4d4d4"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/liner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- 单位名称 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/mCompany_Nmae"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="right|center"
+            android:text="单位名称"
+            android:textColor="#8d8d8d"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/mCompany_SetTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:gravity="center|start"
+            android:src="@drawable/icon"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/mCompany_Nmae" />
+
+        <ImageView
+            android:id="@+id/mCompany_QianTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/icon_list_time_select"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+    <!-- 下划线 -->
+    <ImageView
+        android:background="#e7e6e6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+</LinearLayout>
+
+
+

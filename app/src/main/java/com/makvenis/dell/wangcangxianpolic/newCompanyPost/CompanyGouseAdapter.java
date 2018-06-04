@@ -56,7 +56,7 @@ public class CompanyGouseAdapter extends RecyclerView.Adapter<CompanyGouseAdapte
                     getGesture(holder.mCompany_SetMing,e.getKey());
                     /* 路径 */
                     File mFile = mContext.getExternalFilesDir(null);
-                    String path = mFile.getAbsoluteFile() + e.getKey() + ".png";
+                    String path = mFile.getAbsoluteFile() + e.getKey() + ".png"; //当前文件的地址
                     Bitmap bitmap= BitmapFactory.decodeFile(path); //将图片的长和宽缩小味原来的1/2
                     //回调图片的地址 和 Bitmap
                     mClink.saveImage(bitmap,e.getKey(),path);

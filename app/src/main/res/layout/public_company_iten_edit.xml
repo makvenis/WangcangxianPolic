@@ -15,7 +15,7 @@
         android:background="#FFFFFF"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/mCompany_Nmae"
@@ -24,16 +24,15 @@
             android:gravity="right|center"
             android:text="单位名称"
             android:layout_width="100dp"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/mCompany_Edit"
             android:textColorHint="#afafaf"
             android:textColor="#afafaf"
             android:textSize="18sp"
-            android:hint="请选择单位名称"
             android:layout_marginLeft="10dp"
-            android:background="@null"
+            android:background="@drawable/border"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

@@ -24,10 +24,11 @@ import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
-import com.makvenis.dell.wangcangxianpolic.activity.*;
+import com.makvenis.dell.wangcangxianpolic.activity.AlertPushNewsActivity;
+import com.makvenis.dell.wangcangxianpolic.activity.AlertPushPoliceActivity;
 import com.makvenis.dell.wangcangxianpolic.company.CompanyActivity;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
-import com.makvenis.dell.wangcangxianpolic.newCompanyPost.CompanyEditActivity;
+import com.makvenis.dell.wangcangxianpolic.newCompanyPost.ToYesActivity;
 import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleLoadingDialog;
@@ -279,7 +280,7 @@ public class NoticeFragment extends Fragment {
                 intent.putExtras(bundle);
                 startActivity(intent,
                         ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());*/
-                startActivity(new Intent(getActivity(),CompanyEditActivity.class));
+                startActivity(new Intent(getActivity(),ToYesActivity.class));
             }
         });
     }

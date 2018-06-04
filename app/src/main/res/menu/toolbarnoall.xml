@@ -24,6 +24,11 @@
                     android:icon="@drawable/icon"
                     app:showAsAction="ifRoom"
                     />
+                <item android:id="@+id/toolbar_r_2"
+                    android:title="检查笔录"
+                    android:icon="@drawable/icon"
+                    app:showAsAction="ifRoom"
+                    />
             </group>
         </menu>
     </item>
