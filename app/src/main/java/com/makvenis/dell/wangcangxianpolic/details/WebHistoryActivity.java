@@ -108,7 +108,7 @@ public class WebHistoryActivity extends AppCompatActivity {
         // TODO: 2018/6/5  加载地址
         Log.e("DATA","WebHistoryActivity >>> "+url+" >>> "+mType);
 
-        //mWebView.loadUrl(url);
+        mWebView.loadUrl(url+"&bianhao=143");
     }
 
     public String getTypeTable(String type) {

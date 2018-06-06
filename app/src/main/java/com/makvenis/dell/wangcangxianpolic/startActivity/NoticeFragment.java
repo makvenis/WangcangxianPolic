@@ -27,8 +27,8 @@ import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.activity.AlertPushNewsActivity;
 import com.makvenis.dell.wangcangxianpolic.activity.AlertPushPoliceActivity;
 import com.makvenis.dell.wangcangxianpolic.company.CompanyActivity;
+import com.makvenis.dell.wangcangxianpolic.company.SearchCompanyActivity;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
-import com.makvenis.dell.wangcangxianpolic.newCompanyPost.ToYesActivity;
 import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleLoadingDialog;
@@ -99,7 +99,19 @@ public class NoticeFragment extends Fragment {
                     if(obj != null){
                         dialog.dismiss();
                         Intent intent1 = new Intent(getActivity(), CompanyActivity.class);
-                        intent1.putExtra("mData",obj);
+                        intent1.putExtra("where",obj);
+                        startActivity(intent1,ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                    }else {
+                        Configfile.Log(getActivity(),"请求数据不存在！");
+                        dialog.dismiss();
+                    }
+
+                    break;
+                case 0X000005:
+                    if(obj != null){
+                        dialog.dismiss();
+                        Intent intent1 = new Intent(getActivity(), SearchCompanyActivity.class);
+                        intent1.putExtra("where",obj);
                         startActivity(intent1,ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
                     }else {
                         Configfile.Log(getActivity(),"请求数据不存在！");
@@ -140,8 +152,8 @@ public class NoticeFragment extends Fragment {
                                             Log.e("TAG",new Date()+" >>> json解释的 BjcUnitlist 值为"+mConpany+" 长度为"+array.length());
                                             if(array.length() != 0){
                                                 Message msg=new Message();
-                                                msg.what=0X000004;
-                                                msg.obj=mConpany;
+                                                msg.what=0X000005;
+                                                msg.obj=e; //搜索的条件
                                                 mHandler.sendMessage(msg);
                                             }else {
                                                 Configfile.Log(getActivity(),"搜索的数据不存在！");

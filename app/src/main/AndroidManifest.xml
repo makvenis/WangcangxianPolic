@@ -44,7 +44,9 @@
 
         <activity android:name=".StartActivity" />
         <activity android:name=".startActivity.AdvertisingActivity" />
-        <activity android:name=".startActivity.HomeActivity" android:launchMode="singleTask" />
+        <activity
+            android:name=".startActivity.HomeActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".startActivity.GuideActivity" />
         <activity
             android:name=".startActivity.MainActivity"
@@ -108,7 +110,8 @@
         <activity android:name=".newCompanyPost.ToNoActivity" />
         <activity android:name=".newCompanyPost.ToBiLuActivity" />
         <activity android:name=".details.WebHistoryActivity" />
-        <activity android:name=".startActivity.ShowUploadImageActivity"></activity>
+        <activity android:name=".startActivity.ShowUploadImageActivity" />
+        <activity android:name=".company.SearchCompanyActivity" android:launchMode="singleTop"></activity>
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -97,7 +98,7 @@ public class CompanyActivity extends BaseActivity{
                         for (int i = 0; i < list.size(); i++) {
                             maps.add(list.get(i));
                         }
-
+                        Log.e("TAG",maps.size()+"");
                         mSwipeRefreshLayout.setRefreshing(false);
                         mAdapter.notifyDataSetChanged();
                     }
@@ -461,5 +462,13 @@ public class CompanyActivity extends BaseActivity{
         mDialogLoding4.setMessage("正在请求数据中").show();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() ==  KeyEvent.ACTION_DOWN){
+            Intent intent=new Intent(this,HomeActivity.class);
+            startActivity(intent);
+        }
+        return true;
 
+    }
 }

@@ -50,6 +50,7 @@ public class MoreDetailsActivity extends AppCompatActivity {
     /* 时间更新 */
     @ViewInject(R.id.mTime)
     TextView mTimer;
+    private SimpleAdapterSwipe mSimpleAdapterSwipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +111,8 @@ public class MoreDetailsActivity extends AppCompatActivity {
         dataFragment.add(new UpdateViewFragment());
         dataFragment.add(new AddViewFragment());
         mTabLayout.setupWithViewPager(mViewPage);
-        mViewPage.setAdapter(new BaseFragmentAdapter(getSupportFragmentManager(),dataFragment));
+        mSimpleAdapterSwipe = new SimpleAdapterSwipe(getSupportFragmentManager(),dataFragment);
+        mViewPage.setAdapter(mSimpleAdapterSwipe);
 
     }
 
@@ -118,7 +120,15 @@ public class MoreDetailsActivity extends AppCompatActivity {
     protected void onResume() {
         int id = getIntent().getIntExtra("bank_id", 0);
         if (id == 2) {//其他Activity跳转第二个碎片里面的ViewPage中第二个页面
-            creadFragmentData();
+
+
+
+            List<Fragment> dataFragment = new ArrayList<>();
+            dataFragment.add(new ToViewFragment());
+            dataFragment.add(new UpdateViewFragment());
+            dataFragment.add(new AddViewFragment());
+            mSimpleAdapterSwipe.setFragments(dataFragment);
+
 /*            mViewPage.setCurrentItem(1);
             mTabLayout.getTabAt(1).select();*/
         }else if(id == 3) {

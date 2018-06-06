@@ -11,7 +11,7 @@
     <android.support.v7.widget.Toolbar
         app:popupTheme="@style/OverflowMenuStyle"
         app:titleTextColor="#FFFFFF"
-        app:navigationIcon="@drawable/icon_bank"
+        app:navigationIcon="@drawable/icon_bank_left_50"
         android:background="@color/colorPrimary"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

@@ -115,7 +115,7 @@ public class Configfile {
     public static final String RESULT_HTML_TYPE_2=Configfile.WEB+"mobile/toshowDengji2?type=2";
     public static final String RESULT_HTML_TYPE_3=Configfile.WEB+"mobile/toshowDengji2?type=3";
     public static final String RESULT_HTML_TYPE_4=Configfile.WEB+"mobile/toshowDengji2?type=4";
-    public static final String RESULT_HTML_TYPE_5=Configfile.WEB+"mobile/toshowDengji3";
+    public static final String RESULT_HTML_TYPE_5=Configfile.WEB+"mobile/toshowDengji3?type=3";
 
     /***
      * @ 解释: 当使用检查项目的提交时候分别提交的地址
@@ -173,7 +173,33 @@ public class Configfile {
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*app名称*/
+    public static final String APP_NAME="kkk/";
+
+    /*网络请求GET值*/
+    public static final int GET_CODE=1;
+    /*网络请求下载值*/
+    public static final int DOWN_CODE=2;
+    /*网络用户账号密码返回值*/
+    public static final int USER_PASS=3;
+    /*操作涵义 成功*/
+    public static boolean ACTION_SUCCESS=true;
+    /*操作涵义 成功*/
+    public static boolean ACTION_DEFEAT=false;
+
 
 
 

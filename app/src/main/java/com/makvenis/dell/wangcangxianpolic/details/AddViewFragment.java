@@ -87,7 +87,7 @@ public class AddViewFragment extends Fragment {
                     String obj = (String) msg.obj;
                     if(obj != null){
 
-                        // TODO: 2018/6/5 设置适配器
+                        // TODO: 2018/6/5 设置适配器 去烧参数 编号（bianhao）
                         List<Map<String, String>> maps = JSON.GetJson(obj, new String[]{"id", "jctime", "remark", "type", "unitid", "username"});
                         for (int i = 0; i < maps.size(); i++) {
                             Map<String, String> p = maps.get(i);
