@@ -175,7 +175,7 @@ public class UpdateViewFragment extends Fragment {
             if(msg.what == 1){
                 String obj = (String) msg.obj;
                 Log.e(TAG,"赋值前的数据 mHandler obj >>> "+obj);
-                Map<String, Object> json = JSON.getObjectJson(obj, new String[]{"address","attr", "id", "legalaName","level", "name", "pcs", "phone", "sex","state", "tradeId", "type", "zjnum" ,"zjtype"});
+                Map<String, Object> json = JSON.getObjectJson(obj, new String[]{"address","attr", "id", "legalaName","level", "name", "pcs", "phone", "sex","state", "tradeId", "type", "zjnum" ,"zjtype","age"});
                 if(json.size() != 0){
                     setEditViewData(json);
                     mInteger = ((Integer) json.get("id"));
@@ -274,17 +274,6 @@ public class UpdateViewFragment extends Fragment {
 
                     }
                 });
-    }
-    /**
-     * 判断fragment的隐藏，没有隐藏则请求数据
-     * @param hidden
-     */
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if(!hidden){
-           downData();
-        }
     }
 
     @Override
@@ -635,7 +624,7 @@ public class UpdateViewFragment extends Fragment {
     public void updete(MessageEvent msg){
         Log.e("DATA",msg.getMessage());
         downData();
-        
+
     }
 
     @Override

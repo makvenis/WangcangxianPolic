@@ -295,12 +295,12 @@ public class AddCompanyActivity extends AppCompatActivity {
                                 @Override
                                 public void onLoading(long total, long current, boolean isUploading) {
                                     super.onLoading(total, current, isUploading);
-
+                                    int i = (int) ((current * 100) / total);
                                     Message msg=new Message();
                                     msg.what=0x000009;
-                                    msg.obj=current;
+                                    msg.obj=i;
                                     mHandler.sendMessage(msg);
-                                    Log.e(TAG,"当前上传进度"+current+"");
+                                    Log.e(TAG,"当前上传进度"+i+"%");
                                 }
                             });
                 }
@@ -467,8 +467,10 @@ public class AddCompanyActivity extends AppCompatActivity {
                     break;
 
                 case 0x000009:
-                    long num = (long) msg.obj;
-                    mMore_Uri.setText(num+"");
+                    int num = (int) msg.obj;
+                    if(num >= 99){
+                        mMore_Uri.setText("上传完成");
+                    }else mMore_Uri.setText(num+"%");
                     break;
             }
         }

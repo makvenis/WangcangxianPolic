@@ -101,7 +101,6 @@ public class SearchCompanyActivity extends BaseActivity{
                             for (int i = 0; i < list.size(); i++) {
                                 maps.add(list.get(i));
                             }
-
                             mSwipeRefreshLayout.setRefreshing(false);
                             mAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {

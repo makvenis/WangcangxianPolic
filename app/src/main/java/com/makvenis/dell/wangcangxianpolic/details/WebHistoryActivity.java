@@ -1,7 +1,9 @@
 package com.makvenis.dell.wangcangxianpolic.details;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -39,6 +41,8 @@ public class WebHistoryActivity extends AppCompatActivity {
     /* 处理toolbar 结束 */
 
     String url;
+    private String bianhao;
+    private String mUrl; //再上层适配器中已经做了全地址拼接
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +53,7 @@ public class WebHistoryActivity extends AppCompatActivity {
         /* 获取父类参数 */
         getParment();
 
-
+        mTextView.setText(table);
 
         // TODO: 2018/6/5  加载地址
         /* 获取当前名称表 */
@@ -67,8 +71,14 @@ public class WebHistoryActivity extends AppCompatActivity {
     /* 返回 */
     @OnClick({R.id.toolbar_callbank})
     public void oncklinkViewImage(View v){
+        /* 返回首页需要单位ID参数 */
+        /* 获取固定xmlId 存储的单位id值 */
+        SharedPreferences xmlId = getSharedPreferences("xmlId", Context.MODE_PRIVATE);
+        String xmlIdString = xmlId.getString("id", "0");
+        Log.e("DATA","haredPreferences()" + xmlIdString);
         Intent intent = new Intent(this, MoreDetailsActivity.class);
         intent.putExtra("bank_id",3);
+        intent.putExtra("id",xmlIdString);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
@@ -106,9 +116,8 @@ public class WebHistoryActivity extends AppCompatActivity {
         webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
 
         // TODO: 2018/6/5  加载地址
-        Log.e("DATA","WebHistoryActivity >>> "+url+" >>> "+mType);
-
-        mWebView.loadUrl(url+"&bianhao=143");
+        Log.e("DATA","WebHistoryActivity >>>适配器传递的地址 "+mUrl+" >>> 类型 "+mType);
+        mWebView.loadUrl(mUrl);
     }
 
     public String getTypeTable(String type) {
@@ -167,15 +176,12 @@ public class WebHistoryActivity extends AppCompatActivity {
 
     public void getParment() {
         Bundle bundle = getIntent().getExtras();
-        //bundle.putString("type",type);
-        //bundle.putString("id",unitid);      //单位ID
-        //bundle.putString("companyName",map.get("remark"));//单位名称
-        //bundle.putString("table",table);   //当前检查的表格（旅店安全检查表、校园、民爆...）
-        //startActivity(intent);
         mType = bundle.getString("type");
         id = bundle.getString("id");
         companyName = bundle.getString("companyName");
         table = bundle.getString("table");
+        bianhao = bundle.getString("bianhao");
+        mUrl = bundle.getString("url");
 
     }
 }

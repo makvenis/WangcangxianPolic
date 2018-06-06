@@ -88,7 +88,7 @@ public class AddViewFragment extends Fragment {
                     if(obj != null){
 
                         // TODO: 2018/6/5 设置适配器 去烧参数 编号（bianhao）
-                        List<Map<String, String>> maps = JSON.GetJson(obj, new String[]{"id", "jctime", "remark", "type", "unitid", "username"});
+                        List<Map<String, String>> maps = JSON.GetJson(obj, new String[]{"id", "jctime", "remark", "type", "unitid", "username","bianhao"});
                         for (int i = 0; i < maps.size(); i++) {
                             Map<String, String> p = maps.get(i);
                             data.add(p);
@@ -128,6 +128,36 @@ public class AddViewFragment extends Fragment {
         }
         return null;
     }
+
+    /* 根据当前type 获取路径 */
+    public String getTypeUrl(String url) {
+        if(url != null){
+
+            int i = Integer.valueOf(url).intValue();
+            //Configfile
+            switch (i){
+
+                case 0:
+                    return "";
+                case 1:
+                    return Configfile.RESULT_HTML_TYPE_1;
+                case 2:
+                    return Configfile.RESULT_HTML_TYPE_2;
+                case 3:
+                    return Configfile.RESULT_HTML_TYPE_3;
+                case 4:
+                    return Configfile.RESULT_HTML_TYPE_4;
+                case 5:
+                    return Configfile.RESULT_HTML_TYPE_5;
+
+            }
+
+
+        }
+
+        return null;
+    }
+
 
 
 
@@ -213,6 +243,7 @@ public class AddViewFragment extends Fragment {
                 holder.company.setText(table);
                 holder.id.setText(position+"");
                 holder.title.setText(map.get("remark"));
+                final String bianhao = map.get("bianhao");
 
                 /* 获取价差时间 */
                 String jctime = map.get("jctime");
@@ -221,7 +252,10 @@ public class AddViewFragment extends Fragment {
 
                 Log.e("DATA","jctime:"+jctime+" >>> unitid"+unitid);
 
-
+                String typeUrl = getTypeUrl(type);
+                Log.e("DATA","当前类型 >>> "+ type);
+                final String url=typeUrl+"&bianhao="+bianhao;
+                Log.e("DATA","完整地址 >>> "+ url);
                 /* 点击事件 */
                 View view = ((SimpleViewHolder) holder).itemView;
                 view.setOnClickListener(new View.OnClickListener() {
@@ -229,11 +263,12 @@ public class AddViewFragment extends Fragment {
                     public void onClick(View v) {
                         Intent intent=new Intent(getActivity(),WebHistoryActivity.class);
                         Bundle bundle=new Bundle();
-                        //bundle.putString("shijian",); //当前编号
+                        bundle.putString("bianhao",bianhao); //当前编号
                         bundle.putString("type",type);
                         bundle.putString("id",unitid);      //单位ID
                         bundle.putString("companyName",map.get("remark"));//单位名称
                         bundle.putString("table",table);   //当前检查的表格（旅店安全检查表、校园、民爆...）
+                        bundle.putString("url",url);
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
