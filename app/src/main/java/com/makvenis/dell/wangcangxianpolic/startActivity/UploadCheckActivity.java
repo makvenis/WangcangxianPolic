@@ -153,6 +153,9 @@ public class UploadCheckActivity extends AppCompatActivity {
                                 intent.putExtra("id",id);
 
                                 startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(UploadCheckActivity.this).toBundle());
+
+
+
                                 mCat.dismiss();
                             }
                         } catch (JSONException e) {
@@ -197,7 +200,8 @@ public class UploadCheckActivity extends AppCompatActivity {
         Log.e("TAG"," 预备提交的地址 >>>> "+Configfile.UPLOAD_TRUE_IMAGE);
         Log.e("TAG"," 预备提交的实体JSON >>>> "+mResult);
 
-        //NetworkTools.postHttpToolsUaerRegistite(Configfile.UPLOAD_TRUE_IMAGE,mHandler,mResult);
+        /* 发送 */
+        EventBus.getDefault().post(new MessageEvent(mPath));
 
         NetworkTools.httpUpload(HttpRequest.HttpMethod.POST,"dataJson",mHandler,Configfile.UPLOAD_TRUE_IMAGE,
                 mResult);

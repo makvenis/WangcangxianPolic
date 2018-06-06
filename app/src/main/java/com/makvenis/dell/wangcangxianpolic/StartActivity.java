@@ -87,10 +87,9 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void CreatAnimacationAll() {
-
+        //
         //定义动画集合
         AnimationSet set=new AnimationSet(true);
-
         //缩放
         Animation alphAnimation=new AlphaAnimation(0f, 1f);
         alphAnimation.setDuration(3000);//设置动画持续时间为3秒

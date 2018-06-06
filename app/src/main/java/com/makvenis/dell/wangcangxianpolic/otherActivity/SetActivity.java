@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -44,6 +45,9 @@ public class SetActivity extends BaseActivity {
     TextView mDatabase; //清除数据库表Adds
     @ViewInject(R.id.mSet_clean_cache)
     TextView mCache;
+
+    @ViewInject(R.id.mSet_tuisong)
+    SwitchCompat mSet_tuisong;
 
     /* 当前用户名称 */
     public String mName;
@@ -90,7 +94,10 @@ public class SetActivity extends BaseActivity {
     public void oncklinkView(View v){
         Intent intent=new Intent(this,HomeActivity.class);
         intent.putExtra("bank_id",2);
+        // TODO: 2018/6/5
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        finish();
     }
 
     /* 返回 */
@@ -98,7 +105,10 @@ public class SetActivity extends BaseActivity {
     public void oncklinkViewTextView(View v){
         Intent intent=new Intent(this,HomeActivity.class);
         intent.putExtra("bank_id",2);
+        // TODO: 2018/6/5
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        finish();
     }
 
     /* 重写方法 获取用户名称 */
@@ -141,6 +151,19 @@ public class SetActivity extends BaseActivity {
             }
         });
 
+        mSet_tuisong.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                editor.putBoolean("tuisong",isChecked);    //是否开启本里历史
+                if(isChecked){
+                    Configfile.Log(mContext,"开启推送");
+                }else {
+                    Configfile.Log(mContext,"关闭推送");
+                }
+                editor.commit();
+            }
+        });
+
         mDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,10 +192,21 @@ public class SetActivity extends BaseActivity {
         SharedPreferences pref = getSharedPreferences("set",MODE_PRIVATE);
         boolean dingwei = pref.getBoolean("dingwei", false);
         boolean history = pref.getBoolean("localHistory", false);
+        boolean tuisong = pref.getBoolean("tuisong", false);
         mSet_renwu.setChecked(history);
         mSet_dingwei.setChecked(dingwei);
+        mSet_tuisong.setChecked(tuisong);
 
     }
 
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() ==  KeyEvent.ACTION_DOWN){
+            Intent intent=new Intent(this,HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
+        return true;
+    }
 }

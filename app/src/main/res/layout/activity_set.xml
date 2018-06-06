@@ -67,6 +67,35 @@
 
     </LinearLayout>
 
+    <!-- 是否推送 -->
+    <LinearLayout
+        android:gravity="center"
+        android:background="#e3e2e2"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_weight="1"
+            android:text="推送"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.SwitchCompat
+            app:theme="@style/SwitchCompat.Control"
+            android:textColor="#fac"
+            android:textOff="关"
+            android:textOn="开"
+            app:showText="true"
+            app:switchPadding="5dp"
+            android:id="@+id/mSet_tuisong"
+            android:layout_weight="1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
     <!-- 清除所有缓存 -->
     <LinearLayout
         android:gravity="center"

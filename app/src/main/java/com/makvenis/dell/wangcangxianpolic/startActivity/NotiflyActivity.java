@@ -84,7 +84,6 @@ public class NotiflyActivity extends AppCompatActivity {
         }
     }
 
-
     /* 返回 */
     @OnClick({R.id.toolbar_callbank})
     public void oncklinkViewImage(View v){

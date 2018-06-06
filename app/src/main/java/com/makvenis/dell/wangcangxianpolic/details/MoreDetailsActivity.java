@@ -17,8 +17,8 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
+import com.makvenis.dell.wangcangxianpolic.company.CompanyActivity;
 import com.makvenis.dell.wangcangxianpolic.help.PermissionsUtils;
-import com.makvenis.dell.wangcangxianpolic.startActivity.HomeActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -110,21 +110,19 @@ public class MoreDetailsActivity extends AppCompatActivity {
         dataFragment.add(new UpdateViewFragment());
         dataFragment.add(new AddViewFragment());
         mTabLayout.setupWithViewPager(mViewPage);
-        mViewPage.setAdapter(new SimpleDetailsViewPage(getSupportFragmentManager(),dataFragment));
+        mViewPage.setAdapter(new BaseFragmentAdapter(getSupportFragmentManager(),dataFragment));
 
     }
-
 
     @Override
     protected void onResume() {
         int id = getIntent().getIntExtra("bank_id", 0);
         if (id == 2) {//其他Activity跳转第二个碎片里面的ViewPage中第二个页面
-            onCreate(null);
             creadFragmentData();
-            mViewPage.setCurrentItem(1);
-            mTabLayout.getTabAt(1).select();
+/*            mViewPage.setCurrentItem(1);
+            mTabLayout.getTabAt(1).select();*/
         }else if(id == 3) {
-            onCreate(null);
+            creadFragmentData();
             mViewPage.setCurrentItem(2);
             mTabLayout.getTabAt(2).select();
         }
@@ -133,6 +131,9 @@ public class MoreDetailsActivity extends AppCompatActivity {
 
     @OnClick({R.id.mHomeLink_bank})
     public void BankCompanyActivity(View v){
-        startActivity(new Intent(this, HomeActivity.class));
+        Intent intent = new Intent(this, CompanyActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 }

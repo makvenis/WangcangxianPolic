@@ -12,8 +12,6 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
@@ -25,7 +23,6 @@ import com.makvenis.dell.wangcangxianpolic.company.CompanyActivity;
 import com.makvenis.dell.wangcangxianpolic.correctActivity.CorrectCommandActivity;
 import com.makvenis.dell.wangcangxianpolic.help.MessageEvent;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
-import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -33,6 +30,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /* 作者  王从文 */
 /* 全局采用注解模式 */
@@ -72,26 +70,55 @@ public class WebViewActivity extends BaseActivity {
     @ViewInject(R.id.mUploadImage)
     Button mSubmit;
 
-    /* 组查找 Start */
-    @ViewInject(R.id.mWebLiner)
-    LinearLayout mLinearLayout;
+    /* mUploadImageShow */
+    @ViewInject(R.id.mUploadImageShow)
+    Button mUploadImageShow;
 
-    @ViewInject(R.id.mWebImage_1)
-    ImageView mWebImage_1;
-    @ViewInject(R.id.mWebImage_2)
-    ImageView mWebImage_2;
-    @ViewInject(R.id.mWebImage_3)
-    ImageView mWebImage_3;
+    /* 预备传递的地址 供图片查看 */
+    List<String> mUrl = new ArrayList<>();
 
-    /* 组查找 End */
 
+    @OnClick({R.id.mUploadImageShow})
+    public void showImage(View v){
+        if(mUrl.size() != 0){
+            Log.e("DATA","当前查看图片的集合大小 >>> "+mUrl.size()+"");
+            Intent intent=new Intent(this,ShowUploadImageActivity.class);
+            Bundle bundle=new Bundle();
+            if(mUrl.get(0) != null){
+                bundle.putString("mUrl1",mUrl.get(0));
+            }else if(mUrl.get(1) != null){
+                bundle.putString("mUrl2",mUrl.get(1));
+            }else if(mUrl.get(2) != null){
+                bundle.putString("mUrl3",mUrl.get(2));
+            }
+            intent.putExtras(bundle);
+            //startActivity(intent);
+
+        }else {
+            Configfile.Log(this,"暂未上传任何图片，无法查看["+mUrl.size()+"]");
+        }
+    }
+
+
+
+    /* 接收广播 */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getUrl(MessageEvent msg){
+        String message = msg.getMessage();
+        String[] split = message.split(",");
+        for (int i = 0; i < split.length; i++) {
+
+            if(split[i] != null){
+                mUrl.add(split[i]);
+            }
+        }
+        Log.e("DATA","上传完毕之后查看图片的集合大小 >>> "+mUrl.size()+" \n"+mUrl.toString());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewUtils.inject(this);
-
-        EventBus.getDefault().register(this);
 
         /* 获取父类传递过来的参数 */
         getParmentData();
@@ -105,6 +132,8 @@ public class WebViewActivity extends BaseActivity {
         /* 设置WebView的基本属性 */
         setWebView();
 
+        EventBus.getDefault().register(this);
+
     }
 
     @Override
@@ -112,42 +141,6 @@ public class WebViewActivity extends BaseActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void showImage(MessageEvent msg){
-        Log.e("TAG",msg.getMessage());
-        if(msg.getMessage() != null){
-            //mLinearLayout.setVisibility(View.VISIBLE);
-            String url = msg.getMessage();
-            String[] split = url.split(",");
-            for (int i = 0; i < split.length; i++) {
-                String s = split[i];
-                Log.e("TAG"," 拆分地址 "+s);
-                if(s != null && i == 0){
-                    String replace = s.replace("../../", Configfile.SERVICE_WEB_IMG);
-                    Picasso.with(this).load(replace)
-                            .placeholder(R.drawable.icon_normal_no_photo)
-                            .error(R.drawable.icon_normal_no_photo)
-                            .into(mWebImage_1);
-                }else if(s != null && i == 1){
-                    String replace = s.replace("../../", Configfile.SERVICE_WEB_IMG);
-                    Picasso.with(this).load(replace)
-                            .placeholder(R.drawable.icon_normal_no_photo)
-                            .error(R.drawable.icon_normal_no_photo)
-                            .into(mWebImage_2);
-                }else if(s != null && i == 2){
-                    String replace = s.replace("../../", Configfile.SERVICE_WEB_IMG);
-                    Picasso.with(this).load(replace)
-                            .placeholder(R.drawable.icon_normal_no_photo)
-                            .error(R.drawable.icon_normal_no_photo)
-                            .into(mWebImage_2);
-                }
-
-
-            }
-        }
-    }
-
 
     /* 获取参数（上一级页面传递过来的必要参数） */
     public void getParmentData() {
@@ -184,8 +177,6 @@ public class WebViewActivity extends BaseActivity {
 
         mWebView.loadUrl(mUrl_intent+"&bianhao="+mCid);
     }
-
-
 
     //设置标题栏Toolbar
     private void setToolbar() {
@@ -283,6 +274,7 @@ public class WebViewActivity extends BaseActivity {
         Intent intent=new Intent(WebViewActivity.this, CorrectCommandActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
+        finish();
     }
 
     /**
@@ -311,7 +303,6 @@ public class WebViewActivity extends BaseActivity {
      * @122 被检查人签名
      * @123 被检查人签名(中文汉字)
      */
-
 
     @OnClick({R.id.mUploadImage})
     public void jumActivity(View v){

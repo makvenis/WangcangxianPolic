@@ -69,7 +69,7 @@
                         android:src="@drawable/icon_upload_check_02"
                         android:id="@+id/mShowImage"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="160dp" />
 
                 </LinearLayout>
 
@@ -124,7 +124,7 @@
                         android:src="@drawable/icon_upload_check_02"
                         android:id="@+id/mShowImage2"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="160dp" />
 
                 </LinearLayout>
 
@@ -179,7 +179,7 @@
                         android:src="@drawable/icon_upload_check_02"
                         android:id="@+id/mShowImage3"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="160dp" />
 
                 </LinearLayout>
 

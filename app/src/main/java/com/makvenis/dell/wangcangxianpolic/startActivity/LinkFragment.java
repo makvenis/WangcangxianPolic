@@ -289,7 +289,13 @@ public class LinkFragment extends Fragment{
     @OnClick({R.id.mHomeLink_set})
     public void setOnclink(View v){
         Intent intent = new Intent(getActivity(), SetActivity.class);
+        // TODO: 2018/6/5
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent,
                 ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
     }
+
+
+
+
 }

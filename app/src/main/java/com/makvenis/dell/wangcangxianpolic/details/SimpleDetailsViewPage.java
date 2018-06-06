@@ -45,5 +45,4 @@ public class SimpleDetailsViewPage extends FragmentPagerAdapter {
 
     }
 
-
 }

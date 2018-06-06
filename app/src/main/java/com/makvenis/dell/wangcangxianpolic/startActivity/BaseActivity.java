@@ -15,7 +15,9 @@ import android.telephony.TelephonyManager;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
@@ -294,5 +296,24 @@ public class BaseActivity extends AppCompatActivity{
 
 
     }
+
+
+    /* 重写物理返回键 */
+    private long mOlTime;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() ==  KeyEvent.ACTION_DOWN){
+            if(System.currentTimeMillis()-2000 > mOlTime){
+                mOlTime=System.currentTimeMillis();
+                Toast.makeText(this,"再次点击退出",Toast.LENGTH_LONG).show();
+            }else {
+                System.exit(0);
+                // TODO: 2018/4/2 退出APP的事件
+            }
+        }
+        return true;
+    }
+
 
 }

@@ -17,8 +17,6 @@
         android:pivotY="50%"
 
         android:fillAfter="true">
-
-
     </scale>
 
 </set>

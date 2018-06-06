@@ -3,7 +3,9 @@ package com.makvenis.dell.wangcangxianpolic.startActivity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -156,12 +158,20 @@ public class HomeActivity extends BaseActivity {
 
     /* 调用服务 */
     private void CreatIntentService() {
-        /* 注册SimpleService 服务的消息 */
-        Intent intent=new Intent(this, SimpleServiceMessage.class);
-        Bundle bundle=new Bundle();
-        bundle.putString("mMessage", Configfile.MESSAGE_PATH+getName());
-        intent.putExtras(bundle);
-        startService(intent);
+        /* 查找设置是否开启推送 */
+        SharedPreferences pref = getSharedPreferences("set", Context.MODE_PRIVATE);
+        //boolean dingwei = pref.getBoolean("dingwei", false);
+        boolean tuisong = pref.getBoolean("tuisong", false);
+        if(tuisong == true){
+            /* 注册SimpleService 服务的消息 */
+            Intent intent=new Intent(this, SimpleServiceMessage.class);
+            Bundle bundle=new Bundle();
+            bundle.putString("mMessage", Configfile.MESSAGE_PATH+getName());
+            intent.putExtras(bundle);
+            startService(intent);
+        }else {
+            Log.e("DATA","用户暂未开启推送"+tuisong);
+        }
     }
 
     /* 处理Button事件机制 */
@@ -220,7 +230,6 @@ public class HomeActivity extends BaseActivity {
                 mOlTime=System.currentTimeMillis();
                 Toast.makeText(this,"再次点击退出",Toast.LENGTH_LONG).show();
             }else {
-                finish();
                 System.exit(0);
                 // TODO: 2018/4/2 退出APP的事件
             }

@@ -1,18 +1,49 @@
 package com.makvenis.dell.wangcangxianpolic.details;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
+import com.lidroid.xutils.view.annotation.ViewInject;
 import com.makvenis.dell.wangcangxianpolic.R;
+import com.makvenis.dell.wangcangxianpolic.help.JSON;
+import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
+import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 
-/* 单位详情（增加） */
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+/* 检查历史（增加） */
 
 public class AddViewFragment extends Fragment {
+
+    @ViewInject(R.id.mDetailsHistory)
+    RecyclerView mDetailRecycle;
+
+    /* 全局集合 */
+    List<Map<String,String>> data=new ArrayList<>();
+    private HistoryAdapter adapter;
+
 
     @Nullable
     @Override
@@ -25,6 +56,18 @@ public class AddViewFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        /* 获取数据 */
+        createDataHistory();
+
+        RecyclerView.LayoutManager manager=new LinearLayoutManager(getActivity(),
+                LinearLayoutManager.VERTICAL,
+                false);
+        mDetailRecycle.setLayoutManager(manager);
+        /* 适配器 */
+        adapter = new HistoryAdapter(data,getActivity());
+        mDetailRecycle.setAdapter(adapter);
+
     }
 
 
@@ -33,4 +76,195 @@ public class AddViewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ViewUtils.inject(this,view);
     }
+
+    public Handler mHandler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            int what = msg.what;
+            switch (what){
+                case 1:
+                    String obj = (String) msg.obj;
+                    if(obj != null){
+
+                        // TODO: 2018/6/5 设置适配器
+                        List<Map<String, String>> maps = JSON.GetJson(obj, new String[]{"id", "jctime", "remark", "type", "unitid", "username"});
+                        for (int i = 0; i < maps.size(); i++) {
+                            Map<String, String> p = maps.get(i);
+                            data.add(p);
+                        }
+
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    break;
+            }
+        }
+    };
+
+    /* 根据Type获取当前的检查类型 */
+    public String getTypeTable(String type) {
+
+        if(type != null){
+
+            int i = Integer.valueOf(type).intValue();
+            switch (i){
+
+                case 0:
+                    return "";
+                case 1:
+                    return "旅店安全检查表";
+                case 2:
+                    return "金融机构检查登记表";
+                case 3:
+                    return "寄递物流业安全检查登记表";
+                case 4:
+                    return "校园治安保卫工作检查登记表";
+                case 5:
+                    return "民爆物品安全检查情况登记表";
+                case 6:
+                    return "加油站";
+            }
+        }
+        return null;
+    }
+
+
+
+    /* 获取用户信息列表 */
+    public String getSqliteName(){
+        /* 数据库操作 获取当前用户名称 */
+        AppMothedHelper helper=new AppMothedHelper(getActivity());
+        Map<Object, Object> map = helper.queryByKey(Configfile.USER_DATA_KEY);
+        String data = (String) map.get("data");
+        Map<String, String> map1 = JSON.GetJsonRegiste(data);
+        String s = map1.get("username");
+        Log.e("TAG",new Date() + " >>> 检查历史---当前用户名称 "+s);
+        return s;
+    }
+
+
+    /* 获取数据 */
+    public void createDataHistory(){
+        String path = Configfile.HISTORY_PATH;
+        /* 数据库查询当前登陆用户名称 */
+        String name = getSqliteName();
+        final String url=path+name;
+        Log.e("DATA","当前用户去获取检查历史请求地址为 >>>"+url);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new HttpUtils(5000).send(HttpRequest.HttpMethod.GET,
+                        url,
+                        new RequestCallBack<String>() {
+                            @Override
+                            public void onSuccess(ResponseInfo<String> responseInfo) {
+
+                                String s = responseInfo.result;
+
+                                if(s != null){
+                                    Message msg=new Message();
+                                    msg.what=1;
+                                    msg.obj=s;
+                                    mHandler.sendMessage(msg);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(HttpException e, String s) {
+
+                            }
+                        });
+
+
+            }
+        }).start();
+
+    }
+
+    /* 为了方便管理 此页面的适配器就写在此处 */
+    public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.SimpleViewHolder>{
+
+        List<Map<String,String>> mData;
+        Context mContext;
+
+        public HistoryAdapter(List<Map<String, String>> mData, Context mContext) {
+            this.mData = mData;
+            this.mContext = mContext;
+        }
+
+        @Override
+        public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+            View view = LayoutInflater.from(mContext).inflate(R.layout.layout_history_net_item, parent, false);
+            return new SimpleViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(SimpleViewHolder holder, int position) {
+            if(holder instanceof SimpleViewHolder){
+                final Map<String, String> map = mData.get(position);
+                //"id", "jctime", "remark", "type", "unitid", "username"
+                //赋值
+                holder.name.setText(map.get("username"));
+
+                final String type = map.get("type");
+                final String table = getTypeTable(type);
+                holder.company.setText(table);
+                holder.id.setText(position+"");
+                holder.title.setText(map.get("remark"));
+
+                /* 获取价差时间 */
+                String jctime = map.get("jctime");
+                /* 获取被检查单位ID */
+                final String unitid = map.get("unitid");
+
+                Log.e("DATA","jctime:"+jctime+" >>> unitid"+unitid);
+
+
+                /* 点击事件 */
+                View view = ((SimpleViewHolder) holder).itemView;
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(getActivity(),WebHistoryActivity.class);
+                        Bundle bundle=new Bundle();
+                        //bundle.putString("shijian",); //当前编号
+                        bundle.putString("type",type);
+                        bundle.putString("id",unitid);      //单位ID
+                        bundle.putString("companyName",map.get("remark"));//单位名称
+                        bundle.putString("table",table);   //当前检查的表格（旅店安全检查表、校园、民爆...）
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return data.size();
+        }
+
+        class SimpleViewHolder extends RecyclerView.ViewHolder{
+            @ViewInject(R.id.mHistory_id)      //序号 mHistory_looding
+            TextView id;
+            @ViewInject(R.id.mHistory_title)   //单位名称
+            TextView title;
+            @ViewInject(R.id.mHistory_name)    //检查人姓名
+            TextView name;
+            @ViewInject(R.id.mHistory_company) //检查的内容（旅店安全检查...）
+            TextView company;
+            @ViewInject(R.id.mHistory_gone)    //是否是最新的内容选择隐藏还是显示
+            ImageView gone;
+
+            public SimpleViewHolder(View itemView) {
+                super(itemView);
+                ViewUtils.inject(this,itemView);
+            }
+        }
+
+    }
+
+
 }

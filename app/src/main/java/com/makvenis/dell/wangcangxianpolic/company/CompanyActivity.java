@@ -340,6 +340,12 @@ public class CompanyActivity extends BaseActivity{
                         startActivity(intent,
                                 ActivityOptions.makeSceneTransitionAnimation(CompanyActivity.this).toBundle());
                         break;
+                    case R.id.select_6:
+                        //参数（是否具有头部文件，头部文件id，是否具有脚部文件，脚部文件id）
+                        Bundle bundle6 = creadCondationDefault(id,false, 0, true, R.layout.public_item_notes_foot,Configfile.FORM_SQL_DATABASE_5,"民爆物品安全检查情况登记表",Configfile.RESULT_HTML_TYPE_5);
+                        getNetJsonString(CompanyActivity.this,Configfile.FORM_GET_TABLE_5,mHandler,Configfile.FORM_SQL_DATABASE_5,bundle6);
+                        loadingDialog();
+                        break;
                 }
             }
         });
@@ -440,6 +446,7 @@ public class CompanyActivity extends BaseActivity{
         Map<Object, Object> map = helper.queryByKey(mKey);
         boolean isData = helper.isDismisData(context, mKey);
         Log.e("TAG","即将跳转之前查询的数据 >>>> "+ map.get("data")+" >>>> "+ mKey + " >>>> " + isData +" >>>" + mData);
+        Log.e("DATA","即将跳转之前查询的数据 >>>> "+ map.get("data")+" >>>> \n"+ mKey + " >>>> \n" + isData +" >>> \n" + mData);
         if(isData == true){
             //存在 执行更新
             helper.update(mKey,mData);

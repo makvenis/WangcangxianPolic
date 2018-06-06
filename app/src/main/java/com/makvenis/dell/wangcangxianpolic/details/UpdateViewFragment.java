@@ -1,11 +1,11 @@
 package com.makvenis.dell.wangcangxianpolic.details;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,6 +35,8 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.cat.CatLoadingView;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
+import com.makvenis.dell.wangcangxianpolic.help.MessageEvent;
+import com.makvenis.dell.wangcangxianpolic.help.PermissionsUtils;
 import com.makvenis.dell.wangcangxianpolic.sanEntery.BjcUnit;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
@@ -42,6 +44,9 @@ import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.PicassoEngine;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -143,12 +148,14 @@ public class UpdateViewFragment extends Fragment {
                             if(state.equals("OK")){
                                 Configfile.Log(getActivity(), "修改成功");
                                 /* 返回单位列表页 */
-                                Intent intent=new Intent(getActivity(), MoreDetailsActivity.class);
+                                //Intent intent=new Intent(getActivity(), MoreDetailsActivity.class);
                                 /* 返回此页面基本参数需要一个查询的id */
-
-                                intent.putExtra("id",xmlIdString);
+                                /*intent.putExtra("id",xmlIdString);
                                 intent.putExtra("bank_id",2);
                                 startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                                */
+                                EventBus.getDefault().post(new MessageEvent("ok"));
+
                             }else {
                                 Configfile.Log(getActivity(), "解析错误"+obj);
                             }
@@ -174,9 +181,12 @@ public class UpdateViewFragment extends Fragment {
                     mInteger = ((Integer) json.get("id"));
                 }
             }
+
             if(msg.what == 0x000009){
-                long num = (long) msg.obj;
-                mMore_Uri.setText(num+"");
+                int num = (int) msg.obj;
+                if(num >= 99){
+                    mMore_Uri.setText("上传完成");
+                }else mMore_Uri.setText(num+"%");
             }
 
             if(msg.what == 0x000008){
@@ -197,6 +207,9 @@ public class UpdateViewFragment extends Fragment {
                         }
                     }
                     Configfile.Log(getActivity(),"上传完成！");
+                    /* 设置上传按钮可以被点击 */
+                    mMore_Submit.setClickable(true);
+                    mMore_Submit.setBackgroundColor(Color.BLUE);
                     e.setPhotoUrl(mPathMax);
                 }else {
                     Configfile.Log(getActivity(),"[ERROR]"+ json);
@@ -217,10 +230,17 @@ public class UpdateViewFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        /* 动态权限 */
+        PermissionsUtils utils=new PermissionsUtils();
+        utils.SetPermissionForNormal(getActivity());
+
         /* 获取固定xmlId 存储的单位id值 */
         SharedPreferences xmlId = getActivity().getSharedPreferences("xmlId", Context.MODE_PRIVATE);
         xmlIdString = xmlId.getString("id", "0");
         Log.e(TAG,"haredPreferences()" + xmlIdString);
+
+        String path = Configfile.COMPANY_URL_SEARCH_ID + xmlIdString;
+        Log.e("TAG","修改当前单位地址 >>> "+path);
 
         /* 执行下载 首次赋值单位的信息 */
         downData();
@@ -376,6 +396,7 @@ public class UpdateViewFragment extends Fragment {
     BjcUnit e=new BjcUnit();
     CatLoadingView mCat;
 
+    /* 提交按钮 */
     @OnClick({R.id.mMore_Submit})
     public void addCompany(View v){
         // TODO: 2018/6/2 提交信息
@@ -447,8 +468,8 @@ public class UpdateViewFragment extends Fragment {
         Log.e("TAG"," 预备提交的实体JSON >>>> "+mResult);
 
         //NetworkTools.postHttpToolsUaerRegistite(Configfile.UPDATE_COMPANY,mHandler,mResult);
-        String path="http://ssdaixiner.oicp.net:26168/wcjw/mobile/doUpdateDanwei";
-        NetworkTools.httpUpload(HttpRequest.HttpMethod.POST,"dataJson",mHandler,path,
+        //String path="http://ssdaixiner.oicp.net:26168/wcjw/mobile/doUpdateDanwei";
+        NetworkTools.httpUpload(HttpRequest.HttpMethod.POST,"dataJson",mHandler,Configfile.UPDATE_COMPANY,
                 mResult);
 
         mCat = new CatLoadingView();
@@ -461,6 +482,9 @@ public class UpdateViewFragment extends Fragment {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             final List<Uri> mSelected = Matisse.obtainResult(data);
 
+            /* 设置上传按钮为灰色 */
+            mMore_Submit.setClickable(false);
+            mMore_Submit.setBackgroundColor(Color.BLACK);
             Log.e("TAG", "mSelected: " + mSelected.toString() + " 大小 " +mSelected.size());
             e.setPhotoUrl(mSelected.get(0).toString());
 
@@ -498,11 +522,12 @@ public class UpdateViewFragment extends Fragment {
                                 public void onLoading(long total, long current, boolean isUploading) {
                                     super.onLoading(total, current, isUploading);
 
+                                    int i = (int) ((current * 100) / total);
                                     Message msg=new Message();
                                     msg.what=0x000009;
-                                    msg.obj=current;
+                                    msg.obj=i;
                                     mHandler.sendMessage(msg);
-                                    Log.e(TAG,"当前上传进度"+current+"");
+                                    Log.e(TAG,"当前上传进度"+i+"%");
                                 }
                             });
                 }
@@ -511,7 +536,6 @@ public class UpdateViewFragment extends Fragment {
 
         }
     }
-
 
     public String getRealPathFromUri(Context context, Uri contentUri) {
         Cursor cursor = null;
@@ -527,7 +551,6 @@ public class UpdateViewFragment extends Fragment {
             }
         }
     }
-
 
     /* 获取当前单位类型 */
     @OnClick({R.id.mMore_AddrsType})
@@ -607,4 +630,23 @@ public class UpdateViewFragment extends Fragment {
         builder.create().show();
     }
 
+    /* 返回更新数据 */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void updete(MessageEvent msg){
+        Log.e("DATA",msg.getMessage());
+        downData();
+        
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
 }

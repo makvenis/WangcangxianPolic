@@ -44,7 +44,7 @@
 
         <activity android:name=".StartActivity" />
         <activity android:name=".startActivity.AdvertisingActivity" />
-        <activity android:name=".startActivity.HomeActivity" />
+        <activity android:name=".startActivity.HomeActivity" android:launchMode="singleTask" />
         <activity android:name=".startActivity.GuideActivity" />
         <activity
             android:name=".startActivity.MainActivity"
@@ -104,9 +104,11 @@
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme" />
         <activity android:name=".newCompanyPost.CompanyEditActivity" />
-        <activity android:name=".newCompanyPost.ToYesActivity"></activity>
-        <activity android:name=".newCompanyPost.ToNoActivity"></activity>
-        <activity android:name=".newCompanyPost.ToBiLuActivity"></activity>
+        <activity android:name=".newCompanyPost.ToYesActivity" />
+        <activity android:name=".newCompanyPost.ToNoActivity" />
+        <activity android:name=".newCompanyPost.ToBiLuActivity" />
+        <activity android:name=".details.WebHistoryActivity" />
+        <activity android:name=".startActivity.ShowUploadImageActivity"></activity>
     </application>
 
 </manifest>

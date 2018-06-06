@@ -68,7 +68,7 @@
             android:textSize="13sp"
             />-->
 
-        <com.makvenis.dell.wangcangxianpolic.view.SimpleRadioButton
+        <json.makvenis.com.mylibrary.json.view.SimpleRadioButton
             android:layout_marginTop="10dp"
             android:textColor="@color/radiobutton_select_color"
             android:id="@+id/Main_button_c"

@@ -424,6 +424,41 @@ public class NetworkTools {
     }
 
 
+    public static void postHttpToolsUaerRegistite(String path, final Handler handler, String mDatajson,String name){
+
+        //创建实例
+        OkHttpClient httpClient = new OkHttpClient();
+        //请求的对象（类似html的表单请求）
+        FormBody body = new FormBody.Builder()
+                .add("dataJson", mDatajson)
+                .add("username", name)
+                .build();
+
+        //创建请求
+        Request request = new Request.Builder()
+                .url(path)
+                .post(body)
+                .build();
+        Call call = httpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String string = response.body().string();
+                Message msg = new Message();
+                msg.what = Configfile.CALLBANK_POST_MSG;
+                msg.obj = string;
+                handler.sendMessage(msg);
+            }
+        });
+
+    }
+
+
     public static void postHttpToolsUaerRegistite(String path, final Handler handler, String mDatajson){
 
         //创建实例

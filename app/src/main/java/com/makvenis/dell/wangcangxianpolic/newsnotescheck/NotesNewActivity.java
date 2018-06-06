@@ -239,18 +239,21 @@ public class NotesNewActivity extends BaseActivity implements GestureDetector.On
     }
 
     private void addBodyView() {
-
         /* 数据库查询 */
         AppMothedHelper helper=new AppMothedHelper(this);
         boolean dismisData = helper.isDismisData(this, TagDb);
+        Log.e("DATA","questions >>> 是否有数据 "+dismisData + " 查询条件 "+ TagDb);
         if(dismisData == true){
             Map<Object, Object> map = helper.queryByKey(TagDb);
             String data = (String) map.get("data");
+            Log.e("DATA",data);
             /* 准备数据 */
             List<Question> questions = initData(data);
+            Log.e("DATA","questions"+questions.size());
             Log.e("TAG","questions"+questions.size());
             mQuestion.addAll(questions);
             Log.e("TAG","最外层集合mQuestion"+mQuestion.size());
+            Log.e("DATA","最外层集合mQuestion"+mQuestion.size());
         }
 
         //添加body(中间部分)的子View
@@ -463,13 +466,23 @@ public class NotesNewActivity extends BaseActivity implements GestureDetector.On
             Log.e("TAG","上传数据的总长度-->>>"+mResult.length());
             Log.e("TAG","用户输入答案-->>>"+mPostDismis.toString());
             Log.e("TAG","需要上传的数据--->>>原始数据:"+mResult);
+            Log.e("DATA","当前提交的表格是"+mtitle);
 
+            /* 获取当前用户名称 */
+            String name = getSqliteName();
 
+            if(mtitle.equals("民爆物品安全检查情况登记表")){
+                //FORM_POST_SERVICE_TABLE_JSON_MINBAO_PATH
+                Log.e("DATA","当前提交的地址是"+Configfile.FORM_POST_SERVICE_TABLE_JSON_MINBAO_PATH);
+                /* 启用子线程 */
+                NetworkTools.postHttpToolsUaerRegistite(Configfile.FORM_POST_SERVICE_TABLE_JSON_MINBAO_PATH,
+                        mHandler, mResult,name);
+            }else {
 
-            /* 启用子线程 */
-            NetworkTools.postHttpToolsUaerRegistite(Configfile.FORM_POST_SERVICE_TABLE_JSON_PATH,
-                    mHandler,mResult);
-
+                /* 启用子线程 */
+                NetworkTools.postHttpToolsUaerRegistite(Configfile.FORM_POST_SERVICE_TABLE_JSON_PATH,
+                        mHandler, mResult,name);
+            }
 
         }else {
             Configfile.Log(this,"请完善所有的答案！");
@@ -696,8 +709,21 @@ public class NotesNewActivity extends BaseActivity implements GestureDetector.On
                 postList.add(s);
                 //Configfile.Log(NotesNewActivity.this,"回调的结果为"+s+"====pstMap集合大小:"+postList.size()+"===当前postion"+postion);
                 Log.e("TAG","回调的结果为"+s+"====pstMap集合大小:"+postList.size()+"===当前postion"+postion);
+
+                /* 自动跳转下一题 */
+                if (mViewFlipper.getDisplayedChild() == mQuestion.size()) {
+                    mViewFlipper.stopFlipping();
+                    return;
+                }else {
+                    mViewFlipper.setInAnimation(animations[0]);
+                    mViewFlipper.setOutAnimation(animations[1]);
+                    mViewFlipper.showNext();
+                }
+
             }
         });
+
+
 
         //点击下一题
         button_next.setOnClickListener(new View.OnClickListener() {

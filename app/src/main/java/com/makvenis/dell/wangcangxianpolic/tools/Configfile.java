@@ -13,7 +13,7 @@ import com.makvenis.dell.wangcangxianpolic.startActivity.NotiflyActivity;
 public class Configfile {
 
     /* 服务器IP地址分析 /    */
-    public static final String IP="http://wcjworg.oicp.io:21000/";
+    public static final String IP="http://ssdaixiner.oicp.net:26168/";
     //public static final String IP="http://ssdaixiner.oicp.net:26168/";
 
     /* 服务器、报名地址*/
@@ -101,26 +101,32 @@ public class Configfile {
     //寄递物流业安全检查登记表
     public static final String FORM_GET_TABLE_4=Configfile.WEB+"mobile/getDataforQuest?type=4";
     //校园治安保卫工作检查登记表
+    public static final String FORM_GET_TABLE_5=Configfile.WEB+"mobile/toshowminbao";
 
     /* 以下是数据库存储四张JSON的key键 也是取出数据的条件 */
     public static final String FORM_SQL_DATABASE_1="FORM_SQL_DATABASE_1"; //旅店安全检查 存储json
     public static final String FORM_SQL_DATABASE_2="FORM_SQL_DATABASE_2"; //银行业金融机构治安保卫工作检查登记表 存储json
     public static final String FORM_SQL_DATABASE_3="FORM_SQL_DATABASE_3"; //寄递物流业安全检查登记表 存储json
     public static final String FORM_SQL_DATABASE_4="FORM_SQL_DATABASE_4"; //校园治安保卫工作检查登记表 存储json
+    public static final String FORM_SQL_DATABASE_5="FORM_SQL_DATABASE_5"; //民爆存储json
 
     /* 以下是每一张json对应的html结果网页地址 只是在WebViewActivity中使用 */
     public static final String RESULT_HTML_TYPE_1=Configfile.WEB+"mobile/toshowDengji?type=1";
     public static final String RESULT_HTML_TYPE_2=Configfile.WEB+"mobile/toshowDengji2?type=2";
     public static final String RESULT_HTML_TYPE_3=Configfile.WEB+"mobile/toshowDengji2?type=3";
     public static final String RESULT_HTML_TYPE_4=Configfile.WEB+"mobile/toshowDengji2?type=4";
+    public static final String RESULT_HTML_TYPE_5=Configfile.WEB+"mobile/toshowDengji3";
 
     /***
      * @ 解释: 当使用检查项目的提交时候分别提交的地址
      * @ 键:dataJson
      * @ 提交方式 post
      * @ 实用 type=(1,2,3,4)
+     * @ 民爆doinsertminbao
      */
     public static final String FORM_POST_SERVICE_TABLE_JSON_PATH=Configfile.WEB+"mobile/toSaveDengjiData";
+    public static final String FORM_POST_SERVICE_TABLE_JSON_MINBAO_PATH=Configfile.WEB+"mobile/doinsertminbao";
+
 
     /* 当Post请求的时候 回调的数据 msg的值 */
     public static final int CALLBANK_POST_MSG=0X000005;
@@ -158,54 +164,16 @@ public class Configfile {
     /* 添加单位 */
     public static final String INSERT_COMPANY=Configfile.WEB+"mobile/doAddDanwei";
 
-
+    /* String path="http://ssdaixiner.oicp.net:26168/wcjw/mobile/doUpdateDanwei"; */
     /* 修改当前单位 */
     public static final String UPDATE_COMPANY=Configfile.WEB+"mobile/doUpdateDanwei";
 
+    /* 获取检查历史 */
+    public static final String HISTORY_PATH=Configfile.WEB+"mobile/toshowhistory?username=";
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*app名称*/
-    public static final String APP_NAME="kkk/";
-
-    /*数据库连接地址*/
-    public static final String DATA_URL=".././webapps/aaa/WEB-INF/yyjs.db";
-    /*是否允许相对路径*/
-    public static final boolean RELATIVE=true;
-    /*设置图片最大缓存*/
-    public static final double IMAGE_MAX=400.00;
-    /*默认接受下载位置路径*/
-    public static final String DEFAULT_PATH="mnt/sdcard/"+APP_NAME+"_cache/";
-    /*是否向服务器发送操作码*/
-    //public static final int P_CODE=0>1?0:1;
-    /*是否获取用户登陆IP地址，并上传*/
-    public static final boolean USER_IP=false;
-    /*条件符*/
-    public static final String SAL="/";
-    /*网络请求GET值*/
-    public static final int GET_CODE=1;
-    /*网络请求下载值*/
-    public static final int DOWN_CODE=2;
-    /*网络用户账号密码返回值*/
-    public static final int USER_PASS=3;
-    /*操作涵义 成功*/
-    public static boolean ACTION_SUCCESS=true;
-    /*操作涵义 成功*/
-    public static boolean ACTION_DEFEAT=false;
-
+    
 
 
 
