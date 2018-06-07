@@ -174,7 +174,7 @@ public class BaseActivity extends AppCompatActivity{
                                 String mX = String.valueOf(x);
                                 String mY = String.valueOf(y);
                                 String path = Configfile.UPDATE_MAP_PATH+"?longitude="+mX+"&latitude="+ mY+
-                                        "username="+getSqliteName();
+                                        "&username="+getSqliteName();
                                 NetworkTools.getHttpTools(path,mHandler,2);
 
                             } catch (InterruptedException e) {

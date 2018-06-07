@@ -3,6 +3,15 @@
 
     <item
         is-multidex="true"
+        jar="C:\Users\dell\.android\build-cache\5fa46c3a36ece687b5fe75e207492eff9bc168c5\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="07a662a463af3626f6a26c680b416841bdee5eae">
+        <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_71e0922162a4af16f90e8bc86217d4aa3061d136\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="D:\Windows\AndroidProject\WangcangxianPolic\app\libs\commons-lang3-3.7.jar"
         jumboMode="true"
         optimize="true"
@@ -38,6 +47,24 @@
         <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\pre-dexed\release\pojo_8848700da6b76c1a3f603e4767f41d060c871e08.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="C:\Users\dell\.android\build-cache\091efcf1afebeed9ca8014f663e7f6fc71651e18\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d05c16d86108d3d34377946a79d79f8485a46bfa">
+        <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_094fb8a25169dc72bc980f1bc05ae55f52323486\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Windows\AndroidProject\WangcangxianPolic\app\libs\pojo.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="4f27326e836df2e55a96adf6a597dd04337b62af">
+        <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\transforms\dex\debug\folders\1000\2\pojo_8848700da6b76c1a3f603e4767f41d060c871e08\classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="D:\Windows\AndroidProject\WangcangxianPolic\app\libs\commons-lang3-3.7.jar"
         jumboMode="false"
@@ -52,7 +79,7 @@
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="189a9f140b4dca7c4fa457048ff52b267397d517">
+        sha1="fa5fae25772c34995acff04b965806eff715208c">
         <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_0f703ca52bfbcab61d1b529ec2520dbfd44cfe4e\classes.dex" />
     </item>
     <item
@@ -65,13 +92,22 @@
         <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\transforms\dex\debug\folders\1000\2\fastjson-1.1.41_57bdf07497da4d63f4079d5ffbff690c73d7a0e8\classes.dex" />
     </item>
     <item
-        is-multidex="true"
-        jar="D:\Windows\AndroidProject\WangcangxianPolic\app\libs\pojo.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\dell\.android\build-cache\5fa46c3a36ece687b5fe75e207492eff9bc168c5\output\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="26.0.2"
-        sha1="4f27326e836df2e55a96adf6a597dd04337b62af">
-        <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\transforms\dex\debug\folders\1000\2\pojo_8848700da6b76c1a3f603e4767f41d060c871e08\classes.dex" />
+        sha1="07a662a463af3626f6a26c680b416841bdee5eae">
+        <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\pre-dexed\release\classes_71e0922162a4af16f90e8bc86217d4aa3061d136.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\dell\.android\build-cache\091efcf1afebeed9ca8014f663e7f6fc71651e18\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d05c16d86108d3d34377946a79d79f8485a46bfa">
+        <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\pre-dexed\release\classes_094fb8a25169dc72bc980f1bc05ae55f52323486.jar" />
     </item>
     <item
         is-multidex="false"
@@ -155,15 +191,6 @@
         <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\pre-dexed\release\BaiduLBS_Android_4183e30ec3932618c88af241b524dd7ca509d776.jar" />
     </item>
     <item
-        is-multidex="false"
-        jar="D:\Windows\AndroidProject\WangcangxianPolic\app\libs\commons-text-1.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.2"
-        sha1="c336bf600f44b88af356c8a85eef4af822b06a4d">
-        <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\pre-dexed\release\commons-text-1.1_08bed369270f689dc8276cd167e8fd7268149a4a.jar" />
-    </item>
-    <item
         is-multidex="true"
         jar="D:\Windows\AndroidProject\WangcangxianPolic\app\libs\okio-1.6.0.jar"
         jumboMode="true"
@@ -171,6 +198,15 @@
         revision="26.0.2"
         sha1="98476622f10715998eacf9240d6b479f12c66143">
         <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\transforms\dex\debug\folders\1000\2\okio-1.6.0_d7df6d7127400f1806d52452dc997d944c31a9bb\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Windows\AndroidProject\WangcangxianPolic\app\libs\commons-text-1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="c336bf600f44b88af356c8a85eef4af822b06a4d">
+        <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\pre-dexed\release\commons-text-1.1_08bed369270f689dc8276cd167e8fd7268149a4a.jar" />
     </item>
     <item
         is-multidex="true"

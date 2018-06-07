@@ -22,6 +22,7 @@ import com.baidu.location.BDLocation;
 
 /**
  * @ 参考地址:http://lbsyun.baidu.com/index.php?title=android-locsdk/guide/get-location/latlng
+ *
  */
 
 public class SimpleBaiDuMap extends BDAbstractLocationListener {

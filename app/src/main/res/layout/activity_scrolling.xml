@@ -43,7 +43,7 @@
                     <EditText
                         android:id="@+id/mMore_Name"
                         android:textColorHint="#afafaf"
-                        android:textColor="#afafaf"
+                        android:textColor="#565656"
                         android:textSize="18sp"
                         android:hint="请选择单位名称"
                         android:layout_marginLeft="10dp"
@@ -76,7 +76,7 @@
                         android:inputType="text"
                         android:id="@+id/mMore_Addrs"
                         android:textColorHint="#afafaf"
-                        android:textColor="#afafaf"
+                        android:textColor="#565656"
                         android:textSize="18sp"
                         android:hint="请添加单位地址"
                         android:layout_marginLeft="10dp"
@@ -109,7 +109,7 @@
                         android:inputType="text"
                         android:id="@+id/mMore_LevName"
                         android:textColorHint="#afafaf"
-                        android:textColor="#afafaf"
+                        android:textColor="#565656"
                         android:textSize="18sp"
                         android:hint="法人姓名"
                         android:layout_marginLeft="10dp"
@@ -144,7 +144,7 @@
                         android:gravity="center|start"
                         android:id="@+id/mMore_GovName"
                         android:textColorHint="#afafaf"
-                        android:textColor="#afafaf"
+                        android:textColor="#565656"
                         android:textSize="18sp"
                         android:hint="请选择管辖单位"
                         android:layout_marginLeft="10dp"
@@ -177,7 +177,7 @@
                         android:textColorHint="#afafaf"
                         android:gravity="center|start"
                         android:id="@+id/mMore_AddrsType"
-                        android:textColor="#afafaf"
+                        android:textColor="#565656"
                         android:textSize="18sp"
                         android:hint="请添加组织类型"
                         android:layout_marginLeft="10dp"
@@ -210,7 +210,7 @@
                         android:inputType="number"
                         android:id="@+id/mMore_Phone"
                         android:textColorHint="#afafaf"
-                        android:textColor="#afafaf"
+                        android:textColor="#565656"
                         android:textSize="18sp"
                         android:hint="请输入联系电话"
                         android:layout_marginLeft="10dp"
@@ -244,7 +244,7 @@
                         android:inputType="text"
                         android:id="@+id/mMore_Sex"
                         android:textColorHint="#afafaf"
-                        android:textColor="#afafaf"
+                        android:textColor="#565656"
                         android:textSize="18sp"
                         android:hint="请选择性别"
                         android:layout_marginLeft="10dp"
@@ -275,10 +275,9 @@
 
                     <TextView
                         android:gravity="center|start"
-                        android:inputType="number"
                         android:id="@+id/mMore_LevType"
                         android:textColorHint="#afafaf"
-                        android:textColor="#afafaf"
+                        android:textColor="#565656"
                         android:textSize="18sp"
                         android:hint="请选择证件类型"
                         android:layout_marginLeft="10dp"
@@ -309,10 +308,10 @@
 
                     <EditText
                         android:gravity="center|start"
-                        android:inputType="number"
+                        android:inputType="text"
                         android:id="@+id/mMore_Num"
                         android:textColorHint="#afafaf"
-                        android:textColor="#afafaf"
+                        android:textColor="#565656"
                         android:textSize="18sp"
                         android:hint="请输入证件号码"
                         android:layout_marginLeft="10dp"
@@ -326,8 +325,6 @@
                     android:background="#e7e6e6"
                     android:layout_width="match_parent"
                     android:layout_height="1dp" />
-
-
 
                 <!-- 法人年龄 -->
                 <LinearLayout
@@ -348,7 +345,7 @@
                         android:inputType="number"
                         android:id="@+id/mMore_Age"
                         android:textColorHint="#afafaf"
-                        android:textColor="#afafaf"
+                        android:textColor="#565656"
                         android:textSize="18sp"
                         android:hint="请输入年龄"
                         android:layout_marginLeft="10dp"
@@ -418,12 +415,12 @@
                         android:layout_height="match_parent" />
 
                     <EditText
-                        android:inputType="number"
+                        android:inputType="text"
                         android:id="@+id/mMore_Lev"
                         android:textColorHint="#afafaf"
                         android:textColor="#afafaf"
                         android:textSize="18sp"
-                        android:hint="请输入联系电话"
+                        android:hint="例如 A、B、C"
                         android:layout_marginLeft="10dp"
                         android:background="@null"
                         android:layout_width="match_parent"
@@ -478,12 +475,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp" />
                 </LinearLayout>
-
-
-
-
-
-
 
             </LinearLayout>
 

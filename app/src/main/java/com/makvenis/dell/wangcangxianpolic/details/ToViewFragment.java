@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.jude.rollviewpager.OnItemClickListener;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
@@ -51,7 +51,7 @@ public class ToViewFragment extends Fragment {
     public final String TAG = "ToViewFragment";
 
     @ViewInject(R.id.mToViewSwipe)
-    SwipeRefreshLayout mSwipe;
+    PullRefreshLayout mSwipe;
 
     @ViewInject(R.id.mToViewRecycle)
     RecyclerView mRecycle;
@@ -75,17 +75,13 @@ public class ToViewFragment extends Fragment {
                     String obj = (String) msg.obj;
                     Log.e(TAG," mHandler >>> " + obj);
                     List<List<Map<String, String>>> lists = setTypeAdapterData(obj);
+                    if(mMaxData.size() > 0){
+                        mMaxData.removeAll(mMaxData);
+                    }
                     mMaxData.addAll(lists);
                     Log.e(TAG," addAll() 之后的集合状态 "+mMaxData.size() + " >>> " + mMaxData.toString());
-                    /* 绑定适配器 */
-                    RecyclerView.LayoutManager manager=new LinearLayoutManager(mContext,
-                            LinearLayoutManager.VERTICAL,false);
-                    mRecycle.setLayoutManager(manager);
-                    mAdapter = new ToViewAdapter(getActivity(),mMaxData);
-                    if( mMaxData != null ){
-                        mRecycle.setAdapter(mAdapter);
-                        mSwipe.setRefreshing(false);
-                    }
+                    mAdapter.notifyDataSetChanged();
+                    mSwipe.setRefreshing(false);
                     break;
             }
         }
@@ -103,27 +99,51 @@ public class ToViewFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         /* 获取固定xmlId 存储的单位id值 */
-        SharedPreferences xmlId = getActivity().getSharedPreferences("xmlId", Context.MODE_PRIVATE);
-        xmlIdString = xmlId.getString("id", "0");
+        xmlIdString = getXmlIdString();
         Log.e(TAG,"haredPreferences()" + xmlIdString);
 
         /* 设置刷新 */
         mSwipe.setRefreshing(true);
-
         /* 构建数据 */
         creatMoreDatils();
-
+        /* 绑定适配器 */
+        setAdapter();
         /* 重新请求数据 */
-        mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        /*mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mSwipe.setRefreshing(true);
                 creatMoreDatils();
             }
         });
+*/
+        mSwipe.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSwipe.setRefreshing(true);
+                creatMoreDatils();
+            }
+        });
+    }
 
+    /* 获取依赖本Activity的单位ID */
+    public String getXmlIdString(){
+        SharedPreferences xmlId = getActivity().getSharedPreferences("xmlId", Context.MODE_PRIVATE);
+        String xmlIdString = xmlId.getString("id", "0");
+        Log.e(TAG,"haredPreferences()" + xmlIdString);
+        return xmlIdString;
+    }
 
+    /* 绑定适配器 */
+    private void setAdapter() {
+        /* 绑定适配器 */
+        RecyclerView.LayoutManager manager=new LinearLayoutManager(mContext,
+                LinearLayoutManager.VERTICAL,false);
+        mRecycle.setLayoutManager(manager);
+        mAdapter = new ToViewAdapter(getActivity(),mMaxData);
+        mRecycle.setAdapter(mAdapter);
     }
 
     /* 数据规范化 */
@@ -188,13 +208,14 @@ public class ToViewFragment extends Fragment {
     /* 数据下载 */
     private void creatMoreDatils() {
         String path = Configfile.COMPANY_URL_SEARCH_ID + xmlIdString;
-        Log.e("TAG",path);
+        Log.e("TAG",TAG+" >>> "+path);
         new HttpUtils(5000).send(HttpRequest.HttpMethod.GET,
                 path,
                 new RequestCallBack<String>() {
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
                         String result = responseInfo.result;
+                        Log.e("DATA",TAG+" >>> "+ result);
                         if(result != null){
                             Message msg=new Message();
                             msg.what=0X000001;
@@ -211,13 +232,14 @@ public class ToViewFragment extends Fragment {
                 });
     }
 
+    /* 注解绑定 */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ViewUtils.inject(this,view);
     }
 
-
+    /* 适配器（1) */
     public class ToViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         public final int VIEW_TYPE_0 = 0;
@@ -249,46 +271,51 @@ public class ToViewFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            if(holder instanceof MyRollViewHolder){
-                List<Map<String, String>> maps = mMaxDataAdapter.get(0);
-                if(maps != null){
-                    RollPagerView page = ((MyRollViewHolder) holder).mRollPagerView;
-                    //设置适配器
-                    page.setAdapter(new MyPagerAdapter(maps));
-                /* 启动自动翻页 */
-                    page.pause();
-                    page.resume();
-                    page.isPlaying();
+            /* 判断大集合如果为空就不要再去加载适配器的赋值过程 */
+            if (!(mMaxDataAdapter.size() == 0)) {
 
-                    page.setOnItemClickListener(new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(int position) {
-                            Toast.makeText(mContext,"Item "+position+" clicked",Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                if(holder instanceof MyRollViewHolder) {
+                    List<Map<String, String>> maps = mMaxDataAdapter.get(0);
+
+                    if (maps.size() != 0) {
+                        RollPagerView page = ((MyRollViewHolder) holder).mRollPagerView;
+                        //设置适配器
+                        page.setAdapter(new MyPagerAdapter(maps, getActivity()));
+                    /* 启动自动翻页 */
+                        page.pause();
+                        page.resume();
+                        page.isPlaying();
+
+                        page.setOnItemClickListener(new OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Toast.makeText(mContext, "Item " + position + " clicked", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+
+                } else if (holder instanceof MyRecycleViewHolder) {
+
+                    RecyclerView mDatilsRecycle = ((MyRecycleViewHolder) holder).mDatailsRecycle;
+
+                    List<Map<String, String>> maps = mMaxDataAdapter.get(1);
+
+                    if (maps.size() != 0) {
+
+                        LinearLayoutManager manager = new LinearLayoutManager(getActivity(),
+                                LinearLayoutManager.VERTICAL, false);
+
+                        mDatilsRecycle.setLayoutManager(manager);
+                        mDatilsRecycle.setAdapter(new MyTestPaddingAdapter(maps, getActivity()));
+                    }
+
+
+                } else if (holder instanceof MyPhotoleViewHolder) {
+                    RelativeLayout layout = ((MyPhotoleViewHolder) holder).layout;
                 }
-
-
-
-            }else if(holder instanceof MyRecycleViewHolder){
-
-                RecyclerView mDatilsRecycle = ((MyRecycleViewHolder) holder).mDatailsRecycle;
-
-                List<Map<String, String>> maps = mMaxDataAdapter.get(1);
-
-                if( maps.size() != 0){
-
-                    LinearLayoutManager manager=new LinearLayoutManager(getActivity(),
-                            LinearLayoutManager.VERTICAL,false);
-
-                    mDatilsRecycle.setLayoutManager(manager);
-                    mDatilsRecycle.setAdapter(new MyTestPaddingAdapter(maps,getActivity()));
-                }
-
-
-            }else if(holder instanceof MyPhotoleViewHolder){
-                RelativeLayout layout = ((MyPhotoleViewHolder) holder).layout;
             }
+
         }
 
         @Override
@@ -342,14 +369,17 @@ public class ToViewFragment extends Fragment {
 
     }
 
+    /* 适配器（2) */
     public class MyPagerAdapter extends StaticPagerAdapter {
 
         private int[] image = {R.drawable.icon_test, R.drawable.icon_test, R.drawable.icon_test, R.drawable.icon_test};
 
         List<Map<String, String>> imgData;
+        Context mContext;
 
-        public MyPagerAdapter(List<Map<String, String>> imgData) {
+        public MyPagerAdapter(List<Map<String, String>> imgData, Context mContext) {
             this.imgData = imgData;
+            this.mContext = mContext;
         }
 
         // SetScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -395,6 +425,7 @@ public class ToViewFragment extends Fragment {
         }
     }
 
+    /* 适配器（3) */
     public class MyTestPaddingAdapter extends RecyclerView.Adapter<MyTestPaddingAdapter.MyViewHolder>{
 
 
@@ -448,7 +479,5 @@ public class ToViewFragment extends Fragment {
             }
         }
     }
-
-
 
 }

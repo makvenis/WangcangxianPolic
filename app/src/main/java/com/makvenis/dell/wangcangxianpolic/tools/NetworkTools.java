@@ -781,6 +781,62 @@ public class NetworkTools {
 
     }
 
-    
+
+    /**
+     *
+     * {@link #httpload(HttpRequest.HttpMethod, String[], String[], Handler, String)}  多参数、请求头的
+     * 上传
+     */
+    public static final int POST_LOADING_CALLBANK=0X000020;
+    public static final int POST_OK_CALLBANK=0X000020;
+
+    public static void httpload(HttpRequest.HttpMethod method,
+                                String[] head,
+                                String[] data,
+                                final Handler mHandler,
+                                String servicePath){
+        RequestParams params=new RequestParams();
+        if(head.length == data.length){
+            for (int i = 0; i < head.length; i++) {
+                params.addBodyParameter(head[i],data[i]);
+            }
+            //执行上传
+            new HttpUtils(10000).send(method,
+                    servicePath,
+                    params,
+                    new RequestCallBack<String>() {
+                        @Override
+                        public void onSuccess(ResponseInfo<String> responseInfo) {
+                            String result = responseInfo.result;
+                            if(result != null){
+                                Message msg=new Message();
+                                msg.what=NetworkTools.POST_OK_CALLBANK;
+                                msg.obj=result;
+                                mHandler.sendMessage(msg);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(HttpException e, String s) {
+
+                        }
+
+                        @Override
+                        public void onLoading(long total, long current, boolean isUploading) {
+                            super.onLoading(total, current, isUploading);
+                            int i = (int) ((current * 100) / total);
+                            Message msg=new Message();
+                            msg.what=NetworkTools.POST_LOADING_CALLBANK;
+                            msg.obj=i;
+                            mHandler.sendMessage(msg);
+                            Log.e("TAG","当前上传进度"+i+"%");
+                        }
+                    });
+
+        }
+
+
+    }
+
 
 }

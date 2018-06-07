@@ -91,7 +91,7 @@ public class SearchCompanyActivity extends BaseActivity{
                             JSONObject object=new JSONObject(result);
                             JSONArray array = object.getJSONArray("BjcUnitlist");
                             List<Map<String, String>> list = JSON.GetJson(array.toString(), new String[]{"address", "attr", "name", "photoUrl","id"});
-                            if(maps != null){
+                            /*if(maps != null){
                                 maps.removeAll(maps);
                                 for (int i = 0; i < list.size(); i++) {
                                     maps.add(list.get(i));
@@ -100,7 +100,9 @@ public class SearchCompanyActivity extends BaseActivity{
 
                             for (int i = 0; i < list.size(); i++) {
                                 maps.add(list.get(i));
-                            }
+                            }*/
+                            maps.addAll(list);
+                            Configfile.Log(SearchCompanyActivity.this,"刷新成功！");
                             mSwipeRefreshLayout.setRefreshing(false);
                             mAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
@@ -152,8 +154,6 @@ public class SearchCompanyActivity extends BaseActivity{
             @Override
             public void onRefresh() {
                 swipeData();
-                Configfile.Log(SearchCompanyActivity.this,"刷新成功！");
-                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
 
@@ -176,6 +176,7 @@ public class SearchCompanyActivity extends BaseActivity{
 
     /* 刷新使用 下载使用 */
     public void swipeData(){
+        mSwipeRefreshLayout.setRefreshing(false);
         String where = getIntent().getStringExtra("where");
         Log.e("TAG",new Date()+" >>> 预备搜索的地址 "+ Configfile.COMPANY_URL_SEARCH+where);
         final String path = Configfile.COMPANY_URL_SEARCH + where;

@@ -3,6 +3,7 @@ package com.makvenis.dell.wangcangxianpolic.company;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.makvenis.dell.wangcangxianpolic.R;
-import com.makvenis.dell.wangcangxianpolic.details.MoreDetailsActivity;
+import com.makvenis.dell.wangcangxianpolic.details.SelectDetailsActivity;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleDialogSureView;
 import com.squareup.picasso.Picasso;
@@ -92,26 +93,36 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.MyViewHo
         holder.item_TextView_Style.setText(map.get("attr"));
         holder.item_TextView_Path.setText(map.get("address"));
         String url = map.get("photoUrl");
-        String serviceWebImg = Configfile.SERVICE_WEB_IMG;
-        String replace = url.replace("../../", "");
-        String img=serviceWebImg+replace;
-        Picasso.with(mContext)
-                .load(img)
-                .placeholder(R.drawable.icon_normal_no_photo)
-                .error(R.drawable.icon_normal_no_photo)
-                .into(holder.item_ImageView);
+        Log.e("TAG","适配器集合取值（photoUrl）"+url);
+        /* 拆分 */ //str.indexOf("ABC")!=-1 包含字符串
+        if(url != null && url.indexOf("../../") != -1){
+            String[] split = url.split(",");
+            String path = split[0].replace("../../",Configfile.SERVICE_WEB_IMG);
+            Picasso.with(mContext)
+                    .load(path)
+                    .resize(100,100)
+                    .centerCrop()
+                    .placeholder(R.drawable.icon_normal_no_photo)
+                    .error(R.drawable.icon_normal_no_photo)
+                    .into(holder.item_ImageView);
+            Log.e("TAG","适配器图片加载网络地址（url）"+path);
+        }else {
+            //加载本地默认的图片 //暂未图片
+            holder.item_ImageView.setImageResource(R.drawable.icon_normal_no_photo);
+        }
 
         /* 处理侧滑事件按钮 */
         holder.deleteTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mContext, MoreDetailsActivity.class);
+                //Intent intent=new Intent(mContext, MoreDetailsActivity.class);
+                Intent intent=new Intent(mContext, SelectDetailsActivity.class);
                 intent.putExtra("id",map.get("id"));//单位ID
                 mContext.startActivity(intent);
             }
         });
 
-        /* 处理单位单位 */
+        /* 处理单位删除 */
         holder.addTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

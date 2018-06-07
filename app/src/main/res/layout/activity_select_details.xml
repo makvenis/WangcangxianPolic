@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.makvenis.dell.wangcangxianpolic.details.SelectDetailsActivity">
+
+    <include layout="@layout/public_toolbar_simple"></include>
+
+    <ImageView
+        android:background="#FAC"
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <RadioGroup
+        android:id="@+id/rg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/Main_button_a"
+            style="@style/HomeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btnselectback_a"
+            android:checked="true"
+            android:drawableTop="@drawable/detailsselector_a"
+            android:text="单位详情" />
+
+        <RadioButton
+            android:id="@+id/Main_button_b"
+            style="@style/HomeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btnselectback_a"
+            android:drawableTop="@drawable/detailsselector_b"
+            android:text="修改信息" />
+
+        <RadioButton
+            android:id="@+id/Main_button_c"
+            style="@style/HomeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btnselectback_a"
+            android:drawableTop="@drawable/detailsselector_c"
+            android:text="历史查询" />
+
+
+    </RadioGroup>
+
+    <ImageView
+        android:background="#d4d4d4"
+        android:layout_width="match_parent"
+        android:layout_height="4dp" />
+    <FrameLayout
+        android:layout_weight="1"
+        android:id="@+id/fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+
+</LinearLayout>

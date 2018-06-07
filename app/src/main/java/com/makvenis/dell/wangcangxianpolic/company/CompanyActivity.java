@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IdRes;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -88,19 +88,18 @@ public class CompanyActivity extends BaseActivity{
                     String result = ((String) msg.obj);
                     if(result != null){
                         List<Map<String, String>> list = JSON.GetJson(result, new String[]{"address", "attr", "name", "photoUrl","id"});
-                        if(maps != null){
-                            maps.removeAll(maps);
-                            for (int i = 0; i < list.size(); i++) {
-                                maps.add(list.get(i));
-                            }
-                        }
 
+                        if(maps.size() > 0){
+                            maps.removeAll(maps);
+                            Log.e("DATA","现在maps集合大小为" + maps.size()+"");
+                        }
                         for (int i = 0; i < list.size(); i++) {
                             maps.add(list.get(i));
                         }
-                        Log.e("TAG",maps.size()+"");
+                        Log.e("TAG",maps.size()+" \n "+new Date()+" >>> "+maps.toString());
                         mSwipeRefreshLayout.setRefreshing(false);
                         mAdapter.notifyDataSetChanged();
+                        Configfile.Log(CompanyActivity.this,"刷新成功！");
                     }
                     break;
             }
@@ -128,7 +127,7 @@ public class CompanyActivity extends BaseActivity{
     private SimpleRecycleScollView mRecycleView;
 
     @ViewInject(R.id.company_swipe)
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private PullRefreshLayout mSwipeRefreshLayout;
 
     /* 适配集合 */
     List<Map<String, String>> maps = new ArrayList<>();
@@ -144,12 +143,10 @@ public class CompanyActivity extends BaseActivity{
 
         //刷新组件
         mSwipeRefreshLayout.setColorSchemeColors(new int[]{Color.RED,Color.GREEN,Color.BLUE});
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwipeRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 swipeData();
-                Configfile.Log(CompanyActivity.this,"刷新成功！");
-                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
 
@@ -176,6 +173,7 @@ public class CompanyActivity extends BaseActivity{
 
     /* 刷新使用 下载使用 */
     public void swipeData(){
+        mSwipeRefreshLayout.setRefreshing(true);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -201,7 +199,6 @@ public class CompanyActivity extends BaseActivity{
             }
         }).start();
     }
-
 
     /* 适配 */
     public void SetAdapters(){
@@ -236,6 +233,7 @@ public class CompanyActivity extends BaseActivity{
                                                     mSwipeRefreshLayout.setRefreshing(true);
                                                     maps.remove(postion);
                                                     mAdapter.notifyDataSetChanged();
+                                                    mSwipeRefreshLayout.setRefreshing(false);
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
@@ -284,6 +282,19 @@ public class CompanyActivity extends BaseActivity{
         Intent intent=new Intent(CompanyActivity.this, AddCompanyActivity.class);
         startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSwipeRefreshLayout.setRefreshing(true);
+        swipeData();
+    }
+
+
+
+
+
+
 
 
 

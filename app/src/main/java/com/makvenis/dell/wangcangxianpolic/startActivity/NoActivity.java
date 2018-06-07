@@ -7,9 +7,11 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
@@ -100,5 +102,20 @@ public class NoActivity extends AppCompatActivity {
             }
         }
         return netType;
+    }
+
+    long mOlTime;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() ==  KeyEvent.ACTION_DOWN){
+            if(System.currentTimeMillis()-2000 > mOlTime){
+                mOlTime=System.currentTimeMillis();
+                Toast.makeText(this,"再次点击退出",Toast.LENGTH_LONG).show();
+            }else {
+                System.exit(0);
+                // TODO: 2018/4/2 退出APP的事件
+            }
+        }
+        return true;
     }
 }

@@ -1,5 +1,6 @@
 package com.makvenis.dell.wangcangxianpolic.details;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,6 +35,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.cat.CatLoadingView;
+import com.makvenis.dell.wangcangxianpolic.company.CompanyActivity;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
 import com.makvenis.dell.wangcangxianpolic.help.MessageEvent;
 import com.makvenis.dell.wangcangxianpolic.help.PermissionsUtils;
@@ -148,12 +150,10 @@ public class UpdateViewFragment extends Fragment {
                             if(state.equals("OK")){
                                 Configfile.Log(getActivity(), "修改成功");
                                 /* 返回单位列表页 */
-                                //Intent intent=new Intent(getActivity(), MoreDetailsActivity.class);
-                                /* 返回此页面基本参数需要一个查询的id */
-                                /*intent.putExtra("id",xmlIdString);
-                                intent.putExtra("bank_id",2);
+                                Intent intent=new Intent(getActivity(), CompanyActivity.class);
+                                intent.putExtra("bank_id","0");
                                 startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
-                                */
+
                                 EventBus.getDefault().post(new MessageEvent("ok"));
 
                             }else {
@@ -182,11 +182,13 @@ public class UpdateViewFragment extends Fragment {
                 }
             }
 
-            if(msg.what == 0x000009){
+            if(msg.what == 0x000010){
                 int num = (int) msg.obj;
-                if(num >= 99){
+                if(num >= 100){
                     mMore_Uri.setText("上传完成");
-                }else mMore_Uri.setText(num+"%");
+                }else {
+                    mMore_Uri.setText(num+"%");
+                }
             }
 
             if(msg.what == 0x000008){
@@ -198,7 +200,6 @@ public class UpdateViewFragment extends Fragment {
                     String mPathMax="";
 
                     for (int i = 0; i < maps.size(); i++) {
-
                         Map<String, String> map = maps.get(i);
                         String s = map.get("message");
                         if(s.equals("ok")){
@@ -206,10 +207,12 @@ public class UpdateViewFragment extends Fragment {
                             mPathMax+=value+",";
                         }
                     }
+
                     Configfile.Log(getActivity(),"上传完成！");
                     /* 设置上传按钮可以被点击 */
                     mMore_Submit.setClickable(true);
-                    mMore_Submit.setBackgroundColor(Color.BLUE);
+                    mMore_Submit.setText("修改");
+                    mMore_Submit.setBackgroundColor(Color.rgb(63,81,181));
                     e.setPhotoUrl(mPathMax);
                 }else {
                     Configfile.Log(getActivity(),"[ERROR]"+ json);
@@ -217,6 +220,14 @@ public class UpdateViewFragment extends Fragment {
             }
         }
     };
+
+    public String getUnitId(){
+        /* 获取固定xmlId 存储的单位id值 */
+        SharedPreferences xmlId = getActivity().getSharedPreferences("xmlId", Context.MODE_PRIVATE);
+        String xmlIdString = xmlId.getString("id", "0");
+        Log.e(TAG,"haredPreferences()" + xmlIdString);
+        return xmlIdString;
+    }
 
     @Nullable
     @Override
@@ -235,8 +246,7 @@ public class UpdateViewFragment extends Fragment {
         utils.SetPermissionForNormal(getActivity());
 
         /* 获取固定xmlId 存储的单位id值 */
-        SharedPreferences xmlId = getActivity().getSharedPreferences("xmlId", Context.MODE_PRIVATE);
-        xmlIdString = xmlId.getString("id", "0");
+        xmlIdString = getUnitId();
         Log.e(TAG,"haredPreferences()" + xmlIdString);
 
         String path = Configfile.COMPANY_URL_SEARCH_ID + xmlIdString;
@@ -253,7 +263,6 @@ public class UpdateViewFragment extends Fragment {
         /* 服务地址 */
         String path = Configfile.COMPANY_URL_SEARCH_ID + xmlIdString;
         Log.e("TAG",path);
-
         /* 查询 */
         new HttpUtils(5000).send(HttpRequest.HttpMethod.GET,
                 path,
@@ -378,8 +387,6 @@ public class UpdateViewFragment extends Fragment {
                 .maxSelectable(3)
                 .imageEngine(new PicassoEngine())
                 .forResult(1);
-
-
     }
 
     BjcUnit e=new BjcUnit();
@@ -472,8 +479,10 @@ public class UpdateViewFragment extends Fragment {
             final List<Uri> mSelected = Matisse.obtainResult(data);
 
             /* 设置上传按钮为灰色 */
+            /* 设置上传按钮为灰色 */
             mMore_Submit.setClickable(false);
-            mMore_Submit.setBackgroundColor(Color.BLACK);
+            mMore_Submit.setText("正在等待图片上传");
+            mMore_Submit.setBackgroundColor(Color.rgb(212,212,212));
             Log.e("TAG", "mSelected: " + mSelected.toString() + " 大小 " +mSelected.size());
             e.setPhotoUrl(mSelected.get(0).toString());
 
@@ -483,7 +492,10 @@ public class UpdateViewFragment extends Fragment {
                     RequestParams params=new RequestParams();
                     for (int i = 0; i < mSelected.size(); i++) {
                         String uri = getRealPathFromUri(getActivity(), mSelected.get(i));
-                        params.addBodyParameter("msg"+i,new File(uri));
+                        if(uri != null){
+                            //NativeUtil.compressBitmap();
+                            params.addBodyParameter("msg"+i,new File(uri));
+                        }
                     }
 
                     new HttpUtils(5000).send(HttpRequest.HttpMethod.POST,
@@ -510,13 +522,17 @@ public class UpdateViewFragment extends Fragment {
                                 @Override
                                 public void onLoading(long total, long current, boolean isUploading) {
                                     super.onLoading(total, current, isUploading);
+                                    if(total != 0){ //也就是总大小不能为0
+                                        int i = (int) ((current * 100) / total);
+                                        Message msg=new Message();
+                                        msg.what=0x000010;
+                                        msg.obj=i;
+                                        mHandler.sendMessage(msg);
+                                        Log.e(TAG,"当前上传进度"+i+"%");
+                                    }else {
+                                        Log.e("Error","在使用上传的时候 total 的总大小造成为0");
+                                    }
 
-                                    int i = (int) ((current * 100) / total);
-                                    Message msg=new Message();
-                                    msg.what=0x000009;
-                                    msg.obj=i;
-                                    mHandler.sendMessage(msg);
-                                    Log.e(TAG,"当前上传进度"+i+"%");
                                 }
                             });
                 }
@@ -526,11 +542,11 @@ public class UpdateViewFragment extends Fragment {
         }
     }
 
-    public String getRealPathFromUri(Context context, Uri contentUri) {
+    public String getRealPathFromUri(Context mContext, Uri contentUri) {
         Cursor cursor = null;
         try {
             String[] proj = { MediaStore.Images.Media.DATA };
-            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+            cursor = mContext.getContentResolver().query(contentUri, proj, null, null, null);
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
             return cursor.getString(column_index);

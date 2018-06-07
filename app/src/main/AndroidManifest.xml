@@ -97,7 +97,9 @@
         </receiver>
 
         <activity android:name=".activity.TestActivity" />
-        <activity android:name=".startActivity.NoActivity" />
+        <activity
+            android:name=".startActivity.NoActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".details.MoreDetailsActivity" />
         <activity android:name=".morePhotoUpload.UploadImageActivity" />
         <activity android:name=".startActivity.UploadCheckActivity" />
@@ -111,7 +113,10 @@
         <activity android:name=".newCompanyPost.ToBiLuActivity" />
         <activity android:name=".details.WebHistoryActivity" />
         <activity android:name=".startActivity.ShowUploadImageActivity" />
-        <activity android:name=".company.SearchCompanyActivity" android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".company.SearchCompanyActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".details.SelectDetailsActivity"></activity>
     </application>
 
 </manifest>

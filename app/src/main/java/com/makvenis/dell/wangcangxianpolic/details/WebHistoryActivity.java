@@ -76,7 +76,7 @@ public class WebHistoryActivity extends AppCompatActivity {
         SharedPreferences xmlId = getSharedPreferences("xmlId", Context.MODE_PRIVATE);
         String xmlIdString = xmlId.getString("id", "0");
         Log.e("DATA","haredPreferences()" + xmlIdString);
-        Intent intent = new Intent(this, MoreDetailsActivity.class);
+        Intent intent = new Intent(this, SelectDetailsActivity.class);
         intent.putExtra("bank_id",3);
         intent.putExtra("id",xmlIdString);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -86,7 +86,7 @@ public class WebHistoryActivity extends AppCompatActivity {
     /* 返回 */
     @OnClick({R.id.toolbar_callbank_text})
     public void oncklinkViewTextView(View v){
-        Intent intent = new Intent(this, MoreDetailsActivity.class);
+        Intent intent = new Intent(this, SelectDetailsActivity.class);
         intent.putExtra("bank_id",3);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());

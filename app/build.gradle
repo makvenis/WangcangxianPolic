@@ -54,5 +54,8 @@ dependencies {
     compile 'com.jude:rollviewpager:1.4.6'
     compile 'com.zhihu.android:matisse:0.4.3'
     compile 'com.github.makvenis:json:v1.0.1'
+    //图片压缩框架
+    compile 'com.github.luoshihai:XXPictureCompress:V1.0.0'
+    compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
     testCompile 'junit:junit:4.12'
 }

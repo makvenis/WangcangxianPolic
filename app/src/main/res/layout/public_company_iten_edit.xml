@@ -30,7 +30,7 @@
         <EditText
             android:id="@+id/mCompany_Edit"
             android:textColorHint="#afafaf"
-            android:textColor="#afafaf"
+            android:textColor="#565656"
             android:textSize="18sp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/border"

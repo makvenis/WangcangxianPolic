@@ -67,6 +67,9 @@ public class MoreDetailsActivity extends AppCompatActivity {
         /* 存储id */
         insertXmlId(id);
 
+        /* 刷新 */
+
+
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -88,6 +91,7 @@ public class MoreDetailsActivity extends AppCompatActivity {
         SimpleDateFormat fm = new SimpleDateFormat("MM-dd");
         String time = fm.format(new Date());
         mTimer.setText(" 最近更新:"+time);
+
     }
 
     private void insertXmlId(String num) {
@@ -121,20 +125,22 @@ public class MoreDetailsActivity extends AppCompatActivity {
         int id = getIntent().getIntExtra("bank_id", 0);
         if (id == 2) {//其他Activity跳转第二个碎片里面的ViewPage中第二个页面
 
-
-
             List<Fragment> dataFragment = new ArrayList<>();
             dataFragment.add(new ToViewFragment());
             dataFragment.add(new UpdateViewFragment());
             dataFragment.add(new AddViewFragment());
             mSimpleAdapterSwipe.setFragments(dataFragment);
-
-/*            mViewPage.setCurrentItem(1);
-            mTabLayout.getTabAt(1).select();*/
-        }else if(id == 3) {
-            creadFragmentData();
-            mViewPage.setCurrentItem(2);
-            mTabLayout.getTabAt(2).select();
+            mSimpleAdapterSwipe.notifyDataSetChanged();
+            /* 默认选中第2个碎片 */
+            mViewPage.setCurrentItem(1);
+            mTabLayout.getTabAt(1).select();
+        }else if(id == 0) {
+            List<Fragment> dataFragment = new ArrayList<>();
+            dataFragment.add(new ToViewFragment());
+            dataFragment.add(new UpdateViewFragment());
+            dataFragment.add(new AddViewFragment());
+            mSimpleAdapterSwipe.setFragments(dataFragment);
+            mSimpleAdapterSwipe.notifyDataSetChanged();
         }
         super.onResume();
     }

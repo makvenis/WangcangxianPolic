@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -157,7 +158,7 @@ public class AddCompanyActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mMore_AddrsType.setText(items[which]);
-                        e.setTradeId(which);
+                        e.setTradeId(which+1);
                     }
                 });
         builder.create().show();
@@ -197,6 +198,7 @@ public class AddCompanyActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mMore_Sex.setText(items[which]);
+
                     }
                 });
         builder.create().show();
@@ -257,9 +259,15 @@ public class AddCompanyActivity extends AppCompatActivity {
             mMore_Uri.setText(mSelected.get(0).toString()+"");
 
             //Bitmap bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), mSelected.get(0));
+            /* 设置上传按钮为灰色 */
+            mMore_Submit.setClickable(false);
+            mMore_Submit.setText("正在等待图片上传");
+            mMore_Submit.setBackgroundColor(Color.rgb(212,212,212));
+
 
             dialog = new SimpleLoadingDialog(mContext);
             dialog.setMessage("等待图片上传完成...");
+
 
             new Thread(new Runnable() {
                 @Override
@@ -325,7 +333,6 @@ public class AddCompanyActivity extends AppCompatActivity {
         }
     }
 
-
     BjcUnit e=new BjcUnit();
 
     @OnClick({R.id.mMore_Submit})
@@ -383,8 +390,8 @@ public class AddCompanyActivity extends AppCompatActivity {
 
 
         if(Sex.equals("男")){
-            e.setSex(Integer.valueOf(0));
-        }else e.setSex(Integer.valueOf(1));
+            e.setSex(Integer.valueOf(1));
+        }else e.setSex(Integer.valueOf(2));
 
         e.setPhone(Phone);
         e.setState(Integer.valueOf(1));
@@ -399,14 +406,12 @@ public class AddCompanyActivity extends AppCompatActivity {
         Log.e("TAG"," 预备提交的地址 >>>> "+ Configfile.INSERT_COMPANY);
         Log.e("TAG"," 预备提交的实体JSON >>>> "+mResult);
 
-        //NetworkTools.postHttpToolsUaerRegistite(Configfile.INSERT_COMPANY,mHandler,mResult);
         NetworkTools.httpUpload(HttpRequest.HttpMethod.POST,
                 "dataJson",mHandler,Configfile.INSERT_COMPANY,mResult);
 
 
         mCat = new CatLoadingView();
         mCat.show(getSupportFragmentManager(),"");
-
 
     }
 
@@ -457,6 +462,10 @@ public class AddCompanyActivity extends AppCompatActivity {
                             }
                         }
                         Configfile.Log(mContext,"上传完成！");
+                        /* 设置添加按钮可以被点击 */
+                        mMore_Submit.setClickable(true);
+                        mMore_Submit.setText("添加");
+                        mMore_Submit.setBackgroundColor(Color.rgb(63,81,181));
                         dialog.dismiss();
                         e.setPhotoUrl(mPathMax);
                     }else {
@@ -468,7 +477,7 @@ public class AddCompanyActivity extends AppCompatActivity {
 
                 case 0x000009:
                     int num = (int) msg.obj;
-                    if(num >= 99){
+                    if(num >= 100){
                         mMore_Uri.setText("上传完成");
                     }else mMore_Uri.setText(num+"%");
                     break;
