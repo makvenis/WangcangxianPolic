@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -39,6 +41,7 @@ import com.makvenis.dell.wangcangxianpolic.company.CompanyActivity;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
 import com.makvenis.dell.wangcangxianpolic.help.MessageEvent;
 import com.makvenis.dell.wangcangxianpolic.help.PermissionsUtils;
+import com.makvenis.dell.wangcangxianpolic.help.ScaleImage;
 import com.makvenis.dell.wangcangxianpolic.sanEntery.BjcUnit;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
@@ -52,7 +55,9 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -190,6 +195,23 @@ public class UpdateViewFragment extends Fragment {
                     mMore_Uri.setText(num+"%");
                 }
             }
+
+
+            if(msg.what == 0x000007){
+                Bundle data = msg.getData();
+                ArrayList<String> arrayList = data.getStringArrayList("delete_android_img");
+                if(arrayList.size() > 0){
+                    // TODO: 2018/6/8 执行删除
+                    //删除Android数据库中压缩的图片
+                    // TODO: 2018/6/8 执行删除的原因是因为再之前插入图片地址到Android数据库中
+                    for (int i = 0; i < arrayList.size(); i++) {
+                        if(arrayList.get(i) != null){
+                            ScaleImage.DeleteImage(arrayList.get(i),getActivity());
+                        }
+                    }
+                }
+            }
+
 
             if(msg.what == 0x000008){
 
@@ -478,7 +500,7 @@ public class UpdateViewFragment extends Fragment {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             final List<Uri> mSelected = Matisse.obtainResult(data);
 
-            /* 设置上传按钮为灰色 */
+            mMore_Uri.setText("准备中...");
             /* 设置上传按钮为灰色 */
             mMore_Submit.setClickable(false);
             mMore_Submit.setText("正在等待图片上传");
@@ -486,16 +508,24 @@ public class UpdateViewFragment extends Fragment {
             Log.e("TAG", "mSelected: " + mSelected.toString() + " 大小 " +mSelected.size());
             e.setPhotoUrl(mSelected.get(0).toString());
 
+            final ArrayList<String> mFilePath = new ArrayList<String>();
+
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     RequestParams params=new RequestParams();
                     for (int i = 0; i < mSelected.size(); i++) {
-                        String uri = getRealPathFromUri(getActivity(), mSelected.get(i));
-                        if(uri != null){
-                            //NativeUtil.compressBitmap();
-                            params.addBodyParameter("msg"+i,new File(uri));
-                        }
+                        Bitmap bitmap = ScaleImage.execute(getActivity(), mSelected.get(i));
+                        //获取文件的具体路径(数据库地址:content://media/external/images/media/273957)
+                        String filePath = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bitmap, null, null);
+                        Uri uri=Uri.parse(filePath);
+                        Log.e("IMG","压缩之后的图片路径 \n"+ filePath);
+                        String pathFromUri = getRealPathFromUri(getActivity(), uri);
+                        params.addBodyParameter("msg"+i,new File(pathFromUri));
+                        mFilePath.add(pathFromUri);
+                        //删除Android数据库中压缩的图片
+                        // TODO: 2018/6/8 执行删除的原因是因为再之前插入图片地址到Android数据库中
+                        //ScaleImage.DeleteImage(pathFromUri,AddCompanyActivity.this);
                     }
 
                     new HttpUtils(5000).send(HttpRequest.HttpMethod.POST,
@@ -511,6 +541,16 @@ public class UpdateViewFragment extends Fragment {
                                         msg.what=0x000008;
                                         msg.obj=result;
                                         mHandler.sendMessage(msg);
+                                    }
+
+                                    if(mFilePath.size() > 0){
+                                        Message msg=new Message();
+                                        msg.what=0x000007;
+                                        Bundle bundle=new Bundle();
+                                        bundle.putStringArrayList("delete_android_img",mFilePath);
+                                        msg.setData(bundle);
+                                        mHandler.sendMessage(msg);
+
                                     }
                                 }
 
@@ -542,11 +582,38 @@ public class UpdateViewFragment extends Fragment {
         }
     }
 
-    public String getRealPathFromUri(Context mContext, Uri contentUri) {
+    /**
+     *
+     * @param mContext
+     * @param path
+     * @param quality 0-100(100为原图)
+     * @return
+     */
+    public String ScaleImage(Context mContext,String path, int quality){
+
+        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, baos);
+        Log.e("IMG",path+"\n 原始大小：" + baos.toByteArray().length);
+        // 因为质量压缩不是可以无限缩小的，所以一张高质量的图片，再怎么压缩，
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, baos);
+        Log.e("IMG","\n 最终大小" + baos.toByteArray().length);
+        Bitmap mBitmap = BitmapFactory.decodeByteArray(
+                baos.toByteArray(), 0, baos.toByteArray().length);
+
+        //通过bitmap拿到图片的uri
+        String uriPath = MediaStore.Images.Media.insertImage(mContext.getContentResolver(), mBitmap, "", "");
+        Uri uri=Uri.parse(uriPath);
+        //通过uri获取文件路径（在数据库）
+        String fielPath = getRealPathFromUri(mContext, uri);
+        return fielPath;
+    }
+
+    public String getRealPathFromUri(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {
             String[] proj = { MediaStore.Images.Media.DATA };
-            cursor = mContext.getContentResolver().query(contentUri, proj, null, null, null);
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
             return cursor.getString(column_index);
@@ -556,6 +623,7 @@ public class UpdateViewFragment extends Fragment {
             }
         }
     }
+
 
     /* 获取当前单位类型 */
     @OnClick({R.id.mMore_AddrsType})

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,10 +37,10 @@ import com.makvenis.dell.wangcangxianpolic.cat.CatLoadingView;
 import com.makvenis.dell.wangcangxianpolic.company.CompanyActivity;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
 import com.makvenis.dell.wangcangxianpolic.help.PermissionsUtils;
+import com.makvenis.dell.wangcangxianpolic.help.ScaleImage;
 import com.makvenis.dell.wangcangxianpolic.sanEntery.BjcUnit;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
-import com.makvenis.dell.wangcangxianpolic.view.SimpleLoadingDialog;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.PicassoEngine;
@@ -46,7 +48,9 @@ import com.zhihu.matisse.engine.impl.PicassoEngine;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -131,7 +135,6 @@ public class AddCompanyActivity extends AppCompatActivity {
     /* 上下文 */
     public final Context mContext = AddCompanyActivity.this;
     private CatLoadingView mCat;
-    private SimpleLoadingDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -256,7 +259,7 @@ public class AddCompanyActivity extends AppCompatActivity {
             //Toast.makeText(UploadImageActivity.this,mSelected.size()+"",Toast.LENGTH_SHORT).show();
             Log.e("TAG", "mSelected: " + mSelected.toString() + " 大小 " +mSelected.size());
             e.setPhotoUrl(mSelected.get(0).toString());
-            mMore_Uri.setText(mSelected.get(0).toString()+"");
+            mMore_Uri.setText("准备中...");
 
             //Bitmap bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), mSelected.get(0));
             /* 设置上传按钮为灰色 */
@@ -265,17 +268,25 @@ public class AddCompanyActivity extends AppCompatActivity {
             mMore_Submit.setBackgroundColor(Color.rgb(212,212,212));
 
 
-            dialog = new SimpleLoadingDialog(mContext);
-            dialog.setMessage("等待图片上传完成...");
-
-
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+
+                    final ArrayList<String> mFilePath = new ArrayList<String>();
+
                     RequestParams params=new RequestParams();
                     for (int i = 0; i < mSelected.size(); i++) {
-                        String uri = getRealPathFromUri(mContext, mSelected.get(i));
-                        params.addBodyParameter("msg"+i,new File(uri));
+                        Bitmap bitmap = ScaleImage.execute(AddCompanyActivity.this, mSelected.get(i));
+                        //获取文件的具体路径(数据库地址:content://media/external/images/media/273957)
+                        String filePath = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null);
+                        Uri uri=Uri.parse(filePath);
+                        Log.e("IMG","压缩之后的图片路径 \n"+ filePath);
+                        String pathFromUri = getRealPathFromUri(AddCompanyActivity.this, uri);
+                        params.addBodyParameter("msg"+i,new File(pathFromUri));
+                        mFilePath.add(pathFromUri);
+                        //删除Android数据库中压缩的图片
+                        // TODO: 2018/6/8 执行删除的原因是因为再之前插入图片地址到Android数据库中
+                        //ScaleImage.DeleteImage(pathFromUri,AddCompanyActivity.this);
                     }
 
                     new HttpUtils(5000).send(HttpRequest.HttpMethod.POST,
@@ -290,6 +301,14 @@ public class AddCompanyActivity extends AppCompatActivity {
                                         Message msg=new Message();
                                         msg.what=0x000008;
                                         msg.obj=result;
+                                        mHandler.sendMessage(msg);
+                                    }
+                                    if(mFilePath.size() > 0){
+                                        Message msg=new Message();
+                                        msg.what=0x000007;
+                                        Bundle bundle=new Bundle();
+                                        bundle.putStringArrayList("delete_android_img",mFilePath);
+                                        msg.setData(bundle);
                                         mHandler.sendMessage(msg);
 
                                     }
@@ -313,10 +332,36 @@ public class AddCompanyActivity extends AppCompatActivity {
                             });
                 }
             }).start();
-
-
         }
     }
+
+    /**
+     *
+     * @param mContext
+     * @param path
+     * @param quality 0-100(100为原图)
+     * @return
+     */
+    public String ScaleImage(Context mContext,String path, int quality){
+
+        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, baos);
+        Log.e("IMG",path+"\n 原始大小：" + baos.toByteArray().length);
+        // 因为质量压缩不是可以无限缩小的，所以一张高质量的图片，再怎么压缩，
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, baos);
+        Log.e("IMG","\n 最终大小" + baos.toByteArray().length);
+        Bitmap mBitmap = BitmapFactory.decodeByteArray(
+                baos.toByteArray(), 0, baos.toByteArray().length);
+
+        //通过bitmap拿到图片的uri
+        String uriPath = MediaStore.Images.Media.insertImage(mContext.getContentResolver(), mBitmap, "", "");
+        Uri uri=Uri.parse(uriPath);
+        //通过uri获取文件路径（在数据库）
+        String fielPath = getRealPathFromUri(mContext, uri);
+        return fielPath;
+    }
+
 
     public String getRealPathFromUri(Context context, Uri contentUri) {
         Cursor cursor = null;
@@ -445,6 +490,23 @@ public class AddCompanyActivity extends AppCompatActivity {
                     }
 
                     break;
+
+                case 0x000007:
+                    Bundle data = msg.getData();
+                    ArrayList<String> arrayList = data.getStringArrayList("delete_android_img");
+                    if(arrayList.size() > 0){
+                        // TODO: 2018/6/8 执行删除
+                        //删除Android数据库中压缩的图片
+                        // TODO: 2018/6/8 执行删除的原因是因为再之前插入图片地址到Android数据库中
+                        for (int i = 0; i < arrayList.size(); i++) {
+                            if(arrayList.get(i) != null){
+                                ScaleImage.DeleteImage(arrayList.get(i),AddCompanyActivity.this);
+                            }
+                        }
+                    }
+
+                    break;
+
                 case 0x000008:
                     String json = (String) msg.obj;
                     List<Map<String, String>> maps = JSON.GetJson(json, new String[]{"url", "message"});
@@ -466,11 +528,9 @@ public class AddCompanyActivity extends AppCompatActivity {
                         mMore_Submit.setClickable(true);
                         mMore_Submit.setText("添加");
                         mMore_Submit.setBackgroundColor(Color.rgb(63,81,181));
-                        dialog.dismiss();
                         e.setPhotoUrl(mPathMax);
                     }else {
                         Configfile.Log(mContext,"[ERROR]"+ json);
-                        dialog.dismiss();
                     }
 
                     break;
