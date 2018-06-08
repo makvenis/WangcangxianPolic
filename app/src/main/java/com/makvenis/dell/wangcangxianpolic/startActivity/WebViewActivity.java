@@ -22,7 +22,6 @@ import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.company.CompanyActivity;
 import com.makvenis.dell.wangcangxianpolic.correctActivity.CorrectCommandActivity;
 import com.makvenis.dell.wangcangxianpolic.help.MessageEvent;
-import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -30,7 +29,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /* 作者  王从文 */
 /* 全局采用注解模式 */
@@ -74,45 +72,33 @@ public class WebViewActivity extends BaseActivity {
     @ViewInject(R.id.mUploadImageShow)
     Button mUploadImageShow;
 
-    /* 预备传递的地址 供图片查看 */
-    List<String> mUrl = new ArrayList<>();
 
 
     @OnClick({R.id.mUploadImageShow})
     public void showImage(View v){
-        if(mUrl.size() != 0){
-            Log.e("DATA","当前查看图片的集合大小 >>> "+mUrl.size()+"");
-            Intent intent=new Intent(this,ShowUploadImageActivity.class);
-            Bundle bundle=new Bundle();
-            if(mUrl.get(0) != null){
-                bundle.putString("mUrl1",mUrl.get(0));
-            }else if(mUrl.get(1) != null){
-                bundle.putString("mUrl2",mUrl.get(1));
-            }else if(mUrl.get(2) != null){
-                bundle.putString("mUrl3",mUrl.get(2));
-            }
-            intent.putExtras(bundle);
-            //startActivity(intent);
+        Log.e("mDataBase_id","上传完毕之后查看图片的集合id >>> \n"+message);
+        Intent intent=new Intent(this,ShowUploadImageActivity.class);
+        /**
+         *mTitle_intent = bundle.getString("mTitle");
+         mUrl_intent = bundle.getString("mUrl");
+         mCid = bundle.getString("mCid");
+         id = bundle.getString("id");
+         */
+        intent.putExtra("mTitle",mTitle_intent);
+        intent.putExtra("mUrl",mUrl_intent );
+        intent.putExtra("mCid", mCid);
+        intent.putExtra("id",id);
+        startActivity(intent);
 
-        }else {
-            Configfile.Log(this,"暂未上传任何图片，无法查看["+mUrl.size()+"]");
-        }
     }
 
-
-
     /* 接收广播 */
+    String message;
+    @Deprecated
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getUrl(MessageEvent msg){
-        String message = msg.getMessage();
-        String[] split = message.split(",");
-        for (int i = 0; i < split.length; i++) {
-
-            if(split[i] != null){
-                mUrl.add(split[i]);
-            }
-        }
-        Log.e("DATA","上传完毕之后查看图片的集合大小 >>> "+mUrl.size()+" \n"+mUrl.toString());
+        message = msg.getMessage();
+        Log.e("mDataBase_id","上传完毕之后查看图片的集合id >>> \n"+message);
     }
 
     @Override

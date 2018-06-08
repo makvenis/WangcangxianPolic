@@ -5,44 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.makvenis.dell.wangcangxianpolic.startActivity.ShowUploadImageActivity">
+    tools:context="com.makvenis.dell.wangcangxianpolic.startActivity.ShowUploadImageActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v4.widget.NestedScrollView
+    <include layout="@layout/public_toolbar_simple"></include>
+
+    <com.jude.rollviewpager.RollPagerView
+
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/mDatailsRoll"
+        app:rollviewpager_play_delay="3000"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_marginTop="10dp"
-                android:id="@+id/mShowImage1"
-                android:scaleType="fitXY"
-                android:layout_width="match_parent"
-                android:layout_height="120dp" />
-
-            <ImageView
-                android:layout_marginTop="10dp"
-                android:id="@+id/mShowImage2"
-                android:scaleType="fitXY"
-                android:layout_width="match_parent"
-                android:layout_height="120dp" />
-
-            <ImageView
-                android:layout_marginTop="10dp"
-                android:id="@+id/mShowImage3"
-                android:scaleType="fitXY"
-                android:layout_width="match_parent"
-                android:layout_height="120dp" />
-
-        </LinearLayout>
-
-
-
-    </android.support.v4.widget.NestedScrollView>
-
-
+    </com.jude.rollviewpager.RollPagerView>
 
 </LinearLayout>

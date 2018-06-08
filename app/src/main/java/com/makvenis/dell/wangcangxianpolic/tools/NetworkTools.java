@@ -794,7 +794,7 @@ public class NetworkTools {
                                 String[] head,
                                 String[] data,
                                 final Handler mHandler,
-                                String servicePath){
+                                final String servicePath){
         RequestParams params=new RequestParams();
         if(head.length == data.length){
             for (int i = 0; i < head.length; i++) {
@@ -808,6 +808,7 @@ public class NetworkTools {
                         @Override
                         public void onSuccess(ResponseInfo<String> responseInfo) {
                             String result = responseInfo.result;
+                            Log.e("DATA","httpload 当前地址"+servicePath+" >>> \n"+result);
                             if(result != null){
                                 Message msg=new Message();
                                 msg.what=NetworkTools.POST_OK_CALLBANK;

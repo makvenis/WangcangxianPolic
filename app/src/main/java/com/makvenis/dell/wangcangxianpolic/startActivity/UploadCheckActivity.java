@@ -1,10 +1,13 @@
 package com.makvenis.dell.wangcangxianpolic.startActivity;
 
 import android.app.ActivityOptions;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,9 +37,9 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
-import com.makvenis.dell.wangcangxianpolic.cat.CatLoadingView;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
 import com.makvenis.dell.wangcangxianpolic.help.MessageEvent;
+import com.makvenis.dell.wangcangxianpolic.help.ScaleImage;
 import com.makvenis.dell.wangcangxianpolic.sanEntery.JwScenePhoto;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
@@ -49,7 +52,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -62,7 +64,6 @@ public class UploadCheckActivity extends AppCompatActivity {
     public final String TAG="UploadCheckActivity";
 
     /* bundle 中获取的Url */
-    /* bundle 中获取的标题 */
     private String mTitle_intent;
     private String mUrl_intent;
     private String mCid;
@@ -99,8 +100,10 @@ public class UploadCheckActivity extends AppCompatActivity {
     /* 处理toolbar 结束 */
 
 
-
-    private CatLoadingView mCat;
+    /**
+     * 上传成功之后的返回当前的数据库ID 此处id并非单位id和编号一类的
+     */
+    public String mDataBase_id;
 
 
     /* 上传 */
@@ -126,12 +129,10 @@ public class UploadCheckActivity extends AppCompatActivity {
                         updateDatabase(maps);
                     }else {
                         Configfile.Log(UploadCheckActivity.this,"[ERROR]"+ json);
-                        mCat.dismiss();
                     }
-
                     break;
 
-                case 0X101:
+                case NetworkTools.POST_OK_CALLBANK:
                     String obj = ((String) msg.obj);
                     if(obj != null){
                         Log.e("TAG"," 更新之后返回的数据 "+obj);
@@ -140,23 +141,8 @@ public class UploadCheckActivity extends AppCompatActivity {
                             String state = opt.optString("state");
                             if(state.equals("OK")){
                                 Configfile.Log(UploadCheckActivity.this,"上传成功");
-                                Intent intent=new Intent(UploadCheckActivity.this,WebViewActivity.class);
-                                /**
-                                 *mTitle_intent = bundle.getString("mTitle");
-                                 mUrl_intent = bundle.getString("mUrl");
-                                 mCid = bundle.getString("mCid");
-                                 id = bundle.getString("id");
-                                 */
-                                intent.putExtra("mTitle",mTitle_intent);
-                                intent.putExtra("mUrl",mUrl_intent );
-                                intent.putExtra("mCid", mCid);
-                                intent.putExtra("id",id);
-
-                                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(UploadCheckActivity.this).toBundle());
-
-
-
-                                mCat.dismiss();
+                                String mDataBase_id = opt.optString("id");
+                                EventBus.getDefault().post(new MessageEvent(mDataBase_id));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -164,12 +150,18 @@ public class UploadCheckActivity extends AppCompatActivity {
                     }else {
                         Log.e("TAG"," 更新之后返回的数据 "+obj);
                         Configfile.Log(UploadCheckActivity.this,"上传失败");
-                        mCat.dismiss();
                     }
+                    break;
 
+                case 0x000010: //进度UI更新
+                    int num = (int) msg.obj;
+                    if(num >= 100){
+                        dialog.dismiss();
+                    }else {
+                        dialog.setProgress(num);
+                    }
                     break;
             }
-
         }
     };
 
@@ -203,18 +195,43 @@ public class UploadCheckActivity extends AppCompatActivity {
         /* 发送 */
         EventBus.getDefault().post(new MessageEvent(mPath));
 
-        NetworkTools.httpUpload(HttpRequest.HttpMethod.POST,"dataJson",mHandler,Configfile.UPLOAD_TRUE_IMAGE,
-                mResult);
+        /* 设置所有的请求头 */
+        String[] head=new String[]{"dataJson","photoname1","photoname2","photoname3"};
 
-        EventBus.getDefault().post(new MessageEvent(mPath));
 
+        String mText1 = mShowText.getText().toString();
+        String mText2 = mShowText2.getText().toString();
+        String mText3 = mShowText3.getText().toString();
+
+        /* 存储当前的三张图片地址 */
+        SharedPreferences pref = getSharedPreferences("UploadCheckActivity",MODE_PRIVATE);
+        final SharedPreferences.Editor editor = pref.edit();
+        editor.putString("url1",e.getPhotourl1());
+        editor.putString("url2",e.getPhotourl1());
+        editor.putString("url3",e.getPhotourl1());
+        editor.apply();
+
+        if(mText1 != "" && mText2 != "" && mText3 != ""){
+            /* 设置所有的值 */
+            String[] data=new String[]{mResult,mText1,mText2,mText3};
+            /* 开始上传 */
+            NetworkTools.httpload(HttpRequest.HttpMethod.POST,head,data,mHandler,Configfile.UPLOAD_TRUE_IMAGE);
+            /* 旧版本提交方式 */
+            //NetworkTools.httpUpload(HttpRequest.HttpMethod.POST,"dataJson",mHandler,Configfile.UPLOAD_TRUE_IMAGE,
+            //        mResult);
+            EventBus.getDefault().post(new MessageEvent(mPath));
+        }else {
+            Configfile.Log(this,"随笔记录不可以为空");
+            //mCat.dismiss();
+        }
     }
 
-
+    /* 上传 */
     @OnClick({R.id.mToolbar_upload})
     public void upload(View v){
-        mCat = new CatLoadingView();
-        mCat.show(getSupportFragmentManager(),"");
+        //mCat = new CatLoadingView();
+        //mCat.show(getSupportFragmentManager(),"");
+        showDialogProgrous();
         uploadImage();
     }
 
@@ -232,7 +249,6 @@ public class UploadCheckActivity extends AppCompatActivity {
         intent.putExtra("mUrl",mUrl_intent );
         intent.putExtra("mCid", mCid);
         intent.putExtra("id",id);
-
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(UploadCheckActivity.this).toBundle());
     }
 
@@ -276,7 +292,7 @@ public class UploadCheckActivity extends AppCompatActivity {
     }
 
 
-    /* 开启图片上传 */
+    /* 开启获取图片 */
     @OnClick({R.id.mShowImage})
     public void openImage(View v){
         bottomwindow(v);
@@ -284,8 +300,7 @@ public class UploadCheckActivity extends AppCompatActivity {
 
 
     /* 打开popWindows */
-        /* PopWindows 的操作等（开始） */
-
+    /* PopWindows 的操作等（开始） */
     /**
      * @ 解释直接调用 bottomwindow(view)方法
      * @ 解释 详细的不揍操作在方法setButtonListeners()里面
@@ -371,9 +386,7 @@ public class UploadCheckActivity extends AppCompatActivity {
             }
         });
     }
-
     /* PopWindows 的操作等 （结束） */
-
 
 
     List<Uri> mSelected;
@@ -393,18 +406,10 @@ public class UploadCheckActivity extends AppCompatActivity {
             img.add(mShowImage3);
 
             for (int i=0;i<mSelected.size();i++){
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelected.get(i));
-                    ImageView view = img.get(i);
-                    view.setImageBitmap(bitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+                Bitmap bitmap = ScaleImage.execute(UploadCheckActivity.this, mSelected.get(i));
+                ImageView view = img.get(i);
+                view.setImageBitmap(bitmap);
             }
-
-            // TODO: 2018/6/2  拿到数据的地址 将uri上传并且转化
-
         }
     }
 
@@ -428,7 +433,6 @@ public class UploadCheckActivity extends AppCompatActivity {
         }
     }
 
-
     public void uploadImage() {
 
         if (mSelected.size() == 0) {
@@ -441,8 +445,20 @@ public class UploadCheckActivity extends AppCompatActivity {
             public void run() {
                 final RequestParams params = new RequestParams();
                 for (int i = 0; i < mSelected.size(); i++) {
-                    params.addBodyParameter("msg" + i, new File(getRealPathFromUri(UploadCheckActivity.this, mSelected.get(i))));
+                    params.addBodyParameter("msg" + i,
+                                    new File(getRealPathFromUri(UploadCheckActivity.this,
+                                    mSelected.get(i))));
                     Log.e(TAG,"文件个数"+i);
+
+                    /* 新版本的执行压缩 */
+                    //Bitmap bitmap = ScaleImage.execute(UploadCheckActivity.this, mSelected.get(i));
+                    /* 存储这张照片 */
+                    //返回的是当前存储的图片在Android的数据库中的地址
+                    //String s = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null);
+                    //拿到具体的路径才能上传
+                    //Uri uri=Uri.parse(s);
+                    //String fromUri = getRealPathFromUri(UploadCheckActivity.this, uri);
+                    //params.addBodyParameter("msg" + i,new File(fromUri));
                 }
                 new HttpUtils(5000).send(HttpRequest.HttpMethod.POST,
                         Configfile.UPLOAD_FILE_PATH_ALL,
@@ -465,10 +481,33 @@ public class UploadCheckActivity extends AppCompatActivity {
                             @Override
                             public void onLoading(long total, long current, boolean isUploading) {
                                 super.onLoading(total, current, isUploading);
-                                Log.e(TAG, "上传比例 >>> " + current + "%");
+                                int i = (int) ((current * 100) / total);
+                                Message msg=new Message();
+                                msg.what=0x000010;
+                                msg.obj=i;
+                                mHandler.sendMessage(msg);
+                                Log.e(TAG,"当前上传进度"+i+"%");
                             }
                         });
             }
         }).start();
+    }
+
+    /* 上传进度条 */
+    ProgressDialog dialog;
+    public void showDialogProgrous(){
+        dialog=new ProgressDialog(this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        dialog.setProgress(R.mipmap.ic_launcher);
+        dialog.setSecondaryProgress(Color.RED);//设置二级进度条的背景
+        dialog.setCancelable(true);// 设置是否可以通过点击Back键取消
+        dialog.setCanceledOnTouchOutside(false);// 设置在点击Dialog外是否取消Dialog进度条
+        dialog.setIcon(R.drawable.icon_upload_dialog);//
+        // 设置提示的title的图标，默认是没有的，需注意的是如果没有设置title的话只设置Icon是不会显示图标的
+        dialog.setTitle("上传中...");
+        dialog.setProgress(0);
+        dialog.setMessage("Upload...");
+        dialog.setMax(100);
+        dialog.show();
     }
 }

@@ -283,7 +283,8 @@ public class NoticeFragment extends Fragment {
         ll_ybss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(getActivity(),ShowUploadImageActivity.class);
+                startActivity(intent);
             }
         });
     }

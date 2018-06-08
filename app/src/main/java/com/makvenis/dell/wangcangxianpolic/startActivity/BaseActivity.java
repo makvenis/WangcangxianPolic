@@ -159,7 +159,6 @@ public class BaseActivity extends AppCompatActivity{
         myListener.GetOnClinkMapListener(new SimpleBaiDuMap.GetOnClinkMapListener() {
 
             SharedPreferences pref = getSharedPreferences("set",MODE_PRIVATE);
-            final SharedPreferences.Editor editor = pref.edit();
 
             @Override
             public void showMap(final double x, final double y) { //回调的经纬度
