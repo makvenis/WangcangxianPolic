@@ -25,7 +25,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.activity.AlertPushNewsActivity;
-import com.makvenis.dell.wangcangxianpolic.activity.AlertPushPoliceActivity;
 import com.makvenis.dell.wangcangxianpolic.company.CompanyActivity;
 import com.makvenis.dell.wangcangxianpolic.company.SearchCompanyActivity;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
@@ -275,7 +274,7 @@ public class NoticeFragment extends Fragment {
         ll_jqts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), AlertPushPoliceActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+               /* startActivity(new Intent(getActivity(), AlertPushPoliceActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());*/
             }
         });
 
@@ -283,8 +282,8 @@ public class NoticeFragment extends Fragment {
         ll_ybss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),ShowUploadImageActivity.class);
-                startActivity(intent);
+               /* Intent intent=new Intent(getActivity(),ShowUploadImageActivity.class);
+                startActivity(intent);*/
             }
         });
     }

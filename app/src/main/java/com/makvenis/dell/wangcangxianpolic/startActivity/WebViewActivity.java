@@ -160,8 +160,9 @@ public class WebViewActivity extends BaseActivity {
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
         webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
         webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
-
-        mWebView.loadUrl(mUrl_intent+"&bianhao="+mCid);
+        if(mTitle_intent.equals("加油站")){
+            mWebView.loadUrl(mUrl_intent+"?bianhao="+mCid);
+        }else mWebView.loadUrl(mUrl_intent+"&bianhao="+mCid);
     }
 
     //设置标题栏Toolbar
@@ -237,7 +238,9 @@ public class WebViewActivity extends BaseActivity {
     //设置menu（右边图标）
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar, menu); //解析menu布局文件到menu
+        if(!mTitle_intent.equals("加油站")){
+            getMenuInflater().inflate(R.menu.toolbar, menu); //解析menu布局文件到menu
+        }
         return true;
     }
 

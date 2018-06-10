@@ -42,6 +42,12 @@
             android:layout_height="wrap_content" />
 
         <RadioButton
+            android:id="@+id/select_7"
+            android:text="加油站"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
             android:id="@+id/select_5"
             android:text="复查意见书"
             android:layout_width="wrap_content"

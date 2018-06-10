@@ -53,7 +53,7 @@ public class NotiflyActivity extends AppCompatActivity {
         ViewUtils.inject(this);
 
         /* 文本字 */
-        mTextView.setText("警情推送");
+        mTextView.setText("法律法规");
 
         /* 获取notifyCation传递的参数值  */
         String id = getIntent().getStringExtra("id");

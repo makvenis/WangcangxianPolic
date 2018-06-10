@@ -96,11 +96,11 @@ public class WebHtmlActivity extends AppCompatActivity {
             }
 
             switch (what){
+
                 case Configfile.CALLBANK_POST_MSG:
-                    if(obj != null){
+                    if(obj == null){
                         return;
-                    }else
-                    if(mLocal_title.equals("不同意延期整改治安隐患") || mLocal_title.equals("同意延期整改治安隐患")){
+                    }else if(mLocal_title.equals("不同意延期整改治安隐患") || mLocal_title.equals("同意延期整改治安隐患")){
                         if((object.optString("state")).equals("OK")){ //说明请求成功
                             Configfile.Log(mThis,"请求成功");
                             looading.dismiss();
@@ -138,6 +138,7 @@ public class WebHtmlActivity extends AppCompatActivity {
                             looading.dismiss();
                         }
                     }else if(mLocal_title.equals("复查意见书")){
+                        Log.e("DATA",object.optString("state"));
                         if(object.optString("state").equals("OK")){
                             Configfile.Log(mThis,"请求成功");
                             startActivity(new Intent(WebHtmlActivity.this,HomeActivity.class),ActivityOptions.makeSceneTransitionAnimation(WebHtmlActivity.this).toBundle());
@@ -389,24 +390,28 @@ public class WebHtmlActivity extends AppCompatActivity {
         }else if(mLocal_title.equals("复查意见书")){
             JwYinhuanMsgFucha e1=new JwYinhuanMsgFucha();
 
-            if(list.size() == 6){
+            if(var != null){
+                Log.e("DATA",var);
+                Map<String, Object> map = JSON.getObjectJson(var, new String[]{"num1", "num2", "time1", "textarea", "radio", "time1"});
+
                 Log.e("TAG",new Date() + " >>> 复查意见书的单位ID");
 
                 e1.setBjcUnitid(Integer.valueOf(id));        //单位ID
                 e1.setId(Integer.valueOf(0));                //主键
-                e1.setBianhao1(list.get(0));                 //编号1
-                e1.setBianhao2(Integer.valueOf(list.get(1)));//编号3
+                e1.setBianhao1(((String) map.get("num1")));                 //编号1
+                e1.setBianhao2(Integer.valueOf(((String) map.get("num2"))));//编号3
 
-                e1.setFcmsgTime(stringByDate(list.get(3)));  //复查角标时间
-                e1.setContent(list.get(4));                  //复查的内容
-                e1.setFcTime(stringByDate(list.get(3)));     //复查时间
-                if(list.get(5).equals("true")){
+                e1.setFcmsgTime(stringByDate((String) map.get("time1")));  //复查角标时间
+                e1.setContent((String) map.get("textarea"));               //复查的内容
+                e1.setFcTime(stringByDate(((String) map.get("time1"))));   //复查时间
+                boolean radio = (boolean) map.get("radio");
+                if(radio == true){
                     e1.setDabiao(Integer.valueOf(1));
                 }else {
                     e1.setDabiao(Integer.valueOf(2));
                 }
 
-                if(list.get(5).equals("true")){
+                if(radio == true){
                     e1.setHege(Integer.valueOf(1));
                 }else {
                     e1.setHege(Integer.valueOf(2));
@@ -417,7 +422,9 @@ public class WebHtmlActivity extends AppCompatActivity {
                 String mResult=com.alibaba.fastjson.JSON.toJSONString(e1);
                 Log.e("TAG"," 预备提交的地址 >>>> "+Configfile.OVER_POST_CORECT_FUCHA);
                 Log.e("TAG"," 预备提交的实体JSON >>>> "+mResult);
-                //提交
+                String[] head=new String[]{"dataJson"};
+                String[] data=new String[]{mResult};
+                //NetworkTools.httpload(HttpRequest.HttpMethod.POST,head,data,mHandler,Configfile.OVER_POST_CORECT_FUCHA);
                 NetworkTools.postHttpToolsUaerRegistite(Configfile.OVER_POST_CORECT_FUCHA,mHandler,mResult);
             }else {
                 Configfile.Log(this,"请完善所有的选项");

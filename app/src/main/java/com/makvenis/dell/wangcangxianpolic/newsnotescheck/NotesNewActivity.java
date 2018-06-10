@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.IdRes;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -256,11 +258,56 @@ public class NotesNewActivity extends BaseActivity implements GestureDetector.On
             Log.e("DATA","最外层集合mQuestion"+mQuestion.size());
         }
 
+
+
+
         //添加body(中间部分)的子View
         for (int i = 0;i<mQuestion.size();i++){
             Question question = mQuestion.get(i);
             mViewFlipper.addView(addQuestionView(question,i));
         }
+
+        if(mtitle.equals("加油站")){
+            View view = View.inflate(this,R.layout.view_add_jiayou, null);
+            mViewFlipper.addView(view);
+            /* 点击事件等操作 */
+            setOnclinkViewJiayou(view);
+        }
+
+    }
+
+    private void setOnclinkViewJiayou(View view) {
+
+        final JwjcDetails mEntry=new JwjcDetails();
+
+        RadioGroup group = (RadioGroup) view.findViewById(R.id.mJiayouRadioGroup);
+        /* 处理button的按钮事件 */
+        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                switch (checkedId){
+                    case R.id.mJiayouBtn1:
+                        mViewFlipper.setInAnimation(animations[0]);
+                        mViewFlipper.setOutAnimation(animations[1]);
+                        mViewFlipper.showNext();
+                        break;
+
+                    case R.id.mJiayouBtn2:
+                        mViewFlipper.setInAnimation(animations[0]);
+                        mViewFlipper.setOutAnimation(animations[1]);
+                        mViewFlipper.showNext();
+                        break;
+
+                    case R.id.mJiayouBtn3:
+                        mViewFlipper.setInAnimation(animations[0]);
+                        mViewFlipper.setOutAnimation(animations[1]);
+                        mViewFlipper.showNext();
+                        break;
+                }
+            }
+        });
+
+        //Configfile
 
     }
 
@@ -398,7 +445,7 @@ public class NotesNewActivity extends BaseActivity implements GestureDetector.On
         /* 获取输入的用户数据 */
         String m_jc_zgnr_text = jc_zgnr.getText().toString(); //检查整改内容的用户输入数据
         String m_jc_zgtl_set = jc_zgtl_set.getText().toString(); //检查整改条例
-        String m_jc_zgsj_set = jc_zgsj_set.getText().toString(); //整改完毕时间
+        //String m_jc_zgsj_set = jc_zgsj_set.getText().toString(); //整改完毕时间
         String m_jc_cqcs_set = jc_cqcs.getText().toString();
 
 
@@ -456,6 +503,7 @@ public class NotesNewActivity extends BaseActivity implements GestureDetector.On
             mEntry.setZgmethod(m_jc_cqcs_set);
 
 
+
             /* 查看图片是否回调成功 */
             Log.e("TAG","被检查 >>>>" + mByteString_bjc.toString());
             Log.e("TAG","检查 >>>>" + mByteString_jc.toString());
@@ -477,8 +525,12 @@ public class NotesNewActivity extends BaseActivity implements GestureDetector.On
                 /* 启用子线程 */
                 NetworkTools.postHttpToolsUaerRegistite(Configfile.FORM_POST_SERVICE_TABLE_JSON_MINBAO_PATH,
                         mHandler, mResult,name);
+            }else if(mtitle.equals("加油站")){
+                Log.e("DATA","当前提交的地址是"+Configfile.FORM_POST_SERVICE_TABLE_JSON_JAIYOUZHAN);
+                /* 启用子线程 */
+                NetworkTools.postHttpToolsUaerRegistite(Configfile.FORM_POST_SERVICE_TABLE_JSON_JAIYOUZHAN,
+                        mHandler, mResult,name);
             }else {
-
                 /* 启用子线程 */
                 NetworkTools.postHttpToolsUaerRegistite(Configfile.FORM_POST_SERVICE_TABLE_JSON_PATH,
                         mHandler, mResult,name);

@@ -358,6 +358,12 @@ public class CompanyActivity extends BaseActivity{
                         getNetJsonString(CompanyActivity.this,Configfile.FORM_GET_TABLE_5,mHandler,Configfile.FORM_SQL_DATABASE_5,bundle6);
                         loadingDialog();
                         break;
+                    case R.id.select_7:
+                        //参数（是否具有头部文件，头部文件id，是否具有脚部文件，脚部文件id）
+                        Bundle bundle7 = creadCondationDefault(id,false, 0, true, R.layout.public_item_notes_foot,Configfile.FORM_SQL_DATABASE_7,"加油站",Configfile.RESULT_HTML_TYPE_7);
+                        getNetJsonString(CompanyActivity.this,Configfile.FORM_GET_TABLE_7,mHandler,Configfile.FORM_SQL_DATABASE_7,bundle7);
+                        loadingDialog();
+                        break;
                 }
             }
         });

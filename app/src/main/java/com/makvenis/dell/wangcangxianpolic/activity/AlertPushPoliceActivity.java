@@ -61,6 +61,7 @@ public class AlertPushPoliceActivity extends AppCompatActivity {
         /* 获取绑定事件以及获取数据 */
         setDataAdapter();
 
+
         /* 处理刷新事件 */
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

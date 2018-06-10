@@ -102,6 +102,9 @@ public class Configfile {
     public static final String FORM_GET_TABLE_4=Configfile.WEB+"mobile/getDataforQuest?type=4";
     //校园治安保卫工作检查登记表
     public static final String FORM_GET_TABLE_5=Configfile.WEB+"mobile/toshowminbao";
+    //民爆安全检查表的json
+    public static final String FORM_GET_TABLE_7=Configfile.WEB+"mobile/getDataforQuest?type=6";
+    //加油站的json请求表
 
     /* 以下是数据库存储四张JSON的key键 也是取出数据的条件 */
     public static final String FORM_SQL_DATABASE_1="FORM_SQL_DATABASE_1"; //旅店安全检查 存储json
@@ -109,6 +112,7 @@ public class Configfile {
     public static final String FORM_SQL_DATABASE_3="FORM_SQL_DATABASE_3"; //寄递物流业安全检查登记表 存储json
     public static final String FORM_SQL_DATABASE_4="FORM_SQL_DATABASE_4"; //校园治安保卫工作检查登记表 存储json
     public static final String FORM_SQL_DATABASE_5="FORM_SQL_DATABASE_5"; //民爆存储json
+    public static final String FORM_SQL_DATABASE_7="FORM_SQL_DATABASE_5"; //加油站json
 
     /* 以下是每一张json对应的html结果网页地址 只是在WebViewActivity中使用 */
     public static final String RESULT_HTML_TYPE_1=Configfile.WEB+"mobile/toshowDengji?type=1";
@@ -116,6 +120,7 @@ public class Configfile {
     public static final String RESULT_HTML_TYPE_3=Configfile.WEB+"mobile/toshowDengji2?type=3";
     public static final String RESULT_HTML_TYPE_4=Configfile.WEB+"mobile/toshowDengji2?type=4";
     public static final String RESULT_HTML_TYPE_5=Configfile.WEB+"mobile/toshowDengji3?type=3";
+    public static final String RESULT_HTML_TYPE_7=Configfile.WEB+"mobile/toshowDengji4";
 
     /***
      * @ 解释: 当使用检查项目的提交时候分别提交的地址
@@ -126,7 +131,7 @@ public class Configfile {
      */
     public static final String FORM_POST_SERVICE_TABLE_JSON_PATH=Configfile.WEB+"mobile/toSaveDengjiData";
     public static final String FORM_POST_SERVICE_TABLE_JSON_MINBAO_PATH=Configfile.WEB+"mobile/doinsertminbao";
-
+    public static final String FORM_POST_SERVICE_TABLE_JSON_JAIYOUZHAN=Configfile.WEB+"mobile/toSaveGasStation";
 
     /* 当Post请求的时候 回调的数据 msg的值 */
     public static final int CALLBANK_POST_MSG=0X000005;

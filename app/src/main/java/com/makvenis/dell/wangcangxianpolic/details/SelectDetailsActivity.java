@@ -64,6 +64,8 @@ public class SelectDetailsActivity extends AppCompatActivity {
 
         PermissionsUtils permissionsUtils=new PermissionsUtils();
         permissionsUtils.SetPermissionForNormal(this);
+        
+        mTextView.setText("单位信息及其更改");
 
         /* 默认加载第一个碎片 */
         manager=getSupportFragmentManager();

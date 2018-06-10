@@ -155,11 +155,11 @@ public class ToViewFragment extends Fragment {
 
             Map<String, Object> json = JSON
                     .getObjectJson(result,
-                    new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum","photoUrl"});
+                    new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum"});
 
-            String[] key = new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum","photoUrl"};
+            String[] key = new String[]{"address", "attr", "legalaName", "level", "name", "pcs", "phone","type", "zjnum"};
 
-            String[] name = new String[]{"单位地址", "单位属性", "法人姓名", "管理等级", "单位名称", "管辖单位", "电话","证件类型", "证件编号","图片地址"};
+            String[] name = new String[]{"单位地址", "单位属性", "法人姓名", "管理等级", "单位名称", "管辖单位", "电话","证件类型", "证件编号"};
             if(json.size() != 0){
                 /* 构建第一组 */
                 List<Map<String,String>> minDataImg = new ArrayList<>();

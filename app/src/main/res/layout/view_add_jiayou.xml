@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="#e8e8e8"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#9ea0a7"
+        android:text="完成97%"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <!-- 进度条 -->
+    <ProgressBar
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:max="96"
+        android:progress="100"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:padding="10dp"
+        android:gravity="center|start"
+        android:text="加油站属性"
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
+    <RadioGroup
+        android:layout_marginTop="10dp"
+        android:background="#FFFFFF"
+        android:id="@+id/mJiayouRadioGroup"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <RadioButton
+            android:id="@+id/mJiayouBtn1"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:text="中石油"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/mJiayouBtn2"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:text="中石化"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/mJiayouBtn3"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:text="社会加油站"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RadioGroup>
+
+</LinearLayout>
