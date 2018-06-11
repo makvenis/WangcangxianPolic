@@ -16,17 +16,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.lidroid.xutils.HttpUtils;
+import com.baoyz.widget.PullRefreshLayout;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
 import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
+import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +36,9 @@ public class AddViewFragment extends Fragment {
 
     @ViewInject(R.id.mDetailsHistory)
     RecyclerView mDetailRecycle;
+
+    @ViewInject(R.id.mSwipe)
+    PullRefreshLayout mSwipe;
 
     /* 全局集合 */
     List<Map<String,String>> data=new ArrayList<>();
@@ -68,6 +68,15 @@ public class AddViewFragment extends Fragment {
         adapter = new HistoryAdapter(data,getActivity());
         mDetailRecycle.setAdapter(adapter);
 
+        /* 刷新数据 */
+        mSwipe.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSwipe.setRefreshing(true);
+                createDataHistory();
+            }
+        });
+
     }
 
 
@@ -87,16 +96,19 @@ public class AddViewFragment extends Fragment {
                     String obj = (String) msg.obj;
                     if(obj != null){
 
-                        // TODO: 2018/6/5 设置适配器 去烧参数 编号（bianhao）
-                        List<Map<String, String>> maps = JSON.GetJson(obj, new String[]{"id", "jctime", "remark", "type", "unitid", "username","bianhao"});
+                        if(data.size() > 0){
+                            data.clear();
+                        }
+                        // TODO: 2018/6/5 设置适配器 参数 编号（bianhao）
+                        List<Map<String, String>> maps = JSON.GetJson(obj,
+                                new String[]{"id", "jctime", "remark", "type", "unitid", "username","bianhao"});
                         for (int i = 0; i < maps.size(); i++) {
                             Map<String, String> p = maps.get(i);
                             data.add(p);
                         }
-
+                        mSwipe.setRefreshing(false);
                         adapter.notifyDataSetChanged();
                     }
-
                     break;
             }
         }
@@ -134,7 +146,6 @@ public class AddViewFragment extends Fragment {
         if(url != null){
 
             int i = Integer.valueOf(url).intValue();
-            //Configfile
             switch (i){
 
                 case 0:
@@ -149,6 +160,8 @@ public class AddViewFragment extends Fragment {
                     return Configfile.RESULT_HTML_TYPE_4;
                 case 5:
                     return Configfile.RESULT_HTML_TYPE_5;
+                case 6:
+                    return Configfile.RESULT_HTML_TYPE_7;
 
             }
 
@@ -184,32 +197,21 @@ public class AddViewFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                new HttpUtils(5000).send(HttpRequest.HttpMethod.GET,
-                        url,
-                        new RequestCallBack<String>() {
-                            @Override
-                            public void onSuccess(ResponseInfo<String> responseInfo) {
-
-                                String s = responseInfo.result;
-
-                                if(s != null){
-                                    Message msg=new Message();
-                                    msg.what=1;
-                                    msg.obj=s;
-                                    mHandler.sendMessage(msg);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(HttpException e, String s) {
-
-                            }
-                        });
-
-
+                byte[] bytes = NetworkTools.NetShow(url);
+                String mResult = new String(bytes);
+                if(mResult != null){
+                    Message msg=new Message();
+                    msg.what=1;
+                    msg.obj=mResult;
+                    mHandler.sendMessage(msg);
+                }else {
+                    Message msg=new Message();
+                    msg.what=1;
+                    msg.obj=null;
+                    mHandler.sendMessage(msg);
+                }
             }
         }).start();
-
     }
 
     /* 为了方便管理 此页面的适配器就写在此处 */

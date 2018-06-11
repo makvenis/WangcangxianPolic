@@ -119,8 +119,8 @@ public class Configfile {
     public static final String RESULT_HTML_TYPE_2=Configfile.WEB+"mobile/toshowDengji2?type=2";
     public static final String RESULT_HTML_TYPE_3=Configfile.WEB+"mobile/toshowDengji2?type=3";
     public static final String RESULT_HTML_TYPE_4=Configfile.WEB+"mobile/toshowDengji2?type=4";
-    public static final String RESULT_HTML_TYPE_5=Configfile.WEB+"mobile/toshowDengji3?type=3";
-    public static final String RESULT_HTML_TYPE_7=Configfile.WEB+"mobile/toshowDengji4";
+    public static final String RESULT_HTML_TYPE_5=Configfile.WEB+"mobile/toshowDengji3?type=5";
+    public static final String RESULT_HTML_TYPE_7=Configfile.WEB+"mobile/toshowDengji4?type=6";
 
     /***
      * @ 解释: 当使用检查项目的提交时候分别提交的地址
