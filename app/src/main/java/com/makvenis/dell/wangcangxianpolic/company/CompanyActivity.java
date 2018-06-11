@@ -38,6 +38,7 @@ import com.makvenis.dell.wangcangxianpolic.startActivity.BaseActivity;
 import com.makvenis.dell.wangcangxianpolic.startActivity.HomeActivity;
 import com.makvenis.dell.wangcangxianpolic.startActivity.WebHtmlActivity;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
+import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleLoadingDialog;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleRecycleScollView;
 
@@ -90,7 +91,8 @@ public class CompanyActivity extends BaseActivity{
                         List<Map<String, String>> list = JSON.GetJson(result, new String[]{"address", "attr", "name", "photoUrl","id"});
 
                         if(maps.size() > 0){
-                            maps.removeAll(maps);
+                            //maps.removeAll(maps);
+                            maps.clear();
                             Log.e("DATA","现在maps集合大小为" + maps.size()+"");
                         }
                         for (int i = 0; i < list.size(); i++) {
@@ -98,6 +100,7 @@ public class CompanyActivity extends BaseActivity{
                         }
                         Log.e("TAG",maps.size()+" \n "+new Date()+" >>> "+maps.toString());
                         mSwipeRefreshLayout.setRefreshing(false);
+                        //mAdapter.notifyAll();
                         mAdapter.notifyDataSetChanged();
                         Configfile.Log(CompanyActivity.this,"刷新成功！");
                     }
@@ -174,28 +177,19 @@ public class CompanyActivity extends BaseActivity{
     /* 刷新使用 下载使用 */
     public void swipeData(){
         mSwipeRefreshLayout.setRefreshing(true);
+        /* 不启用缓存技术 */
+        final String mPath = Configfile.COMPANY_URL + getSqliteName();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                new HttpUtils(5000).send(HttpRequest.HttpMethod.GET,
-                        Configfile.COMPANY_URL+getSqliteName(),
-                        new RequestCallBack<String>() {
-                            @Override
-                            public void onSuccess(ResponseInfo<String> responseInfo) {
-                                String result = responseInfo.result;
-                                if(result != null){
-                                    Message msg=new Message();
-                                    msg.what=0X000005;
-                                    msg.obj=result;
-                                    mHandler.sendMessage(msg);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(HttpException e, String s) {
-                                Configfile.Log(CompanyActivity.this,"网络链接失败！");
-                            }
-                        });
+                byte[] show = NetworkTools.NetShow(mPath);
+                String mResult=new String(show);
+                if(mResult != null){
+                    Message msg=new Message();
+                    msg.what=0X000005;
+                    msg.obj=mResult;
+                    mHandler.sendMessage(msg);
+                }
             }
         }).start();
     }
@@ -290,25 +284,16 @@ public class CompanyActivity extends BaseActivity{
         swipeData();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /* 返回刷新 */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 200 && requestCode == RESULT_OK){
+            Log.e("CODE","onActivityResult requestCode" + requestCode);
+            mSwipeRefreshLayout.setRefreshing(true);
+            swipeData();
+        }
+    }
 
     /* ------------------------------Dialog的处理事件--------------------------------- */
     public void getRadioGroupCheck(RadioGroup mGroup, final String id){

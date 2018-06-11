@@ -1,6 +1,5 @@
 package com.makvenis.dell.wangcangxianpolic.details;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -156,9 +155,9 @@ public class UpdateViewFragment extends Fragment {
                                 Configfile.Log(getActivity(), "修改成功");
                                 /* 返回单位列表页 */
                                 Intent intent=new Intent(getActivity(), CompanyActivity.class);
-                                intent.putExtra("bank_id","0");
-                                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
-
+                                //intent.putExtra("bank_id","0");
+                                //startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                                startActivityForResult(intent,200);
                                 EventBus.getDefault().post(new MessageEvent("ok"));
 
                             }else {

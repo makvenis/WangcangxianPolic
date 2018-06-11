@@ -122,13 +122,15 @@ public class SelectDetailsActivity extends AppCompatActivity {
     /* 返回 */
     @OnClick({R.id.toolbar_callbank})
     public void oncklinkViewImage(View v){
-        startActivity(new Intent(this, CompanyActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        Intent intent = new Intent(this, CompanyActivity.class);
+        startActivityForResult(intent,200, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
     /* 返回 */
     @OnClick({R.id.toolbar_callbank_text})
     public void oncklinkViewTextView(View v){
-        startActivity(new Intent(this, CompanyActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        Intent intent = new Intent(this, CompanyActivity.class);
+        startActivityForResult(intent,200, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
 }
