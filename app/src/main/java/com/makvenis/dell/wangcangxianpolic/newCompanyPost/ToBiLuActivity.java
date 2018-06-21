@@ -43,7 +43,6 @@ public class ToBiLuActivity extends AppCompatActivity {
     public static final String TAG = "ToYesActivity";
 
     /* 获取父类的参数信息 */
-    private String mBianhao;
     private String mUrl;
     private String mtitle;
     private String id;
@@ -92,7 +91,6 @@ public class ToBiLuActivity extends AppCompatActivity {
     public void getParemnt() {
         //页面接收数据
         Bundle bundle = this.getIntent().getExtras();
-        mBianhao = bundle.getString("mLocal_bianhao");
         mUrl = bundle.getString("mUrl");
         mtitle = bundle.getString("l_title");
         id = bundle.getString("id");
@@ -119,6 +117,7 @@ public class ToBiLuActivity extends AppCompatActivity {
         Log.e(TAG,"适配器返回的值 >>> \n >>> map1:"+map1.toString() +"\n >>> map2:"+map2.toString()+"\n >>> map3:"+map3.toString());
 
         if(map1 != null && map2 != null && map3 != null ){
+
             Jcbilu e1=new Jcbilu();
             /* "readHead","number","document" */
             e1.setJcProjectid(Integer.valueOf(id));      //单位ID "readHead","number"

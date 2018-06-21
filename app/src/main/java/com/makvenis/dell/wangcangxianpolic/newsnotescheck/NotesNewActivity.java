@@ -403,7 +403,7 @@ public class NotesNewActivity extends BaseActivity implements GestureDetector.On
 
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        text.setText(year + "年" + monthOfYear+ "月" + dayOfMonth + "日");
+                        text.setText(year + "年" + (monthOfYear+1)+ "月" + dayOfMonth + "日");
                         Log.e("TAG","获取事件"+year + "年" + monthOfYear+ "月" + dayOfMonth + "日");
                     }
                 }

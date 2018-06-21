@@ -2,6 +2,8 @@ package com.makvenis.dell.wangcangxianpolic.details;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,10 +12,15 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.baoyz.widget.PullRefreshLayout;
@@ -21,11 +28,16 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.help.JSON;
+import com.makvenis.dell.wangcangxianpolic.newCompanyPost.ToBiLuActivity;
+import com.makvenis.dell.wangcangxianpolic.newCompanyPost.ToNoActivity;
+import com.makvenis.dell.wangcangxianpolic.newCompanyPost.ToYesActivity;
 import com.makvenis.dell.wangcangxianpolic.newdbhelp.AppMothedHelper;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -116,10 +128,8 @@ public class AddViewFragment extends Fragment {
 
     /* 根据Type获取当前的检查类型 */
     public String getTypeTable(String type) {
-
         if(type != null){
-
-            int i = Integer.valueOf(type).intValue();
+            int i = Integer.valueOf(type.trim()).intValue();
             switch (i){
 
                 case 0:
@@ -162,17 +172,11 @@ public class AddViewFragment extends Fragment {
                     return Configfile.RESULT_HTML_TYPE_5;
                 case 6:
                     return Configfile.RESULT_HTML_TYPE_7;
-
             }
-
-
         }
 
         return null;
     }
-
-
-
 
     /* 获取用户信息列表 */
     public String getSqliteName(){
@@ -186,13 +190,20 @@ public class AddViewFragment extends Fragment {
         return s;
     }
 
+    /* 获取依赖本Activity的单位ID */
+    public String getXmlIdString(){
+        SharedPreferences xmlId = getActivity().getSharedPreferences("xmlId", Context.MODE_PRIVATE);
+        String xmlIdString = xmlId.getString("id", "0");
+        Log.e("TAG","haredPreferences()" + xmlIdString);
+        return xmlIdString;
+    }
 
     /* 获取数据 */
     public void createDataHistory(){
         String path = Configfile.HISTORY_PATH;
         /* 数据库查询当前登陆用户名称 */
         String name = getSqliteName();
-        final String url=path+name;
+        final String url=path+name+"&danweiId="+getXmlIdString();
         Log.e("DATA","当前用户去获取检查历史请求地址为 >>>"+url);
         new Thread(new Runnable() {
             @Override
@@ -239,18 +250,27 @@ public class AddViewFragment extends Fragment {
                 //"id", "jctime", "remark", "type", "unitid", "username"
                 //赋值
                 holder.name.setText(map.get("username"));
-
                 final String type = map.get("type");
-                final String table = getTypeTable(type);
-                holder.company.setText(table);
+                final String table = getTypeTable(type.trim());
+                Log.e("TAG",type+" "+table);
+                holder.company.setText(map.get("remark"));
                 holder.id.setText(position+"");
                 holder.title.setText(map.get("remark"));
                 final String bianhao = map.get("bianhao");
 
-                /* 获取价差时间 */
+                /* 获取检查时间 */
                 String jctime = map.get("jctime");
+                Log.e("TAG",jctime);
                 /* 获取被检查单位ID */
                 final String unitid = map.get("unitid");
+                /* long 转 date() */
+                Calendar cal = Calendar.getInstance();
+                long longValue = Long.parseLong(jctime);
+                cal.setTimeInMillis(longValue);
+                Date date = cal.getTime();
+                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                String format = sdf.format(date);
+                holder.mHistory_company_time.setText(format);
 
                 Log.e("DATA","jctime:"+jctime+" >>> unitid"+unitid);
 
@@ -275,6 +295,15 @@ public class AddViewFragment extends Fragment {
                         startActivity(intent);
                     }
                 });
+
+                /* 继续检查 */
+                holder.mHistory_ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String mStringTableOfOne = "限期整改治安隐患通知书";
+                        bottomwindow(v,unitid,map.get("remark"));
+                    }
+                });
             }
         }
 
@@ -295,6 +324,11 @@ public class AddViewFragment extends Fragment {
             @ViewInject(R.id.mHistory_gone)    //是否是最新的内容选择隐藏还是显示
             ImageView gone;
 
+            @ViewInject(R.id.mHistory_company_time)
+            TextView mHistory_company_time;    //检查时间
+            @ViewInject(R.id.mHistory_ok)
+            ImageView mHistory_ok;
+
             public SimpleViewHolder(View itemView) {
                 super(itemView);
                 ViewUtils.inject(this,itemView);
@@ -304,4 +338,167 @@ public class AddViewFragment extends Fragment {
     }
 
 
+
+        /* PopWindows 的操作等（开始） */
+    /**
+     * @ 解释直接调用 bottomwindow(view)方法
+     * @ 解释 详细的不揍操作在方法setButtonListeners()里面
+     */
+    private PopupWindow popupWindow;
+
+    public void bottomwindow(View view,String unitid,String remark) {
+
+        if (popupWindow != null && popupWindow.isShowing()) {
+            return;
+        }
+        LinearLayout layout;
+        if(remark.indexOf("限期整改治安隐患通知书") != -1){
+            //包含 表明当前的是处于限期整改治安隐患通知书
+            Log.e("TAG","当前检查历史处于"+ remark + (remark.indexOf("限期整改治安隐患通知书") != -1)+"");
+            layout = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.layout_history_yeoorno_details, null);
+        }else {
+            Log.e("TAG","当前检查历史处于 else 部分");
+            layout = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.layout_history_start_details, null);
+        }
+        popupWindow = new PopupWindow(layout,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        //点击空白处时，隐藏掉pop窗口
+        popupWindow.setFocusable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        //添加弹出、弹入的动画
+        popupWindow.setAnimationStyle(R.style.Popupwindow);
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+        popupWindow.showAtLocation(view, Gravity.LEFT | Gravity.BOTTOM, 0, -location[1]);
+        //添加按键事件监听
+        setButtonListeners(layout,unitid,remark);
+        //添加pop窗口关闭事件，主要是实现关闭时改变背景的透明度
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1f);
+            }
+        });
+        backgroundAlpha(0.5f);
+    }
+
+    private void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getActivity().getWindow().setAttributes(lp);
+        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+
+    }
+
+    /* PopWindows的控件全局变量 */
+    private TextView danwei,faren,dizhi;
+
+    public void setButtonListeners(LinearLayout view,final String unitid,String remark) { //
+
+        if(remark.indexOf("限期整改治安隐患通知书") != -1){
+
+            Button xqzg = (Button) view.findViewById(R.id.mHistory_start_xqzg);
+            Button zlzg = (Button) view.findViewById(R.id.mHistory_start_zlzg);
+            Button jcbl = (Button) view.findViewById(R.id.mHistory_start_jcbl);
+
+            xqzg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(getActivity(), ToYesActivity.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putString("l_title","同意延期整改治安隐患");
+                    bundle.putString("mUrl","");
+                    bundle.putString("id",unitid);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+
+            zlzg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(getActivity(), ToNoActivity.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putString("l_title","不同意延期整改治安隐患");
+                    bundle.putString("mUrl","");
+                    bundle.putString("id",unitid);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+
+            jcbl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //页面接收数据
+                    //Bundle bundle = this.getIntent().getExtras();
+                    //mBianhao = bundle.getString("mLocal_bianhao");
+                    //mUrl = bundle.getString("mUrl");
+                    //mtitle = bundle.getString("l_title");
+                    //id = bundle.getString("id");
+                    Intent intent=new Intent(getActivity(), ToBiLuActivity.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putString("l_title","检查笔录");
+                    bundle.putString("mUrl","");
+                    bundle.putString("id",unitid);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+
+        }else {
+
+            Button xqzg = (Button) view.findViewById(R.id.mHistory_start_xqzg);
+            Button zlzg = (Button) view.findViewById(R.id.mHistory_start_zlzg);
+            Button dccf = (Button) view.findViewById(R.id.mHistory_start_dccf);
+            Button jcbl = (Button) view.findViewById(R.id.mHistory_start_jcbl);
+            final int TYPE_XQZG = 1;
+            final int TYPE_ZLZG = 2;
+            final int TYPE_DCCF = 3;
+            final int TYPE_JCBL = 4;
+
+            xqzg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DetailsUtils.getMethondDetails(TYPE_XQZG, unitid, getActivity());
+                }
+            });
+
+            zlzg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DetailsUtils.getMethondDetails(TYPE_ZLZG, unitid, getActivity());
+                }
+            });
+
+            dccf.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DetailsUtils.getMethondDetails(TYPE_DCCF, unitid, getActivity());
+                }
+            });
+
+            jcbl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //页面接收数据
+                    //Bundle bundle = this.getIntent().getExtras();
+                    //mBianhao = bundle.getString("mLocal_bianhao");
+                    //mUrl = bundle.getString("mUrl");
+                    //mtitle = bundle.getString("l_title");
+                    //id = bundle.getString("id");
+                    Intent intent=new Intent(getActivity(), ToBiLuActivity.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putString("l_title","检查笔录");
+                    bundle.putString("mUrl","");
+                    bundle.putString("id",unitid);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+        }
+    }
+
+    /* PopWindows 的操作等 （结束） */
 }

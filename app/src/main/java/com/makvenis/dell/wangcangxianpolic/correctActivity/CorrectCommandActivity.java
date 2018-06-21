@@ -41,7 +41,6 @@ import com.makvenis.dell.wangcangxianpolic.sanEntery.JwNowchufamsg;
 import com.makvenis.dell.wangcangxianpolic.sanEntery.JwYinhuanMsg;
 import com.makvenis.dell.wangcangxianpolic.startActivity.BaseActivity;
 import com.makvenis.dell.wangcangxianpolic.startActivity.WebPostRemarkActivity;
-import com.makvenis.dell.wangcangxianpolic.startActivity.WebViewActivity;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
 import com.makvenis.dell.wangcangxianpolic.tools.NetworkTools;
 import com.makvenis.dell.wangcangxianpolic.view.SimpleLoadingDialog;
@@ -271,8 +270,8 @@ public class CorrectCommandActivity extends BaseActivity {
     CardView mCardView_23;
     /* End Find  */
 
-    @ViewInject(R.id.toolbar_bank)
-    ImageView mImageView_bank;
+/*    @ViewInject(R.id.toolbar_bank)
+    ImageView mImageView_bank;*/
 
     /* 提交按钮 */
     @ViewInject(R.id.mPostData)
@@ -312,8 +311,8 @@ public class CorrectCommandActivity extends BaseActivity {
                         if(state.equals("OK")){
                             Configfile.Log(CorrectCommandActivity.this,"提交成功");
                             String bianhao = object.optString("bianhao");
-                            jumpActivity(bianhao,"旺苍县公安局责令改正通知书",Configfile.SERVICE_WEB+"toshowxqzg");
-
+                            Log.e("TAG","旺苍县公安局责令改正通知书--预备跳转的地址和编号"+Configfile.SERVICE_WEB+"toshowxqzg"+" 编号 "+bianhao);
+                            jumpActivity(bianhao,"旺苍县公安局责令改正通知书",Configfile.SERVICE_WEB+"toshowgaizheng");
                         }
                         dialog.dismiss();
                     }else if(mTitleParment.equals("旺苍县公安局当场处罚决定书")){
@@ -540,11 +539,11 @@ public class CorrectCommandActivity extends BaseActivity {
         setAllOnClinkListener();
 
         /* 其他点击事件 */
-        setOtherClinkListener();
+        //setOtherClinkListener();
 
     }
 
-    private void setOtherClinkListener() {
+/*    private void setOtherClinkListener() {
         // 返回WebViewActivity主页
         mImageView_bank.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -552,7 +551,7 @@ public class CorrectCommandActivity extends BaseActivity {
                 startActivity(new Intent(CorrectCommandActivity.this, WebViewActivity.class));
             }
         });
-    }
+    }*/
 
     private void setAllOnClinkListener() {
         /* 出生日期的选择 */
@@ -698,8 +697,9 @@ public class CorrectCommandActivity extends BaseActivity {
                     /* 拼接 13 */
                     String zgcs_time = mOverTime_set_zgcs.getText().toString();
                     String zgcs_neirong = mOverTime_set_text.getText().toString();
-                    if(zgcs_time != null && zgcs_neirong != null){
-                        e.setGzWay("在"+zgcs_time+"前改正或者整改完毕，并将结果函告我单位。在期限届满之前，你（单位）必须"+ zgcs_neirong);
+                    Log.e("DATA","整改完毕时间"+zgcs_time);
+                    if(!zgcs_time.equals("")){
+                        e.setGzWay("在"+zgcs_time+"之前改正或者整改完毕，并将结果函告我单位。在期限届满之前，你（单位）必须"+ zgcs_neirong);
                     }else {
                         e.setGzWay("立即停止");
                     }
@@ -762,7 +762,7 @@ public class CorrectCommandActivity extends BaseActivity {
                     e.setContent(mObjectMapData.get("mCardView_9"));            //存在的违法行为
                     e.setBianhao1(mObjectMapData.get("xq_wg"));                 //旺公（）
                     e.setBianhao2(Integer.valueOf(mObjectMapData.get("xq_ztz"))); //责通字
-                    e.setBianhao3(Integer.valueOf(mObjectMapData.get("xq_num"))); //第()号
+                    e.setBianhao3(Integer.valueOf(0));                          //第()号
                     e.setId(Integer.valueOf(0));                                //主键ID
                     //e.setJcName(mObjectMapData.get("mCardView_22"));          //被检查单位签名
                     e.setJcName(mObjectMapData.get("mCardView_23"));            //被检查单位签名
@@ -771,7 +771,6 @@ public class CorrectCommandActivity extends BaseActivity {
                     if(mObjectMapData.get("mCardView_17") != null){
                         String view17 = mObjectMapData.get("mCardView_17");
                         Log.e("TAG","===="+view17);
-
                         String replace = view17.replace("年", "-");
                         String replace1 = replace.replace("月", "-");
                         String replace2 = replace1.replace("日", "");
@@ -887,7 +886,7 @@ public class CorrectCommandActivity extends BaseActivity {
 
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        text.setText(year + "年" + monthOfYear+ "月" + dayOfMonth + "日");
+                        text.setText(year + "年" + (monthOfYear+1)+ "月" + dayOfMonth + "日");
                         Log.e("TAG","获取事件"+year + "年" + monthOfYear+ "月" + dayOfMonth + "日");
                     }
                 }
@@ -907,61 +906,57 @@ public class CorrectCommandActivity extends BaseActivity {
 
 
     public void getParentViewGone(ArrayList<String> mGoneData) {
-        Log.e("TAG","当前允许开启视图大小 >>> "+mGoneData.size());
+        Log.e("TAG", "当前允许开启视图大小 >>> " + mGoneData.size());
         for (int i = 0; i < mGoneData.size(); i++) {
             String defaultGone = mGoneData.get(i);
-            Log.e("TAG","当前允许开启视图列表 >>> "+defaultGone);
-            if(defaultGone .equals("mCardView_1") ){
+            Log.e("TAG", "当前允许开启视图列表 >>> " + defaultGone);
+            if (defaultGone.equals("mCardView_1")) {
                 mCardView_1.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_2")){
+            } else if (defaultGone.equals("mCardView_2")) {
                 mCardView_2.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_3")){
+            } else if (defaultGone.equals("mCardView_3")) {
                 mCardView_3.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_4")){
+            } else if (defaultGone.equals("mCardView_4")) {
                 mCardView_4.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_5")){
+            } else if (defaultGone.equals("mCardView_5")) {
                 mCardView_5.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_6")){
+            } else if (defaultGone.equals("mCardView_6")) {
                 mCardView_6.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_7")){
+            } else if (defaultGone.equals("mCardView_7")) {
                 mCardView_7.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_8")){
+            } else if (defaultGone.equals("mCardView_8")) {
                 mCardView_8.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_9")){
+            } else if (defaultGone.equals("mCardView_9")) {
                 mCardView_9.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_10")){
+            } else if (defaultGone.equals("mCardView_10")) {
                 mCardView_10.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_11")){
+            } else if (defaultGone.equals("mCardView_11")) {
                 mCardView_11.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_12")){
+            } else if (defaultGone.equals("mCardView_12")) {
                 mCardView_12.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_13")){
+            } else if (defaultGone.equals("mCardView_13")) {
                 mCardView_13.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_14")){
+            } else if (defaultGone.equals("mCardView_14")) {
                 mCardView_14.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_15")){
+            } else if (defaultGone.equals("mCardView_15")) {
                 mCardView_15.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_16")){
+            } else if (defaultGone.equals("mCardView_16")) {
                 mCardView_16.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_17")){
+            } else if (defaultGone.equals("mCardView_17")) {
                 mCardView_17.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_18")){
+            } else if (defaultGone.equals("mCardView_18")) {
                 mCardView_18.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_19")){
+            } else if (defaultGone.equals("mCardView_19")) {
                 mCardView_19.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_20")){
+            } else if (defaultGone.equals("mCardView_20")) {
                 mCardView_20.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_21")){
+            } else if (defaultGone.equals("mCardView_21")) {
                 mCardView_21.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_22")){
+            } else if (defaultGone.equals("mCardView_22")) {
                 mCardView_22.setVisibility(View.VISIBLE);
-            }else if (defaultGone .equals("mCardView_23")){
+            } else if (defaultGone.equals("mCardView_23")) {
                 mCardView_23.setVisibility(View.VISIBLE);
             }
-
         }
-
     }
-
-
 }

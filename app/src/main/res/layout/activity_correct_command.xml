@@ -33,11 +33,13 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
 
+                <!--
                 <ImageView
                     android:id="@+id/toolbar_bank"
                     android:src="@drawable/icon_bank"
                     android:layout_width="35dp"
                     android:layout_height="35dp" />
+                -->
 
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -87,17 +89,19 @@
                         android:layout_height="wrap_content" />
 
                     <EditText
+                        android:hint="例如:检查、改正、复查等"
                         android:background="@drawable/bg_edittext_select"
                         android:maxLines="1"
                         android:id="@+id/mEdit_type_wg"
                         android:layout_width="match_parent"
                         android:layout_height="30dp" />
                     <TextView
-                        android:text="责通字 [  ]"
+                        android:text="通字 [  ]"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <EditText
+                        android:hint="例如:2018、0085等数字"
                         android:background="@drawable/bg_edittext_select"
                         android:maxLines="1"
                         android:inputType="number"
@@ -129,6 +133,7 @@
                         android:layout_height="wrap_content" />
 
                     <EditText
+                        android:hint="例如:治、改、查等"
                         android:background="@drawable/bg_edittext_select"
                         android:maxLines="1"
                         android:id="@+id/mEdit_type_xq_wg"
@@ -140,6 +145,7 @@
                         android:layout_height="wrap_content" />
 
                     <EditText
+                        android:hint="例如:2018、001等数字"
                         android:background="@drawable/bg_edittext_select"
                         android:maxLines="1"
                         android:inputType="number"
@@ -152,6 +158,7 @@
                         android:layout_height="wrap_content" />
 
                     <EditText
+                        android:hint="文件编号"
                         android:background="@drawable/bg_edittext_select"
                         android:maxLines="1"
                         android:inputType="number"
@@ -495,7 +502,7 @@
                             android:layout_marginTop="10dp"
                             android:background="@drawable/bg_edittext_select"
                             style="@style/myInputEditTextNorml"
-                            android:hint="条款名称"
+                            android:hint="条款名称 例如《中华人民共和国XXX法》"
                             android:id="@+id/item_mEditView_tiaoKuanName"
                             android:layout_width="match_parent"
                             android:layout_height="30dp" />
@@ -504,7 +511,7 @@
                             android:background="@drawable/bg_edittext_select"
                             style="@style/myInputEditTextNorml"
                             android:inputType="number"
-                            android:hint="条（数字）"
+                            android:hint="例如 第5条（只填写数字）"
                             android:id="@+id/item_mEditView_tiaoName"
                             android:layout_width="match_parent"
                             android:layout_height="30dp" />
@@ -514,7 +521,7 @@
                             android:background="@drawable/bg_edittext_select"
                             style="@style/myInputEditTextNorml"
                             android:inputType="number"
-                            android:hint="款（数字）"
+                            android:hint="例如 第5款（只填写数字）"
                             android:id="@+id/item_mEditView_kuanName"
                             android:layout_width="match_parent"
                             android:layout_height="30dp" />
@@ -523,7 +530,7 @@
                             android:background="@drawable/bg_edittext_select"
                             style="@style/myInputEditTextNorml"
                             android:inputType="number"
-                            android:hint="项（数字）"
+                            android:hint="例如 第5项（只填写数字）"
                             android:id="@+id/item_mEditView_xiang"
                             android:layout_width="match_parent"
                             android:layout_height="30dp" />
@@ -803,7 +810,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="被检查人姓名(多个人请用','隔开):" />
+                        android:text="检查人姓名(多个人请用','隔开):" />
 
                     <EditText
                         android:background="@drawable/bg_edittext_select"

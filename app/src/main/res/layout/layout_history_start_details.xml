@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 检查历史里面的再次检查 -->
+
+    <Button
+        android:layout_marginTop="5dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:background="#b76904"
+        android:id="@+id/mHistory_start_xqzg"
+        android:text="限期整改"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_marginTop="5dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:background="#b76904"
+        android:id="@+id/mHistory_start_zlzg"
+        android:text="责令改正"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_marginTop="5dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:background="#b76904"
+        android:id="@+id/mHistory_start_dccf"
+        android:text="当场处罚"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_marginTop="5dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:background="#b76904"
+        android:id="@+id/mHistory_start_jcbl"
+        android:text="检查笔录"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -1,10 +1,20 @@
 package com.makvenis.dell.wangcangxianpolic.details;
 
+import android.Manifest;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Picture;
+import android.os.Build;
 import android.os.Bundle;
+import android.print.PrintAttributes;
+import android.print.PrintDocumentAdapter;
+import android.print.PrintManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +22,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
@@ -19,6 +30,9 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.makvenis.dell.wangcangxianpolic.R;
 import com.makvenis.dell.wangcangxianpolic.tools.Configfile;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 @ContentView(R.layout.activity_web_history)
 public class WebHistoryActivity extends AppCompatActivity {
@@ -40,6 +54,8 @@ public class WebHistoryActivity extends AppCompatActivity {
     TextView mTextView;
     /* 处理toolbar 结束 */
 
+    String[] mPermissions = new String[]{Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS};
+
     String url;
     private String bianhao;
     private String mUrl; //再上层适配器中已经做了全地址拼接
@@ -49,6 +65,16 @@ public class WebHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_web_history);
         ViewUtils.inject(this);
+
+        //权限检查
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            int i = ActivityCompat.checkSelfPermission(this, mPermissions[0]);
+            if(i != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this,mPermissions,1);
+            }else {
+                Configfile.Log(this,"您之前拒绝了此权限，请到设置--权限开通系列权限");
+            }
+        }
 
         /* 获取父类参数 */
         getParment();
@@ -64,6 +90,15 @@ public class WebHistoryActivity extends AppCompatActivity {
 
         /* 设置网页基本参数 */
         setWebView();
+
+        mWebView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Configfile.Log(WebHistoryActivity.this,"当前为长按保存图片和选择打印机");
+                printPDF();
+                return true;
+            }
+        });
 
     }
 
@@ -150,7 +185,7 @@ public class WebHistoryActivity extends AppCompatActivity {
         if(url != null){
 
             int i = Integer.valueOf(url).intValue();
-            //Configfile
+
             switch (i){
 
                 case 0:
@@ -165,12 +200,8 @@ public class WebHistoryActivity extends AppCompatActivity {
                     return Configfile.RESULT_HTML_TYPE_4;
                 case 5:
                     return Configfile.RESULT_HTML_TYPE_5;
-
             }
-
-
         }
-
         return null;
     }
 
@@ -183,5 +214,50 @@ public class WebHistoryActivity extends AppCompatActivity {
         bianhao = bundle.getString("bianhao");
         mUrl = bundle.getString("url");
 
+    }
+
+    /* 屏幕长按事件 */
+    public void printPDF() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // Get a PrintManager instance
+            PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
+
+            // Get a print adapter instance
+            PrintDocumentAdapter printAdapter = mWebView.createPrintDocumentAdapter();
+
+            // Create a print job with name and adapter instance
+            String jobName = getString(R.string.app_name) + " Document";
+            printManager.print(jobName, printAdapter,
+                    new PrintAttributes.Builder().build());
+            saveImage();
+        } else {
+            Toast.makeText(getApplicationContext(), "当前系统不支持该功能", Toast.LENGTH_SHORT).show();
+        }
+    }
+    /**
+     * 保存图片
+     */
+    public void saveImage() {
+        Picture picture = mWebView.capturePicture();
+        Bitmap b = Bitmap.createBitmap(
+                picture.getWidth(), picture.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(b);
+        picture.draw(c);
+        File file = new File("/sdcard/" + "page.jpg");
+        if(file.exists()){
+            file.delete();
+        }
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file.getAbsoluteFile());
+            if (fos != null) {
+                b.compress(Bitmap.CompressFormat.JPEG, 90, fos);
+                fos.close();
+                Toast.makeText(getApplicationContext(), "保存成功", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "保存失败", Toast.LENGTH_SHORT).show();
+        }
     }
 }

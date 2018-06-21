@@ -174,7 +174,7 @@ public class Configfile {
     public static final String UPDATE_COMPANY=Configfile.WEB+"mobile/doUpdateDanwei";
 
     /* 获取检查历史 */
-    public static final String HISTORY_PATH=Configfile.WEB+"mobile/toshowhistory?username=";
+    public static final String HISTORY_PATH=Configfile.WEB+"mobile/toshowhistory2?username=";
 
 
 

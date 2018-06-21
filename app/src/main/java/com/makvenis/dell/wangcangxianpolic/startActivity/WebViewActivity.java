@@ -160,9 +160,7 @@ public class WebViewActivity extends BaseActivity {
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
         webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
         webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
-        if(mTitle_intent.equals("加油站")){
-            mWebView.loadUrl(mUrl_intent+"?bianhao="+mCid);
-        }else mWebView.loadUrl(mUrl_intent+"&bianhao="+mCid);
+        mWebView.loadUrl(mUrl_intent+"&bianhao="+mCid);
     }
 
     //设置标题栏Toolbar
@@ -193,7 +191,6 @@ public class WebViewActivity extends BaseActivity {
                     case R.id.toolbar_r_2: //限期整改
                         /* 构建显示的数据 */
                         ArrayList<String> mGoneData1 = new ArrayList<>();
-                        mGoneData1.add("mCardView_19");
                         mGoneData1.add("mCardView_9");
                         mGoneData1.add("mCardView_20");
                         mGoneData1.add("mCardView_23");
@@ -238,9 +235,7 @@ public class WebViewActivity extends BaseActivity {
     //设置menu（右边图标）
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(!mTitle_intent.equals("加油站")){
-            getMenuInflater().inflate(R.menu.toolbar, menu); //解析menu布局文件到menu
-        }
+        getMenuInflater().inflate(R.menu.toolbar, menu); //解析menu布局文件到menu
         return true;
     }
 

@@ -38,6 +38,15 @@
         <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\pre-dexed\release\pojo_8848700da6b76c1a3f603e4767f41d060c871e08.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="371d22dd0657280bad4ea41cc4697acf737576e7">
+        <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_0f703ca52bfbcab61d1b529ec2520dbfd44cfe4e\classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="D:\Windows\AndroidProject\WangcangxianPolic\app\libs\commons-lang3-3.7.jar"
         jumboMode="false"
@@ -63,15 +72,6 @@
         revision="26.0.2"
         sha1="4f27326e836df2e55a96adf6a597dd04337b62af">
         <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\transforms\dex\debug\folders\1000\2\pojo_8848700da6b76c1a3f603e4767f41d060c871e08\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="d4c8e197776b167f4e9ebadbb463fddda51e8ce7">
-        <dex dex="D:\Windows\AndroidProject\WangcangxianPolic\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_0f703ca52bfbcab61d1b529ec2520dbfd44cfe4e\classes.dex" />
     </item>
     <item
         is-multidex="false"

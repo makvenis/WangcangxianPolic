@@ -32,7 +32,7 @@ import com.makvenis.dell.wangcangxianpolic.utils.NetUtil;
 import java.util.Date;
 import java.util.Map;
 
-public class BaseActivity extends AppCompatActivity{
+public abstract class BaseActivity extends AppCompatActivity{
 
     private int anInt;
 

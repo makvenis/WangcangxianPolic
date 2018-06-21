@@ -56,8 +56,13 @@ public class CompanyTimeAdapter extends RecyclerView.Adapter<CompanyTimeAdapter.
 
                     //初始化时间格式
                     String time = setTime.getText().toString();
-                    //去除格式化
-                    Date date = stringByDate(time + " 00:00:00");
+                    //去除格式化 //增加时分秒
+                    /* 获取当前时间 */
+                    Date mDate = new Date();
+                    SimpleDateFormat sdf=new SimpleDateFormat("hh:mm:ss");
+                    String format = sdf.format(mDate);
+                    //返回拼接之后的完整时间
+                    Date date = stringByDate(time + " "+format);
                     mClink.bankTime(position,e.getKey(),date);
                 }
             });
@@ -112,7 +117,8 @@ public class CompanyTimeAdapter extends RecyclerView.Adapter<CompanyTimeAdapter.
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        text.setText(year + "-" + (monthOfYear+1) + "-" + dayOfMonth + "");
+                        text.setText(year + "-" + (monthOfYear+1) + "-" + dayOfMonth + "-"+Calendar.HOUR+"-"+
+                        Calendar.MILLISECOND);
                         Log.e("TAG","获取事件"+year + "年" + monthOfYear+ "月" + dayOfMonth + "日");
                     }
                 }

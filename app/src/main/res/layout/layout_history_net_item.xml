@@ -29,7 +29,7 @@
 
     <LinearLayout
         android:layout_gravity="center"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_weight="8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -95,6 +95,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
 
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:textSize="12sp"
+                        android:id="@+id/mHistory_company_time"
+                        android:gravity="center"
+                        android:text="2018.5.7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -103,18 +112,30 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp">
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:layout_width="80dp"
+            android:layout_height="match_parent">
 
             <ImageView
-
-                android:background="#919191"
-                android:layout_width="match_parent"
-                android:layout_height="1dp" />
-
+                android:id="@+id/mHistory_ok"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_history_ok"
+                android:layout_width="30dp"
+                android:layout_height="25dp" />
+            <!--
+            <ImageView
+                android:id="@+id/mHistory_looding"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_history_gengduo"
+                android:layout_width="30dp"
+                android:layout_height="25dp" />
+            -->
         </LinearLayout>
 
     </LinearLayout>
+
+
+
 
 </LinearLayout>

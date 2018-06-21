@@ -410,12 +410,11 @@
                         android:layout_height="match_parent" />
 
                     <EditText
-                        android:inputType="number"
                         android:id="@+id/mMore_Lev"
                         android:textColorHint="#afafaf"
                         android:textColor="#afafaf"
                         android:textSize="18sp"
-                        android:hint="A"
+                        android:hint="例如:A、B、C"
                         android:layout_marginLeft="10dp"
                         android:background="@null"
                         android:layout_width="match_parent"
