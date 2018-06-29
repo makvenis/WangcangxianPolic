@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.makvenis.dell.wangcangxianpolic.startActivity.WebHtmlActivity">
+    tools:context="com.makvenis.dell.wcx.sc.makvenis.dell.wcx.startActivity.WebHtmlActivity">
 
     <include layout="@layout/public_toolbar_simple">
 

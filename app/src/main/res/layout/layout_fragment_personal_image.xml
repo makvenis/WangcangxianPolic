@@ -13,7 +13,7 @@
         android:layout_height="120dp"
         android:gravity="center">
 
-        <com.makvenis.dell.wangcangxianpolic.view.SimpleImageViewCircleBitmap
+        <sc.gys.wcx.and.view.SimpleImageViewCircleBitmap
 
             android:id="@+id/mPersonalAdapterImage"
             android:layout_width="120dp"

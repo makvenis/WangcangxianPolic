@@ -4,7 +4,7 @@
     android:layout_width="170dp"
     android:layout_height="200dp"
     android:background="@drawable/background"
-    tools:context=".startActivity.UploadCheckActivity">
+    tools:context="com.makvenis.dell.wcx.sc.makvenis.dell.wcx.startActivity.UploadCheckActivity">
 
     <ImageView
         android:src="@drawable/mouse"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/eye_left"/>
 
-        <com.makvenis.dell.wangcangxianpolic.cat.EyelidView
+        <sc.gys.wcx.and.cat.EyelidView
             android:layout_marginLeft="3.5dp"
             android:layout_marginTop="12.5dp"
             android:src="@drawable/eyes"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/eye_right"/>
 
-        <com.makvenis.dell.wangcangxianpolic.cat.EyelidView
+        <sc.gys.wcx.and.cat.EyelidView
             android:layout_marginLeft="28dp"
             android:layout_marginTop="12.5dp"
             android:src="@drawable/eyes"
@@ -60,7 +60,7 @@
             android:id="@+id/eyelid_right"/>
     </RelativeLayout>
 
-    <com.makvenis.dell.wangcangxianpolic.cat.GraduallyTextView
+    <sc.gys.wcx.and.cat.GraduallyTextView
         android:id="@+id/graduallyTextView"
         android:layout_marginBottom="10dp"
         android:textSize="15sp"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.makvenis.dell.wangcangxianpolic.otherActivity.SetActivity"
+    tools:context="com.makvenis.dell.wcx.sc.makvenis.dell.wcx.otherActivity.SetActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <include layout="@layout/public_toolbar_simple"></include>

@@ -74,7 +74,7 @@
 
             </android.support.v7.widget.Toolbar>
 
-            <com.makvenis.dell.wangcangxianpolic.view.SimpleImageViewCircleBitmap
+            <sc.gys.wcx.and.view.SimpleImageViewCircleBitmap
                 android:src="@drawable/icon"
                 android:id="@+id/mPersonal_Photo"
                 android:layout_gravity="center"

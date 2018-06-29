@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.makvenis.dell.wangcangxianpolic">
+    package="sc.gys.wcx.and">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -41,14 +41,14 @@
             android:enabled="true"
             android:process=":remote" />
 
-        <activity android:name=".StartActivity" />
-        <activity android:name=".startActivity.AdvertisingActivity" />
+        <activity android:name="sc.gys.wcx.and.StartActivity" />
+        <activity android:name="sc.gys.wcx.and.startActivity.AdvertisingActivity" />
         <activity
-            android:name=".startActivity.HomeActivity"
+            android:name="sc.gys.wcx.and.startActivity.HomeActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".startActivity.GuideActivity" />
+        <activity android:name="sc.gys.wcx.and.startActivity.GuideActivity" />
         <activity
-            android:name=".startActivity.MainActivity"
+            android:name="sc.gys.wcx.and.startActivity.MainActivity"
             android:icon="@drawable/icon">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,66 +56,67 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".startActivity.BaseActivity" />
-        <activity android:name=".login.UserLoginActivity" />
-        <activity android:name=".login.RegisteActivity" />
-        <activity android:name=".company.CompanyActivity" />
-        <activity android:name=".company.CompanyItemDetailsActivity" />
-        <activity android:name=".hotelcheck.HotelCheckActivity" />
-        <activity android:name=".hotelcheck.NotesActivity" />
-        <activity android:name=".newsnotescheck.NotesNewActivity" />
-        <activity android:name=".startActivity.WebViewActivity" />
-        <activity android:name=".correctActivity.CorrectCommandActivity" />
-        <activity android:name=".activity.AlertPushNewsActivity" />
-        <activity android:name=".startActivity.NotiflyActivity" />
+        <activity android:name="sc.gys.wcx.and.startActivity.BaseActivity" />
+        <activity android:name="sc.gys.wcx.and.login.UserLoginActivity" />
+        <activity android:name="sc.gys.wcx.and.login.RegisteActivity" />
+        <activity android:name="sc.gys.wcx.and.company.CompanyActivity" />
+        <activity android:name="sc.gys.wcx.and.company.CompanyItemDetailsActivity" />
+        <activity android:name="sc.gys.wcx.and.hotelcheck.HotelCheckActivity" />
+        <activity android:name="sc.gys.wcx.and.hotelcheck.NotesActivity" />
+        <activity android:name="sc.gys.wcx.and.newsnotescheck.NotesNewActivity" />
+        <activity android:name="sc.gys.wcx.and.startActivity.WebViewActivity" />
+        <activity android:name="sc.gys.wcx.and.correctActivity.CorrectCommandActivity" />
+        <activity android:name="sc.gys.wcx.and.activity.AlertPushNewsActivity" />
+        <activity android:name="sc.gys.wcx.and.startActivity.NotiflyActivity" />
 
         <service
-            android:name=".service.SimpleServiceMessage"
+            android:name="sc.gys.wcx.and.service.SimpleServiceMessage"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".service.SimpleUpdateUserImagePhoto"
+            android:name="sc.gys.wcx.and.service.SimpleUpdateUserImagePhoto"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activity.AlertPushPoliceActivity" />
-        <activity android:name=".startActivity.WebHtmlActivity" />
-        <activity android:name=".startActivity.WebPostRemarkActivity" />
-        <activity android:name=".otherActivity.CorrectHistoryActivity" />
-        <activity android:name=".otherActivity.SetActivity" />
-        <activity android:name=".minFragment.PersonalCenterActivity" />
-        <activity android:name=".startActivity.UpdatePassActivity" />
+        <activity android:name="sc.gys.wcx.and.activity.AlertPushPoliceActivity" />
+        <activity android:name="sc.gys.wcx.and.startActivity.WebHtmlActivity" />
+        <activity android:name="sc.gys.wcx.and.startActivity.WebPostRemarkActivity" />
+        <activity android:name="sc.gys.wcx.and.otherActivity.CorrectHistoryActivity" />
+        <activity android:name="sc.gys.wcx.and.otherActivity.SetActivity" />
+        <activity android:name="sc.gys.wcx.and.minFragment.PersonalCenterActivity" />
+        <activity android:name="sc.gys.wcx.and.startActivity.UpdatePassActivity" />
 
         <!-- notifyCation 的广播注册事件 -->
         <receiver
-            android:name=".broadcastReceiver.MyNotifyCationBroadcastReceiver"
+            android:name="sc.gys.wcx.and.broadcastReceiver.MyNotifyCationBroadcastReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="NOTIFY_NEWS" />
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.TestActivity" />
+        <activity android:name="sc.gys.wcx.and.activity.TestActivity" />
         <activity
-            android:name=".startActivity.NoActivity"
+            android:name="sc.gys.wcx.and.startActivity.NoActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".details.MoreDetailsActivity" />
-        <activity android:name=".morePhotoUpload.UploadImageActivity" />
-        <activity android:name=".startActivity.UploadCheckActivity" />
+        <activity android:name="sc.gys.wcx.and.details.MoreDetailsActivity" />
+        <activity android:name="sc.gys.wcx.and.morePhotoUpload.UploadImageActivity" />
+        <activity android:name="sc.gys.wcx.and.startActivity.UploadCheckActivity" />
         <activity
-            android:name=".addCompany.AddCompanyActivity"
+            android:name="sc.gys.wcx.and.addCompany.AddCompanyActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme" />
-        <activity android:name=".newCompanyPost.CompanyEditActivity" />
-        <activity android:name=".newCompanyPost.ToYesActivity" />
-        <activity android:name=".newCompanyPost.ToNoActivity" />
-        <activity android:name=".newCompanyPost.ToBiLuActivity" />
-        <activity android:name=".details.WebHistoryActivity" />
-        <activity android:name=".startActivity.ShowUploadImageActivity" />
+        <activity android:name="sc.gys.wcx.and.newCompanyPost.CompanyEditActivity" />
+        <activity android:name="sc.gys.wcx.and.newCompanyPost.ToYesActivity" />
+        <activity android:name="sc.gys.wcx.and.newCompanyPost.ToNoActivity" />
+        <activity android:name="sc.gys.wcx.and.newCompanyPost.ToBiLuActivity" />
+        <activity android:name="sc.gys.wcx.and.details.WebHistoryActivity" />
+        <activity android:name="sc.gys.wcx.and.startActivity.ShowUploadImageActivity" />
         <activity
-            android:name=".company.SearchCompanyActivity"
+            android:name="sc.gys.wcx.and.company.SearchCompanyActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".details.SelectDetailsActivity"></activity>
+        <activity android:name="sc.gys.wcx.and.details.SelectDetailsActivity" />
+        <activity android:name="sc.gys.wcx.and.newCompanyPost.ToShouJiaoActivity"></activity>
     </application>
 
 </manifest>

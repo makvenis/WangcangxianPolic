@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.makvenis.dell.wangcangxianpolic.newsnotescheck.NotesNewActivity">
+    tools:context="com.makvenis.dell.wcx.sc.makvenis.dell.wcx.newsnotescheck.NotesNewActivity">
 
     <android.support.v7.widget.Toolbar
         app:popupTheme="@style/OverflowMenuStyle"

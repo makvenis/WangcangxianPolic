@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!-- 编号1 -->
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/mObjectFlag"
+            android:textColor="#F00"
+            android:textSize="16dp"
+            android:paddingLeft="5dp"
+            android:text="编号1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_marginTop="10dp"
+                android:background="@drawable/makvenis_editview_style_edittext"
+                android:id="@+id/mObjectName"
+                android:textSize="16dp"
+                android:hint="物品名称"
+                android:layout_width="match_parent"
+                android:layout_height="35dp" />
+            <EditText
+                android:layout_marginTop="10dp"
+                android:background="@drawable/makvenis_editview_style_edittext"
+                android:id="@+id/mObjectNumble"
+                android:inputType="number"
+                android:textSize="16dp"
+                android:hint="物品数量"
+                android:layout_width="match_parent"
+                android:layout_height="35dp" />
+            <EditText
+                android:layout_marginTop="10dp"
+                android:background="@drawable/makvenis_editview_style_edittext"
+                android:id="@+id/mObjectType"
+                android:textSize="16dp"
+                android:hint="物品特征"
+                android:layout_width="match_parent"
+                android:layout_height="35dp" />
+            <EditText
+                android:layout_marginTop="10dp"
+                android:background="@drawable/makvenis_editview_style_edittext"
+                android:id="@+id/mObjectSetMethod"
+                android:textSize="16dp"
+                android:hint="物品处理情况"
+                android:layout_width="match_parent"
+                android:layout_height="35dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

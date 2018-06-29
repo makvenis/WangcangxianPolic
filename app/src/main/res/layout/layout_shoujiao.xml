@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/public_simple_toolbar_xml"></include>
+
+    <android.support.v4.widget.NestedScrollView
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:id="@+id/mObjectGroup"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/mList_1"
+                    android:text="《中华人民共和国治安管理处罚法》 第十一条第一款"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/mList_2"
+                    android:text="《中华人民共和国治安管理处罚法》 第十一条第二款"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/mList_3"
+                    android:text="《公安机关办理行政案件程序规定》 第一百六十八条第一款"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/mList_4"
+                    android:text="《公安机关办理行政案件程序规定》 第一百六十八条第三款 之规定，对物品持有人的下列物品予以收缴"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RadioGroup>
+
+            <TextView
+                android:padding="10dp"
+                android:text="         如不服本决定，可以在收到本清单之日起六十日内向广元市公安局或旺苍县人民政府 申请行政复议或者在三个月内依法向旺苍县人民法院提起行政诉讼。"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textSize="16dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="物品持有人:" />
+                <EditText
+                    android:id="@+id/mObject_cyr"
+                    android:textSize="16dp"
+                    android:hint="填写下列物品持有人的姓名"
+                    android:background="@drawable/makvenis_editview_style_edittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <TextView
+                android:gravity="center"
+                android:textSize="16dp"
+                android:text="收缴清单"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- 布局容器 -->
+            <LinearLayout
+                android:id="@+id/mLinearLayoutAdd"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+
+            <!-- 添加和移除布局 -->
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:id="@+id/mAddLayout"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_push"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:id="@+id/mRemoveLayout"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_remove"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/item_mObject_cyr"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="物品持有人:" />
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:id="@+id/item_mObject_cyr_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp" />
+
+                    <ImageView
+                        android:id="@+id/item_mObject_cyr_set"
+                        android:src="@drawable/icon_list_qianming"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/item_mObject_bgr"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="物品保管人:" />
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:id="@+id/item_mObject_bgr_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp" />
+
+                    <ImageView
+                        android:id="@+id/item_mObject_bgr_set"
+                        android:src="@drawable/icon_list_qianming"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/item_mObject_bgr_bamj"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="办案警察签名:" />
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:id="@+id/item_mObject_bgr_bamj_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp" />
+
+                    <ImageView
+                        android:id="@+id/item_mObject_bgr_bamj_set"
+                        android:src="@drawable/icon_list_qianming"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 提交按钮 -->
+            <Button
+                android:id="@+id/mSubmit"
+                android:layout_marginTop="10dp"
+                android:text="提交"
+                android:background="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</LinearLayout>

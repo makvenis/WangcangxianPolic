@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.makvenis.dell.wangcangxianpolic.addCompany.AddCompanyActivity">
+    tools:context="com.makvenis.dell.wcx.com.makvenis.dell.wcx.addCompany.AddCompanyActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

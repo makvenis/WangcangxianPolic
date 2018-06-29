@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.makvenis.dell.wangcangxianpolic.startActivity.AdvertisingActivity">
+    tools:context="com.makvenis.dell.wcx.sc.makvenis.dell.wcx.startActivity.AdvertisingActivity">
 
 
     <ImageView
@@ -12,7 +12,7 @@
         android:id="@+id/adv_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <com.makvenis.dell.wangcangxianpolic.view.SimpleTimeView
+    <sc.gys.wcx.and.view.SimpleTimeView
         android:layout_alignParentRight="true"
         android:id="@+id/adv_downTime"
         android:layout_width="wrap_content"
